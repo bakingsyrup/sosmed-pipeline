@@ -307,7 +307,7 @@ async function processFile(filename, styleGuideContent) {
             .slice(0, 80);
 
           const keywords = cleanQuery.split(/\s+/).filter(w => w.length > 3).slice(0, 6);
-          const clipId = path.basename(filename, '.md');
+          const clipId = path.basename(filePath, '.md');
 
           const clipRes = await findAndClipVideo(cleanQuery, keywords, '', clipId);
           if (clipRes.status === 'success') {

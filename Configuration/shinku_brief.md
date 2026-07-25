@@ -76,6 +76,7 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: `x-draft-agent` actively running via PM2 in watch mode; syncs real-time state & feature settings with Ad Astra UI (`00-Status.md`, `00-Settings.md`).
+* **July 25, 2026**: Updated Style Markers in `x_style_guide.md` to explicitly forbid "AS" when referring to the United States and mandate "US" (e.g. `pemerintah US`, `bursa saham US`).
 * **July 25, 2026**: Added **CRITICAL HEADLINE FORMATTING DIRECTIVE** to `drafting_prompt.mjs` and `x_style_guide.md` explicitly forcing Sentence Case output for all opening headlines (overriding LLM pre-training Title Case bias).
 * **July 25, 2026**: Enforced **Sentence Case Headline Formatting** in `x_style_guide.md` (DOs & Section 4 examples). Headlines now capitalize ONLY the first word and proper nouns (eliminating Title Case).
 * **July 25, 2026**: Re-introduced **Standard Breaking News & Short Insight Template as Draft 2** (~60 words, pure breaking news without historical anchors). The full output now delivers 7 distinct draft options: Draft 1a (Historical Event), Draft 1b (Industry Playbook), Draft 1c (Entity Track Record), Draft 2 (Standard Breaking News), Draft 3 (Mechanism), Draft 4 (Rhetorical Q&A), and Draft 5 (Crisis).

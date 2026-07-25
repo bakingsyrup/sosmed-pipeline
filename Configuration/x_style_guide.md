@@ -30,7 +30,7 @@ The writing is primarily in **Indonesian**, heavily blended with English busines
     *   *Operating profit, profit margin, market share, net importir, supply, fiber optic, prototype, hardware, hijack, leverage, ETF, GDP.*
 *   **Style Markers & Abbreviations:**
     *   Uses *Korsel* instead of Korea Selatan.
-    *   Uses *US* instead of Amerika Serikat.
+    *   Uses *US* instead of Amerika Serikat or AS. Never write "AS" when referring to the United States (e.g. write "pemerintah US" or "bursa saham US", NOT "pemerintah AS").
     *   Uses *Ijin* instead of izin.
     *   Uses *Miliar* or *Milyar* interchangeably.
 *   **Word Reduction & Root Words (Linguistic Simplification):**
@@ -181,7 +181,7 @@ Fed Tahan Suku Bunga Tinggi Lebih Lama
 
 bukan karena ekonomi kuat, tapi karena inflasi masih bandel.
 
-Suku bunga AS tetap ditahan di kisaran 5.25% - 5.50%
+Suku bunga US tetap ditahan di kisaran 5.25% - 5.50%
 
 sepertinya sepele, 
 
