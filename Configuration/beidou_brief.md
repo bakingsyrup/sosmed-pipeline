@@ -44,9 +44,8 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Architectural Specification Phase 1 Complete. Ready for Data Schema & Ingestion Implementation.
-* **July 25, 2026**: Recorded Decision 4: Confirmed Horizontal Decoupled Model between Shinku & Beidou, presenting strategic insights directly to the human operator via a dedicated Strategic Feedback Card in Ad Astra Sosmed Center UI.
-* **July 25, 2026**: Recorded Decision 3: Defined Mathematical Diagnostic Engine (Net Relative Variance $V$) + Ad Astra Interactive Pivot Table & Dynamic Visual Chart Canvas (Bar, Line Trend, Donut/Pie).
-* **July 25, 2026**: Recorded Decision 2: Configured Multi-Cohort & Multi-Account architecture with 2-Tier structure (Peer Tier for diagnostic math, Leader Tier for macro trend discovery) via isolated `00-Cohorts/*.json` files.
-* **July 25, 2026**: Recorded Decision 1: Selected Headless Free Ingestion (`x_headless_adapter.mjs`) for 100% public DOM metric extraction (Impressions, Likes, Retweets, Replies, Bookmarks, Post Age) using Fixed T+24h & T+48h Snapshots.
+* **Status**: Beidou Cohort Manager UI & Sub-Navigation Tabs (`X Posts` vs `Intel`) implemented and active in Ad Astra UI.
+* **July 25, 2026**: Built Sub-Navigation tabs (`X Posts` & `Intel`) in Ad Astra Sosmed Center + `BeidouCohortManager` UI card and Fastify API (`/api/beidou/cohorts`).
+* **July 25, 2026**: Tested & verified Tab Isolation Pattern (`browser.newPage()`) and 100% background headless execution on CDP port 18810.
+* **July 25, 2026**: Recorded Decisions 1-4: Headless extraction, 2-Tier Multi-Cohort JSON spec, Net Relative Variance math, and Decoupled Horizontal UI.
 * **July 25, 2026**: Initialized Beidou architecture, directory structure (`Configuration/beidou/`, `beidou-pipeline/`), and documentation ecosystem (`iroi_brief.md`, `beidou_brief.md`, `beidou_guide.md`, `.gemini/rules/beidou_docs.md`).
