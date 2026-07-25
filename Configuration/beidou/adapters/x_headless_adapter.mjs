@@ -149,7 +149,8 @@ async function scrapeAccount(page, handle, limit) {
   console.log(`  @${handle}: navigating...`);
 
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await sleep(3000); // wait for tweets to render
+  await page.waitForSelector('article[data-testid="tweet"]', { timeout: 10000 }).catch(() => {});
+  await sleep(2000); // wait for tweets to render
 
   // Check if profile exists
   const notFound = await page.evaluate(() => {
@@ -236,7 +237,7 @@ async function main() {
   let browser, conn;
   try {
     const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
+    conn = await connectCDP(18810, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
   } catch (e) {
     console.error(`Cannot connect to Chrome CDP: ${e.message}`);
