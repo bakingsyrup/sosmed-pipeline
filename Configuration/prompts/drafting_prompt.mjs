@@ -98,6 +98,9 @@ export function getStandardPromptStr(tweetText, researchBrief, lang, glossaryDat
 Fact-Checking & Research Brief:
 ${researchBrief}
 
+CRITICAL HEADLINE FORMATTING DIRECTIVE:
+Write all opening headlines in standard SENTENCE CASE (e.g. write "Bitcoin bisa kehilangan posisi #1", NOT "Bitcoin Bisa Kehilangan Posisi #1"). Capitalize ONLY the first word and proper nouns. Do NOT use Title Case.
+
 Using the style guide instructions, write the following distinct alternative drafts for an X (Twitter) post based on this information:
 
 - Draft 1 (Ultra-Compact Breaking News & Historical Benchmarks, MAX 60 WORDS PER SUB-DRAFT): Write THREE (3) distinct sub-variations (Draft 1a, Draft 1b, Draft 1c) using the 3 Historical Anchor Categories:

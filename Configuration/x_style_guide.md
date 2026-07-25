@@ -88,6 +88,7 @@ Designed for ultra-fast, high-density breaking news alerts without historical an
 
 ### Headline Formation
 Start with a bold, high-impact title that summarizes the core conflict, mega-number, or crisis.
+*   *Capitalization:* Headlines MUST use standard **Sentence Case** (capitalize ONLY the first word and proper nouns). Do NOT use Title Case.
 *   *Format:* `[Subject] + [High Stakes Action/Crisis/Big Number]`
 *   *Examples:* 
     *   "Korsel invest 1 quadrilion won ($750 miliar) di AI"
