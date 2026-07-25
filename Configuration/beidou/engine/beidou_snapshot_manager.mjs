@@ -74,7 +74,7 @@ export async function runSnapshotBatch(options = {}) {
   console.log(`[beidou-snapshot] Starting batch scrape for ${handles.length} unique handles across ${cohorts.length} cohort(s)...`);
 
   return new Promise((resolve) => {
-    const child = spawn('node', [ADAPTER_PATH, ...handles, '--out', snapshotFile, '--limit', '10'], {
+    const child = spawn('node', [ADAPTER_PATH, '--out', snapshotFile, '--limit', '10', ...handles], {
       cwd: BASE_DIR,
       stdio: 'inherit',
     });

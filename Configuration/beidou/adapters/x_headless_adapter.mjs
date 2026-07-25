@@ -55,7 +55,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
  */
 async function extractTweetsFromPage(page) {
   return page.evaluate(() => {
-    const articles = document.querySelectorAll('article[data-testid="tweet"]');
+    const articles = document.querySelectorAll('article');
     const tweets = [];
 
     for (const article of articles) {
@@ -149,7 +149,7 @@ async function scrapeAccount(page, handle, limit) {
   console.log(`  @${handle}: navigating...`);
 
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForSelector('article[data-testid="tweet"]', { timeout: 10000 }).catch(() => {});
+  await page.waitForSelector('article', { timeout: 10000 }).catch(() => {});
   await sleep(2000); // wait for tweets to render
 
   // Check if profile exists
