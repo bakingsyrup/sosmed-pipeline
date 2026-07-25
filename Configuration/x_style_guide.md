@@ -42,9 +42,8 @@ The writing is primarily in **Indonesian**, heavily blended with English busines
 ## 3. Formatting & Visual Spacing
 Visual layout is critical for readability on mobile screens. The style relies on high breathing room and short text blocks.
 
-*   **Double Line Breaks:** Every single sentence, bullet point, or logical transition must be separated by a double line break (`\n\n`). Never group sentences into standard paragraphs.
-*   **Punchy Line Length:** Keep lines extremely short. A single line should rarely exceed 8–10 words. If a sentence is longer, manually break it into a new line.
-*   **Flowing Line Breaks (Commas & Lowercase):** To keep lines short (8-10 words max) without breaking grammatical meaning, split single sentences across lines using a comma (`,`) at the end of the line instead of a period (`.`). The continued line must start with a **lowercase** letter (e.g., `karena`, `namun`, `ternyata`).
+*   **Double Line Breaks (1 Sentence Per Block):** Every single sentence, bullet point, or logical transition must be separated by a double line break (`\n\n`). Never group multiple sentences into standard paragraphs.
+*   **Max 33 Words Per Sentence:** Write complete, natural sentences in standard sentence case (max **33 words** per sentence). Use standard punctuation (periods `.`, colons `:`, dashes `-`) at sentence ends. Do NOT artificially chop single sentences into multiple 8-word line fragments using commas and lowercase letters.
 *   **List Formatting:**
     *   Use numbered lists (`1.`, `2.`, `3.`) or lettered lists (`a.`, `b.`) to break down complex timelines or multi-factor issues.
     *   Use bold headers for list items to allow quick scanning (e.g., `1. Wawancara 'Show and Tell'`).
@@ -108,8 +107,8 @@ For complex macro topics, add a small, isolated context section at the bottom to
 
 ### DOs
 *   **DO** start with a strong, capitalized hook.
-*   **DO** use double line breaks between *every* line.
-*   **DO** keep sentences short, simple, and active.
+*   **DO** use double line breaks (`\n\n`) between *every* sentence block.
+*   **DO** keep sentences short, clear, and active (max **33 words** per sentence).
 *   **DO** explain the direct flow of money (how a macro decision affects "kita retail").
 *   **DO** use English business/tech terms directly if they are industry standard.
 *   **DO** use clean lists with bold headers to summarize events or statistics.
@@ -121,7 +120,6 @@ For complex macro topics, add a small, isolated context section at the bottom to
 *   **DO** identify the party most affected by the event (e.g., pension funds, insurance companies, commercial banks, tech giants, foreign governments) and focus the narrative takeaway on them. 
 *   **DO** preserve the **"Red Thread" (Logical Core)**: If your post hinges on a seemingly small change or figure (e.g., a 0.36% yield difference), you must anticipate the reader's natural skepticism (e.g., *"why does 0.36% matter?"*) and explicitly explain the mechanism/math (e.g., long duration + massive institutional scale = huge absolute dollar impact) so the logic remains sound.
 *   **DO** provide comparative context for every metric or statistic. Never state a number in isolation. Compare the current figure to its **prior period, benchmark, forecast, or expectation**, showing both the delta and the reference value (e.g., *"GDP kuartal dua hanya tumbuh 4.3%, meleset 0.2% dari GDP kuartal 1 sebelumnya yaitu 4.5%"* or *"investasi properti hancur minus 18% di semester pertama, anjlok dari ekspektasi awal yaitu minus 12%"*).
-*   **DO** use commas and lowercase letters at the start of continued lines if they are part of the same logical sentence.
 *   **DO** filter out non-essential details, names, acronyms, or secondary data points if they do not directly reinforce the core premise of the post. Keep the writing focused only on the main entities and the logical flow of the narrative.
 
 ### DONTs
@@ -135,7 +133,6 @@ For complex macro topics, add a small, isolated context section at the bottom to
 *   **DON'T** use lazy adjective labels or hype words (e.g., "raksasa", "masif", "huge", "sangat besar", "sangat bahaya") to declare a conclusion.
 *   **DON'T** introduce technical terms or complex actions without explanation. Never assume the reader knows financial acronyms or why institutional players structured a trade in a certain way.
 *   **DON'T** default to retail ("kita retail" or "Retail REKT") as the victim or target audience unless they are indeed the group impacted the most by the news.
-*   **DON'T** capitalize the first letter of a line if it is a continuation of the sentence above it. Avoid ending every single line with a period.
 
 ---
 
