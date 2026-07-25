@@ -4,3 +4,5 @@ node_modules/
 .DS_Store
 *.log
 .antigravity/
+x-pipeline/00-Media-Vault/*.mp4
+x-pipeline/00-Media-Vault/.temp/

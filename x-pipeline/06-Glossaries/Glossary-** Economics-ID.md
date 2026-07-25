@@ -73,3 +73,41 @@ Bayangkan kamu ingin buka jualan limun di pinggir jalan, tapi kota minta izin re
 Saat Nigeria meluncurkan Dewan Aset Virtual baru, mereka langsung mewajibkan adanya sandbox regulasi untuk startup kripto. Sebuah bursa lokal yang bangun produk remitansi berbasis stablecoin sekarang bisa mengujinya dengan basis pengguna terbatas di bawah pengawasan bank sentral, tanpa harus langsung mengamankan lisensi perbankan penuh atau takut rekening tiba-tiba dibekukan—selama beroperasi dalam pagar sandbox.
 
 <!-- Date: 2026-07-20 -->
+
+---
+
+## Salary Cap
+
+**Apa itu?**
+Salary Cap adalah aturan internal liga yang membatasi total uang yang boleh dikeluarkan satu tim untuk gaji pemain dalam satu musim, supaya kompetisi tetap seimbang dan tim kaya tidak bisa memborong semua pemain bintang.
+
+**Mengapa ini penting?**
+Salary cap bikin tiap tim wajib atur anggaran dengan cermat. Kalau semua uang habis buat satu megastar, kamu tidak punya cukup ruang untuk pemain pelapis. Tim yang melebihi cap kena pajak mewah (luxury tax) yang bisa mengunci fleksibilitas keuangan mereka bertahun-tahun.
+
+**Bahasa Bayi**
+Bayangin orang tua kamu kasih uang saku bulanan yang sama ke kamu dan saudara buat beli mainan. Kamu tidak bisa minta lebih dari batas itu, jadi harus pilih: beli satu mainan mahal atau beberapa mainan murah. Salary cap itu uang sakunya — semua tim dapat jatah sama, jadi harus pintar milih pemain.
+
+**Contoh / Studi Kasus**
+Waktu LeBron James teken kontrak veteran minimum $4 juta per tahun di Sixers, gajinya cuma makan 2,35% dari salary cap, kasih ruang buat Philly pertahankan tiga bintang lain tanpa kena penalti pajak yang menghancurkan.
+
+<!-- Date: 2026-07-25 -->
+
+---
+
+## Wage Ceiling
+
+**Apa itu?**
+Wage Ceiling adalah batas atas kompensasi yang diterima tenaga kerja akibat aturan atau tekanan ekonomi. Di olahraga, salary cap tim itu fungsi utama wage ceiling, cegah satu tim menimbun talenta elit dengan cara membayar lebih tinggi dari yang lain. Sementara itu, veteran minimum exception berperan sebagai batas bawah (wage floor) buat pemain tua.
+
+**Mengapa ini penting?**
+Tanpa wage ceiling, tim pasar besar tinggal beli gelar juara dengan gaji selangit yang tidak bisa dilawan tim kecil. Batas ini memaksa distribusi bakat lebih merata, dan juara ditentukan oleh susunan tim yang pintar, bukan cuma isi dompet.
+
+**Bahasa Bayi**
+Anggap ada pesta kelas yang aturannya setiap anak cuma boleh bawa maksimal 10 snack. Itu batasnya. Walaupun pabrik snack punya keluargamu, kamu tetap tidak bisa bawa lebih dari 10. Jadi tidak ada satu anak pun yang kuasai meja makanan sendirian.
+
+**Contoh / Studi Kasus**
+Keputusan LeBron ambil gaji minimum memainkan logika wage ceiling: dengan bayaran nyaris di lantai upah pemain senior, dia buat total gaji Philadelphia tetap di bawah langit-langit cap, buka jalan buat tim mempertahankan pemain maksimal lain seperti Joel Embiid dan Jaylen Brown.
+
+---
+
+<!-- Date: 2026-07-25 -->

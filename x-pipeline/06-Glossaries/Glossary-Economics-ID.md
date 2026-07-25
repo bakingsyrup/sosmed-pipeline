@@ -22,24 +22,6 @@ Venue malam LSE akan bergantung pada sistem agentic trading untuk menempatkan or
 
 ---
 
-## Balance of Payments (BoP)
-
-**Apa itu?**
-Balance of Payments (BoP) adalah catatan semua transaksi ekonomi antara penduduk suatu negara dengan negara lain selama periode tertentu. Ini mencakup perdagangan (ekspor dan impor), arus investasi, dan transfer keuangan.
-
-**Mengapa ini penting?**
-BoP penting karena menunjukkan apakah suatu negara mendapatkan cukup mata uang asing untuk membayar impornya dan membayar utangnya. Defisit BoP yang terus-menerus berarti negara itu lebih banyak belanja di luar negeri daripada pendapatannya, menguras cadangan devisa. Ketika cadangan menipis, negara menghadapi "krisis neraca pembayaran" di mana ia tidak bisa membayar impor penting (makanan, bahan bakar, obat-obatan) atau membayar utang luar negerinya. Ini persis skenario yang ingin dihindari Pakistan.
-
-**Bahasa Bayi**
-Anggap BoP itu seperti laporan bulanan uang jajan dan pengeluaran kamu. Setiap bulan, kamu punya pemasukan (uang jajan, hadiah) dan pengeluaran (jajan, main game, ongkos). Kalau setiap bulan pengeluaran lebih besar dari pemasukan, kamu harus ambil tabungan. Kalau tabungan habis, kamu dalam masalah. BoP adalah laporan "pemasukan vs. pengeluaran" bulanan suatu negara.
-
-**Contoh / Studi Kasus**
-Pakistan sudah puluhan tahun mengalami defisit perdagangan, artinya mereka lebih banyak impor daripada ekspor. Ini menciptakan defisit BoP kronis. Untuk menutup celah ini, Pakistan pinjam dari IMF, mitra bilateral (China, Arab Saudi), atau terbitkan obligasi. Permintaan $10 miliar ke AS adalah upaya untuk menambal celah ini tanpa syarat IMF yang lebih ketat.
-
-<!-- Date: 2026-07-22 -->
-
----
-
 ## Capital Expenditure (Capex)
 
 **Apa itu?**
@@ -112,6 +94,24 @@ Peralihan navigasi militer Iran dari GPS ke BeiDou China adalah contoh nyata. Se
 
 ---
 
+## Dual-Use Technology
+
+**Apa itu?**
+Dual-Use Technology adalah teknologi yang dikembangkan untuk kebutuhan sipil, tapi bisa langsung dipakai ulang untuk tujuan militer atau ofensif tanpa modifikasi besar.
+
+**Mengapa ini penting?**
+Di luar angkasa, batas sipil dan militer kabur. Sistem navigasi otonom berkecepatan tinggi yang dibuat buat menabrak asteroid pakai sensor, pendorong, dan logika bidik yang sama buat melacak dan menghancurkan satelit manuver. Artinya, setiap misi luar angkasa besar punya intel tersembunyi, dan setiap peluncuran bikin negara lain wajib evaluasi ulang celah satelit mereka sendiri.
+
+**Bahasa Bayi**
+Anggap aja kayak pisau dapur. Kamu bisa iris sayur buat makan malam, atau kamu bisa pakai buat menyakiti orang. Pisaunya sendiri nggak baik atau jahat—tergantung siapa yang pegang. Kinetic impactor mirip: bisa selamatkan planet, atau berubah jadi misil pembunuh satelit.
+
+**Contoh / Studi Kasus**
+Satelit raksasa Shijian-21 milik China yang narik satelit ke orbit kuburan di 2022 resminya uji "mitigasi sampah luar angkasa". Tapi lengan robot dan teknik rendezvous orbit yang sama juga kasih mereka kemampuan siap pakai buat merampas dan melumpuhkan satelit mata-mata lawan.
+
+<!-- Date: 2026-07-24 -->
+
+---
+
 ## Energy Sovereignty
 
 **Apa itu?**
@@ -130,21 +130,21 @@ Kebijakan E20 India adalah contoh nyata. Dengan campuran 20% etanol produksi dal
 
 ---
 
-## Exchange Stabilization Fund (ESF)
+## Exchange Stabilization Fund
 
 **Apa itu?**
-Exchange Stabilization Fund (ESF) adalah akun milik Departemen Keuangan AS yang bisa dipakai untuk membeli atau menjual mata uang asing, menyimpan aset valas AS dan Special Drawing Rights (SDRs), serta memberikan pinjaman ke pemerintah asing untuk stabilisasi mata uang.
+Exchange Stabilization Fund adalah dana cadangan yang dipegang oleh Kementerian Keuangan atau bank sentral, yang sejak awal dirancang untuk turun tangan di pasar valuta asing guna menstabilkan nilai tukar mata uang atau memberi pinjaman darurat kepada pemerintah lain.
 
 **Mengapa ini penting?**
-ESF penting karena memberikan alat respons cepat bagi pemerintah AS untuk menstabilkan mata uang tanpa perlu persetujuan Kongres. Ketika sekutu strategis menghadapi krisis mata uang (seperti Pakistan), Treasury bisa menggunakan ESF untuk menyediakan likuiditas darurat, membeli waktu untuk reformasi, dan mencegah penularan keuangan yang lebih luas. ESF beroperasi sebagai mekanisme off-budget yang fleksibel untuk intervensi ekonomi-geopolitik.
+Ketika negara seperti Pakistan menghadapi tekanan kurs yang parah dan cadangan devisa yang menipis, Exchange Stabilization Fund bisa jadi jalur cepat pasokan dolar tanpa syarat panjang ala IMF. Alat ini sekaligus menjadi tameng keuangan dan alat tawar diplomatik — penerima dapat ruang napas, sementara pemberi dapat pengaruh langsung atas pilihan kebijakan si penerima.
 
 **Bahasa Bayi**
-Bayangin temen kamu punya jualan es teh yang lagi susah karena harga gula tiba-tiba naik turun. Kamu punya celengan khusus di bawah kasur yang dikasih orang tua kamu untuk keadaan darurat. Kamu bisa ambil uang dari celengan itu dan pinjam ke temen kamu biar dia bisa beli gula dengan harga stabil, meskipun pasar lagi kacau. Celengan itu adalah ESF.
+Bayangkan Exchange Stabilization Fund itu seperti celengan darurat besar milik bendahara negara. Ketika usaha temanmu hampir ambruk karena semua orang ramai‑ramai tarik uang, kamu bisa buru‑buru kasih suntikan tunai dari celengan itu supaya lampu tetap nyala, sambil memastikan dia akan mendengarkan permintaanmu nanti.
 
 **Contoh / Studi Kasus**
-Pada tahun 1995, Treasury AS menggunakan ESF untuk memberikan pinjaman $20 miliar ke Meksiko saat Krisis Tequila untuk menstabilkan peso. Pinjaman itu dibayar lebih awal dengan bunga. Sekarang, Pakistan minta fasilitas serupa senilai $10 miliar.
+Exchange Stabilization Fund AS pernah dipakai untuk bailout Meksiko tahun 1995 dan menyokong reksadana pasar uang saat krisis 2008. Tahun 2026, Pakistan minta US Treasury mengucurkan $10 miliar dari dana ini, efektif mencoba menukar perannya sebagai mediator dengan jaminan dolar keras.
 
-<!-- Date: 2026-07-22 -->
+<!-- Date: 2026-07-25 -->
 
 ---
 
@@ -157,12 +157,30 @@ Fiscal Dominance adalah kondisi di mana kebutuhan pinjaman dan tingkat defisit p
 Ketika fiscal dominance terjadi, bank sentral kehilangan kemampuan untuk menekan inflasi. Ia harus menahan suku bunga tetap rendah, atau bahkan mencetak uang untuk membeli obligasi pemerintah, karena setiap kenaikan suku bunga tajam akan meledakkan biaya bunga utang dan berisiko gagal bayar. Akibatnya, nilai mata uang tergerus dan tercipta lingkaran setan defisit dan inflasi.
 
 **Bahasa Bayi**
-Bayangkan kamu punya teman yang terus minjam uang ke kamu. Lama-lama jumlahnya besar sekali sampai kamu khawatir kalau diminta kembali, dia bangkrut dan uangmu hilang. Alhasil, kamu malah kasih pinjaman baru supaya dia tetap jalan, dan kamu berhenti menagih yang lama. Itulah bank sentral dan pemerintah dalam fiscal dominance.
+Bayangkan kamu punya teman yang terus minjam uang ke kamu. Lama‑lama jumlahnya besar sekali sampai kamu khawatir kalau diminta kembali, dia bangkrut dan uangmu hilang. Alhasil, kamu malah kasih pinjaman baru supaya dia tetap jalan, dan kamu berhenti menagih yang lama. Itulah bank sentral dan pemerintah dalam fiscal dominance.
 
 **Contoh / Studi Kasus**
 AS saat ini dalam cengkeraman fiscal dominance. Dengan utang nasional menembus $39 triliun dan biaya bunga tahunan di atas $1 triliun, The Fed tak bisa agresif naikkan suku bunga tanpa membengkakkan defisit dan memancing krisis fiskal, sehingga inflasi dibiarkan lebih tinggi lebih lama.
 
 <!-- Date: 2026-07-18 -->
+
+---
+
+## Geopolitical Risk Premium
+
+**Apa itu?**
+Geopolitical Risk Premium adalah tambahan harga yang diminta investor atau pasar sebagai kompensasi atas risiko perang, sanksi, atau ketidakstabilan politik yang bisa ganggu suplai sebuah aset. Di pasar minyak, ini adalah porsi harga yang murni muncul dari ketakutan akan kehilangan suplai di masa depan, bukan karena minyak benar-benar sudah langka.
+
+**Mengapa ini penting?**
+Premium ini bisa melambungkan harga berminggu-minggu sebelum ada gangguan fisik nyata, membuat biaya energi liar dan sulit diprediksi. Efeknya langsung ke ongkos angkut, logistik, dan anggaran subsidi energi pemerintah. Saat ketegangan mereda, premium bisa lenyap secepat kemunculannya, menciptakan efek kejut di bursa saham dan data inflasi.
+
+**Bahasa Bayi**
+Bayangkan kamu jualan es jeruk di pinggir lapangan. Kalau ada isu truk es akan mogok seminggu lagi, pembeli akan rela bayar lebih mahal sekarang supaya aman, padahal stok es kamu masih penuh. Uang lebih itu adalah geopolitical risk premium—harga dari rasa takut kehabisan di masa depan.
+
+**Contoh / Studi Kasus**
+Saat eskalasi AS-Iran memanas pada 2026, harga minyak Brent melonjak dari $70 ke $118 per barel dalam beberapa minggu di bulan Maret, semata-mata karena pasar memasukkan risiko penutupan Selat Hormuz. Begitu memorandum damai disepakati Juni, premium itu langsung amblas.
+
+<!-- Date: 2026-07-24 -->
 
 ---
 
@@ -180,7 +198,25 @@ Bayangkan main poker, tapi satu pemain bisa intip kartu berikutnya di tumpukan s
 **Contoh / Studi Kasus**
 Hedge fund bayar jutaan dolar untuk akses feed satelit cuaca agar bisa trading komoditas gandum sebelum pemerintah rilis laporan pertanian publik.
 
-<!-- Date: 2026-07-17 -->
+<!-- Date: 2026-07-23 -->
+
+---
+
+## Insider Trading
+
+**Apa itu?**
+Insider trading adalah tindakan membeli atau menjual saham perusahaan publik saat seseorang memiliki informasi material non‑publik yang akan memengaruhi harga saham begitu dirilis ke publik.
+
+**Mengapa ini penting?**
+Ini merusak keadilan pasar publik. Ketika anggota parlemen atau orang dalam korporasi bertransaksi berdasarkan informasi yang tidak bisa diakses investor biasa, mereka mengambil keuntungan langsung dari pergerakan harga yang tidak bisa diantisipasi oleh retail. Dalam politik, sekadar tampilannya saja sudah mengikis kepercayaan pada institusi dan bisa mengalihkan modal dari pasar publik ke jalur privat yang tidak teregulasi.
+
+**Bahasa Bayi**
+Bayangkan gurumu tahu jawaban ujian sehari sebelum seluruh kelas, lalu dia bertaruh uang saku tentang siapa yang akan lulus atau gagal. Itulah insider trading—pakai informasi rahasia untuk menang melawan orang yang main pakai aturan normal.
+
+**Contoh / Studi Kasus**
+Seorang anggota Kongres mendengar dalam subkomite pertahanan tertutup bahwa kontrak militer akan dibatalkan. Sebelum pengumuman publik, dia jual saham kontraktor pertahanan itu, menghindari kerugian yang nanti ditanggung pemegang saham retail begitu berita tersebar.
+
+<!-- Date: 2026-07-23 -->
 
 ---
 
@@ -199,6 +235,24 @@ Kamu ingin jualan limun. Jalan di depan rumahmu minta lisensi, izin, dan laporan
 Setelah peluang lolosnya CLARITY Act anjlok, sebuah bursa aset digital besar asal AS diam‑diam mengajukan dokumen untuk membuka anak perusahaan yang teregulasi penuh di Swiss. Layanan yang sama, tim yang sama, tapi rumah hukumnya kini berada di yurisdiksi yang menawarkan kerangka klasifikasi token yang jelas dan kepastian lisensi jangka panjang, melindungi perusahaan dari pertarungan hukum berkepanjangan di AS.
 
 <!-- Date: 2026-07-18 -->
+
+---
+
+## Kinetic Impactor
+
+**Apa itu?**
+Kinetic Impactor adalah pesawat atau proyektil yang sengaja ditabrakkan ke objek langit dengan kecepatan sangat tinggi untuk mentransfer momentum dan mengubah lintasannya.
+
+**Mengapa ini penting?**
+Ini teknologi pertahanan planet paling matang karena nggak perlu nuklir atau robot lengan rumit. Dengan hantam asteroid di kecepatan hipersonik, kita bisa ubah orbitnya pelan-pelan tanpa merusaknya jadi pecahan kacau. Masalahnya, kemampuan hantam presisi ini juga jadi dasar untuk sistem rudal anti-satelit—makanya satu platform bisa punya dua fungsi sekaligus.
+
+**Bahasa Bayi**
+Bayangin kamu main biliar. Bola putih adalah pesawatmu dan bola 8 adalah asteroid yang mau nabrak bumi. Kalau kamu sodok bola putih keras dan lurus, energinya pindah ke bola 8, bikin dia belok ke tempat lain. Sama kayak kinetic impactor di luar angkasa, cuma kecepatannya bikin peluru kelihatan lambat.
+
+**Contoh / Studi Kasus**
+Misi DART NASA di 2022 adalah uji pertama. Pesawat menabrak Dimorphos di kecepatan 6.1 km/detik dan sukses mengubah orbitnya 32 menit—buktikan kita bisa redirect objek kosmik jika waktunya cukup.
+
+<!-- Date: 2026-07-24 -->
 
 ---
 
@@ -238,6 +292,24 @@ Abraxas Capital tarik 45,996 ETH dari Binance, buat bursa kekurangan token untuk
 
 ---
 
+## Mark-to-Market (MTM)
+
+**Apa itu?**
+Mark-to-Market (MTM) adalah metode akuntansi yang menilai aset berdasarkan harga pasar saat ini, bukan harga beli awalnya. Perusahaan wajib memperbarui nilai kepemilikan di neraca dan melaporkan untung atau rugi di laporan laba rugi meskipun aset itu belum dijual.
+
+**Mengapa ini penting?**
+MTM memberikan gambaran real-time tentang kesehatan keuangan perusahaan, namun bisa menimbulkan volatilitas besar pada laporan laba. Bagi investor, memahami MTM krusial karena lonjakan profit yang dilaporkan bisa seluruhnya berasal dari keuntungan kertas, bukan uang tunai, sehingga mengaburkan valuasi dan pengambilan keputusan.
+
+**Bahasa Bayi**
+Bayangkan kamu beli kartu langka seharga 10 ribu. Minggu depan, semua orang bilang kartumu sekarang bernilai 100 ribu. Kamu belum jual, tapi di buku catatanmu kamu tulis "kartuku bernilai 100 ribu" dan kamu merasa untung 90 ribu. Itulah mark-to-market: mencatat nilai terkini, bukan harga beli.
+
+**Contoh / Studi Kasus**
+Laporan Q2 2026 Alphabet: saham SpaceX dibeli sekitar $900 juta di 2015. Setelah IPO SpaceX, Alphabet menandai (mark) kepemilikan itu ke harga pasar $94,1 miliar. Lonjakan lebih dari $93 miliar muncul sebagai unrealized gain di laba bersih, mendongkrak earnings GAAP meski Alphabet belum menjual satu lembar pun.
+
+<!-- Date: 2026-07-24 -->
+
+---
+
 ## Multiple to Net Asset Value (mNAV)
 
 **Apa itu?**
@@ -271,24 +343,6 @@ Bayangkan kamu punya celengan berisi 10 koin emas, tapi kamu juga utang Rp50.000
 Strategy memegang 843.775 Bitcoin senilai sekitar $54 miliar di harga saat ini. Mereka punya utang konversi sebesar $6,7 miliar. NAV mereka sekitar $47,3 miliar. Angka ini kasih tahu investor nilai likuidasi mentah perusahaan sebelum ada premi pertumbuhan yang ditambahkan pasar saham.
 
 <!-- Date: 2026-07-20 -->
-
----
-
-## Nuclear Non-Proliferation Treaty (NPT)
-
-**Apa itu?**
-Nuclear Non-Proliferation Treaty (NPT) adalah perjanjian internasional yang ditandatangani pada tahun 1968 yang bertujuan untuk mencegah penyebaran senjata nuklir dan teknologi senjata, mempromosikan kerja sama dalam penggunaan energi nuklir secara damai, dan lebih lanjut mencapai tujuan perlucutan senjata nuklir.
-
-**Mengapa ini penting?**
-NPT adalah landasan rezim non-proliferasi global. Perjanjian ini menciptakan kesepakatan: negara-negara non-senjata nuklir setuju untuk tidak memperoleh senjata nuklir, dan sebagai imbalannya, mereka mendapatkan akses ke teknologi nuklir damai. Perjanjian ini memiliki 191 negara anggota. Ketika kekuatan besar seperti AS tampak merusak perjanjian dengan memfasilitasi kemampuan pengayaan di negara non-nuklir, hal itu mengikis kredibilitas perjanjian dan dapat memicu perlombaan senjata regional.
-
-**Bahasa Bayi**
-Anggap NPT sebagai aturan klub lingkungan: "Setiap orang yang bergabung berjanji untuk tidak membangun kolam renang pribadi mereka sendiri. Sebagai imbalannya, klub mengizinkan semua orang menggunakan kolam bersama." Jika presiden klub kemudian membantu satu anggota membangun kolam pribadi, aturan itu menjadi tidak berarti, dan segera semua orang akan menuntut kolam mereka sendiri.
-
-**Contoh / Studi Kasus**
-Iran menandatangani NPT tetapi dituduh diam-diam mengejar kemampuan pengayaan. AS memimpin kampanye sanksi untuk menghentikan mereka. Sekarang AS memfasilitasi kemampuan pengayaan untuk Arab Saudi, yang juga penandatangan NPT. Ini menciptakan kontradiksi langsung dalam kebijakan AS dan melemahkan kredibilitas penegakan NPT.
-
-<!-- Date: 2026-07-22 -->
 
 ---
 
@@ -382,24 +436,6 @@ Saat tensi dagang AS-China memanas, investor minta yield lebih tinggi untuk pega
 
 ---
 
-## Section 123 Agreement
-
-**Apa itu?**
-Section 123 Agreement adalah perjanjian bilateral yang mengikat secara hukum berdasarkan U.S. Atomic Energy Act tahun 1954 untuk setiap transfer signifikan material nuklir, peralatan, atau teknologi dari Amerika Serikat ke negara lain.
-
-**Mengapa ini penting?**
-Perjanjian ini menentukan bagaimana negara penerima dapat menggunakan teknologi nuklir yang dipasok AS, termasuk apakah mereka diizinkan untuk memperkaya uranium atau memproses ulang bahan bakar bekas. Tanpa perjanjian ini, tidak ada ekspor nuklir besar AS yang bisa berjalan. Ketentuan spesifik yang ditulis dalam Section 123 Agreement menentukan pengaruh strategis yang dimiliki AS atas program nuklir penerima selama puluhan tahun.
-
-**Bahasa Bayi**
-Bayangkan tetanggamu ingin meminjam peralatan listrik mahal milikmu. Section 123 Agreement adalah kontrak tertulis yang bilang: "Kamu boleh pakai bor aku, tapi kamu tidak boleh bongkar untuk bikin pabrik bor sendiri." Kalau kontraknya tidak ada aturan itu, tetanggamu bisa membalikkan rekayasa bor tersebut dan mulai memproduksi bor sendiri.
-
-**Contoh / Studi Kasus**
-Pada tahun 2009, AS menandatangani Section 123 Agreement dengan Uni Emirat Arab. UEA secara sukarela melepaskan hak untuk memperkaya uranium atau memproses ulang bahan bakar bekas—ini dikenal sebagai "Gold Standard." Perjanjian Saudi yang baru secara mencolok menghilangkan pembatasan ini, membuka pintu bagi pengayaan uranium Saudi.
-
-<!-- Date: 2026-07-22 -->
-
----
-
 ## Sovereign Yields
 
 **Apa itu?**
@@ -413,6 +449,24 @@ Anggap saja seperti kartu kredit. Jika skor kredit kamu bagus, bunga kartu kredi
 
 **Contoh / Studi Kasus**
 Pada Juli 2026, Supply Shock dari konflik Timur Tengah mendorong ekspektasi inflasi naik. Akibatnya, investor menuntut yield yang lebih tinggi pada obligasi Treasury AS, mendorong yield 10 tahun lebih tinggi dan meningkatkan biaya pinjaman bagi pemerintah AS dan bisnis.
+
+<!-- Date: 2026-07-22 -->
+
+---
+
+## Stagflation
+
+**Apa itu?**
+Stagflation adalah kondisi ekonomi di mana pertumbuhan ekonomi lambat dan pengangguran tinggi terjadi bersamaan dengan harga barang yang terus naik (inflasi). Ini situasi terburuk karena obat untuk inflasi—menaikkan suku bunga—justru bisa mematikan pertumbuhan ekonomi yang sudah lesu.
+
+**Mengapa ini penting?**
+Stagflation membuat bank sentral kehilangan manuver; mereka tidak bisa turunkan suku bunga untuk sangga pertumbuhan tanpa membuat inflasi makin ganas. Bagi kita, bayaran terasa makin tidak cukup sementara lowongan kerja makin seret. Bagi investor, kondisi ini menghancurkan obligasi (karena inflasi tinggi) sekaligus saham (karena laba perusahaan turun).
+
+**Bahasa Bayi**
+Bayangkan mobil yang rodanya nyangkut di lumpur (pertumbuhan macet), tapi mesinnya overheat dan tidak boleh dipaksa (harga meroket). Kamu mau gas untuk keluar, tapi suhu mesin makin naik. Stagflation adalah mobil yang mandek sekaligus mendidih.
+
+**Contoh / Studi Kasus**
+Krisis minyak 1970-an adalah contoh klasik: embargo OPEC membuat harga energi meledak, mendongkrak biaya semua barang, tapi ekonomi negara-negara Barat saat itu sudah mulai melambat. Hasilnya adalah inflasi tinggi yang bertahan bertahun-tahun bareng dengan resesi.
 
 <!-- Date: 2026-07-22 -->
 
@@ -468,7 +522,7 @@ Bayangkan sebuah toko roti yang menjual 100 roti sehari. Tiba-tiba, banjir mengh
 **Contoh / Studi Kasus**
 Pada Juli 2026, konflik Timur Tengah yang berlangsung mengganggu pengiriman melalui Laut Merah, jalur penting bagi kapal tanker minyak. Hal ini mengurangi pasokan minyak yang mencapai pasar global, menyebabkan harga minyak mentah melonjak dan memicu inflasi di seluruh dunia.
 
-<!-- Date: 2026-07-22 -->
+<!-- Date: 2026-07-24 -->
 
 ---
 
@@ -487,3 +541,21 @@ Bayangkan satu kompleks perumahan pakai jaringan listrik yang sama milik satu pe
 Kemitraan Iran-China lewat BeiDou adalah contoh decoupling teknologi dalam medan perang sungguhan. Dengan melepas GPS Amerika dan memakai BeiDou-3 China, Iran mencopot sekrup militernya dari standar PNT (Positioning, Navigation, and Timing) pimpinan AS. Di sisi lain, Barat juga melakukan decoupling dari rantai pasok 5G dan perangkat keras China, tapi kali ini pihak Timurlah yang memulai, menciptakan lingkungan teknologi militer yang terpecah jadi multipolar.
 
 <!-- Date: 2026-07-19 -->
+
+---
+
+## Unrealized Gain
+
+**Apa itu?**
+Unrealized Gain adalah keuntungan yang hanya ada di atas kertas karena nilai pasar aset naik, tapi pemiliknya belum menjual aset tersebut untuk mengamankan uang tunai. Keuntungan ini tercatat sebagai kenaikan nilai sampai terjadi penjualan.
+
+**Mengapa ini penting?**
+Unrealized gain bisa membuat perusahaan tampak sangat cuan, namun tidak memberi likuiditas untuk operasional, bayar utang, atau dividen. Investor wajib mengupasnya untuk melihat laba inti; jika tidak, mereka berisiko bayar mahal untuk saham yang laba headline-nya gede tapi arus kasnya lemah.
+
+**Bahasa Bayi**
+Orang tuamu beli rumah dulu seharga 100 juta. Sekarang rumah itu bisa dijual 300 juta. Selama belum dijual dan uangnya belum diterima, selisih 200 juta itu adalah unrealized gain — rasanya enak, tapi nggak bisa dipakai belanja bulanan.
+
+**Contoh / Studi Kasus**
+Dalam laporan Q2 2026 Alphabet, keuntungan ekuitas $99 miliar (mayoritas dari SpaceX dan Anthropic) hampir seluruhnya unrealized gain. Angka ini menggelembungkan laba bersih ke $112,1 miliar. Tapi kalau kita buang laba kertas itu, earnings per share adjusted hanya $2,85 — gambaran yang jauh lebih tipis tentang kekuatan operasional Alphabet sebenarnya.
+
+<!-- Date: 2026-07-24 -->

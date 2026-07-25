@@ -22,24 +22,6 @@ The LSE’s overnight venue will rely on agentic trading systems to place orders
 
 ---
 
-## Balance of Payments (BoP)
-
-**What it is?**
-Balance of Payments (BoP) is a record of all economic transactions between the residents of a country and the rest of the world over a specific period. It includes trade (exports and imports), investment flows, and financial transfers.
-
-**Why it is important?**
-The BoP is important because it shows whether a country is earning enough foreign currency to pay for its imports and service its debt. A persistent BoP deficit means a country is spending more abroad than it earns, draining its foreign exchange reserves. When reserves run low, the country faces a "balance of payments crisis" where it cannot pay for essential imports (food, fuel, medicine) or service its external debt. This is exactly the scenario Pakistan is trying to avoid.
-
-**Explain like I'm 10**
-Think of the BoP like your monthly allowance and expenses. Every month, you earn money (allowance, gifts) and you spend money (snacks, games, bus fare). If you spend more than you earn every month, you have to dip into your savings. If your savings run out, you are in trouble. The BoP is a country's monthly "allowance vs. expenses" report.
-
-**Example / Study Case**
-Pakistan has run a trade deficit for decades, meaning it imports more than it exports. This creates a chronic BoP deficit. To cover the gap, Pakistan borrows from the IMF, bilateral partners (China, Saudi Arabia), or issues bonds. The $10 billion request to the US is an attempt to plug this gap without stricter IMF conditions.
-
-<!-- Date: 2026-07-22 -->
-
----
-
 ## Capital Expenditure (Capex)
 
 **What it is?**
@@ -112,6 +94,24 @@ Iran's military navigation move from GPS to China's BeiDou is a textbook example
 
 ---
 
+## Dual-Use Technology
+
+**What it is?**
+Dual-Use Technology is any technology developed for civilian applications that can also be directly repurposed for military or offensive use without major modification.
+
+**Why it is important?**
+In space, things get blurry fast. A high-speed autonomous navigation system built to intercept an asteroid uses the exact same sensors, thrusters, and targeting logic required to track and destroy a maneuvering satellite. This means every major space mission has hidden intelligence value, and every launch forces other nations to reassess their own satellite vulnerability.
+
+**Explain like I'm 10**
+Think of a kitchen knife. You can slice vegetables for dinner or you can use it to hurt someone. The knife itself isn't good or evil—it depends on who's holding it. A kinetic impactor works the same way: it can save the planet, or it can become a missile against a satellite.
+
+**Example / Study Case**
+The bus-sized satellite that China's Shijian-21 tugged into a graveyard orbit in 2022 was officially a "space debris mitigation" test. But the same robotic arm and precise orbital rendezvous technique gave them a ready-made capability to grab and disable an enemy spy satellite.
+
+<!-- Date: 2026-07-24 -->
+
+---
+
 ## Energy Sovereignty
 
 **What it is?**
@@ -130,21 +130,21 @@ India’s E20 mandate is a textbook case. By blending 20% ethanol domestically p
 
 ---
 
-## Exchange Stabilization Fund (ESF)
+## Exchange Stabilization Fund
 
 **What it is?**
-Exchange Stabilization Fund (ESF) is a U.S. Treasury account under the Secretary that can be used to purchase or sell foreign currencies, hold U.S. foreign exchange and Special Drawing Rights (SDRs) assets, and provide financing to foreign governments for currency stabilization.
+Exchange Stabilization Fund is a pool of money held by a Treasury or central bank, originally designed to intervene in foreign exchange markets to stabilize a nation’s currency value or to provide emergency liquidity to other governments.
 
 **Why it is important?**
-The ESF is important because it gives the U.S. government a rapid-response tool to stabilize currencies without needing congressional approval. When a strategic ally faces a currency crisis (like Pakistan), the Treasury can deploy the ESF to provide emergency liquidity, buy time for reforms, and prevent a broader financial contagion. It operates as a flexible, off-budget mechanism for geopolitical-economic intervention.
+When a country like Pakistan faces severe currency pressure and dwindling reserves, an Exchange Stabilization Fund can provide a direct, fast dollar lifeline without the lengthy conditions of an IMF program. It becomes a tool of both financial defense and diplomatic leverage — the recipient gets breathing room, and the provider gains influence over the recipient’s policy choices.
 
-**Explain like I'm 10**
-Imagine your friend's lemonade stand is struggling because other kids keep changing the price of lemons. You have a special piggy bank under your bed that your parents gave you for emergencies. You can take money from that piggy bank and lend it to your friend so they can buy lemons at a stable price, even if the market is crazy. That piggy bank is the ESF.
+**Explain like I’m 10**
+Think of the Exchange Stabilization Fund like a big emergency savings jar that a country’s treasury keeps. When a friend’s business is about to collapse because everyone is pulling their money out, you can quickly hand them cash from the jar to keep the lights on, while also making sure they’ll listen to you later when you ask for a favor.
 
 **Example / Study Case**
-In 1995, the U.S. Treasury used the ESF to provide a $20 billion loan to Mexico during the "Tequila Crisis" to stabilize the peso. The loan was repaid early with interest. Pakistan is now requesting a similar facility worth $10 billion.
+The U.S. Exchange Stabilization Fund has historically been used to bail out Mexico in 1995 and to backstop money market funds during the 2008 crisis. In 2026, Pakistan is asking the U.S. Treasury to tap it for $10 billion, effectively trying to turn its mediator role into a hard‑currency guarantee.
 
-<!-- Date: 2026-07-22 -->
+<!-- Date: 2026-07-25 -->
 
 ---
 
@@ -166,21 +166,57 @@ The U.S. currently sits in fiscal dominance. With national debt exceeding $39 tr
 
 ---
 
+## Geopolitical Risk Premium
+
+**What it is?**
+Geopolitical Risk Premium is the extra return or price increase investors demand for holding an asset when there is a risk of war, sanctions, or political instability that could disrupt its supply. In oil markets, it is the part of the price that reflects fear of future supply loss rather than actual physical shortage.
+
+**Why it is important?**
+This premium can spike prices weeks before any real disruption happens, making energy costs volatile and unpredictable. It directly raises fuel and logistics costs for businesses and consumers, while forcing governments to prepare larger subsidy budgets. If geopolitical calm returns, the premium can collapse just as quickly, creating whiplash effects across stock markets and inflation data.
+
+**Explain like I'm 10**
+Imagine you run a lemonade stand. If a storm is forecast to hit the neighbourhood, your customers might pay extra just to secure lemonade now, even though the storm hasn't knocked out your supply yet. That extra money is like the geopolitical risk premium—it is the price of safety against a possible future shortage.
+
+**Example / Study Case**
+During the 2026 escalation between the US and Iran, Brent crude oil jumped from $70 to $118 per barrel within weeks of March despite steady physical supply, purely because traders priced in the risk of a Strait of Hormuz closure. When a ceasefire was signed in June, the premium evaporated and prices fell back.
+
+<!-- Date: 2026-07-24 -->
+
+---
+
 ## Information Asymmetry
 
 **What it is?**
 A situation where one party in a trade has better, deeper, or faster data than the other party.
 
 **Why it is important?**
-It dictates who makes money in financial markets. Having access to critical news even a few milliseconds before the general public allows institutional players to front-run trades, capture profits, and avoid risks while everyone else is still processing the information.
+It dictates who makes money in financial markets. Having access to critical news even a few milliseconds before the general public allows institutional players to front‑run trades, capture profits, and avoid risks while everyone else is still processing the information.
 
-**Explain like I'm 10**
+**Explain like I’m 10**
 Imagine playing a game of poker, but one player gets to peek at the next card in the deck before deciding how much to bet.
 
 **Example / Study Case**
 Hedge funds pay millions for direct satellite feeds of crop yields so they can trade wheat futures before the government releases the public agriculture report.
 
-<!-- Date: 2026-07-17 -->
+<!-- Date: 2026-07-23 -->
+
+---
+
+## Insider Trading
+
+**What it is?**
+Insider trading is the act of buying or selling a public company’s stock while in possession of material, non‑public information that will affect the stock’s price once released to the public.
+
+**Why it is important?**
+It destroys the fairness of public markets. When lawmakers or corporate insiders trade on information ordinary investors cannot access, they extract profits directly from the price movements that retail participants cannot anticipate. In politics, even the appearance of it erodes trust in institutions and can shift capital away from public markets into private, unregulated channels.
+
+**Explain like I’m 10**
+Imagine your teacher knows the exam answers a day before the rest of the class, and she bets lunch money on which students will pass or fail. That’s insider trading—using secret information to win against people who play by the normal rules.
+
+**Example / Study Case**
+A Congress member learns in a private defense subcommittee that a military contract will be cancelled. Before the public announcement, they sell shares of the defense contractor, avoiding losses that retail shareholders will absorb once the news breaks.
+
+<!-- Date: 2026-07-23 -->
 
 ---
 
@@ -199,6 +235,24 @@ You want to sell lemonade. Your street requires a license, a permit, and a 100�
 After the CLARITY Act’s odds collapsed, a large US‑based digital‑asset exchange quietly filed paperwork to open a fully regulated subsidiary in Switzerland. The same service, the same team, but the legal home is now in a jurisdiction that offers a clear token‑classification framework and long‑term licensing certainty, insulating the firm from drawn‑out US enforcement battles.
 
 <!-- Date: 2026-07-18 -->
+
+---
+
+## Kinetic Impactor
+
+**What it is?**
+Kinetic Impactor is a spacecraft or projectile deliberately crashed into a celestial object at extremely high speed to transfer momentum and change its trajectory.
+
+**Why it is important?**
+It is currently the most mature technology for planetary defense because it doesn't rely on nuclear explosions or complex robotic arms. By hitting an asteroid at hypersonic speeds, we can slowly nudge its orbit over time without breaking it into unpredictable fragments. It also doubles as a precision strike platform, which is why it sits at the heart of emerging space defense doctrines.
+
+**Explain like I'm 10**
+Imagine you're playing pool. The cue ball is your spacecraft and the 8-ball is an asteroid heading towards Earth. If you hit the cue ball hard and straight, it transfers energy to the 8-ball, sending it somewhere else. A kinetic impactor does the same thing in space, just at speeds that make a bullet look slow.
+
+**Example / Study Case**
+NASA's DART mission in 2022 was the first real test. The spacecraft slammed into Dimorphos at 6.1 km/s and successfully changed its orbit around its parent asteroid by 32 minutes—proving we can redirect cosmic objects if we catch them early enough.
+
+<!-- Date: 2026-07-24 -->
 
 ---
 
@@ -238,6 +292,24 @@ Abraxas Capital withdraws 45,996 ETH from Binance, leaving the exchange with few
 
 ---
 
+## Mark-to-Market (MTM)
+
+**What it is?**
+Mark-to-Market (MTM) is an accounting method that values assets at their current market price instead of their original purchase price. It forces companies to update the value of their holdings on the balance sheet and report gains or losses on the income statement even if the asset hasn't been sold.
+
+**Why it is important?**
+MTM provides a real-time snapshot of a firm's financial health, but it can inject huge volatility into earnings reports. For investors, understanding MTM is crucial because a surge in reported profit may be entirely from paper gains rather than actual cash flow, which distorts valuations and decision-making.
+
+**Explain like I'm 10**
+Imagine you buy a rare trading card for $10. Next week, everyone says it's worth $100. You haven't sold it, but you update your notebook to say "my card is worth $100" and you feel $90 richer. That's mark-to-market: recording what things are worth right now, not what you paid.
+
+**Example / Study Case**
+Alphabet's Q2 2026 filing: the SpaceX stake was bought for ~$900 million in 2015. After SpaceX's IPO, Alphabet marked it to the current market price of $94.1 billion. That $93 billion+ jump showed up as a massive unrealized gain in net income, boosting GAAP earnings even though Alphabet hadn't sold a single share.
+
+<!-- Date: 2026-07-24 -->
+
+---
+
 ## Multiple to Net Asset Value (mNAV)
 
 **What it is?**
@@ -271,24 +343,6 @@ Imagine you have a piggy bank with 10 gold coins, but you also owe your friend $
 Strategy holds 843,775 Bitcoin worth about $54 billion at current prices. They carry $6.7 billion in convertible debt. Their NAV is approximately $47.3 billion. This number tells investors the raw liquidation value of the company before any growth premium is added by the stock market.
 
 <!-- Date: 2026-07-20 -->
-
----
-
-## Nuclear Non-Proliferation Treaty (NPT)
-
-**What it is?**
-Nuclear Non-Proliferation Treaty (NPT) is an international treaty signed in 1968 whose objective is to prevent the spread of nuclear weapons and weapons technology, promote cooperation in the peaceful uses of nuclear energy, and further the goal of achieving nuclear disarmament.
-
-**Why it is important?**
-The NPT is the cornerstone of the global non-proliferation regime. It creates a bargain: non-nuclear weapon states agree not to acquire nuclear weapons, and in return, they gain access to peaceful nuclear technology. The treaty has 191 member states. When major powers like the U.S. appear to undermine the treaty by facilitating enrichment capability in non-nuclear states, it erodes the treaty's credibility and can trigger regional arms races.
-
-**Explain like I'm 10**
-Think of the NPT as a neighborhood clubhouse rule: "Everyone who joins promises not to build their own private swimming pool. In exchange, the club lets everyone use the shared pool." If the club president then helps one member build a private pool, the rule becomes meaningless, and soon everyone will demand their own pool.
-
-**Example / Study Case**
-Iran signed the NPT but was accused of secretly pursuing enrichment capability. The U.S. led a campaign of sanctions to stop them. Now the U.S. is facilitating enrichment capability for Saudi Arabia, also an NPT signatory. This creates a direct contradiction in U.S. policy and weakens the NPT's enforcement credibility.
-
-<!-- Date: 2026-07-22 -->
 
 ---
 
@@ -382,24 +436,6 @@ When US-China trade tensions spike, investors demand a higher yield to hold Asia
 
 ---
 
-## Section 123 Agreement
-
-**What it is?**
-Section 123 Agreement is a legally binding bilateral agreement required under the U.S. Atomic Energy Act of 1954 for any significant transfer of nuclear material, equipment, or technology from the United States to another country.
-
-**Why it is important?**
-It sets the terms for how the recipient country can use U.S.-supplied nuclear technology, including whether they are allowed to enrich uranium or reprocess spent fuel. Without this agreement, no major U.S. nuclear export can proceed. The specific terms written into a Section 123 Agreement determine the strategic leverage the U.S. retains over the recipient's nuclear program for decades.
-
-**Explain like I'm 10**
-Imagine your neighbor wants to borrow your high-end power tools. A Section 123 Agreement is the written contract that says: "You can use my drill, but you cannot take it apart to build your own drill factory." If the contract doesn't include that rule, your neighbor could reverse-engineer the drill and start manufacturing their own.
-
-**Example / Study Case**
-In 2009, the U.S. signed a Section 123 Agreement with the United Arab Emirates. The UAE voluntarily gave up the right to enrich uranium or reprocess spent fuel—this became known as the "Gold Standard." The new Saudi agreement notably omits this restriction, leaving the door open for Saudi enrichment.
-
-<!-- Date: 2026-07-22 -->
-
----
-
 ## Sovereign Yields
 
 **What it is?**
@@ -413,6 +449,24 @@ Think of it like a credit card. If you have a good credit score, your interest r
 
 **Example / Study Case**
 In July 2026, the supply shock from the Middle East conflict drove up inflation expectations. As a result, investors demanded higher yields on US Treasury bonds, pushing the 10-year yield higher and increasing borrowing costs for the US government and businesses.
+
+<!-- Date: 2026-07-22 -->
+
+---
+
+## Stagflation
+
+**What it is?**
+Stagflation is an economic condition where slow economic growth and high unemployment occur at the same time as rising prices (inflation). It is the worst of both worlds because the usual medicine for inflation—raising interest rates—can kill economic growth even further.
+
+**Why it is important?**
+Stagflation traps central banks; they cannot easily lower rates to boost growth without making inflation worse. For us, it means our wages buy less while job opportunities shrink. For investors, it crushes both bonds (due to high inflation) and stocks (due to falling profits), leaving very few safe places for money.
+
+**Explain like I'm 10**
+Think of a car stuck in deep mud (slow growth) but the engine is overheating at the same time (rising prices). You want to rev the engine to get out, but that makes it hotter. Stagflation is exactly that: an economy stuck and overheating together.
+
+**Example / Study Case**
+The 1970s oil crisis is the classic example: an OPEC oil embargo caused energy prices to skyrocket, which raised the cost of everything, yet Western economies were already slowing down. The result was years of high inflation combined with recession.
 
 <!-- Date: 2026-07-22 -->
 
@@ -468,7 +522,7 @@ Imagine a bakery that sells 100 loaves of bread a day. Suddenly, a flood destroy
 **Example / Study Case**
 In July 2026, the ongoing Middle East conflict disrupted shipping through the Red Sea, a critical route for oil tankers. This reduced the supply of oil reaching global markets, causing crude oil prices to spike and fueling inflation worldwide.
 
-<!-- Date: 2026-07-22 -->
+<!-- Date: 2026-07-24 -->
 
 ---
 
@@ -487,3 +541,21 @@ Think of a neighborhood where everyone uses the same power grid owned by one com
 The Iran-China BeiDou partnership is a live-fire example of technological decoupling. By dropping the American GPS for China's BeiDou-3, Iran effectively unscrewed its military from the US-led PNT (Positioning, Navigation, and Timing) standard. Similarly, the West is decoupling from Chinese 5G and hardware supply chains, but this time the East is driving the shift, creating a multipolar military tech environment.
 
 <!-- Date: 2026-07-19 -->
+
+---
+
+## Unrealized Gain
+
+**What it is?**
+Unrealized Gain is a profit that exists on paper because an asset's market value has increased, but the owner hasn't sold the asset to lock in the cash. It sits in the accounts as an increase in value until a sale happens.
+
+**Why it is important?**
+Unrealized gains can make a company look incredibly profitable, but they provide no liquidity for operations, debt payments, or dividends. Investors need to strip them out to see core earnings; otherwise, they risk overpaying for a stock that has robust headline profits but weak cash generation.
+
+**Explain like I'm 10**
+Your parents bought a house years ago for $100,000. Now it could sell for $300,000. Until they actually sell it and get the money, that $200,000 extra is an unrealized gain — it feels good, but you can't spend it on groceries.
+
+**Example / Study Case**
+In Alphabet’s Q2 2026 report, the $99 billion in equity gains (mainly SpaceX and Anthropic) were almost entirely unrealized. They inflated net income to $112.1 billion. But if you exclude those paper profits, adjusted earnings per share were only $2.85 — a much thinner picture of Alphabet’s actual operating strength.
+
+<!-- Date: 2026-07-24 -->

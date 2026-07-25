@@ -98,23 +98,62 @@ export function getStandardPromptStr(tweetText, researchBrief, lang, glossaryDat
 Fact-Checking & Research Brief:
 ${researchBrief}
 
-Using the style guide instructions, write THREE (3) distinct alternative drafts for an X (Twitter) post based on this information.
-Each draft should follow a different angle or template from the style guide:
-- Draft 1: A bold headline followed by a highly connected, step-by-step narrative flow that explains the core macro/business mechanism and naturally builds towards the final key takeaway.
-- Draft 2: A rhetorical question-and-answer flow. It MUST start with a main news headline in the first line, followed immediately by supporting quantitative facts in the second line to establish credibility, before pivoting into the rhetorical Q&A flow to explain the context.
-- Draft 3: A high-stakes crisis angle highlighting the party most affected / getting REKT. It MUST follow a "Show, Don't Tell" approach: instead of declaring a situation "massive" or "dangerous" directly, it should lay out the facts and relative comparisons step-by-step so the reader understands the scale of the danger themselves.
+CRITICAL COGNITIVE DECISION GATE (MARIO STYLE):
+Before drafting, analyze the Research Brief and select the single best Archetype among:
+1. Archetype 1: Macro Signal (Ultra-compact ~70 words)
+2. Archetype 2: Curated Intelligence Bulletin (4-5 dash-bullet items or short evidence blocks)
+3. Archetype 3: Deep Explainer / Geopolitical Pivot (110-160 words narrative blocks)
+
+Each draft MUST begin with the archetype metadata block:
+🎯 **Selected Archetype**: [Archetype Name]
+💡 **Rationale**: [1-2 sentences explaining why this archetype was selected for these research facts]
+
+Each draft MUST strictly follow Mario Style rules:
+- Establish 1 clear Editorial Thesis per draft. Include ONLY facts that directly support that thesis. Raw fact dumping is strictly forbidden; every sentence, bullet, or block MUST follow: \`[Raw Fact/Metric] + [Explicit "So What?" Sub-Clause connecting to the Editorial Thesis]\`.
+- Data-Gated Angle Selection: Select ONLY a Mid-Post Turn technique from the Menu of 10 that is backed by sufficient, concrete research evidence in the brief. Do NOT select data-dependent angles like 'Follow the Money' unless explicit cash flow / balance sheet figures exist in the brief.
+- Seamless Narrative Bridge: Framing transition lines MUST be integrated smoothly into the opening sentence of the evidence block. Never output isolated 4-word slogans (e.g. avoid standing alone phrases like "Lihat ke mana aliran uangnya bergerak.").
+- Select the best Visual Container (Unicode bullets '• ', Numbered lists '1.', Paragraph blocks, or Micro-headers) for EACH archetype based on what delivers maximum clarity for the research facts.
+- X-Compatible Bullet Formatting: ALWAYS use the literal Unicode bullet symbol (\`• \`) for bulleted lists. Never use standard markdown dashes (\`-\`).
+- Mandatory Blank Line Spacing for Lists: ALWAYS place 1 blank line (\`\\n\\n\`) between every single bullet item (\`• \`) or numbered list item (\`1.\`, \`2.\`). Never cram list items together without blank lines.
+- Fact-Gated Bullet Scope: Each bullet item (\`• \`) presents 1 core fact/metric, followed ONLY by direct consequences explicitly grounded in the research brief. Include a secondary consequence ONLY if it is a major data point in the brief—never force or speculate an ungrounded consequence.
+- Bullet Line Break Rule: If a bullet item exceeds ~25 words and contains a full stop (\`.\`), split the text after the full stop out of the bullet list into a standalone paragraph block below.
+- For Archetype 1: Focus 100% on SINGLE core concept. Do NOT cram multiple unexplained concepts into ~70 words.
+- For Archetype 2: Select 1 Framing Transition Line backed by brief data, followed by 3-4 evidence items (using Unicode bullets \`• \`, numbered lists, or evidence blocks separated by blank lines). Rotate across sentence variations focusing on metric properties, external impacts, and reality checks.
+- For Archetype 3: Block 1 MUST satisfy natural reader curiosity (how/why did this happen?) to ground the reader before Block 2 pivots into the complex thesis mechanism.
+- Lead with Visual Badges on Line 1 (\`🇺🇸\`, \`🚨\`), use dynamic 1-3 sentence blocks, standard sentence case, spoken headline verbs, and vivid mechanism verbs.
+- Headline Parenthetical Formatting Rule: When adding brief supplementary context, definitions, or historical benchmarks inside a headline, always enclose the context in parentheses \`(...)\` rather than em-dashes (\`—...—\`). Never use em-dashes inside headlines.
+- Spoken Active Verb Principle: Strip all formal active prefixes (\`me-\`, \`mem-\`, \`men-\`, \`meng-\`, \`memper-\`) from active action and motion verbs across headlines and body text to output direct spoken root forms. Active suffixes (\`-i\` and \`-kan\`) remain intact when the active prefix is stripped. ALWAYS retain passive prefixes (\`di-\`, \`ter-\`) and verbs that change class to a noun.
+- Untranslated Global Jargon Principle: When writing in Indonesian (\`lang: id\`), retain all digital technology, software, computing, internet infrastructure, and financial market terms (both single-word and multi-word terms) in their standard practitioner English form. Never translate industry tech jargon into literal dictionary Indonesian.
+- Concise Spoken Noun Phrases: Omit non-essential locative and relational prepositions (kata depan) inside compound noun phrases when writing in Indonesian (\`lang: id\`).
+- Explicit Temporal Contrast Pacing: When contrasting a past precedent with a present action in a single sentence, insert an explicit present-time conjunction after the comma. Use pronominal suffixes rather than repeating subject nouns.
+- Concessive Conditional Pacing & Anaphoric Pronouns: Express hypothetical workarounds or concessions using direct concessive conditional conjunctions (expressing even if) rather than multi-word negative clauses. Use conversational pronouns when referencing active subjects. Close with a direct 1-sentence macro thesis (no victim callouts).
+
+CRITICAL 3-DRAFT ANGLE DISTRIBUTION DIRECTIVE:
+- Draft 1: MUST use 1 of the Top 3 Neutral & Informative Angles (Causality/Mechanism, Downstream Chain Reaction, or Temporal Contrast).
+- Draft 2: MUST use a DIFFERENT angle from the Top 3 Neutral & Informative Angles (Causality/Mechanism, Downstream Chain Reaction, or Temporal Contrast).
+- Draft 3: MUST use a Wildcard Angle from the Remaining 7 Angles (Follow the Money, Scale Benchmark, Deductive Signal, Rhetorical Interrogation, Counter-Intuitive, Double Standard, or Contrarian).
+- Contrarian / Claim vs Reality angles are STRICTLY FORBIDDEN in Draft 1 and Draft 2!
 
 Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English, do not write in Indonesian)' : 'INDONESIAN (blended naturally with English trading terms)'}
 
 Separate the drafts clearly with headers:
 ### Draft 1
-[Content]
+🎯 **Selected Archetype**: [Archetype Name]
+💡 **Rationale**: [Brief explanation]
+
+[Draft Copy Content]
 
 ### Draft 2
-[Content]
+🎯 **Selected Archetype**: [Archetype Name]
+💡 **Rationale**: [Brief explanation]
+
+[Draft Copy Content]
 
 ### Draft 3
-[Content]
+🎯 **Selected Archetype**: [Archetype Name]
+💡 **Rationale**: [Brief explanation]
+
+[Draft Copy Content]
 `;
 
   if (glossaryData) {

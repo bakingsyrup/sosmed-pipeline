@@ -33,6 +33,18 @@ CRITICAL ENFORCEMENT RULES:
 
 7. FORMAT & TONE:
    - Raw, unscripted, bullet points, factual data only. NO teleprompter scripting or flowery commentary.
+
+8. TOPIC EXECUTIVE SUMMARY & SUPPORTING DATA:
+   - Placed right after the Fact-Check Header and before Section 1 (Topic Idea & Overview), write a clear, simple Executive Summary in easy-to-understand English structured into 4 parts:
+     • Paragraph 1 (What & Mechanics): Max 1 paragraph defining the core topic, what it is, and its primary mechanism or structural driver.
+     • Paragraph 2 (Status & Context): Max 1 paragraph explaining the timeline, current phase or stage of readiness, and key background context.
+     • Paragraph 3 (Impact & Action): Max 1 paragraph explaining real-world impact on everyday participants and any direct action or caution required.
+     • Section 4 (📊 Key Supporting Data & Important Metrics): Bullet-point list of granular empirical evidence.
+   - STRICT REQUIREMENT FOR SECTION 4 (KEY SUPPORTING DATA & METRICS):
+     • DO NOT rephrase, generalize, or summarize concepts from the narrative paragraphs above.
+     • Every bullet point MUST state a specific, verifiable data point directly from the research brief using exact proper nouns, exact numbers, exact dates, or exact official titles.
+     • VAGUE GENERALITIES ARE STRICTLY FORBIDDEN: Do not write vague phrases like "major companies", "several countries", "high volatility", or "recent reports". If a bullet point cannot cite an exact proper noun or number from the research brief, omit it.
+     • Never fabricate numbers or force bullets if specific data is not present in the research brief.
 `;
 }
 
@@ -57,6 +69,19 @@ Please format your response strictly using this Markdown template:
 # 🛡️ Fact-Check & Verification Header
 - Status: [✅ Factually Verified / ⚠️ Context Corrected / ❌ Debunked]
 - Verification Details: [Brief explanation of verified facts]
+
+# 📰 Executive Summary
+[Paragraph 1: Core Concept & Mechanics — Simple, easy-to-understand English]
+
+[Paragraph 2: Context, Timeline & Current Status — Simple, easy-to-understand English]
+
+[Paragraph 3: Practical Impact & Actionable Guidance — Simple, easy-to-understand English]
+
+**📊 Key Supporting Data & Important Metrics:**
+- **[Specific Fact / Entity 1]**: [Exact proper noun, date, or specific location directly from research context]
+- **[Specific Fact / Entity 2]**: [Exact proper noun, date, or specific location directly from research context]
+- **[Specific Metric 1]**: [Exact numerical figure, %, or $ amount directly from research context]
+- **[Specific Metric 2]**: [Exact numerical figure, %, or $ amount directly from research context]
 
 # 📌 1. Topic Idea & Overview
 - Subject:

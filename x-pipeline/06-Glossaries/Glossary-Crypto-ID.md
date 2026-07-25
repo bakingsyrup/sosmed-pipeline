@@ -38,6 +38,24 @@ MegaETH danai 20 startup dan bayar biaya audit keamanan mereka untuk pancing akt
 
 ---
 
+## Liquidity Extraction
+
+**Apa itu?**
+Liquidity Extraction adalah proses di mana pihak dalam atau pemain istimewa menguras daya beli yang tersedia di pasar dengan menjual aset dalam jumlah besar ke publik, meninggalkan buku order yang kering dan harga yang runtuh.
+
+**Mengapa ini penting?**
+Ini berbahaya karena mengubah investor retail awal menjadi exit liquidity paksa. Ketika mitra utama proyek—seperti market maker atau pemodal awal—mengutamakan panen keuntungan cepat ketimbang menjaga pasar yang adil, harga aset bisa anjlok permanen, menghabisi pemegang yang tidak curiga dan menghancurkan kepercayaan terhadap ekosistem token.
+
+**Bahasa Bayi**
+Kamu dan teman-temanmu antusias kumpulin stiker dari merek baru. Satu anak dikasih 1.000 bungkus stiker gratis oleh merek itu, lalu bilang ke kalian, “Stiker ini langka!” Anak itu diam-diam jual semua bungkus stiker itu ke kalian dengan harga mahal. Begitu semua sudah punya, stiker itu jadi tidak berharga, dan uang jajanmu lenyap. Anak itu barusan mengekstrak likuiditasmu.
+
+**Contoh / Studi Kasus**
+Di ekosistem Movement, market maker memanfaatkan jatah token mereka untuk menjual ke order beli retail selama periode hype awal. Sebelum pasar luas sadar tidak ada permintaan organik, mayoritas bid liquidity sudah habis dikonsumsi, menyisakan pemegang token yang hampir tidak bernilai.
+
+<!-- Date: 2026-07-22 -->
+
+---
+
 ## Liquidity Squeeze
 
 **Apa itu?**
@@ -53,6 +71,24 @@ Bayangkan kamu pergi ke pasar untuk beli apel, tapi sebuah restoran besar baru s
 Abraxas Capital tarik 45,996 ETH dari Binance, buat bursa kekurangan token untuk fasilitasi trading harian.
 
 <!-- Date: 2026-07-17 -->
+
+---
+
+## Market-Making Agreement
+
+**Apa itu?**
+Market-Making Agreement adalah kontrak dimana penerbit token menyewa firma khusus untuk secara terus-menerus memasang order beli dan jual, tujuannya menciptakan ilusi pasar yang likuid dan stabil untuk token baru.
+
+**Mengapa ini penting?**
+Ini krusial karena perjanjian ini menentukan apakah peluncuran token menghasilkan harga wajar atau justru skema predator. Kontrak yang sehat bisa kurangi selip harga dan volatilitas, bantu proyek bertahan di awal. Tapi kontrak busuk, dimana market maker dibayar dengan jatah token besar, justru insentif buat mereka bongkar pasokan itu ke retail, menciptakan lubang hitam likuiditas yang hancurkan harga jangka panjang.
+
+**Bahasa Bayi**
+Bayangkan kamu buka kedai limun dan sewa teman untuk pura-pura antri beli, supaya anak lain kira limunmu laris. Kamu janjikan temanmu satu toples besar limun gratis nanti. Alih-alih pura-pura, temanmu diam-diam jual toples itu ke anak lain dengan harga tinggi sebelum sadar limunmu asam. Antrian langsung lenyap, kedaimu hancur, dan pembeli marah.
+
+**Contoh / Studi Kasus**
+Movement Labs merekrut market maker yang terima alokasi token MOVE dalam jumlah besar sebagai kompensasi. Market maker itu jual bertahap ke retail saat hype awal, mengekstrak exit liquidity dan mempercepat kehancuran harga token sebesar 99% begitu permintaan nyata terbukti nihil.
+
+<!-- Date: 2026-07-22 -->
 
 ---
 

@@ -38,6 +38,24 @@ MegaETH funded 20 startups and paid for their security audits to kickstart its n
 
 ---
 
+## Liquidity Extraction
+
+**What it is?**
+Liquidity Extraction is the process where an insider or privileged participant drains the available buying power in a market by selling large amounts of an asset to the public, leaving behind a dried-up order book and a collapsing price.
+
+**Why it is important?**
+It matters because it turns early retail investors into involuntary exit liquidity. When a project’s key partners—like market makers or early backers—prioritize harvesting quick profits over sustaining a fair market, the asset’s price can crater irreversibly, wiping out unsuspecting holders and destroying trust in the entire token ecosystem.
+
+**Explain like I'm 10**
+You and your friends are excited to collect stickers from a new brand. One kid is given 1,000 free sticker packs by the brand, telling you “these will be rare!” The kid secretly sells those packs to all of you at high prices. Once everyone has them, they’re worthless, and your allowance is gone. That kid just extracted your liquidity.
+
+**Example / Study Case**
+In the Movement ecosystem, market makers leveraged their token grants to sell into retail buy orders throughout the initial hype period. By the time the broader market realized there was no organic demand, most available bid liquidity had been consumed, leaving late buyers with near-worthless tokens.
+
+<!-- Date: 2026-07-22 -->
+
+---
+
 ## Liquidity Squeeze
 
 **What it is?**
@@ -53,6 +71,24 @@ Imagine going to a market to buy apples, but a huge restaurant chain just bought
 Abraxas Capital withdraws 45,996 ETH from Binance, leaving the exchange with fewer tokens to facilitate daily retail trades.
 
 <!-- Date: 2026-07-17 -->
+
+---
+
+## Market-Making Agreement
+
+**What it is?**
+Market-Making Agreement is a contract where a token issuer hires a specialized firm to place buy and sell orders continuously, aiming to create the illusion of a liquid and stable market for a new token.
+
+**Why it is important?**
+It’s critical because these deals determine whether a token launch sees healthy price discovery or becomes a predatory dump. A well-structured agreement can reduce slippage and volatility, helping early-stage projects survive. However, toxic agreements where the market maker is paid in large token allocations incentivize the firm to offload that supply onto retail buyers, creating a liquidity black hole that destroys long-term price.
+
+**Explain like I'm 10**
+Imagine you open a lemonade stand and hire a friend to stand in line pretending to buy your lemonade, so that other kids think it’s popular. You promise your friend a big jar of free lemonade later. Instead of just pretending to buy, your friend secretly sells that free jar to other kids at a high price before anyone realizes the drink is sour. The line vanishes, and you’re left with a crushed stand and angry customers.
+
+**Example / Study Case**
+Movement Labs onboarded market makers who received massive MOVE token allocations as compensation. Those market makers offloaded gradually to retail buyers during the initial hype, extracting exit liquidity and accelerating the token’s 99% crash once real demand proved nonexistent.
+
+<!-- Date: 2026-07-22 -->
 
 ---
 

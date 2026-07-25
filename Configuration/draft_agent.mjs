@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 // Import Modular API Service
 import { callGemini } from './services/gemini_api.mjs';
 import { callDeepSeek } from './services/deepseek_api.mjs';
+import { findAndClipVideo } from './utils/youtube_clipper.mjs';
 
 // Import Modular File Helpers
 import {
@@ -289,6 +290,33 @@ async function processFile(filename, styleGuideContent) {
       sources = extractSources(researchResult);
 
       console.log(`Research completed. Found ${sources.length} source links.`);
+
+      // Step 1b: Trigger YouTube Clip Finder
+      try {
+        console.log('Step 1b: Running YouTube Clip Finder & Precision Cutter...');
+        // Universal query cleaning: strip URLs, @handles, leading ALL-CAPS tags (e.g. "JUST IN:", "BERITA TERKINI:"), and non-alphanumeric clutter
+        const cleanQuery = tweetText
+          .replace(/https?:\/\/\S+/g, '')
+          .replace(/@\w+/g, '')
+          .replace(/^[A-Z\s]{2,15}:/g, '')
+          .replace(/[^\w\s]/gi, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 80);
+
+        const keywords = cleanQuery.split(/\s+/).filter(w => w.length > 3).slice(0, 6);
+        const clipId = path.basename(filename, '.md');
+
+        const clipRes = await findAndClipVideo(cleanQuery, keywords, '', clipId);
+        if (clipRes.status === 'success') {
+          console.log(`[YouTube Clipper] Clip created successfully: ${clipRes.obsidian_embed}`);
+          researchBrief += `\n\n# Media Asset\n- **Video Clip**: ${clipRes.obsidian_embed}\n- **Timestamp**: ${clipRes.timestamp_range}\n- **Source**: ${clipRes.channel} (${clipRes.source_url})\n`;
+        } else {
+          console.log(`[YouTube Clipper] No video clip attached: ${clipRes.message}`);
+        }
+      } catch (clipErr) {
+        console.error(`[YouTube Clipper] Error: ${clipErr.message}`);
+      }
 
       // Parse Glossary extraction details from the research brief
       const hasGlossary = researchBrief.includes('GLOSSARY_DETECTION: YES');
@@ -630,9 +658,9 @@ function isDeepSeekPeakPricing() {
 // Helper to resolve the active drafting model name dynamically
 // Falls back to Gemini during DeepSeek peak pricing hours to avoid double billing.
 function resolveDraftModel() {
-  const configuredModel = process.env.GEMINI_DRAFT_MODEL || 'gemini-2.5-pro';
+  const configuredModel = process.env.GEMINI_DRAFT_MODEL || 'deepseek-v4-pro';
   if (configuredModel.toLowerCase().includes('deepseek') && isDeepSeekPeakPricing()) {
-    const fallbackModel = process.env.GEMINI_FALLBACK_DRAFT_MODEL || 'gemini-3.1-pro-preview';
+    const fallbackModel = process.env.GEMINI_FALLBACK_DRAFT_MODEL || 'deepseek-v4-pro';
     const sgtTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Singapore" });
     console.log(`[Peak Pricing Routing] SGT Peak Pricing is active. Routing draft to fallback model: ${fallbackModel} (Current SGT: ${sgtTime})`);
     return fallbackModel;

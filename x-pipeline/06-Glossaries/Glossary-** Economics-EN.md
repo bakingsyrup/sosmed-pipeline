@@ -73,3 +73,41 @@ Imagine you want to open a lemonade stand but the city requires a full restauran
 When Nigeria launched its new Virtual Asset Council, it mandated a regulatory sandbox for crypto startups. A local exchange building a stablecoin-based remittance product can now test it with a limited user base under the Central Bank’s watch, without needing to immediately secure a full banking license or fear sudden account freezes—provided they operate within the sandbox’s guardrails.
 
 <!-- Date: 2026-07-20 -->
+
+---
+
+## Salary Cap
+
+**What it is?**
+Salary Cap is an internal league rule that limits the total amount of money a team can spend on player salaries in a given season, designed to keep competition balanced and prevent wealthier teams from hoarding all the best players.
+
+**Why it is important?**
+The salary cap forces teams to allocate limited resources strategically. If you overspend on one superstar, you might not have enough room to pay a supporting cast. In a hard-cap league, exceeding the cap results in luxury tax penalties, which can cripple a team’s financial flexibility for years.
+
+**Explain like I'm 10**
+Imagine your parents give you and your siblings the same amount of allowance to buy toys. You can’t spend more than that, so you have to choose between one expensive toy or several cheaper ones. The salary cap is that allowance — each team gets the same limit, so they have to be smart about which players to “buy.”
+
+**Example / Study Case**
+When LeBron James signed with the 76ers for just $4 million per year (veteran minimum), he only counted for about 2.35% of the salary cap, leaving Philadelphia room to keep three other max-contract stars without triggering destructive luxury tax penalties.
+
+<!-- Date: 2026-07-25 -->
+
+---
+
+## Wage Ceiling
+
+**What it is?**
+Wage Ceiling is a regulatory or economic constraint on the maximum compensation paid to labor. In sports, the team’s overall salary cap acts as the ultimate wage ceiling, preventing any single franchise from stockpiling elite talent by outspending everyone. Meanwhile, the veteran minimum exception serves as a wage floor for older players.
+
+**Why it is important?**
+Without a wage ceiling, big-market teams could simply buy championships by offering salaries no one else could match. The ceiling ensures that talent gets distributed more evenly and that championships are won through smart roster construction, not just deep pockets.
+
+**Explain like I'm 10**
+Think of a class party where everyone can bring snacks, but there’s a rule: you can’t bring more than 10 items. That’s the ceiling. Even if your family owns a snack factory, you’re stuck at 10 — just like everyone else. It stops one kid from dominating the whole food table.
+
+**Example / Study Case**
+LeBron’s decision to take the veteran minimum leveraged the wage ceiling: by staying near the floor of what a veteran star could earn, he artificially kept Philadelphia’s total payroll below the cap ceiling, giving them room to sign or keep other max-level players like Joel Embiid and Jaylen Brown.
+
+---
+
+<!-- Date: 2026-07-25 -->
