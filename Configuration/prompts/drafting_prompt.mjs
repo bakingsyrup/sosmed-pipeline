@@ -98,17 +98,26 @@ export function getStandardPromptStr(tweetText, researchBrief, lang, glossaryDat
 Fact-Checking & Research Brief:
 ${researchBrief}
 
-Using the style guide instructions, write FOUR (4) distinct alternative drafts for an X (Twitter) post based on this information:
+Using the style guide instructions, write the following distinct alternative drafts for an X (Twitter) post based on this information:
 
-- Draft 1 (Ultra-Compact Breaking News & Short Insight, MAX 60 WORDS): A bold headline followed by a compact narrative flow that presents the primary WHAT and WHEN event, then pivots directly into the single most relevant insight selected from WHY, HOW, or WHO.
+- Draft 1 (Ultra-Compact Breaking News & Historical Benchmarks, MAX 60 WORDS PER SUB-DRAFT): Write THREE (3) distinct sub-variations (Draft 1a, Draft 1b, Draft 1c) using the 3 Historical Anchor Categories:
+  * Draft 1a: Use Category A (Historical Event Anchor: Bold headline + WHAT/WHEN + Historical Event precedent & result + comparative question).
+  * Draft 1b: Use Category B (Parallel Industry Playbook: Bold headline + WHAT/WHEN + Industry Playbook precedent & result + comparative question).
+  * Draft 1c: Use Category C (Entity Track-Record Anchor: Bold headline + WHAT/WHEN + Entity Track-Record precedent & result + comparative question).
 - Draft 2: A bold headline followed by a highly connected, step-by-step narrative flow that explains the core macro/business mechanism and naturally builds towards the final key takeaway.
 - Draft 3: A rhetorical question-and-answer flow. It MUST start with a main news headline in the first line, followed immediately by supporting quantitative facts in the second line to establish credibility, before pivoting into the rhetorical Q&A flow to explain the context.
 - Draft 4: A high-stakes crisis angle highlighting the party most affected / getting REKT. It MUST follow a "Show, Don't Tell" approach: instead of declaring a situation "massive" or "dangerous" directly, lay out facts and relative comparisons step-by-step so the reader understands the scale of danger themselves.
 
 Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English, do not write in Indonesian)' : 'INDONESIAN (blended naturally with English trading terms)'}
 
-Separate the 4 drafts clearly with headers:
-### Draft 1
+Separate all drafts clearly with headers:
+### Draft 1a (Category A: Historical Event Anchor)
+[Content]
+
+### Draft 1b (Category B: Parallel Industry Playbook)
+[Content]
+
+### Draft 1c (Category C: Entity Track-Record Anchor)
 [Content]
 
 ### Draft 2

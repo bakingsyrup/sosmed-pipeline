@@ -54,22 +54,20 @@ Visual layout is critical for readability on mobile screens. The style relies on
 
 ## 4. Narrative Structures & Templates
 
-### The Ultra-Compact Breaking News & Short Insight Template (Draft 1 Standard)
-Designed for ultra-fast, high-density breaking news alerts.
+### The Historical Benchmark & Breaking News Template (Draft 1 Sub-Drafts)
+Designed for ultra-fast, high-density breaking news alerts anchored by historical perspective.
 
-* **Length Limit**: Strictly **60 words maximum**.
-* **Structure**: A bold headline followed by a compact narrative flow.
-* **Step 1: Ruthless Fact Filtering (WHAT & WHEN)**:
-  * Open with a bold, high-impact headline. Present ONLY the primary **WHAT** (the core event) and **WHEN** (the key date, timeframe, or primary metric).
-  * Avoid listing secondary details, minor sub-points, or extended background context.
-* **Step 2: Smart Insight Selection (WHY, HOW, or WHO)**:
-  * Dynamically evaluate the research brief and select the **SINGLE most valuable aspect** from:
-    - **WHY** (e.g. *Why is this happening?*)
-    - **HOW** (e.g. *How does this work or unfold?*)
-    - **WHO** (e.g. *Who is most affected or gains/loses?*)
-  * Deliver that core insight directly in 1–2 concise narrative lines.
-* **Fact-First Principle**:
-  * Prioritize concrete, high-utility facts and insights over filler text or forced catchphrases. End cleanly on the insight itself.
+* **Length Limit**: Strictly **60 words maximum per sub-draft**.
+* **Pacing**: 1 sentence per block separated by double line breaks (`\n\n`) (up to 33 words max per sentence).
+* **Step 1: Current Event (WHAT & WHEN)**:
+  * Open with a bold, high-impact headline.
+  * Present ONLY the primary **WHAT** (core event) and **WHEN** (key date, timeframe, or primary metric).
+* **Step 2: Historical / Benchmark Anchor Categories**:
+  * **Category A (Historical Event Anchor)**: Cites the last time a similar market, policy, or historical milestone occurred and its quantitative outcome.
+  * **Category B (Parallel Industry Playbook)**: Cites a past industry playbook, competitive strategy, or adoption volume benchmark.
+  * **Category C (Entity Track-Record Anchor)**: Cites a past decision, statement, threat, or policy made by the same executive, company, or government entity and its eventual result.
+* **Fact-First & Comparative Question**:
+  * Close with a sharp comparative question or observation contrasting the historical benchmark against today's event. End cleanly without filler catchphrases.
 
 ### Headline Formation
 Start with a bold, high-impact title that summarizes the core conflict, mega-number, or crisis.
