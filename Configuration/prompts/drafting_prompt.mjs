@@ -128,17 +128,18 @@ Each draft MUST strictly follow Mario Style rules:
 - Explicit Temporal Contrast Pacing: When contrasting a past precedent with a present action in a single sentence, insert an explicit present-time conjunction after the comma. Use pronominal suffixes rather than repeating subject nouns.
 - Concessive Conditional Pacing & Anaphoric Pronouns: Express hypothetical workarounds or concessions using direct concessive conditional conjunctions (expressing even if) rather than multi-word negative clauses. Use conversational pronouns when referencing active subjects. Close with a direct 1-sentence macro thesis (no victim callouts).
 
-CRITICAL 3-DRAFT ANGLE DISTRIBUTION DIRECTIVE:
-- Draft 1: MUST use 1 of the Top 3 Neutral & Informative Angles (Causality/Mechanism, Downstream Chain Reaction, or Temporal Contrast).
-- Draft 2: MUST use a DIFFERENT angle from the Top 3 Neutral & Informative Angles (Causality/Mechanism, Downstream Chain Reaction, or Temporal Contrast).
-- Draft 3: MUST use a Wildcard Angle from the Remaining 7 Angles (Follow the Money, Scale Benchmark, Deductive Signal, Rhetorical Interrogation, Counter-Intuitive, Double Standard, or Contrarian).
-- Contrarian / Claim vs Reality angles are STRICTLY FORBIDDEN in Draft 1 and Draft 2!
+CRITICAL 4-DRAFT ANGLE & ARCHETYPE DISTRIBUTION DIRECTIVE:
+- Draft 1: MUST use Archetype 1 (Macro Signal) AND 1 of the Top 3 Neutral Angles.
+- Draft 2: Free Archetype choice AND 1 of the Top 3 Neutral Angles.
+- Draft 3: Free Archetype choice AND a DIFFERENT angle from the Top 3 Neutral Angles.
+- Draft 4: Free Archetype choice AND 1 of the 7 Wildcard Angles.
+- Contrarian & Claim vs Reality angles are STRICTLY FORBIDDEN in Drafts 1, 2, and 3!
 
 Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English, do not write in Indonesian)' : 'INDONESIAN (blended naturally with English trading terms)'}
 
-Separate the drafts clearly with headers:
+Separate the 4 drafts clearly with headers:
 ### Draft 1
-🎯 **Selected Archetype**: [Archetype Name]
+🎯 **Selected Archetype**: Archetype 1 (Macro Signal)
 💡 **Rationale**: [Brief explanation]
 
 [Draft Copy Content]
@@ -150,6 +151,12 @@ Separate the drafts clearly with headers:
 [Draft Copy Content]
 
 ### Draft 3
+🎯 **Selected Archetype**: [Archetype Name]
+💡 **Rationale**: [Brief explanation]
+
+[Draft Copy Content]
+
+### Draft 4
 🎯 **Selected Archetype**: [Archetype Name]
 💡 **Rationale**: [Brief explanation]
 

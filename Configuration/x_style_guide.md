@@ -144,12 +144,13 @@ Prepend the final draft in output with a brief rationale block:
 ### C. The Menu of 10 Mid-Post Turn Techniques
 The Mid-Post Turn is the mid-way pivot where the post shifts from *reporting the headline* to *exposing what it means*. 
 
-#### Rules for Angle Selection & 3-Draft Distribution:
-1. **The 3-Draft Angle Distribution Rule**:
-   * **Draft 1**: MUST select 1 of the **Top 3 Neutral & Informative Angles** (backed by brief facts).
-   * **Draft 2**: MUST select a DIFFERENT angle from the **Top 3 Neutral & Informative Angles**.
-   * **Draft 3**: MUST select a **Wildcard Angle** from the **Remaining 7 Angles** (backed by brief facts).
-   * *Contrarian / Claim vs Reality angles are strictly forbidden in Draft 1 and Draft 2!*
+#### Rules for Angle Selection & 4-Draft Distribution:
+1. **The 4-Draft Distribution Rule**:
+   * **Draft 1**: MUST use **Archetype 1 (Macro Signal)** and 1 of the **Top 3 Neutral Angles**.
+   * **Draft 2**: Free Archetype choice and 1 of the **Top 3 Neutral Angles**.
+   * **Draft 3**: Free Archetype choice and a DIFFERENT angle from the **Top 3 Neutral Angles**.
+   * **Draft 4**: Free Archetype choice and 1 of the **7 Wildcard Angles**.
+   * *Contrarian / Claim vs Reality angles are strictly forbidden in Drafts 1, 2, and 3!*
 2. **Data-Gated Selection Rule**: Select ONLY an angle from this menu that is backed by sufficient, concrete research evidence in the brief. Never select a data-dependent angle (such as *Follow the Money* or *Scale Benchmark*) unless the Research Brief contains explicit numbers, cash flows, or metrics supporting it.
 3. **Seamless Narrative Bridge Rule**: A framing transition line MUST be a seamless narrative bridge integrated smoothly into the sentence introducing the evidence block. NEVER output an isolated, standalone 4-word slogan (e.g. avoid isolated phrases like `"Lihat ke mana aliran uangnya bergerak."` standing alone).
 
