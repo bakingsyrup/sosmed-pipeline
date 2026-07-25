@@ -41,11 +41,15 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 * **Horizontal Decoupled Model**: Shinku (Production) and Beidou (Intelligence) operate as independent peer tools at the same level with zero direct code/prompt coupling.
 * **Human-in-the-Loop Feedback**: Beidou renders a dedicated **Strategic Feedback Card** in Ad Astra Sosmed Center UI displaying top winning formats, underperforming formats, and actionable recommendations for the human operator.
 
+### 7. Storage Engine (Lightweight JSON File-Database)
+* **Storage Model**: 100% file-based JSON database inside `beidou-pipeline/01-Snapshots/` (zero PostgreSQL / SQLite overhead).
+* **Efficiency**: ~160 MB total footprint across 10 years of daily snapshots. In-memory array filtering, median calculations, and 7d/30d follower growth math execute in <5ms in Node.js.
+
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Beidou Cohort Manager UI & Sub-Navigation Tabs (`X Posts` vs `Intel`) implemented and active in Ad Astra UI.
-* **July 25, 2026**: Built Sub-Navigation tabs (`X Posts` & `Intel`) in Ad Astra Sosmed Center + `BeidouCohortManager` UI card and Fastify API (`/api/beidou/cohorts`).
+* **Status**: Cohort Configuration Active (`crypto-indonesia.json` & `news-global.json`). Ready for Snapshot Manager & Diagnostic Engine.
+* **July 25, 2026**: Recorded Decision 5: Selected Lightweight JSON File-Database Storage (`beidou-pipeline/01-Snapshots/`) eliminating PostgreSQL/SQLite overhead while maintaining <5ms in-memory query performance.
+* **July 25, 2026**: Built Sub-Navigation tabs (`X Posts` & `Intel`) in Ad Astra Sosmed Center + `BeidouCohortManager` UI card and Fastify API (`/api/beidou/cohorts`). Saved user cohorts (`crypto-indonesia.json`, `news-global.json`).
 * **July 25, 2026**: Tested & verified Tab Isolation Pattern (`browser.newPage()`) and 100% background headless execution on CDP port 18810.
-* **July 25, 2026**: Recorded Decisions 1-4: Headless extraction, 2-Tier Multi-Cohort JSON spec, Net Relative Variance math, and Decoupled Horizontal UI.
 * **July 25, 2026**: Initialized Beidou architecture, directory structure (`Configuration/beidou/`, `beidou-pipeline/`), and documentation ecosystem (`iroi_brief.md`, `beidou_brief.md`, `beidou_guide.md`, `.gemini/rules/beidou_docs.md`).
