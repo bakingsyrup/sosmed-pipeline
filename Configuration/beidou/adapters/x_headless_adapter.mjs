@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 /**
- * Scrape tweets from X/Twitter profiles via Chrome CDP.
- * Connects to a running Chrome instance (same as other /website/x tools).
+ * Beidou X/Twitter Adapter — scrapes tweets from profiles via Chrome CDP.
+ * Connects to a running Chrome instance on port 18800 (authenticated session).
  *
  * Usage:
- *   node scrape-tweets.mjs WatcherGuru
- *   node scrape-tweets.mjs WatcherGuru coinbureau lookonchain arkham
- *   node scrape-tweets.mjs WatcherGuru --out tweets.json
- *   node scrape-tweets.mjs --accounts accounts.json --out tweets.json
+ *   node x_headless_adapter.mjs kenalkripto --since 2026-07-25T00:00:00Z --until 2026-07-26T00:00:00Z --out snapshot.json
+ *   node x_headless_adapter.mjs kenalkripto sarjana_crypto --since ... --until ... --dedup-file ids.json --targets kenalkripto --out snapshot.json
  */
 
 import { chromium } from 'playwright';
@@ -19,7 +17,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 // ---------------------------------------------------------------------------
 const CDP_URL         = 'http://localhost:18800';
 const SCROLL_DELAY    = 1500;
-const MAX_SCROLLS     = 15;
+const MAX_SCROLLS     = 40;
 const STALE_LIMIT     = 3;
 const DELAY_BETWEEN   = 3000; // between accounts
 
@@ -28,21 +26,22 @@ const DELAY_BETWEEN   = 3000; // between accounts
 // ---------------------------------------------------------------------------
 const { values, positionals } = parseArgs({
   options: {
-    accounts: { type: 'string', short: 'a' },
-    out:      { type: 'string', short: 'o' },
-    help:     { type: 'boolean', short: 'h' },
-    limit:    { type: 'string', short: 'l' },  // max tweets per account
+    accounts:  { type: 'string', short: 'a' },
+    out:       { type: 'string', short: 'o' },
+    help:      { type: 'boolean', short: 'h' },
+    since:     { type: 'string' },
+    until:     { type: 'string' },
+    'dedup-file': { type: 'string' },
+    targets:   { type: 'string' },
   },
   allowPositionals: true,
   strict: false,
 });
 
 if (values.help) {
-  console.log(`Usage: node scrape-tweets.mjs [handles...] [--accounts file.json] [--out file.json] [--limit 50]`);
+  console.log(`Usage: node x_headless_adapter.mjs [handles...] [--accounts file.json] [--out file.json] [--since ISO] [--until ISO] [--dedup-file path] [--targets handle1,handle2]`);
   process.exit(0);
 }
-
-const tweetLimit = parseInt(values.limit) || 100;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -51,30 +50,29 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 /**
  * Extract tweet data from article elements on the page.
- * Returns array of tweet objects.
+ * skipIds: array of tweet IDs to skip (already scraped before).
  */
-async function extractTweetsFromPage(page) {
-  return page.evaluate(() => {
+async function extractTweetsFromPage(page, skipIds = []) {
+  return page.evaluate((skipIdsArr) => {
+    const skipSet = new Set(skipIdsArr);
     const articles = document.querySelectorAll('article[data-testid="tweet"]');
     const tweets = [];
 
     for (const article of articles) {
       try {
-        // Tweet text
         const textEl = article.querySelector('[data-testid="tweetText"]');
         const text = textEl ? textEl.innerText.trim() : '';
 
-        // Timestamp + link
         const timeEl = article.querySelector('time');
         const timestamp = timeEl ? timeEl.getAttribute('datetime') : null;
         const linkEl = timeEl ? timeEl.closest('a') : null;
         const tweetUrl = linkEl ? linkEl.href : '';
 
-        // Extract tweet ID from URL
         const idMatch = tweetUrl.match(/status\/(\d+)/);
         const id = idMatch ? idMatch[1] : '';
 
-        // Author handle
+        if (!id || skipSet.has(id)) continue;
+
         const handleLinks = article.querySelectorAll('a[role="link"]');
         let authorHandle = '';
         for (const a of handleLinks) {
@@ -85,7 +83,6 @@ async function extractTweetsFromPage(page) {
           }
         }
 
-        // Engagement — aria-labels on group buttons
         let likes = 0, retweets = 0, replies = 0, bookmarks = 0, views = 0;
 
         const replyBtn = article.querySelector('[data-testid="reply"]');
@@ -105,7 +102,6 @@ async function extractTweetsFromPage(page) {
         likes     = parseCount(likeBtn);
         bookmarks = parseCount(bookBtn);
 
-        // Views — via aria-label on role=link spans (works for all accounts)
         const viewSpans = article.querySelectorAll('a[role="link"] span');
         for (const span of viewSpans) {
           const parentAria = span.closest('a')?.getAttribute('aria-label') || '';
@@ -113,45 +109,37 @@ async function extractTweetsFromPage(page) {
           if (vm) views = parseInt(vm[1].replace(/,/g, ''));
         }
 
-        // Is retweet?
         const socialContext = article.querySelector('[data-testid="socialContext"]');
         const isRetweet = socialContext ? /reposted/i.test(socialContext.innerText) : false;
 
-        if (id) {
-          tweets.push({
-            id,
-            text,
-            author: authorHandle,
-            timestamp,
-            ts_epoch: timestamp ? new Date(timestamp).getTime() : null,
-            likes,
-            retweets,
-            replies,
-            bookmarks,
-            views,
-            url: tweetUrl,
-            is_retweet: isRetweet,
-          });
-        }
-      } catch (e) {
-        // skip broken article
-      }
+        tweets.push({
+          id, text, author: authorHandle, timestamp,
+          ts_epoch: timestamp ? new Date(timestamp).getTime() : null,
+          likes, retweets, replies, bookmarks, views,
+          url: tweetUrl, is_retweet: isRetweet,
+        });
+      } catch (e) {}
     }
     return tweets;
-  });
+  }, skipIds);
 }
 
 // ---------------------------------------------------------------------------
 // Scrape one account
 // ---------------------------------------------------------------------------
-async function scrapeAccount(page, handle, limit) {
+async function scrapeAccount(page, handle, opts) {
+  const { since, until, dedupIds, isTarget } = opts;
+  const sinceMs = new Date(since).getTime();
+  const untilMs = new Date(until).getTime();
+  const skipIds = new Set(dedupIds || []);
+  const POST_CAP = isTarget ? Infinity : 20;
+
   const url = `https://x.com/${handle}`;
   console.log(`  @${handle}: navigating...`);
 
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await sleep(3000); // wait for tweets to render
+  await sleep(3000);
 
-  // Check if profile exists
   const notFound = await page.evaluate(() => {
     const h = document.querySelector('[data-testid="empty_state_header_text"]');
     return h ? h.innerText : null;
@@ -161,7 +149,6 @@ async function scrapeAccount(page, handle, limit) {
     return { handle, followers: 0, tweets: [], error: 'profile not found' };
   }
 
-  // Extract follower count from profile header
   const followers = await page.evaluate(() => {
     const link = document.querySelector('a[href$="/verified_followers"], a[href$="/followers"]');
     if (!link) return 0;
@@ -177,13 +164,22 @@ async function scrapeAccount(page, handle, limit) {
 
   const allTweets = new Map();
   let staleCount = 0;
+  let boundaryPassed = false;
 
   for (let scroll = 0; scroll < MAX_SCROLLS; scroll++) {
-    const found = await extractTweetsFromPage(page);
+    const found = await extractTweetsFromPage(page, [...skipIds]);
     const prevSize = allTweets.size;
 
     for (const t of found) {
-      if (!allTweets.has(t.id)) allTweets.set(t.id, t);
+      if (!allTweets.has(t.id)) {
+        allTweets.set(t.id, t);
+        skipIds.add(t.id);
+      }
+    }
+
+    const timestamps = [...allTweets.values()].map(t => t.ts_epoch).filter(Boolean);
+    if (timestamps.length > 0 && Math.min(...timestamps) < sinceMs) {
+      boundaryPassed = true;
     }
 
     const newCount = allTweets.size - prevSize;
@@ -195,17 +191,20 @@ async function scrapeAccount(page, handle, limit) {
       staleCount = 0;
     }
 
-    if (allTweets.size >= limit) break;
+    if (boundaryPassed) break;
 
     await page.mouse.wheel(0, 800);
     await sleep(SCROLL_DELAY);
   }
 
-  const tweets = [...allTweets.values()]
-    .sort((a, b) => (b.ts_epoch || 0) - (a.ts_epoch || 0))
-    .slice(0, limit);
+  let tweets = [...allTweets.values()]
+    .filter(t => t.ts_epoch >= sinceMs && t.ts_epoch < untilMs)
+    .sort((a, b) => (a.ts_epoch || 0) - (b.ts_epoch || 0));
 
-  console.log(`  @${handle}: ${tweets.length} tweets scraped (${followers} followers)`);
+  if (!isTarget) tweets = tweets.slice(0, POST_CAP);
+
+  const label = isTarget ? 'target' : `capped at ${POST_CAP}`;
+  console.log(`  @${handle}: ${tweets.length} tweets (${label}) scraped (${followers} followers)`);
   return { handle, followers, tweets, error: null };
 }
 
@@ -230,9 +229,26 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`Scraping tweets for ${handles.length} account(s)...\n`);
+  const since = values.since || new Date(Date.now() - 86400000).toISOString();
+  const until = values.until || new Date().toISOString();
 
-  // Acquire shared page mutex before touching Chrome (same pattern as main fetcher)
+  let dedupMap = {};
+  if (values['dedup-file']) {
+    try {
+      const raw = await readFile(values['dedup-file'], 'utf-8');
+      dedupMap = JSON.parse(raw);
+    } catch {}
+  }
+
+  const targetSet = new Set(
+    (values.targets || '').split(',').map(h => h.trim().replace(/^@/, '').toLowerCase()).filter(Boolean)
+  );
+
+  console.log(`Scraping tweets for ${handles.length} account(s)...`);
+  console.log(`  Window: ${since} → ${until}`);
+  console.log(`  Targets: ${[...targetSet].join(', ') || 'none'}`);
+  if (Object.keys(dedupMap).length > 0) console.log(`  Dedup: ${Object.keys(dedupMap).length} handle(s) with history\n`);
+
   const { acquireLock, releaseLock } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-lock.mjs');
   const lock = await acquireLock('18800-page');
   let browser, page;
@@ -245,7 +261,12 @@ async function main() {
     const results = [];
     for (const handle of handles) {
       try {
-        const result = await scrapeAccount(page, handle, tweetLimit);
+        const isTarget = targetSet.has(handle.toLowerCase());
+        const result = await scrapeAccount(page, handle, {
+          since, until,
+          dedupIds: dedupMap[handle] || [],
+          isTarget,
+        });
         results.push(result);
       } catch (err) {
         console.log(`  @${handle}: ERROR — ${err.message}`);
@@ -254,20 +275,17 @@ async function main() {
       if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
     }
 
-    // Navigate back to blank for reuse
     await page.goto('about:blank').catch(() => {});
 
-    // Summary
-  console.log('\n--- Summary ---');
-  const total = results.reduce((sum, r) => sum + r.tweets.length, 0);
-  for (const r of results) {
-    const status = r.error ? `FAILED (${r.error})` : `${r.tweets.length} tweets`;
-    console.log(`  @${r.handle.padEnd(20)} ${status}`);
-  }
-  console.log(`  Total: ${total} tweets`);
+    console.log('\n--- Summary ---');
+    const total = results.reduce((sum, r) => sum + r.tweets.length, 0);
+    for (const r of results) {
+      const status = r.error ? `FAILED (${r.error})` : `${r.tweets.length} tweets`;
+      console.log(`  @${r.handle.padEnd(20)} ${status}`);
+    }
+    console.log(`  Total: ${total} tweets`);
 
-  // Output
-  if (values.out) {
+    if (values.out) {
       await writeFile(values.out, JSON.stringify(results, null, 2));
       console.log(`\nSaved to ${values.out}`);
     } else {

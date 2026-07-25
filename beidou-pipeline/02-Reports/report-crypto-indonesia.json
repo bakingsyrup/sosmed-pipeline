@@ -3,6 +3,10 @@
   "target_account": "@kenalkripto",
   "niche": "Crypto",
   "snapshot_date": "snapshot-2026-07-25.json",
+  "time_range": "1D",
+  "days_window": 1,
+  "snapshots_counted": 1,
+  "total_data_days": 1,
   "diagnostic_status": "MACRO_DOWNTURN",
   "status_badge": "🟡 MACRO_DOWNTURN",
   "net_variance_pct": -12.81,
@@ -17,9 +21,191 @@
     "median_impression_yield_pct": 15.975000000000001,
     "median_engagement_rate_pct": 0.635
   },
+  "entities": [
+    {
+      "id": "@kenalkripto",
+      "name": "@kenalkripto",
+      "role": "TARGET",
+      "followers": 26600,
+      "metrics": {
+        "impression_yield_pct": 3.165,
+        "max_impression_yield_pct": 6.94,
+        "engagement_rate_pct": 0.905,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 9678,
+        "total_engagements": 93
+      }
+    },
+    {
+      "id": "@sarjana_crypto",
+      "name": "@sarjana_crypto",
+      "role": "PEER",
+      "followers": 111600,
+      "metrics": {
+        "impression_yield_pct": 2.73,
+        "max_impression_yield_pct": 7.64,
+        "engagement_rate_pct": 0.12,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 31968,
+        "total_engagements": 54
+      }
+    },
+    {
+      "id": "@duta_crypto",
+      "name": "@duta_crypto",
+      "role": "PEER",
+      "followers": 53900,
+      "metrics": {
+        "impression_yield_pct": 13.68,
+        "max_impression_yield_pct": 98.37,
+        "engagement_rate_pct": 0.585,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 160921,
+        "total_engagements": 673
+      }
+    },
+    {
+      "id": "@setyamickala",
+      "name": "@setyamickala",
+      "role": "PEER",
+      "followers": 51100,
+      "metrics": {
+        "impression_yield_pct": 37.885,
+        "max_impression_yield_pct": 288.37,
+        "engagement_rate_pct": 0.825,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 333248,
+        "total_engagements": 2365
+      }
+    },
+    {
+      "id": "@warungdegen",
+      "name": "@warungdegen",
+      "role": "PEER",
+      "followers": 10500,
+      "metrics": {
+        "impression_yield_pct": 25.314999999999998,
+        "max_impression_yield_pct": 74.96,
+        "engagement_rate_pct": 0.465,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 37202,
+        "total_engagements": 163
+      }
+    },
+    {
+      "id": "@cipherr_exe",
+      "name": "@cipherr_exe",
+      "role": "PEER",
+      "followers": 9518,
+      "metrics": {
+        "impression_yield_pct": 13.025,
+        "max_impression_yield_pct": 40.3,
+        "engagement_rate_pct": 2.315,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 15006,
+        "total_engagements": 348
+      }
+    },
+    {
+      "id": "@satyaxbt",
+      "name": "@satyaxbt",
+      "role": "LEADER",
+      "followers": 33500,
+      "metrics": {
+        "impression_yield_pct": 9.835,
+        "max_impression_yield_pct": 84.3,
+        "engagement_rate_pct": 1.565,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 70654,
+        "total_engagements": 1038
+      }
+    },
+    {
+      "id": "@guaremperor",
+      "name": "@guaremperor",
+      "role": "LEADER",
+      "followers": 87700,
+      "metrics": {
+        "impression_yield_pct": 15.2,
+        "max_impression_yield_pct": 434.47,
+        "engagement_rate_pct": 1.675,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 530741,
+        "total_engagements": 3904
+      }
+    },
+    {
+      "id": "@cryptorealis",
+      "name": "@cryptorealis",
+      "role": "LEADER",
+      "followers": 49900,
+      "metrics": {
+        "impression_yield_pct": 5.02,
+        "max_impression_yield_pct": 11.54,
+        "engagement_rate_pct": 0.67,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 25336,
+        "total_engagements": 199
+      }
+    },
+    {
+      "id": "@coinvestasi",
+      "name": "@coinvestasi",
+      "role": "LEADER",
+      "followers": 67700,
+      "metrics": {
+        "impression_yield_pct": 2.075,
+        "max_impression_yield_pct": 9.13,
+        "engagement_rate_pct": 0.5349999999999999,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 18937,
+        "total_engagements": 177
+      }
+    },
+    {
+      "id": "@yanzero_",
+      "name": "@yanzero_",
+      "role": "LEADER",
+      "followers": 21000,
+      "metrics": {
+        "impression_yield_pct": 8.91,
+        "max_impression_yield_pct": 51.8,
+        "engagement_rate_pct": 0.7,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 28367,
+        "total_engagements": 348
+      }
+    },
+    {
+      "id": "peer-collective",
+      "name": "👥 Peer Collective",
+      "role": "COLLECTIVE",
+      "followers": 51100,
+      "metrics": {
+        "impression_yield_pct": 15.975000000000001,
+        "max_impression_yield_pct": 74.96,
+        "engagement_rate_pct": 0.635,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 578345,
+        "total_engagements": 3603
+      }
+    }
+  ],
   "leader_tier_top_archetypes": [
     {
-      "handle": "@GuarEmperor",
+      "handle": "@guaremperor",
       "followers": 87700,
       "text": "My 2025 alpha results:\n\nSteadyteddy worth $1.6K call very early ez farm wl\nPlasma worth $9K just join early presale\nRaccoon worth $1,7K mid \nethOS worth $1.8K just farm code\nLamumu worth $600\nAster call at $0.08 on my discord \nSomnia $5K \nLilstar worth $390 from testnet\nWallchain",
       "url": "https://x.com/GuarEmperor/status/2006036138382045544",
@@ -29,7 +215,7 @@
       "replies": 218
     },
     {
-      "handle": "@satyaXBT",
+      "handle": "@satyaxbt",
       "followers": 33500,
       "text": "getting verified just to wait for payout? rude gong..\n\nthere's a lot of stuff you can take advantage of, including making videos like this using grok 4.5 build",
       "url": "https://x.com/satyaXBT/status/2078813855212253557",
@@ -39,7 +225,7 @@
       "replies": 58
     },
     {
-      "handle": "@satyaXBT",
+      "handle": "@satyaxbt",
       "followers": 33500,
       "text": "There's a new account playing around on X, bro, lemme tell you the three rules from Jensen:\n\n- Don't steal content\n- Don't share analytics\n- Don't farm followers\n- Just diligently reply to posts, that's the key thing\n\nIt's so damn nice that he can just hit 12M views right off the",
       "url": "https://x.com/satyaXBT/status/2080822018753364086",
@@ -59,7 +245,7 @@
       "replies": 15
     },
     {
-      "handle": "@GuarEmperor",
+      "handle": "@guaremperor",
       "followers": 87700,
       "text": "Thank you VLAD for profit\n\ngot it 4 figs from LP\n\nmissed runner you can lp on uniswap\n\non \n@emperorjournal_\n we eat everything hahahahahaha",
       "url": "https://x.com/GuarEmperor/status/2080499235557097789",
@@ -69,5 +255,5 @@
       "replies": 77
     }
   ],
-  "generated_at": "2026-07-25T15:37:27.546Z"
+  "generated_at": "2026-07-25T17:52:47.202Z"
 }

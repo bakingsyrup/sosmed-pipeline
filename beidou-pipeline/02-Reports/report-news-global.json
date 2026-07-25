@@ -17,6 +17,158 @@
     "median_impression_yield_pct": 2.075,
     "median_engagement_rate_pct": 0.5349999999999999
   },
+  "entities": [
+    {
+      "id": "@kenalkripto",
+      "name": "@kenalkripto",
+      "role": "TARGET",
+      "followers": 26600,
+      "metrics": {
+        "impression_yield_pct": 3.165,
+        "max_impression_yield_pct": 6.94,
+        "engagement_rate_pct": 0.905,
+        "daily_post_count": 8,
+        "follower_growth_pct": 0,
+        "total_views": 9678,
+        "total_engagements": 93
+      }
+    },
+    {
+      "id": "@coinvestasi",
+      "name": "@coinvestasi",
+      "role": "PEER",
+      "followers": 67700,
+      "metrics": {
+        "impression_yield_pct": 2.075,
+        "max_impression_yield_pct": 9.13,
+        "engagement_rate_pct": 0.5349999999999999,
+        "daily_post_count": 2,
+        "follower_growth_pct": 0,
+        "total_views": 18937,
+        "total_engagements": 177
+      }
+    },
+    {
+      "id": "@marionawfal",
+      "name": "@marionawfal",
+      "role": "LEADER",
+      "followers": 3700000,
+      "metrics": {
+        "impression_yield_pct": 0.595,
+        "max_impression_yield_pct": 9.45,
+        "engagement_rate_pct": 0.435,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 555913,
+        "total_engagements": 1775
+      }
+    },
+    {
+      "id": "@coinbureau",
+      "name": "@coinbureau",
+      "role": "LEADER",
+      "followers": 1100000,
+      "metrics": {
+        "impression_yield_pct": 2.43,
+        "max_impression_yield_pct": 3.09,
+        "engagement_rate_pct": 0.695,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 258364,
+        "total_engagements": 2164
+      }
+    },
+    {
+      "id": "@cointelegraph",
+      "name": "@cointelegraph",
+      "role": "LEADER",
+      "followers": 2900000,
+      "metrics": {
+        "impression_yield_pct": 1.585,
+        "max_impression_yield_pct": 2.03,
+        "engagement_rate_pct": 0.5549999999999999,
+        "daily_post_count": 9,
+        "follower_growth_pct": 0,
+        "total_views": 397411,
+        "total_engagements": 2652
+      }
+    },
+    {
+      "id": "@firstsquawk",
+      "name": "@firstsquawk",
+      "role": "LEADER",
+      "followers": 551700,
+      "metrics": {
+        "impression_yield_pct": 1.59,
+        "max_impression_yield_pct": 3.78,
+        "engagement_rate_pct": 0.08499999999999999,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 125598,
+        "total_engagements": 111
+      }
+    },
+    {
+      "id": "@zerohedge",
+      "name": "@zerohedge",
+      "role": "LEADER",
+      "followers": 3100000,
+      "metrics": {
+        "impression_yield_pct": 2.045,
+        "max_impression_yield_pct": 6.59,
+        "engagement_rate_pct": 0.43,
+        "daily_post_count": 10,
+        "follower_growth_pct": 0,
+        "total_views": 778100,
+        "total_engagements": 6464
+      }
+    },
+    {
+      "id": "@watcherguru",
+      "name": "@watcherguru",
+      "role": "LEADER",
+      "followers": 4500000,
+      "metrics": {
+        "impression_yield_pct": 6.905,
+        "max_impression_yield_pct": 22.07,
+        "engagement_rate_pct": 1.22,
+        "daily_post_count": 3,
+        "follower_growth_pct": 0,
+        "total_views": 3617137,
+        "total_engagements": 51591
+      }
+    },
+    {
+      "id": "@coinvo",
+      "name": "@coinvo",
+      "role": "LEADER",
+      "followers": 350600,
+      "metrics": {
+        "impression_yield_pct": 5.24,
+        "max_impression_yield_pct": 258.61,
+        "engagement_rate_pct": 1.29,
+        "daily_post_count": 8,
+        "follower_growth_pct": 0,
+        "total_views": 1102577,
+        "total_engagements": 2567
+      }
+    },
+    {
+      "id": "peer-collective",
+      "name": "👥 Peer Collective",
+      "role": "COLLECTIVE",
+      "followers": 67700,
+      "metrics": {
+        "impression_yield_pct": 2.075,
+        "max_impression_yield_pct": 9.13,
+        "engagement_rate_pct": 0.5349999999999999,
+        "daily_post_count": 2,
+        "follower_growth_pct": 0,
+        "total_views": 18937,
+        "total_engagements": 177
+      }
+    }
+  ],
   "leader_tier_top_archetypes": [
     {
       "handle": "@Coinvo",
@@ -69,5 +221,5 @@
       "replies": 322
     }
   ],
-  "generated_at": "2026-07-25T15:37:27.551Z"
+  "generated_at": "2026-07-25T17:35:03.932Z"
 }
