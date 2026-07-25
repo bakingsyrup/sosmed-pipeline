@@ -2,7 +2,7 @@
   "cohort_id": "crypto-indonesia",
   "target_account": "@kenalkripto",
   "niche": "Crypto",
-  "snapshot_date": "snapshot-2026-04-28.json",
+  "snapshot_date": "snapshot-2026-07-25.json",
   "time_range": "3M",
   "days_window": 90,
   "snapshots_counted": 89,
@@ -9355,7 +9355,7 @@
       "id": "@setyamickala",
       "name": "@setyamickala",
       "role": "PEER",
-      "followers": 51200,
+      "followers": 51100,
       "tweets": [
         {
           "id": "2080626297273999757",
@@ -13973,7 +13973,7 @@
         "max_impression_yield_pct": 288.37,
         "engagement_rate_pct": 0,
         "daily_post_count": 1.6,
-        "follower_growth_pct": 0,
+        "follower_growth_pct": -0.2,
         "total_views": 6440038,
         "total_engagements": 46770
       }
@@ -32656,7 +32656,7 @@
       "id": "@yanzero_",
       "name": "@yanzero_",
       "role": "LEADER",
-      "followers": 0,
+      "followers": 21000,
       "tweets": [
         {
           "id": "2081039960619274326",
@@ -32822,9 +32822,13 @@
           "retweets": 2,
           "replies": 15,
           "bookmarks": 0,
-          "views": 10881,
+          "views": 10878,
           "url": "https://x.com/yanzero_/status/2071428126983455010",
-          "is_retweet": false
+          "is_retweet": false,
+          "post_age_hours": 636.64,
+          "time_window": "HISTORICAL",
+          "impression_yield_pct": 51.8,
+          "engagement_rate_pct": 1.6
         },
         {
           "id": "2071241790997623083",
@@ -36070,9 +36074,9 @@
         },
         {
           "date": "2026-06-29",
-          "total_views": 10881,
+          "total_views": 10878,
           "post_count": 1,
-          "max_yield": 0,
+          "max_yield": 51.8,
           "tweets": [
             {
               "id": "2071428126983455010",
@@ -36084,9 +36088,13 @@
               "retweets": 2,
               "replies": 15,
               "bookmarks": 0,
-              "views": 10881,
+              "views": 10878,
               "url": "https://x.com/yanzero_/status/2071428126983455010",
-              "is_retweet": false
+              "is_retweet": false,
+              "post_age_hours": 636.64,
+              "time_window": "HISTORICAL",
+              "impression_yield_pct": 51.8,
+              "engagement_rate_pct": 1.6
             }
           ]
         },
@@ -36303,11 +36311,11 @@
       ],
       "metrics": {
         "impression_yield_pct": 0,
-        "max_impression_yield_pct": 19.22,
+        "max_impression_yield_pct": 51.8,
         "engagement_rate_pct": 0,
         "daily_post_count": 1.2,
         "follower_growth_pct": 0,
-        "total_views": 893949,
+        "total_views": 893946,
         "total_engagements": 15947
       }
     },
@@ -36315,7 +36323,7 @@
       "id": "peer-collective",
       "name": "👥 Peer Collective",
       "role": "COLLECTIVE",
-      "followers": 51200,
+      "followers": 51100,
       "metrics": {
         "impression_yield_pct": 12.26,
         "max_impression_yield_pct": 74.96,
@@ -36349,6 +36357,16 @@
       "replies": 58
     },
     {
+      "handle": "@yanzero_",
+      "followers": 21000,
+      "text": "There is a company from Jakarta offering a 1-month internship for agentic AI coding in Jogja. Free accommodation is provided.\nMaterials:\n1. Coding workflow using AI\n2. Quality Assurance\n3. Strategies for refactoring legacy code",
+      "url": "https://x.com/yanzero_/status/2071428126983455010",
+      "impression_yield_pct": 51.8,
+      "likes": 157,
+      "retweets": 2,
+      "replies": 15
+    },
+    {
       "handle": "@guaremperor",
       "followers": 87700,
       "text": "Thank you VLAD for profit\n\ngot it 4 figs from LP\n\nmissed runner you can lp on uniswap\n\non \n@emperorjournal_\n we eat everything hahahahahaha",
@@ -36367,17 +36385,7 @@
       "likes": 248,
       "retweets": 19,
       "replies": 39
-    },
-    {
-      "handle": "@yanzero_",
-      "followers": 0,
-      "text": "It means for success:  \n- Collaborating with powerful people  \n- Collaborating with people who have strong finances  \n- Collaborating with people who have good networks and great courage  \n- Collaborating with crazy people",
-      "url": "https://x.com/yanzero_/status/2073594839535661278",
-      "impression_yield_pct": 19.22,
-      "likes": 59,
-      "retweets": 8,
-      "replies": 2
     }
   ],
-  "generated_at": "2026-07-25T19:06:42.257Z"
+  "generated_at": "2026-07-25T19:08:10.320Z"
 }

@@ -56,8 +56,14 @@ export function runCohortDiagnostics(cohortId, days = 1) {
 
   const snapshotFiles = fs.readdirSync(SNAPSHOTS_DIR)
     .filter(f => f.startsWith('snapshot-') && f.endsWith('.json'))
-    .map(f => ({ name: f, mtime: fs.statSync(path.join(SNAPSHOTS_DIR, f)).mtimeMs }))
-    .sort((a, b) => b.mtime - a.mtime);
+    .map(f => {
+      const match = f.match(/^snapshot-(\d{4}-\d{2}-\d{2})\.json$/);
+      const dateStr = match ? match[1] : '';
+      const dateMs = dateStr ? new Date(`${dateStr}T23:59:59.999Z`).getTime() : 0;
+      return { name: f, dateStr, dateMs };
+    })
+    .filter(f => f.dateMs > 0)
+    .sort((a, b) => b.dateMs - a.dateMs);
 
   if (snapshotFiles.length === 0) {
     return { ok: false, error: 'No valid snapshot-*.json data files found' };
@@ -71,8 +77,9 @@ export function runCohortDiagnostics(cohortId, days = 1) {
   else if (daysNum >= 14) timeRangeLabel = '14D';
   else if (daysNum >= 7) timeRangeLabel = '7D';
 
-  const cutoffMs = Date.now() - (daysNum * 24 * 3600 * 1000);
-  const targetSnapshots = snapshotFiles.filter((f, idx) => idx === 0 || f.mtime >= cutoffMs);
+  const latestDateMs = snapshotFiles[0].dateMs;
+  const cutoffMs = daysNum > 1 ? latestDateMs - (daysNum * 24 * 3600 * 1000) : (latestDateMs - (24 * 3600 * 1000));
+  const targetSnapshots = daysNum === 1 ? [snapshotFiles[0]] : snapshotFiles.filter(f => f.dateMs >= cutoffMs);
   const snapshotsCounted = targetSnapshots.length;
 
   // Aggregate account data across selected snapshot files
