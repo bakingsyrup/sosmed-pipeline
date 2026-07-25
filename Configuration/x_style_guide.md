@@ -60,14 +60,17 @@ Designed for ultra-fast, high-density breaking news alerts anchored by historica
 * **Length Limit**: Strictly **60 words maximum per sub-draft**.
 * **Pacing**: 1 sentence per block separated by double line breaks (`\n\n`) (up to 33 words max per sentence).
 * **Step 1: Current Event (WHAT & WHEN)**:
-  * Open with a bold, high-impact headline.
+  * Open with a bold, high-impact headline in standard sentence case.
   * Present ONLY the primary **WHAT** (core event) and **WHEN** (key date, timeframe, or primary metric).
-* **Step 2: Historical / Benchmark Anchor Categories**:
-  * **Category A (Historical Event Anchor)**: Cites the last time a similar market, policy, or historical milestone occurred and its quantitative outcome.
-  * **Category B (Parallel Industry Playbook)**: Cites a past industry playbook, competitive strategy, or adoption volume benchmark.
-  * **Category C (Entity Track-Record Anchor)**: Cites a past decision, statement, threat, or policy made by the same executive, company, or government entity and its eventual result.
+* **Step 2: Data-Gated Historical Anchor (Applied to Draft 1a, 1b, 1c)**:
+  * **Category A (Historical Event Anchor)**: Cites the last time a similar market, policy, or historical milestone occurred and its **exact quantitative outcome**.
+  * **Category B (Parallel Industry Playbook)**: Cites a past industry strategy or competitive playbook and its **exact quantitative result or adoption metric**.
+  * **Category C (Entity Track-Record Anchor)**: Cites a past decision, statement, or policy by the same entity/executive and its **exact quantitative track-record figure or outcome**.
+* **Data-Gated Outcome Rule**:
+  * The historical outcome in Draft 1a, 1b, and 1c MUST be backed by a **concrete data point** (percentage delta, index change, dollar value, basis points, or exact count).
+  * Strictly avoid unbacked qualitative assertions (e.g. describing a historical reaction vaguely without providing its supporting data metric).
 * **Fact-First & Comparative Question**:
-  * Close with a sharp comparative question or observation contrasting the historical benchmark against today's event. End cleanly without filler catchphrases.
+  * Close with a sharp comparative question contrasting the historical benchmark metric against today's event. End cleanly without filler catchphrases.
 
 ### The Standard Breaking News & Short Insight Template (Draft 2 Standard)
 Designed for ultra-fast, high-density breaking news alerts without historical anchors.

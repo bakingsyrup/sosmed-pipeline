@@ -103,10 +103,11 @@ Write all opening headlines in standard SENTENCE CASE (e.g. write "Bitcoin bisa 
 
 Using the style guide instructions, write the following distinct alternative drafts for an X (Twitter) post based on this information:
 
-- Draft 1 (Ultra-Compact Breaking News & Historical Benchmarks, MAX 60 WORDS PER SUB-DRAFT): Write THREE (3) distinct sub-variations (Draft 1a, Draft 1b, Draft 1c) using the 3 Historical Anchor Categories:
-  * Draft 1a: Use Category A (Historical Event Anchor: Bold headline + WHAT/WHEN + Historical Event precedent & result + comparative question).
-  * Draft 1b: Use Category B (Parallel Industry Playbook: Bold headline + WHAT/WHEN + Industry Playbook precedent & result + comparative question).
-  * Draft 1c: Use Category C (Entity Track-Record Anchor: Bold headline + WHAT/WHEN + Entity Track-Record precedent & result + comparative question).
+- Draft 1 (Ultra-Compact Breaking News & Historical Benchmarks, MAX 60 WORDS PER SUB-DRAFT): Write THREE (3) distinct sub-variations (Draft 1a, Draft 1b, Draft 1c) using the 3 Historical Anchor Categories.
+  CRITICAL DATA-GATED RULE FOR 1a, 1b, 1c: The historical outcome in every sub-draft MUST be backed by a concrete quantitative data point (exact percentage, dollar amount, basis points, or index metric). Do NOT output vague qualitative claims without supporting data metrics.
+  * Draft 1a: Use Category A (Historical Event Anchor: Bold headline + WHAT/WHEN + Historical Event precedent & quantitative result + comparative question).
+  * Draft 1b: Use Category B (Parallel Industry Playbook: Bold headline + WHAT/WHEN + Industry Playbook precedent & quantitative result + comparative question).
+  * Draft 1c: Use Category C (Entity Track-Record Anchor: Bold headline + WHAT/WHEN + Entity Track-Record precedent & quantitative result + comparative question).
 - Draft 2 (Standard Breaking News & Short Insight, MAX 60 WORDS): A bold headline followed by a compact narrative flow that presents the primary WHAT and WHEN event, then pivots directly into the single most relevant insight selected from WHY, HOW, or WHO (without historical anchors).
 - Draft 3: A bold headline followed by a highly connected, step-by-step narrative flow that explains the core macro/business mechanism and naturally builds towards the final key takeaway.
 - Draft 4: A rhetorical question-and-answer flow. It MUST start with a main news headline in the first line, followed immediately by supporting quantitative facts in the second line to establish credibility, before pivoting into the rhetorical Q&A flow to explain the context.
