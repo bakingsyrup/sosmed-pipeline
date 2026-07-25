@@ -1,16 +1,23 @@
 {
   "cohort_id": "crypto-indonesia",
-  "target_account": "@iroi_crypto",
+  "target_account": "@kenalkripto",
   "niche": "Crypto",
   "language": "id",
   "tiers": {
     "peer_tier": [
-      "@peer1",
-      "@peer2"
+      "@sarjana_crypto",
+      "@duta_crypto",
+      "@setyamickala",
+      "@warungdegen",
+      "@cipherr_exe"
     ],
     "leader_tier": [
-      "@leader1"
+      "@satyaXBT",
+      "@GuarEmperor",
+      "@Cryptorealis",
+      "@coinvestasi",
+      "@yanzero_"
     ]
   },
-  "updated_at": "2026-07-25T12:06:45.357Z"
+  "updated_at": "2026-07-25T12:21:07.240Z"
 }
