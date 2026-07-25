@@ -54,12 +54,16 @@ export function runCohortDiagnostics(cohortId) {
     return { ok: false, error: 'No snapshot files found in 01-Snapshots' };
   }
 
-  const snapshotFiles = fs.readdirSync(SNAPSHOTS_DIR).filter(f => f.endsWith('.json')).sort().reverse();
+  const snapshotFiles = fs.readdirSync(SNAPSHOTS_DIR)
+    .filter(f => f.startsWith('snapshot-') && f.endsWith('.json'))
+    .map(f => ({ name: f, mtime: fs.statSync(path.join(SNAPSHOTS_DIR, f)).mtimeMs }))
+    .sort((a, b) => b.mtime - a.mtime);
+
   if (snapshotFiles.length === 0) {
-    return { ok: false, error: 'No snapshot data available to analyze' };
+    return { ok: false, error: 'No valid snapshot-*.json data files found' };
   }
 
-  const latestSnapshotPath = path.join(SNAPSHOTS_DIR, snapshotFiles[0]);
+  const latestSnapshotPath = path.join(SNAPSHOTS_DIR, snapshotFiles[0].name);
   const snapshotData = JSON.parse(fs.readFileSync(latestSnapshotPath, 'utf-8'));
 
   // Account Lookup Map
@@ -145,7 +149,7 @@ export function runCohortDiagnostics(cohortId) {
     cohort_id: safeId,
     target_account: `@${targetHandle}`,
     niche: cohort.niche || 'Crypto',
-    snapshot_date: snapshotFiles[0],
+    snapshot_date: snapshotFiles[0].name,
     diagnostic_status: diagnosticStatus,
     status_badge: statusBadge,
     net_variance_pct: netVariancePct,

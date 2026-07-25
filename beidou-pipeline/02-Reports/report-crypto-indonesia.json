@@ -1,0 +1,25 @@
+{
+  "cohort_id": "crypto-indonesia",
+  "target_account": "@kenalkripto",
+  "niche": "Crypto",
+  "snapshot_date": {
+    "name": "snapshot-2026-07-25.json",
+    "mtime": 1784983319130.9927
+  },
+  "diagnostic_status": "MACRO_DOWNTURN",
+  "status_badge": "🟡 MACRO_DOWNTURN",
+  "net_variance_pct": 0,
+  "summary_message": "Overall niche engagement is down (Peer median yield: 0%). Target account is moving with the market wave. Do NOT panic-pivot strategy.",
+  "target_metrics": {
+    "follower_count": 26600,
+    "median_impression_yield_pct": 0,
+    "median_engagement_rate_pct": 0
+  },
+  "peer_tier_benchmarks": {
+    "peer_count": 5,
+    "median_impression_yield_pct": 0,
+    "median_engagement_rate_pct": 0
+  },
+  "leader_tier_top_archetypes": [],
+  "generated_at": "2026-07-25T12:42:22.950Z"
+}
