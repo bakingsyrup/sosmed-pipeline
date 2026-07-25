@@ -204,11 +204,29 @@ export function runCohortDiagnostics(cohortId, days = 1) {
     // Daily Post Volume: total posts divided by days window (or 1 if 1D)
     const daily_post_count = daysNum > 1 ? parseFloat((tweets.length / daysNum).toFixed(1)) : tweets.length;
 
+    // Group tweets by date (YYYY-MM-DD)
+    const timelineMap = new Map();
+    tweets.forEach(t => {
+      const dStr = t.timestamp ? t.timestamp.split('T')[0] : 'Unknown';
+      if (!timelineMap.has(dStr)) {
+        timelineMap.set(dStr, { date: dStr, total_views: 0, post_count: 0, max_yield: 0, tweets: [] });
+      }
+      const dayEntry = timelineMap.get(dStr);
+      dayEntry.total_views += (t.views || 0);
+      dayEntry.post_count += 1;
+      dayEntry.max_yield = Math.max(dayEntry.max_yield, t.impression_yield_pct || 0);
+      dayEntry.tweets.push(t);
+    });
+
+    const daily_impression_timeline = Array.from(timelineMap.values()).sort((a, b) => a.date.localeCompare(b.date));
+
     return {
       id: `@${handle}`,
       name: `@${handle}`,
       role,
       followers: acc.latestFollowers || 0,
+      tweets: tweets.sort((a, b) => (b.ts_epoch || 0) - (a.ts_epoch || 0)),
+      daily_impression_timeline,
       metrics: {
         impression_yield_pct: calculateMedian(yields),
         max_impression_yield_pct: parseFloat(maxYield.toFixed(2)),
