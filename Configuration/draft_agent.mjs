@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 import { callGemini } from './services/gemini_api.mjs';
 import { callDeepSeek } from './services/deepseek_api.mjs';
 import { findAndClipVideo } from './utils/youtube_clipper.mjs';
+import { isFeatureEnabled } from './services/pipeline_config.mjs';
 
 // Import Modular File Helpers
 import {
@@ -291,35 +292,40 @@ async function processFile(filename, styleGuideContent) {
 
       console.log(`Research completed. Found ${sources.length} source links.`);
 
-      // Step 1b: Trigger YouTube Clip Finder
-      try {
-        console.log('Step 1b: Running YouTube Clip Finder & Precision Cutter...');
-        // Universal query cleaning: strip URLs, @handles, leading ALL-CAPS tags (e.g. "JUST IN:", "BERITA TERKINI:"), and non-alphanumeric clutter
-        const cleanQuery = tweetText
-          .replace(/https?:\/\/\S+/g, '')
-          .replace(/@\w+/g, '')
-          .replace(/^[A-Z\s]{2,15}:/g, '')
-          .replace(/[^\w\s]/gi, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
-          .slice(0, 80);
+      // Step 1b: Trigger YouTube Clip Finder (if enabled)
+      if (isFeatureEnabled('video_clipper', frontmatter, PIPELINE_BASE)) {
+        try {
+          console.log('Step 1b: Running YouTube Clip Finder & Precision Cutter...');
+          // Universal query cleaning: strip URLs, @handles, leading ALL-CAPS tags (e.g. "JUST IN:", "BERITA TERKINI:"), and non-alphanumeric clutter
+          const cleanQuery = tweetText
+            .replace(/https?:\/\/\S+/g, '')
+            .replace(/@\w+/g, '')
+            .replace(/^[A-Z\s]{2,15}:/g, '')
+            .replace(/[^\w\s]/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .slice(0, 80);
 
-        const keywords = cleanQuery.split(/\s+/).filter(w => w.length > 3).slice(0, 6);
-        const clipId = path.basename(filename, '.md');
+          const keywords = cleanQuery.split(/\s+/).filter(w => w.length > 3).slice(0, 6);
+          const clipId = path.basename(filename, '.md');
 
-        const clipRes = await findAndClipVideo(cleanQuery, keywords, '', clipId);
-        if (clipRes.status === 'success') {
-          console.log(`[YouTube Clipper] Clip created successfully: ${clipRes.obsidian_embed}`);
-          researchBrief += `\n\n# Media Asset\n- **Video Clip**: ${clipRes.obsidian_embed}\n- **Timestamp**: ${clipRes.timestamp_range}\n- **Source**: ${clipRes.channel} (${clipRes.source_url})\n`;
-        } else {
-          console.log(`[YouTube Clipper] No video clip attached: ${clipRes.message}`);
+          const clipRes = await findAndClipVideo(cleanQuery, keywords, '', clipId);
+          if (clipRes.status === 'success') {
+            console.log(`[YouTube Clipper] Clip created successfully: ${clipRes.obsidian_embed}`);
+            researchBrief += `\n\n# Media Asset\n- **Video Clip**: ${clipRes.obsidian_embed}\n- **Timestamp**: ${clipRes.timestamp_range}\n- **Source**: ${clipRes.channel} (${clipRes.source_url})\n`;
+          } else {
+            console.log(`[YouTube Clipper] No video clip attached: ${clipRes.message}`);
+          }
+        } catch (clipErr) {
+          console.error(`[YouTube Clipper] Error: ${clipErr.message}`);
         }
-      } catch (clipErr) {
-        console.error(`[YouTube Clipper] Error: ${clipErr.message}`);
+      } else {
+        console.log('[YouTube Clipper] Feature toggled OFF (Skipping video search & clip generation)');
       }
 
-      // Parse Glossary extraction details from the research brief
-      const hasGlossary = researchBrief.includes('GLOSSARY_DETECTION: YES');
+      // Parse Glossary extraction details from the research brief (if enabled)
+      const isGlossaryActive = isFeatureEnabled('glossary_automation', frontmatter, PIPELINE_BASE);
+      const hasGlossary = isGlossaryActive && researchBrief.includes('GLOSSARY_DETECTION: YES');
       glossaryData = null;
       if (hasGlossary && !skipGlossaryToday) {
         const categoryMatch = researchBrief.match(/CATEGORY:\s*([^\n]+)/);
@@ -340,6 +346,8 @@ async function processFile(filename, styleGuideContent) {
           };
           console.log(`Glossary detected: Category: ${glossaryData.category}, Angle: ${glossaryData.angle}, Terms: "${glossaryData.term1}" & "${glossaryData.term2}"`);
         }
+      } else if (!isGlossaryActive) {
+        console.log('[Glossary Automation] Feature toggled OFF (Skipping glossary extraction)');
       }
 
       // Step 2: Drafting based on Style Guide
