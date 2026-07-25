@@ -104,7 +104,9 @@ Write all opening headlines in standard SENTENCE CASE (e.g. write "Bitcoin bisa 
 Using the style guide instructions, write the following distinct alternative drafts for an X (Twitter) post based on this information:
 
 - Draft 1 (Ultra-Compact Breaking News & Historical Benchmarks, MAX 60 WORDS PER SUB-DRAFT): Write THREE (3) distinct sub-variations (Draft 1a, Draft 1b, Draft 1c) using the 3 Historical Anchor Categories.
-  CRITICAL DATA-GATED RULE FOR 1a, 1b, 1c: The historical outcome in every sub-draft MUST be backed by a concrete quantitative data point (exact percentage, dollar amount, basis points, or index metric). Do NOT output vague qualitative claims without supporting data metrics.
+  CRITICAL DATA-GATED & NARRATIVE ALIGNMENT RULES FOR 1a, 1b, 1c:
+  1. The historical outcome in every sub-draft MUST be backed by a concrete quantitative data point (exact percentage, dollar amount, basis points, or index metric). Do NOT output vague qualitative claims without supporting data metrics.
+  2. The historical precedent MUST logically align with the directional premise of today's news event (e.g. surge ➔ past surge, collapse ➔ past collapse). If contrasting an opposing force, include an explicit logical bridge explaining the conflict before introducing the precedent.
   * Draft 1a: Use Category A (Historical Event Anchor: Bold headline + WHAT/WHEN + Historical Event precedent & quantitative result + comparative question).
   * Draft 1b: Use Category B (Parallel Industry Playbook: Bold headline + WHAT/WHEN + Industry Playbook precedent & quantitative result + comparative question).
   * Draft 1c: Use Category C (Entity Track-Record Anchor: Bold headline + WHAT/WHEN + Entity Track-Record precedent & quantitative result + comparative question).

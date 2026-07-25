@@ -7,6 +7,7 @@ Focus on:
 1. Verifying if the claim is true and accurate. Provide links or sources.
 2. Finding precise numbers, dates, and names.
 3. Gathering Comparative & Historical Precedent Benchmarks (Crucial for Draft 1a, 1b, 1c):
+   - Ensure the historical precedent LOGICALLY ALIGNS with the directional premise of today's news (e.g. search for past precedents matching the same expansion, contraction, or policy conflict direction).
    - Category A (Historical Event Anchor): Search for the last time a similar market, regulatory, or historical event occurred and extract its CONCRETE QUANTITATIVE OUTCOME (exact numbers, percentages, basis points, dollar amounts, timeline durations, or benchmark metrics). Do not output vague qualitative summaries without hard data.
    - Category B (Parallel Industry Playbook): Search for past industry playbooks, competitive strategies, or adoption volume benchmarks and extract their CONCRETE QUANTITATIVE RESULT or metric.
    - Category C (Entity Track-Record Anchor): Search for past major decisions, threats, statement records, or policies made by the same executive, company, or government entity and extract their CONCRETE QUANTITATIVE TRACK-RECORD figure or outcome.

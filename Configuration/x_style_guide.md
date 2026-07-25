@@ -69,6 +69,8 @@ Designed for ultra-fast, high-density breaking news alerts anchored by historica
 * **Data-Gated Outcome Rule**:
   * The historical outcome in Draft 1a, 1b, and 1c MUST be backed by a **concrete data point** (percentage delta, index change, dollar value, basis points, or exact count).
   * Strictly avoid unbacked qualitative assertions (e.g. describing a historical reaction vaguely without providing its supporting data metric).
+* **Narrative Alignment & Logical Bridge Rule**:
+  * The historical precedent MUST logically align with the directional premise of the current event (e.g. surge ➔ past surge, collapse ➔ past collapse). If contrasting an opposing force (e.g. market forces breaking an entity's policy cap), you MUST include a short logical bridge explaining the conflict before stating the precedent. Never jump abruptly into an opposing historical context.
 * **Fact-First & Comparative Question**:
   * Close with a sharp comparative question contrasting the historical benchmark metric against today's event. End cleanly without filler catchphrases.
 

@@ -76,6 +76,7 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: `x-draft-agent` actively running via PM2 in watch mode; syncs real-time state & feature settings with Ad Astra UI (`00-Status.md`, `00-Settings.md`).
+* **July 25, 2026**: Added **Narrative Alignment & Logical Bridge Rule** across `research_prompt.mjs`, `x_style_guide.md`, and `drafting_prompt.mjs`. Historical precedents MUST logically match the directional premise of current news (e.g. surge ➔ past surge), requiring explicit logical bridges when contrasting counter-mechanisms.
 * **July 25, 2026**: Enforced **Data-Gated Historical Outcome Rule** across `research_prompt.mjs`, `x_style_guide.md`, and `drafting_prompt.mjs`. Historical precedents in Draft 1a, 1b, and 1c MUST be backed by concrete quantitative data points (exact percentages, dollar amounts, basis points, or index metrics), strictly eliminating vague qualitative claims.
 * **July 25, 2026**: Updated Style Markers in `x_style_guide.md` to explicitly forbid "AS" when referring to the United States and mandate "US" (e.g. `pemerintah US`, `bursa saham US`).
 * **July 25, 2026**: Added **CRITICAL HEADLINE FORMATTING DIRECTIVE** to `drafting_prompt.mjs` and `x_style_guide.md` explicitly forcing Sentence Case output for all opening headlines (overriding LLM pre-training Title Case bias).
