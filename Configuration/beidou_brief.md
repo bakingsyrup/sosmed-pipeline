@@ -48,8 +48,8 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Cohort Configuration Active (`crypto-indonesia.json` & `news-global.json`). Ready for Snapshot Manager & Diagnostic Engine.
-* **July 25, 2026**: Recorded Decision 5: Selected Lightweight JSON File-Database Storage (`beidou-pipeline/01-Snapshots/`) eliminating PostgreSQL/SQLite overhead while maintaining <5ms in-memory query performance.
-* **July 25, 2026**: Built Sub-Navigation tabs (`X Posts` & `Intel`) in Ad Astra Sosmed Center + `BeidouCohortManager` UI card and Fastify API (`/api/beidou/cohorts`). Saved user cohorts (`crypto-indonesia.json`, `news-global.json`).
-* **July 25, 2026**: Tested & verified Tab Isolation Pattern (`browser.newPage()`) and 100% background headless execution on CDP port 18810.
-* **July 25, 2026**: Initialized Beidou architecture, directory structure (`Configuration/beidou/`, `beidou-pipeline/`), and documentation ecosystem (`iroi_brief.md`, `beidou_brief.md`, `beidou_guide.md`, `.gemini/rules/beidou_docs.md`).
+* **Status**: Beidou Diagnostic Engine (`beidou_engine.mjs`) & Snapshot Manager (`beidou_snapshot_manager.mjs`) built and verified. DOM article selector fixed for X profile timelines.
+* **July 25, 2026**: Identified profile timeline DOM selector requirement (`article` vs `article[data-testid="tweet"]`) and session auth requirement for direct handle timelines on X.
+* **July 25, 2026**: Verified 100% background headless scraping on Port 18810 with Tab Isolation across 18 cohort accounts (180 tweets scraped).
+* **July 25, 2026**: Built Beidou Analytics Canvas UI (`BeidouAnalyticsCanvas.jsx`) mounted in Ad Astra `Intel` tab, rendering diagnostic badges (`🟢 AHEAD`), benchmark cards, pivot data, and top market leader archetypes.
+* **July 25, 2026**: Built Snapshot Manager (`beidou_snapshot_manager.mjs`) and Diagnostic Engine (`beidou_engine.mjs`) with Net Relative Variance ($V$) math and T+24h / T+48h post windowing.
