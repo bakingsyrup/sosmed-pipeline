@@ -100,7 +100,7 @@ ${researchBrief}
 
 Using the style guide instructions, write FOUR (4) distinct alternative drafts for an X (Twitter) post based on this information:
 
-- Draft 1 (Ultra-Compact Breaking News & Short Insight, MAX 60 WORDS): State ONLY the primary WHAT and WHEN fact, followed immediately by the single most relevant insight selected from WHY, HOW, or WHO. Fact-first, no filler or forced catchphrases.
+- Draft 1 (Ultra-Compact Breaking News & Short Insight, MAX 60 WORDS): A bold headline followed by a compact narrative flow that presents the primary WHAT and WHEN event, then pivots directly into the single most relevant insight selected from WHY, HOW, or WHO.
 - Draft 2: A bold headline followed by a highly connected, step-by-step narrative flow that explains the core macro/business mechanism and naturally builds towards the final key takeaway.
 - Draft 3: A rhetorical question-and-answer flow. It MUST start with a main news headline in the first line, followed immediately by supporting quantitative facts in the second line to establish credibility, before pivoting into the rhetorical Q&A flow to explain the context.
 - Draft 4: A high-stakes crisis angle highlighting the party most affected / getting REKT. It MUST follow a "Show, Don't Tell" approach: instead of declaring a situation "massive" or "dangerous" directly, lay out facts and relative comparisons step-by-step so the reader understands the scale of danger themselves.

@@ -58,15 +58,16 @@ Visual layout is critical for readability on mobile screens. The style relies on
 Designed for ultra-fast, high-density breaking news alerts.
 
 * **Length Limit**: Strictly **60 words maximum**.
+* **Structure**: A bold headline followed by a compact narrative flow.
 * **Step 1: Ruthless Fact Filtering (WHAT & WHEN)**:
-  * Present ONLY the primary **WHAT** (the core event) and **WHEN** (the key date, timeframe, or primary metric).
+  * Open with a bold, high-impact headline. Present ONLY the primary **WHAT** (the core event) and **WHEN** (the key date, timeframe, or primary metric).
   * Avoid listing secondary details, minor sub-points, or extended background context.
 * **Step 2: Smart Insight Selection (WHY, HOW, or WHO)**:
   * Dynamically evaluate the research brief and select the **SINGLE most valuable aspect** from:
     - **WHY** (e.g. *Why is this happening?*)
     - **HOW** (e.g. *How does this work or unfold?*)
     - **WHO** (e.g. *Who is most affected or gains/loses?*)
-  * Deliver that core insight directly in 1–2 concise lines.
+  * Deliver that core insight directly in 1–2 concise narrative lines.
 * **Fact-First Principle**:
   * Prioritize concrete, high-utility facts and insights over filler text or forced catchphrases. End cleanly on the insight itself.
 
