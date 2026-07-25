@@ -233,32 +233,37 @@ async function main() {
 
   console.log(`Scraping tweets for ${handles.length} account(s)...\n`);
 
-  // Connect to Chrome via CDP with resilient retry
-  let browser, page;
+  // Connect to Chrome via CDP with Tab Isolation Pattern
+  let browser, conn;
   try {
     const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    const conn = await connectCDP(18800, { caller: 'scrape-tweets', maxRetries: 2 });
+    conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
-    page = conn.page;
   } catch (e) {
     console.error(`Cannot connect to Chrome CDP: ${e.message}`);
     process.exit(1);
   }
 
-  const results = [];
-  for (const handle of handles) {
-    try {
-      const result = await scrapeAccount(page, handle, tweetLimit);
-      results.push(result);
-    } catch (err) {
-      console.log(`  @${handle}: ERROR — ${err.message}`);
-      results.push({ handle, tweets: [], error: err.message });
-    }
-    if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
-  }
+  // Create isolated dedicated tab for Beidou (does not touch main fetcher tab)
+  const isolatedPage = await browser.newPage();
+  console.log('[Tab Isolation] Created dedicated background tab for Beidou.');
 
-  // Navigate back to blank for reuse
-  await page.goto('about:blank').catch(() => {});
+  const results = [];
+  try {
+    for (const handle of handles) {
+      try {
+        const result = await scrapeAccount(isolatedPage, handle, tweetLimit);
+        results.push(result);
+      } catch (err) {
+        console.log(`  @${handle}: ERROR — ${err.message}`);
+        results.push({ handle, tweets: [], error: err.message });
+      }
+      if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
+    }
+  } finally {
+    console.log('[Tab Isolation] Closing dedicated background tab...');
+    await isolatedPage.close().catch(() => {});
+  }
 
   // Summary
   console.log('\n--- Summary ---');
