@@ -5,7 +5,7 @@ This guide provides the exact rules, voice parameters, structural guidelines, an
 ---
 
 ## 1. Voice and Tone
-The voice is that of a **pragmatic, street-smart macroeconomist and tech analyst**. It is analytical yet highly conversational, delivering deep business insights in a punchy, easily digestible format.
+The voice is that of a **pragmatic macroeconomist and tech analyst**. It is analytical yet highly conversational, delivering deep business insights in a punchy, easily digestible format without artificial hype or filler words.
 
 *   **Objective & Realist:** Avoids moralizing or emotional bias. Analyzes events through the lenses of geopolitics, capital flow, business margins, and long-term incentives.
 *   **Counter-Intuitive:** Pierces the mainstream narrative. Looks for the hidden secondary effects (e.g., why a tiny 0.1% forecast drop actually triggers massive layoffs).
