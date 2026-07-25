@@ -47,7 +47,9 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 
 ### 4. Ad Astra UI Analytics Dashboard (Pivot & Visual Builder)
 * **Numeric Pivot Table**: Slice & dice by Cohort, Account Tier, Time Window (T+24h / T+48h), and Shinku Draft Types. CSV export enabled.
-* **Dynamic Visual Canvas**: Interactive VS/ALL comparison canvas with customizable metric selectors and time range pills (`1D`, `7D`, `14D`, `30D`, `3M`).
+* **Dynamic Visual Canvas**: Interactive VS/ALL comparison canvas with customizable metric selectors and localized inline timeframe pills (`1D`, `7D`, `14D`, `30D`, `3M`).
+* **Flexible Dual-Account VS Selector**: Compare any 2 accounts in the cohort (Account A vs Account B) with side-by-side colored bars (Purple Account A vs Emerald Green Account B) and a dual-column drill-down inspector grid.
+* **Instant Disk Recalculation**: Timeframe clicks pass `skipScrape: true` to recalculate diagnostics from disk in <5ms without acquiring Chrome CDP locks.
 
 ### 5. Decoupled Horizontal Architecture & Feedback UI
 * **Horizontal Decoupled Model**: Shinku (Production) and Beidou (Intelligence) operate as independent peer tools at the same level with zero direct code/prompt coupling.
@@ -60,12 +62,12 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Beidou full pipeline automated with daily PM2 cron scheduler at 05:00 UTC. VS/ALL comparison canvas, 5-timeframe engine (1D-3M), and daily post timestamp filtering active. 2 cohorts, 18 accounts.
-* **July 26, 2026**: Built VS/ALL Mode Diagnostic Canvas with Head-to-Head KPI cards, multi-bar cohort distribution chart, sortable data matrix table, and `total_data_days` tracking.
+* **Status**: Beidou full pipeline automated with daily PM2 cron scheduler at 05:00 UTC. Dual-Account VS Mode, inline timeframe canvas selector, 90D historical backfill, and 5-timeframe engine (1D-3M) active across 2 cohorts (18 accounts).
+* **July 26, 2026**: Built Flexible Dual-Account VS Mode (`Account A vs Account B`) with side-by-side colored bars (Purple vs Emerald Green), inline canvas timeframe pills (`1D`-`3M`), and dual-column drill-down inspector grid.
+* **July 26, 2026**: Completed 200-post 90-day historical backfill for `crypto-indonesia` (1,178 tweets across 89 snapshots) and `news-global` (779 tweets).
+* **July 26, 2026**: Optimized timeframe switching with instant disk recalculation (`skipScrape: true`) and exact filename date sorting (`snapshot-YYYY-MM-DD.json`).
 * **July 26, 2026**: Upgraded diagnostic engine with multi-timeframe aggregation (`1D`, `7D`, `14D`, `30D`, `3M` / 90 days), rolling medians, accurate 24h UTC post timestamp filtering, and `0.5%` yield floor threshold.
 * **July 26, 2026**: Added PM2 daily scheduler (`beidou_scheduler.mjs` + wrapper shell script) running at 05:00 UTC. Orchestrates snapshot batch → diagnostics for all cohorts → exit. Saved to PM2 dump for `pm2 resurrect`.
-* **July 26, 2026**: Implemented fetch logic overhaul: UTC time-window scraping (yesterday), per-handle tweet-ID dedup via `tweet-ids/{handle}.json`, target vs peer/leader cap (all vs 20 oldest), and skip-today early-exit guard.
-* **July 25, 2026**: Fixed adapter hang caused by CDP WebSocket keeping event loop alive. Added `process.exit(0)` after output write.
 
 
 (End of file — total 78 lines)
