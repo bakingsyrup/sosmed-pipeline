@@ -105,13 +105,12 @@ async function extractTweetsFromPage(page) {
         likes     = parseCount(likeBtn);
         bookmarks = parseCount(bookBtn);
 
-        // Views — usually in a span with "views" text
-        const viewSpans = article.querySelectorAll('a[role="link"] span');
-        for (const span of viewSpans) {
-          if (span.innerText && /views$/i.test(span.closest('a')?.getAttribute('aria-label') || '')) {
-            const vm = (span.closest('a').getAttribute('aria-label') || '').match(/([\d,]+)\s*views/i);
-            if (vm) views = parseInt(vm[1].replace(/,/g, ''));
-          }
+        // Views — from analytics link aria-label e.g. "4078 views. View post analytics"
+        const analyticsLink = article.querySelector('a[href*="/analytics"]');
+        if (analyticsLink) {
+          const aria = analyticsLink.getAttribute('aria-label') || '';
+          const vm = aria.match(/([\d,]+)\s*views/i);
+          if (vm) views = parseInt(vm[1].replace(/,/g, ''));
         }
 
         // Is retweet?
@@ -237,7 +236,7 @@ async function main() {
   let browser, conn;
   try {
     const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    conn = await connectCDP(18810, { caller: 'beidou-adapter', maxRetries: 2 });
+    conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
   } catch (e) {
     console.error(`Cannot connect to Chrome CDP: ${e.message}`);

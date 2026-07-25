@@ -3,115 +3,18 @@
     "handle": "kenalkripto",
     "followers": 26600,
     "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.133Z"
+    "error": null
   },
   {
     "handle": "sarjana_crypto",
     "followers": 111600,
     "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.133Z"
-  },
-  {
-    "handle": "duta_crypto",
-    "followers": 53900,
-    "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.133Z"
-  },
-  {
-    "handle": "setyamickala",
-    "followers": 50800,
-    "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.133Z"
-  },
-  {
-    "handle": "warungdegen",
-    "followers": 10500,
-    "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.133Z"
-  },
-  {
-    "handle": "cipherr_exe",
-    "followers": 9511,
-    "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
+    "error": null
   },
   {
     "handle": "satyaXBT",
     "followers": 33500,
     "tweets": [],
-    "error": null,
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "GuarEmperor",
-    "tweets": [],
-    "error": "page.evaluate: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "Cryptorealis",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "coinvestasi",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "yanzero_",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "MarioNawfal",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "coinbureau",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "Cointelegraph",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "FirstSquawk",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "zerohedge",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "WatcherGuru",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
-  },
-  {
-    "handle": "Coinvo",
-    "tweets": [],
-    "error": "page.goto: Target page, context or browser has been closed",
-    "snapshot_timestamp": "2026-07-25T12:41:59.134Z"
+    "error": null
   }
 ]
