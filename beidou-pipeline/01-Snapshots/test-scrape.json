@@ -1,0 +1,51 @@
+[
+  {
+    "handle": "Coinvo",
+    "followers": 350500,
+    "tweets": [
+      {
+        "id": "2080956259742691767",
+        "text": "President Trump: \"I'm not surprised Ilhan Omar called World War 2 'World War 11\", she also calls her brother 'Husband number 1'.\"\n\n\"They're very much in love, they're moving in together.\"",
+        "author": "Coinvo",
+        "timestamp": "2026-07-25T10:00:09.000Z",
+        "ts_epoch": 1784973609000,
+        "likes": 105,
+        "retweets": 6,
+        "replies": 15,
+        "bookmarks": 0,
+        "views": 0,
+        "url": "https://x.com/Coinvo/status/2080956259742691767",
+        "is_retweet": false
+      },
+      {
+        "id": "2080949930319900905",
+        "text": "It's now legal for U.S. border patrol agents to search through phones of people going into country.\n\nThey wouldn't need any suspicion or warrant, as it's considered \"a routine search.\"",
+        "author": "Coinvo",
+        "timestamp": "2026-07-25T09:35:00.000Z",
+        "ts_epoch": 1784972100000,
+        "likes": 115,
+        "retweets": 8,
+        "replies": 25,
+        "bookmarks": 0,
+        "views": 0,
+        "url": "https://x.com/Coinvo/status/2080949930319900905",
+        "is_retweet": false
+      },
+      {
+        "id": "2025909660025327983",
+        "text": "Join our free Telegram channel for 24/7 news alerts.  \n\n\nhttp://\nt.me/CoinvoNews",
+        "author": "Coinvo",
+        "timestamp": "2026-02-23T12:24:37.000Z",
+        "ts_epoch": 1771849477000,
+        "likes": 288,
+        "retweets": 22,
+        "replies": 47,
+        "bookmarks": 0,
+        "views": 0,
+        "url": "https://x.com/Coinvo/status/2025909660025327983",
+        "is_retweet": false
+      }
+    ],
+    "error": null
+  }
+]
