@@ -237,7 +237,7 @@ async function main() {
   let browser, conn;
   try {
     const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
+    conn = await connectCDP(18810, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
   } catch (e) {
     console.error(`Cannot connect to Chrome CDP: ${e.message}`);
