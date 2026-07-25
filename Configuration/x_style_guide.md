@@ -69,6 +69,23 @@ Designed for ultra-fast, high-density breaking news alerts anchored by historica
 * **Fact-First & Comparative Question**:
   * Close with a sharp comparative question or observation contrasting the historical benchmark against today's event. End cleanly without filler catchphrases.
 
+### The Standard Breaking News & Short Insight Template (Draft 2 Standard)
+Designed for ultra-fast, high-density breaking news alerts without historical anchors.
+
+* **Length Limit**: Strictly **60 words maximum**.
+* **Structure**: A bold headline followed by a compact narrative flow.
+* **Step 1: Ruthless Fact Filtering (WHAT & WHEN)**:
+  * Open with a bold, high-impact headline. Present ONLY the primary **WHAT** (the core event) and **WHEN** (the key date, timeframe, or primary metric).
+  * Avoid listing secondary details, minor sub-points, or extended background context.
+* **Step 2: Smart Insight Selection (WHY, HOW, or WHO)**:
+  * Dynamically evaluate the research brief and select the **SINGLE most valuable aspect** from:
+    - **WHY** (e.g. *Why is this happening?*)
+    - **HOW** (e.g. *How does this work or unfold?*)
+    - **WHO** (e.g. *Who is most affected or gains/loses?*)
+  * Deliver that core insight directly in 1–2 concise narrative lines.
+* **Fact-First Principle**:
+  * Prioritize concrete, high-utility facts and insights over filler text or forced catchphrases. End cleanly on the insight itself.
+
 ### Headline Formation
 Start with a bold, high-impact title that summarizes the core conflict, mega-number, or crisis.
 *   *Format:* `[Subject] + [High Stakes Action/Crisis/Big Number]`
