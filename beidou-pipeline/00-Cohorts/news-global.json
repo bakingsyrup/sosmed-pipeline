@@ -1,0 +1,21 @@
+{
+  "cohort_id": "news-global",
+  "target_account": "@kenalkripto",
+  "niche": "News",
+  "language": "en",
+  "tiers": {
+    "peer_tier": [
+      "@coinvestasi"
+    ],
+    "leader_tier": [
+      "@MarioNawfal",
+      "@coinbureau",
+      "@Cointelegraph",
+      "@FirstSquawk",
+      "@zerohedge",
+      "@WatcherGuru",
+      "@Coinvo"
+    ]
+  },
+  "updated_at": "2026-07-25T12:26:36.203Z"
+}
