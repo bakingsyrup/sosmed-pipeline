@@ -5,18 +5,69 @@
   "snapshot_date": "snapshot-2026-07-25.json",
   "diagnostic_status": "MACRO_DOWNTURN",
   "status_badge": "🟡 MACRO_DOWNTURN",
-  "net_variance_pct": 0,
-  "summary_message": "Overall niche engagement is down (Peer median yield: 0%). Target account is moving with the market wave. Do NOT panic-pivot strategy.",
+  "net_variance_pct": -12.81,
+  "summary_message": "Overall niche engagement is down (Peer median yield: 15.975000000000001%). Target account is moving with the market wave. Do NOT panic-pivot strategy.",
   "target_metrics": {
     "follower_count": 26600,
-    "median_impression_yield_pct": 0,
-    "median_engagement_rate_pct": 0
+    "median_impression_yield_pct": 3.165,
+    "median_engagement_rate_pct": 0.905
   },
   "peer_tier_benchmarks": {
     "peer_count": 5,
-    "median_impression_yield_pct": 0,
-    "median_engagement_rate_pct": 0
+    "median_impression_yield_pct": 15.975000000000001,
+    "median_engagement_rate_pct": 0.635
   },
-  "leader_tier_top_archetypes": [],
-  "generated_at": "2026-07-25T13:13:06.870Z"
+  "leader_tier_top_archetypes": [
+    {
+      "handle": "@GuarEmperor",
+      "followers": 87700,
+      "text": "My 2025 alpha results:\n\nSteadyteddy worth $1.6K call very early ez farm wl\nPlasma worth $9K just join early presale\nRaccoon worth $1,7K mid \nethOS worth $1.8K just farm code\nLamumu worth $600\nAster call at $0.08 on my discord \nSomnia $5K \nLilstar worth $390 from testnet\nWallchain",
+      "url": "https://x.com/GuarEmperor/status/2006036138382045544",
+      "impression_yield_pct": 434.47,
+      "likes": 1018,
+      "retweets": 69,
+      "replies": 218
+    },
+    {
+      "handle": "@satyaXBT",
+      "followers": 33500,
+      "text": "getting verified just to wait for payout? rude gong..\n\nthere's a lot of stuff you can take advantage of, including making videos like this using grok 4.5 build",
+      "url": "https://x.com/satyaXBT/status/2078813855212253557",
+      "impression_yield_pct": 84.3,
+      "likes": 305,
+      "retweets": 38,
+      "replies": 58
+    },
+    {
+      "handle": "@satyaXBT",
+      "followers": 33500,
+      "text": "There's a new account playing around on X, bro, lemme tell you the three rules from Jensen:\n\n- Don't steal content\n- Don't share analytics\n- Don't farm followers\n- Just diligently reply to posts, that's the key thing\n\nIt's so damn nice that he can just hit 12M views right off the",
+      "url": "https://x.com/satyaXBT/status/2080822018753364086",
+      "impression_yield_pct": 55.56,
+      "likes": 109,
+      "retweets": 4,
+      "replies": 62
+    },
+    {
+      "handle": "@yanzero_",
+      "followers": 21000,
+      "text": "There is a company from Jakarta offering a 1-month internship for agentic AI coding in Jogja. Free accommodation is provided.\nMaterials:\n1. Coding workflow using AI\n2. Quality Assurance\n3. Strategies for refactoring legacy code",
+      "url": "https://x.com/yanzero_/status/2071428126983455010",
+      "impression_yield_pct": 51.8,
+      "likes": 157,
+      "retweets": 2,
+      "replies": 15
+    },
+    {
+      "handle": "@GuarEmperor",
+      "followers": 87700,
+      "text": "Thank you VLAD for profit\n\ngot it 4 figs from LP\n\nmissed runner you can lp on uniswap\n\non \n@emperorjournal_\n we eat everything hahahahahaha",
+      "url": "https://x.com/GuarEmperor/status/2080499235557097789",
+      "impression_yield_pct": 38.92,
+      "likes": 297,
+      "retweets": 12,
+      "replies": 77
+    }
+  ],
+  "generated_at": "2026-07-25T15:37:27.546Z"
 }

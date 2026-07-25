@@ -55,7 +55,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
  */
 async function extractTweetsFromPage(page) {
   return page.evaluate(() => {
-    const articles = document.querySelectorAll('article');
+    const articles = document.querySelectorAll('article[data-testid="tweet"]');
     const tweets = [];
 
     for (const article of articles) {
@@ -105,11 +105,11 @@ async function extractTweetsFromPage(page) {
         likes     = parseCount(likeBtn);
         bookmarks = parseCount(bookBtn);
 
-        // Views — from analytics link aria-label e.g. "4078 views. View post analytics"
-        const analyticsLink = article.querySelector('a[href*="/analytics"]');
-        if (analyticsLink) {
-          const aria = analyticsLink.getAttribute('aria-label') || '';
-          const vm = aria.match(/([\d,]+)\s*views/i);
+        // Views — via aria-label on role=link spans (works for all accounts)
+        const viewSpans = article.querySelectorAll('a[role="link"] span');
+        for (const span of viewSpans) {
+          const parentAria = span.closest('a')?.getAttribute('aria-label') || '';
+          const vm = parentAria.match(/([\d,]+)\s*views/i);
           if (vm) views = parseInt(vm[1].replace(/,/g, ''));
         }
 
@@ -149,8 +149,7 @@ async function scrapeAccount(page, handle, limit) {
   console.log(`  @${handle}: navigating...`);
 
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForSelector('article', { timeout: 10000 }).catch(() => {});
-  await sleep(2000); // wait for tweets to render
+  await sleep(3000); // wait for tweets to render
 
   // Check if profile exists
   const notFound = await page.evaluate(() => {
@@ -233,26 +232,20 @@ async function main() {
 
   console.log(`Scraping tweets for ${handles.length} account(s)...\n`);
 
-  // Connect to Chrome via CDP with Tab Isolation Pattern
-  let browser, conn;
+  // Acquire shared page mutex before touching Chrome (same pattern as main fetcher)
+  const { acquireLock, releaseLock } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-lock.mjs');
+  const lock = await acquireLock('18800-page');
+  let browser, page;
   try {
     const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    conn = await connectCDP(18810, { caller: 'beidou-adapter', maxRetries: 2 });
+    const conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
-  } catch (e) {
-    console.error(`Cannot connect to Chrome CDP: ${e.message}`);
-    process.exit(1);
-  }
+    page = conn.page;
 
-  // Create isolated dedicated tab for Beidou (does not touch main fetcher tab)
-  const isolatedPage = await browser.newPage();
-  console.log('[Tab Isolation] Created dedicated background tab for Beidou.');
-
-  const results = [];
-  try {
+    const results = [];
     for (const handle of handles) {
       try {
-        const result = await scrapeAccount(isolatedPage, handle, tweetLimit);
+        const result = await scrapeAccount(page, handle, tweetLimit);
         results.push(result);
       } catch (err) {
         console.log(`  @${handle}: ERROR — ${err.message}`);
@@ -260,12 +253,11 @@ async function main() {
       }
       if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
     }
-  } finally {
-    console.log('[Tab Isolation] Closing dedicated background tab...');
-    await isolatedPage.close().catch(() => {});
-  }
 
-  // Summary
+    // Navigate back to blank for reuse
+    await page.goto('about:blank').catch(() => {});
+
+    // Summary
   console.log('\n--- Summary ---');
   const total = results.reduce((sum, r) => sum + r.tweets.length, 0);
   for (const r of results) {
@@ -276,11 +268,14 @@ async function main() {
 
   // Output
   if (values.out) {
-    await writeFile(values.out, JSON.stringify(results, null, 2));
-    console.log(`\nSaved to ${values.out}`);
-  } else {
-    console.log('\n' + JSON.stringify(results, null, 2));
+      await writeFile(values.out, JSON.stringify(results, null, 2));
+      console.log(`\nSaved to ${values.out}`);
+    } else {
+      console.log('\n' + JSON.stringify(results, null, 2));
+    }
+  } finally {
+    await releaseLock(lock);
   }
 }
 
-main().catch(err => { console.error(err); process.exit(1); });
+main().catch(err => { console.error(err); process.exit(1); }).finally(() => process.exit(0));

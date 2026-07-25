@@ -1,0 +1,73 @@
+{
+  "cohort_id": "news-global",
+  "target_account": "@kenalkripto",
+  "niche": "News",
+  "snapshot_date": "snapshot-2026-07-25.json",
+  "diagnostic_status": "PARITY",
+  "status_badge": "⚪ PARITY",
+  "net_variance_pct": 1.09,
+  "summary_message": "Target account @kenalkripto is performing in lockstep with the peer cohort median (2.075%).",
+  "target_metrics": {
+    "follower_count": 26600,
+    "median_impression_yield_pct": 3.165,
+    "median_engagement_rate_pct": 0.905
+  },
+  "peer_tier_benchmarks": {
+    "peer_count": 1,
+    "median_impression_yield_pct": 2.075,
+    "median_engagement_rate_pct": 0.5349999999999999
+  },
+  "leader_tier_top_archetypes": [
+    {
+      "handle": "@Coinvo",
+      "followers": 350600,
+      "text": "Join our free Telegram channel for 24/7 news alerts.  \n\n\nhttp://\nt.me/CoinvoNews",
+      "url": "https://x.com/Coinvo/status/2025909660025327983",
+      "impression_yield_pct": 258.61,
+      "likes": 288,
+      "retweets": 22,
+      "replies": 47
+    },
+    {
+      "handle": "@WatcherGuru",
+      "followers": 4500000,
+      "text": "JUST IN: OpenAI caught one of its AI agents leaving instructions for future versions to escape internal controls.",
+      "url": "https://x.com/WatcherGuru/status/2080853026445660170",
+      "impression_yield_pct": 22.07,
+      "likes": 10901,
+      "retweets": 1398,
+      "replies": 584
+    },
+    {
+      "handle": "@Coinvo",
+      "followers": 350600,
+      "text": "HUGE: The lead artist behind Pudgy Penguins just launched his own memecoin - $RAKO live now.",
+      "url": "https://x.com/Coinvo/status/2080717992736755811",
+      "impression_yield_pct": 19.81,
+      "likes": 426,
+      "retweets": 74,
+      "replies": 47
+    },
+    {
+      "handle": "@WatcherGuru",
+      "followers": 4500000,
+      "text": "JUST IN:  $7 trillion asset manager Fidelity \"urges\" Senate to pass the crypto Clarity Act.",
+      "url": "https://x.com/WatcherGuru/status/2080724443207246195",
+      "impression_yield_pct": 10.67,
+      "likes": 9515,
+      "retweets": 1190,
+      "replies": 324
+    },
+    {
+      "handle": "@WatcherGuru",
+      "followers": 4500000,
+      "text": "JUST IN:  President Trump threatens \"major tariff\" on Mexico over bad lettuce that caused the explosive diarrhea outbreak.",
+      "url": "https://x.com/WatcherGuru/status/2080755321669099897",
+      "impression_yield_pct": 9.54,
+      "likes": 3453,
+      "retweets": 344,
+      "replies": 322
+    }
+  ],
+  "generated_at": "2026-07-25T15:37:27.551Z"
+}
