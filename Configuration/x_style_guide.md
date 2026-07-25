@@ -90,9 +90,9 @@ Designed for ultra-fast, high-density breaking news alerts without historical an
 Start with a bold, high-impact title that summarizes the core conflict, mega-number, or crisis.
 *   *Format:* `[Subject] + [High Stakes Action/Crisis/Big Number]`
 *   *Examples:* 
-    *   "Korsel invest 1 Quadrilion Won ($750 Miliar) di AI"
-    *   "OpenAI Busuk Sampai Akar"
-    *   "Volkswagen Dalam Masalah Besar"
+    *   "Korsel invest 1 quadrilion won ($750 miliar) di AI"
+    *   "OpenAI busuk sampai akar"
+    *   "Volkswagen dalam masalah besar"
 
 ### The Rhetorical Question-and-Answer Flow (News-First Style)
 Establish authority and credibility first by stating the core news and concrete figures upfront, before transitioning into the Q&A format.
@@ -138,7 +138,7 @@ For complex macro topics, add a small, isolated context section at the bottom to
 ## 5. Concrete Rules (DOs & DONTs)
 
 ### DOs
-*   **DO** start with a strong, capitalized hook.
+*   **DO** write headlines in standard sentence case (capitalize ONLY the first word and proper nouns). Do NOT use Title Case or capitalize every word.
 *   **DO** use double line breaks (`\n\n`) between *every* sentence block.
 *   **DO** keep sentences short, clear, and active (max **33 words** per sentence).
 *   **DO** explain the direct flow of money (how a macro decision affects "kita retail").
