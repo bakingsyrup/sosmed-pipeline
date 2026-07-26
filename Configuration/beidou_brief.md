@@ -1,5 +1,5 @@
 # Beidou AI Briefing (`beidou_brief.md`)
-**Last Updated:** July 26, 2026
+**Last Updated:** July 26, 2026 (evening)
 
 This document serves as the high-density technical blueprint and session context for **Beidou** (Iroi's Automated Account Performance & Competitor Diagnostic Engine).
 
@@ -42,7 +42,7 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 * **Baseline Threshold Floor**: Absolute minimum healthy reach yield set to `0.5%` (20 views per 1,000 followers threshold for `MACRO_DOWNTURN` floor).
 * **VS Mode (Head-to-Head)**: Compare target account directly against a single selected entity (`👥 Peer Collective` benchmark or specific handle) with live delta badges (`+X%` / `-X%`) and active metric bar charts.
 * **ALL Mode (Full Cohort Matrix)**: Multi-bar distribution chart and sortable data matrix table comparing Target (Purple), Peer Collective (Blue), Peers, and Leaders across all raw metrics.
-* **Multi-Timeframe Engine (`1D`, `7D`, `14D`, `30D`, `3M`)**: Aggregates daily snapshot files across selected day windows (`1`, `7`, `14`, `30`, `90` days). Computes rolling medians for yield/engagement, total growth rate %, and average daily post volume.
+* **Multi-Timeframe Engine (`1D`, `7D`, `14D`, `30D`, `3M`)**: Aggregates tweets across snapshot files by actual `timestamp` date (not snapshot filename). Computes rolling medians for yield/engagement, total growth rate %, and average daily post volume. Missing metrics in bare backfill snapshots are computed on-the-fly.
 * **Metadata Tracking**: Tracks `total_data_days` (total unique snapshot files in `01-Snapshots/`), `time_range`, and `snapshots_counted`.
 
 ### 4. Ad Astra UI Analytics Dashboard (Pivot & Visual Builder)
@@ -63,11 +63,11 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: Beidou full pipeline automated with daily PM2 cron scheduler at 05:00 UTC. Dual-Account VS Mode, inline timeframe canvas selector, 90D historical backfill, and 5-timeframe engine (1D-3M) active across 2 cohorts (18 accounts).
+* **July 26, 2026**: Fixed 1D engine bug — now aggregates tweets by actual `timestamp` across snapshots instead of reading only the latest file. Added on-the-fly metric computation for backfill snapshots lacking `impression_yield_pct`/`engagement_rate_pct`. Server route now busts ESM module cache via `?v=mtime` so engine changes take effect without restart.
 * **July 26, 2026**: Built Flexible Dual-Account VS Mode (`Account A vs Account B`) with side-by-side colored bars (Purple vs Emerald Green), inline canvas timeframe pills (`1D`-`3M`), and dual-column drill-down inspector grid.
 * **July 26, 2026**: Completed 200-post 90-day historical backfill for `crypto-indonesia` (1,178 tweets across 89 snapshots) and `news-global` (779 tweets).
 * **July 26, 2026**: Optimized timeframe switching with instant disk recalculation (`skipScrape: true`) and exact filename date sorting (`snapshot-YYYY-MM-DD.json`).
 * **July 26, 2026**: Upgraded diagnostic engine with multi-timeframe aggregation (`1D`, `7D`, `14D`, `30D`, `3M` / 90 days), rolling medians, accurate 24h UTC post timestamp filtering, and `0.5%` yield floor threshold.
-* **July 26, 2026**: Added PM2 daily scheduler (`beidou_scheduler.mjs` + wrapper shell script) running at 05:00 UTC. Orchestrates snapshot batch → diagnostics for all cohorts → exit. Saved to PM2 dump for `pm2 resurrect`.
 
 
 (End of file — total 78 lines)

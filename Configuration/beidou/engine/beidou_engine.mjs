@@ -69,7 +69,6 @@ export function runCohortDiagnostics(cohortId, days = 1) {
     return { ok: false, error: 'No valid snapshot-*.json data files found' };
   }
 
-  // Determine time range label & filter snapshot files within date window
   const daysNum = parseInt(days, 10) || 1;
   let timeRangeLabel = '1D';
   if (daysNum >= 90) timeRangeLabel = '3M';
@@ -77,9 +76,15 @@ export function runCohortDiagnostics(cohortId, days = 1) {
   else if (daysNum >= 14) timeRangeLabel = '14D';
   else if (daysNum >= 7) timeRangeLabel = '7D';
 
-  const latestDateMs = snapshotFiles[0].dateMs;
-  const cutoffMs = daysNum > 1 ? latestDateMs - (daysNum * 24 * 3600 * 1000) : (latestDateMs - (24 * 3600 * 1000));
-  const targetSnapshots = daysNum === 1 ? [snapshotFiles[0]] : snapshotFiles.filter(f => f.dateMs >= cutoffMs);
+  // Tweet timestamp range: last N complete days ending at latest snapshot date
+  const latestSnapshotDate = snapshotFiles[0].dateStr;
+  const tweetEndMs = new Date(latestSnapshotDate + 'T00:00:00Z').getTime();
+  const tweetStartMs = tweetEndMs - (daysNum * 24 * 3600 * 1000);
+
+  // Read all snapshots that could contain tweets in target range.
+  // Buffer by 1 day: snapshot named D may hold tweets from D-1 (scheduler) or D (backfill).
+  const snapshotCutoffMs = tweetStartMs - (24 * 3600 * 1000);
+  const targetSnapshots = snapshotFiles.filter(f => f.dateMs >= snapshotCutoffMs);
   const snapshotsCounted = targetSnapshots.length;
 
   // Aggregate account data across selected snapshot files
@@ -106,10 +111,22 @@ export function runCohortDiagnostics(cohortId, days = 1) {
         // Last snapshot in array is oldest in window
         entry.oldestFollowers = acc.followers || 0;
 
-        // Merge tweets deduplicated by ID
+        // Merge tweets deduplicated by ID, filtered to target timestamp window
         if (Array.isArray(acc.tweets)) {
           acc.tweets.forEach(t => {
-            if (t.id && !entry.tweetsMap.has(t.id)) {
+            const inWindow = t.ts_epoch != null
+              ? t.ts_epoch >= tweetStartMs && t.ts_epoch < tweetEndMs
+              : true;
+            if (t.id && !entry.tweetsMap.has(t.id) && inWindow) {
+              // Backfill snapshots may lack computed metrics — compute on-the-fly
+              if (t.impression_yield_pct === undefined && acc.followers > 0) {
+                t.impression_yield_pct = parseFloat(((t.views || 0) / acc.followers * 100).toFixed(2));
+              }
+              if (t.engagement_rate_pct === undefined) {
+                const eng = (t.likes || 0) + (t.retweets || 0) + (t.replies || 0) + (t.bookmarks || 0);
+                const rate = (t.views || 0) > 0 ? (eng / t.views * 100) : 0;
+                t.engagement_rate_pct = parseFloat(rate.toFixed(2));
+              }
               entry.tweetsMap.set(t.id, t);
             }
           });
