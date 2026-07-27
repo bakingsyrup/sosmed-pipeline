@@ -11,15 +11,22 @@
 import { chromium } from 'playwright';
 import { parseArgs } from 'node:util';
 import { readFile, writeFile } from 'node:fs/promises';
+import { appendFileSync, writeFileSync } from 'node:fs';
 
 // ---------------------------------------------------------------------------
 // Config
 // ---------------------------------------------------------------------------
+const LOG_FILE       = '/tmp/beidou-scrape.log';
 const CDP_URL         = 'http://localhost:18800';
 const SCROLL_DELAY    = 1500;
 const MAX_SCROLLS     = 200;
 const STALE_LIMIT     = 10;
 const DELAY_BETWEEN   = 3000; // between accounts
+
+function logLine(msg) {
+  console.log(msg);
+  try { appendFileSync(LOG_FILE, msg + '\n'); } catch {}
+}
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -222,7 +229,7 @@ async function scrapeAccount(page, handle, opts) {
   if (Number.isFinite(POST_CAP)) tweets = tweets.slice(0, POST_CAP);
 
   const label = isTarget ? 'target' : `capped at ${POST_CAP}`;
-  console.log(`  @${handle}: ${tweets.length} tweets (${label}) | ${allTweets.size} raw, reason=${reason}, scrolls=${doneScrolls} (${followers} followers)`);
+  logLine(`  @${handle}: ${tweets.length} tweets (${label}) | ${allTweets.size} raw, reason=${reason}, scrolls=${doneScrolls} (${followers} followers)`);
   return { handle, followers, tweets, error: null };
 }
 
@@ -230,6 +237,9 @@ async function scrapeAccount(page, handle, opts) {
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
+  // Clear old log at start of every fetch
+  try { writeFileSync(LOG_FILE, ''); } catch {}
+
   let handles = [...positionals];
 
   if (values.accounts) {
