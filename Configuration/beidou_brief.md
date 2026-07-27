@@ -20,8 +20,9 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 * **Port**: 18800 (authenticated Chrome session — same browser as main X fetcher).
 * **Page Strategy**: Shared page (`conn.page`) from `cdp-connect.mjs`.
 * **Mutex**: `cdp-lock.mjs` with lock name `'18800-page'` — shared with main fetcher. File-based lock in `/tmp/opencode/` with PID-based auto-heal stale detection (dead PID or >5min old).
-* **Chrome Lifecycle**: Restarted every 5 accounts via `killChrome` + `connectCDP` to prevent renderer bloat degrading later accounts. Lock held across restarts.
-* **Scrolling**: `MAX_SCROLLS=200`, `STALE_LIMIT=10`, mouse wheel 800px/scroll with 1500ms delay. Boundary check per-scroll (ignores old pinned tweets from accumulated history).
+* **Chrome Lifecycle**: Single Chrome instance for all accounts. Lock held across entire session.
+* **Scrolling**: `MAX_SCROLLS=200`, `STALE_LIMIT=10`, mouse wheel 800px/scroll with 1500ms delay. Boundary check per-scroll (ignores old pinned tweets). Cap counts only in-window tweets, not raw total.
+* **Debug Log**: Auto-clearing at `/tmp/beidou-scrape.log` — wiped at fetch start, shows per-account raw count, stop reason, and scroll count.
 * **Lifecycle**: One-shot script. Must call `process.exit(0)` after completion — CDP WebSocket keeps event loop alive.
 
 ---
