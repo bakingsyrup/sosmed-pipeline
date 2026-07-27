@@ -68,19 +68,49 @@ export function getAllCohortHandles() {
 }
 
 /**
- * Check if today's snapshot already exists and contains valid data.
+ * Check which accounts in today's snapshot have too few tweets and need re-scraping.
+ * Returns { underCounted: string[], snapshotFile: string, data: array|null }
+ *   - null data means no snapshot exists yet
+ *   - empty underCounted means all accounts are fine → skip entire scrape
  */
-function hasValidSnapshotToday() {
+const TARGET_MIN_TWEETS = 30;
+const PEER_MIN_TWEETS   = 20;
+
+function findUnderCountedAccounts(targets, allHandles) {
   const todayStr = new Date().toISOString().split('T')[0];
   const snapshotFile = path.join(SNAPSHOTS_DIR, `snapshot-${todayStr}.json`);
-  if (!fs.existsSync(snapshotFile)) return false;
 
-  try {
-    const data = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
-    return Array.isArray(data) && data.length > 0 && data.some(a => a.followers > 0 && Array.isArray(a.tweets) && a.tweets.length > 0);
-  } catch {
-    return false;
+  if (!fs.existsSync(snapshotFile)) {
+    return { underCounted: allHandles, snapshotFile, data: null };
   }
+
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
+    if (!Array.isArray(data) || data.length === 0) {
+      return { underCounted: allHandles, snapshotFile, data: null };
+    }
+  } catch {
+    return { underCounted: allHandles, snapshotFile, data: null };
+  }
+
+  const snapshotMap = {};
+  for (const a of data) {
+    if (a.handle) snapshotMap[a.handle.toLowerCase()] = a;
+  }
+
+  const underCounted = [];
+  for (const h of allHandles) {
+    const existing = snapshotMap[h.toLowerCase()];
+    const minTweets = targets.has(h) ? TARGET_MIN_TWEETS : PEER_MIN_TWEETS;
+
+    if (!existing || existing.error || existing.tweets?.length < minTweets) {
+      underCounted.push(h);
+    }
+  }
+
+  console.log(`[beidou-snapshot] Snapshot exists — ${allHandles.length - underCounted.length}/${allHandles.length} accounts OK, ${underCounted.length} need re-scrape`);
+  return { underCounted, snapshotFile, data };
 }
 
 /**
@@ -130,13 +160,6 @@ export async function runSnapshotBatch(options = {}) {
     return { ok: false, error: 'No handles found' };
   }
 
-  // ── Early exit: skip if today already ran successfully ──
-  if (hasValidSnapshotToday()) {
-    console.log('[beidou-snapshot] Today\'s snapshot already exists with valid data. Skipping scrape.');
-    const todayStr = new Date().toISOString().split('T')[0];
-    return { ok: true, file: path.join(SNAPSHOTS_DIR, `snapshot-${todayStr}.json`), skipped: true };
-  }
-
   // ── Compute yesterday's UTC window ──
   const now = new Date();
   const yesterdayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 0, 0, 0));
@@ -147,19 +170,30 @@ export async function runSnapshotBatch(options = {}) {
   const todayStr = now.toISOString().split('T')[0];
   const snapshotFile = path.join(SNAPSHOTS_DIR, `snapshot-${todayStr}.json`);
 
+  // ── Check which accounts need re-scraping ──
+  const { underCounted, data: existingSnapshot } = findUnderCountedAccounts(targets, handles);
+
+  if (underCounted.length === 0 && existingSnapshot) {
+    console.log('[beidou-snapshot] All accounts have sufficient data. Skipping scrape.');
+    return { ok: true, file: snapshotFile, skipped: true };
+  }
+
+  const scrapeHandles = underCounted;
+  const isFullScrape = !existingSnapshot; // first-ever scrape needs dedup for all handles
   console.log(`[beidou-snapshot] Yesterday window: ${sinceISO} → ${untilISO}`);
-  console.log(`[beidou-snapshot] Starting batch scrape for ${handles.length} unique handles across ${cohorts.length} cohort(s)...`);
+  console.log(`[beidou-snapshot] Re-scraping ${scrapeHandles.length}/${handles.length} under-counted accounts${isFullScrape ? '' : ' (dedup disabled — fresh pass)'}...`);
 
-  // ── Build dedup indices and targets ──
-  const dedupMap = loadDedupIndices(handles);
-  const dedupCount = Object.values(dedupMap).reduce((sum, ids) => sum + ids.length, 0);
-  if (dedupCount > 0) console.log(`[beidou-snapshot] Loaded ${dedupCount} known tweet IDs across ${Object.keys(dedupMap).length} handles`);
-
-  const targetList = Array.from(targets).join(',');
-  if (targetList) console.log(`[beidou-snapshot] Target accounts (fetch all): ${targetList}`);
-
+  // Only pass dedup on the first-ever scrape. Re-scrapes skip dedup so deeper
+  // scrolling picks up tweets the first pass missed (X lazy-loads more when dedup
+  // doesn't remove already-seen content from the DOM).
   const dedupArgFile = path.join(SNAPSHOTS_DIR, `_dedup-work-${todayStr}.json`);
-  fs.writeFileSync(dedupArgFile, JSON.stringify(dedupMap), 'utf8');
+  const targetList = [...targets].filter(t => scrapeHandles.some(h => h.toLowerCase() === t.toLowerCase())).join(',');
+
+  if (isFullScrape) {
+    const dedupMap = loadDedupIndices(scrapeHandles);
+    fs.writeFileSync(dedupArgFile, JSON.stringify(dedupMap), 'utf8');
+  }
+  if (targetList) console.log(`[beidou-snapshot] Target accounts (fetch all): ${targetList}`);
 
   return new Promise((resolve) => {
     const args = [
@@ -167,10 +201,10 @@ export async function runSnapshotBatch(options = {}) {
       '--out', snapshotFile,
       '--since', sinceISO,
       '--until', untilISO,
-      '--dedup-file', dedupArgFile,
     ];
+    if (isFullScrape) args.push('--dedup-file', dedupArgFile);
     if (targetList) args.push('--targets', targetList);
-    args.push(...handles);
+    args.push(...scrapeHandles);
 
     const child = spawn('node', args, {
       cwd: BASE_DIR,
@@ -178,21 +212,26 @@ export async function runSnapshotBatch(options = {}) {
     });
 
     child.on('close', (code) => {
-      // Clean up temp dedup file
       try { fs.unlinkSync(dedupArgFile); } catch {}
 
       if (code === 0 && fs.existsSync(snapshotFile)) {
         try {
           const raw = fs.readFileSync(snapshotFile, 'utf-8');
-          const data = JSON.parse(raw);
-          const processed = processSnapshotMetrics(data);
+          const freshData = JSON.parse(raw);
+
+          // Merge fresh results into existing snapshot
+          const mergedData = existingSnapshot
+            ? mergeSnapshotData(existingSnapshot, freshData)
+            : freshData;
+
+          const processed = processSnapshotMetrics(mergedData);
           fs.writeFileSync(snapshotFile, JSON.stringify(processed, null, 2), 'utf-8');
 
           // Update dedup indices with newly scraped tweet IDs
-          updateDedupIndices(data);
+          updateDedupIndices(freshData);
 
-          console.log(`[beidou-snapshot] Successfully processed & saved snapshot: ${snapshotFile}`);
-          resolve({ ok: true, file: snapshotFile, accountsScraped: data.length });
+          console.log(`[beidou-snapshot] Successfully merged & saved snapshot: ${snapshotFile}`);
+          resolve({ ok: true, file: snapshotFile, accountsScraped: mergedData.length });
         } catch (err) {
           console.error('[beidou-snapshot] Error post-processing snapshot:', err.message);
           resolve({ ok: false, error: err.message });
@@ -203,6 +242,25 @@ export async function runSnapshotBatch(options = {}) {
       }
     });
   });
+}
+
+/**
+ * Merge freshly scraped accounts into an existing snapshot array.
+ * Existing accounts are kept; new/re-scraped accounts replace their old entries.
+ */
+function mergeSnapshotData(existing, fresh) {
+  const merged = new Map();
+  for (const a of existing) merged.set(a.handle.toLowerCase(), a);
+  for (const a of fresh) {
+    const old = merged.get(a.handle.toLowerCase());
+    const freshCount = a.tweets?.length || 0;
+    const oldCount = old?.tweets?.length || 0;
+    // Prefer fresh data unless old has more tweets AND no error
+    if (!old || old.error || freshCount > oldCount) {
+      merged.set(a.handle.toLowerCase(), a);
+    }
+  }
+  return Array.from(merged.values());
 }
 
 /**

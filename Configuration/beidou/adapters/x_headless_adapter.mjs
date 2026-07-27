@@ -17,8 +17,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 // ---------------------------------------------------------------------------
 const CDP_URL         = 'http://localhost:18800';
 const SCROLL_DELAY    = 1500;
-const MAX_SCROLLS     = 40;
-const STALE_LIMIT     = 3;
+const MAX_SCROLLS     = 200;
+const STALE_LIMIT     = 10;
 const DELAY_BETWEEN   = 3000; // between accounts
 
 // ---------------------------------------------------------------------------
@@ -33,13 +33,14 @@ const { values, positionals } = parseArgs({
     until:     { type: 'string' },
     'dedup-file': { type: 'string' },
     targets:   { type: 'string' },
+    'max-posts': { type: 'string' },
   },
   allowPositionals: true,
   strict: false,
 });
 
 if (values.help) {
-  console.log(`Usage: node x_headless_adapter.mjs [handles...] [--accounts file.json] [--out file.json] [--since ISO] [--until ISO] [--dedup-file path] [--targets handle1,handle2]`);
+  console.log(`Usage: node x_headless_adapter.mjs [handles...] [--accounts file.json] [--out file.json] [--since ISO] [--until ISO] [--dedup-file path] [--targets handle1,handle2] [--max-posts N]`);
   process.exit(0);
 }
 
@@ -128,14 +129,15 @@ async function extractTweetsFromPage(page, skipIds = []) {
 // Scrape one account
 // ---------------------------------------------------------------------------
 async function scrapeAccount(page, handle, opts) {
-  const { since, until, dedupIds, isTarget } = opts;
+  const { since, until, dedupIds, isTarget, maxPosts } = opts;
   const sinceMs = new Date(since).getTime();
   const untilMs = new Date(until).getTime();
   const skipIds = new Set(dedupIds || []);
-  const POST_CAP = isTarget ? Infinity : 20;
+  const POST_CAP = maxPosts !== undefined ? parseInt(maxPosts, 10) : (isTarget ? Infinity : 20);
+  const maxScrollsCount = maxPosts !== undefined ? Math.max(MAX_SCROLLS, Math.ceil(POST_CAP / 2)) : MAX_SCROLLS;
 
   const url = `https://x.com/${handle}`;
-  console.log(`  @${handle}: navigating...`);
+  console.log(`  @${handle}: navigating (max-posts target: ${POST_CAP})...`);
 
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await sleep(3000);
@@ -166,7 +168,7 @@ async function scrapeAccount(page, handle, opts) {
   let staleCount = 0;
   let boundaryPassed = false;
 
-  for (let scroll = 0; scroll < MAX_SCROLLS; scroll++) {
+  for (let scroll = 0; scroll < maxScrollsCount; scroll++) {
     const found = await extractTweetsFromPage(page, [...skipIds]);
     const prevSize = allTweets.size;
 
@@ -177,9 +179,15 @@ async function scrapeAccount(page, handle, opts) {
       }
     }
 
-    const timestamps = [...allTweets.values()].map(t => t.ts_epoch).filter(Boolean);
-    if (timestamps.length > 0 && Math.min(...timestamps) < sinceMs) {
-      boundaryPassed = true;
+    if (allTweets.size >= POST_CAP) {
+      break;
+    }
+
+    // Boundary: stop when the current scroll finds ONLY tweets older than the window.
+    // Ignores pinned/old tweets from earlier scrolls (they'd block the check forever).
+    if (scroll >= 3 && found.length > 0) {
+      const allThisScrollOlder = found.every(t => !t.ts_epoch || t.ts_epoch < sinceMs);
+      if (allThisScrollOlder) boundaryPassed = true;
     }
 
     const newCount = allTweets.size - prevSize;
@@ -201,7 +209,7 @@ async function scrapeAccount(page, handle, opts) {
     .filter(t => t.ts_epoch >= sinceMs && t.ts_epoch < untilMs)
     .sort((a, b) => (a.ts_epoch || 0) - (b.ts_epoch || 0));
 
-  if (!isTarget) tweets = tweets.slice(0, POST_CAP);
+  if (Number.isFinite(POST_CAP)) tweets = tweets.slice(0, POST_CAP);
 
   const label = isTarget ? 'target' : `capped at ${POST_CAP}`;
   console.log(`  @${handle}: ${tweets.length} tweets (${label}) scraped (${followers} followers)`);
@@ -231,6 +239,7 @@ async function main() {
 
   const since = values.since || new Date(Date.now() - 86400000).toISOString();
   const until = values.until || new Date().toISOString();
+  const maxPostsParam = values['max-posts'] ? parseInt(values['max-posts'], 10) : undefined;
 
   let dedupMap = {};
   if (values['dedup-file']) {
@@ -240,39 +249,59 @@ async function main() {
     } catch {}
   }
 
+  const rawTargets = values.targets || '';
+  const isTargetAll = rawTargets.trim().toLowerCase() === 'all';
   const targetSet = new Set(
-    (values.targets || '').split(',').map(h => h.trim().replace(/^@/, '').toLowerCase()).filter(Boolean)
+    rawTargets.split(',').map(h => h.trim().replace(/^@/, '').toLowerCase()).filter(Boolean)
   );
 
   console.log(`Scraping tweets for ${handles.length} account(s)...`);
   console.log(`  Window: ${since} → ${until}`);
-  console.log(`  Targets: ${[...targetSet].join(', ') || 'none'}`);
+  console.log(`  Targets: ${isTargetAll ? 'ALL ACCOUNTS' : [...targetSet].join(', ') || 'none'}`);
+  if (maxPostsParam) console.log(`  Max Posts Limit: ${maxPostsParam}`);
   if (Object.keys(dedupMap).length > 0) console.log(`  Dedup: ${Object.keys(dedupMap).length} handle(s) with history\n`);
 
   const { acquireLock, releaseLock } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-lock.mjs');
   const lock = await acquireLock('18800-page');
   let browser, page;
   try {
-    const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    const conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
+    const { connectCDP, killChrome } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
+    const { chromium } = await import('playwright');
+
+    let conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
     page = conn.page;
 
+    const BATCH_SIZE = 5;
     const results = [];
-    for (const handle of handles) {
+    for (let i = 0; i < handles.length; i++) {
+      const handle = handles[i];
+
+      // Restart Chrome every BATCH_SIZE accounts to keep it fast
+      if (i > 0 && i % BATCH_SIZE === 0) {
+        console.log(`  [batch] Restarting Chrome (${i}/${handles.length})...`);
+        try { await browser.close(); } catch {}
+        await killChrome(18800);
+        await new Promise(r => setTimeout(r, 2000)); // let port release
+        conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 1 });
+        browser = conn.browser;
+        page = conn.page;
+      }
+
       try {
-        const isTarget = targetSet.has(handle.toLowerCase());
+        const isTarget = isTargetAll || targetSet.has(handle.toLowerCase());
         const result = await scrapeAccount(page, handle, {
           since, until,
           dedupIds: dedupMap[handle] || [],
           isTarget,
+          maxPosts: maxPostsParam,
         });
         results.push(result);
       } catch (err) {
         console.log(`  @${handle}: ERROR — ${err.message}`);
         results.push({ handle, tweets: [], error: err.message });
       }
-      if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
+      if (i < handles.length - 1) await sleep(DELAY_BETWEEN);
     }
 
     await page.goto('about:blank').catch(() => {});
