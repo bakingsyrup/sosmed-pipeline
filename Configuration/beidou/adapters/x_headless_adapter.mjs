@@ -167,8 +167,11 @@ async function scrapeAccount(page, handle, opts) {
   const allTweets = new Map();
   let staleCount = 0;
   let boundaryPassed = false;
+  let doneScrolls = 0;
+  let inWindowCount = 0;
 
   for (let scroll = 0; scroll < maxScrollsCount; scroll++) {
+    doneScrolls = scroll + 1;
     const found = await extractTweetsFromPage(page, [...skipIds]);
     const prevSize = allTweets.size;
 
@@ -176,10 +179,11 @@ async function scrapeAccount(page, handle, opts) {
       if (!allTweets.has(t.id)) {
         allTweets.set(t.id, t);
         skipIds.add(t.id);
+        if (t.ts_epoch >= sinceMs && t.ts_epoch < untilMs) inWindowCount++;
       }
     }
 
-    if (allTweets.size >= POST_CAP) {
+    if (inWindowCount >= POST_CAP) {
       break;
     }
 
@@ -205,6 +209,12 @@ async function scrapeAccount(page, handle, opts) {
     await sleep(SCROLL_DELAY);
   }
 
+  const reason = inWindowCount >= POST_CAP ? 'cap-reached'
+    : boundaryPassed ? 'boundary'
+    : staleCount >= STALE_LIMIT ? 'stale-limit'
+    : scroll >= maxScrollsCount ? 'max-scrolls'
+    : 'unknown';
+
   let tweets = [...allTweets.values()]
     .filter(t => t.ts_epoch >= sinceMs && t.ts_epoch < untilMs)
     .sort((a, b) => (a.ts_epoch || 0) - (b.ts_epoch || 0));
@@ -212,7 +222,7 @@ async function scrapeAccount(page, handle, opts) {
   if (Number.isFinite(POST_CAP)) tweets = tweets.slice(0, POST_CAP);
 
   const label = isTarget ? 'target' : `capped at ${POST_CAP}`;
-  console.log(`  @${handle}: ${tweets.length} tweets (${label}) scraped (${followers} followers)`);
+  console.log(`  @${handle}: ${tweets.length} tweets (${label}) | ${allTweets.size} raw, reason=${reason}, scrolls=${doneScrolls} (${followers} followers)`);
   return { handle, followers, tweets, error: null };
 }
 
