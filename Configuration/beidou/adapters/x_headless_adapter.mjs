@@ -265,29 +265,13 @@ async function main() {
   const lock = await acquireLock('18800-page');
   let browser, page;
   try {
-    const { connectCDP, killChrome } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
-    const { chromium } = await import('playwright');
-
-    let conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
+    const { connectCDP } = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-connect.mjs');
+    const conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 2 });
     browser = conn.browser;
     page = conn.page;
 
-    const BATCH_SIZE = 5;
     const results = [];
-    for (let i = 0; i < handles.length; i++) {
-      const handle = handles[i];
-
-      // Restart Chrome every BATCH_SIZE accounts to keep it fast
-      if (i > 0 && i % BATCH_SIZE === 0) {
-        console.log(`  [batch] Restarting Chrome (${i}/${handles.length})...`);
-        try { await browser.close(); } catch {}
-        await killChrome(18800);
-        await new Promise(r => setTimeout(r, 2000)); // let port release
-        conn = await connectCDP(18800, { caller: 'beidou-adapter', maxRetries: 1 });
-        browser = conn.browser;
-        page = conn.page;
-      }
-
+    for (const handle of handles) {
       try {
         const isTarget = isTargetAll || targetSet.has(handle.toLowerCase());
         const result = await scrapeAccount(page, handle, {
@@ -301,7 +285,7 @@ async function main() {
         console.log(`  @${handle}: ERROR — ${err.message}`);
         results.push({ handle, tweets: [], error: err.message });
       }
-      if (i < handles.length - 1) await sleep(DELAY_BETWEEN);
+      if (handle !== handles[handles.length - 1]) await sleep(DELAY_BETWEEN);
     }
 
     await page.goto('about:blank').catch(() => {});
