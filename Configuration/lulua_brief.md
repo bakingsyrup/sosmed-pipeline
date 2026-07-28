@@ -93,7 +93,9 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Steps 1, 2, and 3 fully built, live, and integrated into Ad Astra Web UI with real-time MOC index management.
+* **Status**: Steps 1, 2, and 3 fully built, live, multi-platform enabled (X, IG, YT, TikTok), and integrated into Ad Astra Web UI with real-time MOC index management.
+* **July 29, 2026**: Deployed **Multi-Platform UI Selector** (`𝕏 X`, `📸 Instagram`, `▶️ YouTube`, `🎵 TikTok`) in `SosmedCenter.jsx` connecting dynamically to Lulua's 4-platform tactical audit & wireframe engine.
+* **July 29, 2026**: Enforced **Evidentiary Citation & Bio Accuracy Standard** in `lulua_account_auditor.mjs` (`🎯 Lulua's Audit Finding:`, `🔗 Direct Evidence Link:`, `📊 Empirical Metrics:`, `🧠 Strategic Proof:`), strictly separating literal profile bio quotes from external web search research.
 * **July 28, 2026**: Deployed **Ad Astra Web UI 4-Subtab Navigation** (`X Posts` | `Intel` | `Style Bank` | `Account Bank`) with larger text sizes (+2 font steps), search filtering, direct `🔗 X Profile` links, and one-click file deletion.
 * **July 28, 2026**: Deployed **Automated MOC Index Manager** (`lulua_moc_manager.mjs`) maintaining real-time Markdown index tables `00-Style-Bank-MOC.md` and `00-Account-Audits-MOC.md`.
 * **July 28, 2026**: Completed **Step 3 (Obsidian Note Watcher Daemon & Option B Control Card)**: Created `lulua_note_watcher.mjs`, `lulua_account_auditor.mjs`, and `lulua_post_dissecter.mjs` handling 5D audits and 4-part post dissections via UI or Obsidian inbox notes.
