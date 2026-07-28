@@ -58,9 +58,10 @@ export async function runAccountAudit(rawHandle, platform = 'x', monetizationNot
         beidouMetrics = accountList.find(a => (a.handle || '').toLowerCase() === cleanHandle.toLowerCase());
 
         if (beidouMetrics && Array.isArray(beidouMetrics.tweets)) {
-          const sortedTweets = [...beidouMetrics.tweets].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 5);
+          const originalTweets = beidouMetrics.tweets.filter(t => !t.is_retweet && (t.author || cleanHandle).toLowerCase() === cleanHandle.toLowerCase());
+          const sortedTweets = originalTweets.sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 5);
           topOutlierTweetsContext = sortedTweets.map((t, i) => `
-- Top Post #${i+1}: ${t.url || `https://x.com/${cleanHandle}/status/${t.id}`}
+- Top Original Post #${i+1}: ${t.url || `https://x.com/${cleanHandle}/status/${t.id}`}
   - Metrics: ${t.views?.toLocaleString() || 0} views | ${t.likes?.toLocaleString() || 0} likes | ${t.retweets || 0} retweets | ${t.replies || 0} replies
   - Text Snippet: "${(t.text || '').replace(/\n/g, ' ').slice(0, 150)}..."
 `).join('\n');
@@ -75,21 +76,23 @@ export async function runAccountAudit(rawHandle, platform = 'x', monetizationNot
 - Target Handle: @${cleanHandle}
 - Platform: ${platform.toUpperCase()}
 - Followers: ${beidouMetrics.followers?.toLocaleString() || 'Unknown'}
-- Scraped Posts Window: ${(beidouMetrics.tweets || []).length} posts
+- Scraped Original Posts Window: ${(beidouMetrics.tweets || []).length} posts
 
-Top Mined Outlier Posts for Evidentiary Citations:
+Top Mined Original Outlier Posts for Evidentiary Citations:
 ${topOutlierTweetsContext || 'No snapshot posts available; perform live web search for recent posts.'}
 ` : `- Target Handle: @${cleanHandle}\n- Followers & Baseline Metrics: Query via web search for @${cleanHandle} on ${platform}.`;
 
   const systemInstruction = `You are Lulua, the Strategy & Account Audit Engine for Iroi media business.
 Your task is to conduct an in-depth 5-Dimension Account Audit for @${cleanHandle} (${platform.toUpperCase()}).
 
-CRITICAL MANDATE — STRICT EVIDENTIARY CITATION STANDARD:
-You MUST NOT make any vague or unverified statements. Every single strategic conclusion in every section MUST be explicitly backed by:
-1. **🎯 Lulua's Audit Finding:** Clear, unambiguous strategic finding deduced by Lulua.
-2. **🔗 Direct Evidence Link:** The exact URL (X post URL, Notion portfolio link, YouTube video URL, newsletter signup page, or X profile URL) that proves the finding.
-3. **📊 Empirical Data / Metrics:** (Where applicable) exact view count, likes, retweets, or follower numbers.
-4. **🧠 Strategic Proof & Reasoning:** A short 1-2 sentence explanation of WHY that specific link and data proves Lulua's finding.
+CRITICAL ANTI-HALLUCINATION & EVIDENTIARY RULES:
+1. **Zero Hallucinated Bio Quotes:** Do NOT fabricate, infer, or guess profile bio text. Quoted profile text MUST be the exact, literal string present on the target's live profile. Never claim a bio contains specific words, titles, or links unless they literally appear in the target profile text.
+2. **Original Posts Only:** Only cite original posts written by @${cleanHandle}. Do NOT attribute third-party retweets or external creator posts to @${cleanHandle}.
+3. **Strict Citation Standard:** Every single strategic conclusion MUST be explicitly backed by:
+   - **🎯 Lulua's Audit Finding:** Clear strategic conclusion.
+   - **🔗 Direct Evidence Link:** Exact URL (X post URL, profile URL, bio link, Notion page).
+   - **📊 Empirical Data / Metrics:** Exact view count, likes, retweets, replies.
+   - **🧠 Strategic Proof & Reasoning:** Short explanation connecting link & data to the finding.
 
 REQUIRED 5-DIMENSION REPORT STRUCTURE:
 
