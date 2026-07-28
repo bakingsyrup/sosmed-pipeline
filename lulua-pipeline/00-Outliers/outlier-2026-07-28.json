@@ -1,0 +1,146 @@
+[
+  {
+    "handle": "setyamickala",
+    "tweet_id": "2081581321273667954",
+    "url": "https://x.com/setyamickala/status/2081581321273667954",
+    "text": "Just messing around by adding a new yield for 2 months, right when the airdrop is quiet",
+    "media": {
+      "type": "text_only",
+      "label": "📝 Post Text",
+      "has_media": false
+    },
+    "timestamp": "2026-07-27T03:23:55.000Z",
+    "metrics": {
+      "views": 69324,
+      "likes": 318,
+      "bookmarks": 0,
+      "replies": 63,
+      "retweets": 5,
+      "followers": 51500,
+      "minViewsFloor": 10300
+    },
+    "ratios": {
+      "likeRatio": 0.0046,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.0009,
+      "retweetRatio": 0.0001,
+      "viewYield": 1.35,
+      "yieldVsMedian": 1
+    },
+    "triggers": {
+      "highYield": true,
+      "highUtility": false,
+      "highDebate": false,
+      "highBroadcast": false,
+      "highAppreciation": false
+    }
+  },
+  {
+    "handle": "satyaXBT",
+    "tweet_id": "2081709026883371417",
+    "url": "https://x.com/satyaXBT/status/2081709026883371417",
+    "text": "admin, can I get permission to be a speaker at Coinfest Asia later, yeah ges?\n\nThe yap and earn session slots are already full btw, but we can meet up in another session later.. see u there!",
+    "media": {
+      "type": "text_only",
+      "label": "📝 Post Text",
+      "has_media": false
+    },
+    "timestamp": "2026-07-27T11:51:22.000Z",
+    "metrics": {
+      "views": 8037,
+      "likes": 167,
+      "bookmarks": 0,
+      "replies": 83,
+      "retweets": 4,
+      "followers": 33600,
+      "minViewsFloor": 6720
+    },
+    "ratios": {
+      "likeRatio": 0.0208,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.0103,
+      "retweetRatio": 0.0005,
+      "viewYield": 0.24,
+      "yieldVsMedian": 1.65
+    },
+    "triggers": {
+      "highYield": false,
+      "highUtility": false,
+      "highDebate": true,
+      "highBroadcast": false,
+      "highAppreciation": true
+    }
+  },
+  {
+    "handle": "satyaXBT",
+    "tweet_id": "2081725743814578505",
+    "url": "https://x.com/satyaXBT/status/2081725743814578505",
+    "text": "An old proverb once said:\n\nIf you want to seek the deepest knowledge on this earth, log in and explore Fesnuk\n\nBut swear, dude, on Fesnuk whatever you wanna look for—AI knowledge, vibecoding, tech, whatever random stuff—and the content is all from SEASONED EXPERTS, the",
+    "media": {
+      "type": "text_only",
+      "label": "📝 Post Text",
+      "has_media": false
+    },
+    "timestamp": "2026-07-27T12:57:48.000Z",
+    "metrics": {
+      "views": 13397,
+      "likes": 471,
+      "bookmarks": 0,
+      "replies": 25,
+      "retweets": 92,
+      "followers": 33600,
+      "minViewsFloor": 6720
+    },
+    "ratios": {
+      "likeRatio": 0.0352,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.0019,
+      "retweetRatio": 0.0069,
+      "viewYield": 0.4,
+      "yieldVsMedian": 2.75
+    },
+    "triggers": {
+      "highYield": true,
+      "highUtility": false,
+      "highDebate": false,
+      "highBroadcast": true,
+      "highAppreciation": true
+    }
+  },
+  {
+    "handle": "coinbureau",
+    "tweet_id": "2081732572858757178",
+    "url": "https://x.com/coinbureau/status/2081732572858757178",
+    "text": "CHARLES HOSKINSON: “I’m so tired of talking about Ethereum.”\n\nThe Cardano founder angrily shut down a reporter from The Block who asked about Ethereum’s founding.\n\n“You’re lazy. Do some basic f***ing research.”\n\n\"It's been 12 years and I've answered the question 400 times in",
+    "media": {
+      "type": "text_only",
+      "label": "📝 Post Text",
+      "has_media": false
+    },
+    "timestamp": "2026-07-27T13:24:56.000Z",
+    "metrics": {
+      "views": 249015,
+      "likes": 1006,
+      "bookmarks": 0,
+      "replies": 229,
+      "retweets": 114,
+      "followers": 1100000,
+      "minViewsFloor": 110000
+    },
+    "ratios": {
+      "likeRatio": 0.004,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.0009,
+      "retweetRatio": 0.0005,
+      "viewYield": 0.23,
+      "yieldVsMedian": 7.07
+    },
+    "triggers": {
+      "highYield": true,
+      "highUtility": false,
+      "highDebate": false,
+      "highBroadcast": false,
+      "highAppreciation": false
+    }
+  }
+]

@@ -1,5 +1,5 @@
 # Shinku AI Briefing (`shinku_brief.md`)
-**Last Updated:** July 24, 2026
+**Last Updated:** July 26, 2026
 
 This document serves as the high-density technical blueprint and session context for **Shinku** (Obsidian-driven Social Media, Video & Glossary Drafting Pipeline).
 
@@ -32,7 +32,7 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 5. **[prompts/research_prompt.mjs](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/prompts/research_prompt.mjs)**: Research & search grounding prompt.
 6. **[prompts/drafting_prompt.mjs](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/prompts/drafting_prompt.mjs)**: Standard & Morning Briefing drafting prompts.
 7. **[prompts/video_skeleton_prompt.mjs](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/prompts/video_skeleton_prompt.mjs)**: Video skeleton drafting prompts.
-8. **Style Guides**: [x_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md) (Mario Style), [how_to_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/how_to_style_guide.md), [video_skeleton_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/video_skeleton_style_guide.md).
+8. **Style Guides**: [x_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md) (Pragmatic Analyst Style), [how_to_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/how_to_style_guide.md), [video_skeleton_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/video_skeleton_style_guide.md).
 
 ---
 
@@ -58,8 +58,11 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 * Counts `<!-- Date: YYYY-MM-DD -->` in `06-Glossaries/*-EN.md`.
 * Bypasses glossary stage if daily count `>= 6`.
 
-### 5. Vocabulary & Style Rules (Mario Style)
-* **Mario Style**: Visual badges on Line 1 (`🇺🇸`, `🚨`), dynamic 1–3 sentence blocks, 3 pipeline archetypes, menu of 10 Mid-Post Turns, output rationale tag (`🎯 Selected Archetype`), separated EN/ID copywriting engines with contextual vocabulary rules, and 1-sentence macro thesis/ironic closings (no mandatory victim blocks).
+### 5. Vocabulary & Style Rules (Pragmatic Analyst Style)
+* **Voice & Tone**: Pragmatic macroeconomist and tech analyst. Objective, realist, and counter-intuitive narrative piercing mainstream hype with dry, cynical closings.
+* **Formatting & Visual Layout**: 1 sentence per block separated by double line breaks (`\n\n`) (max 33 words per sentence). Minimal emoji usage (placed sparingly at post ends; no Line 1 badge emojis).
+* **Headline Formatting**: Bold title in strict **Sentence Case** (capitalize first word and proper nouns only; no Title Case).
+* **Linguistic Simplification**: Use Indonesian root verbs (*kata dasar*) by stripping active prefixes (*me-*, *meng-*). Strip filler words. Keep English business/tech terms untranslated (*market share, margin, ETF, AUM*). Use *US* (never *AS*) and *Korsel*.
 * **No "101" Synonym**: Use *basics, foundation, essentials, fundamentals* (ID: *dasar-dasar, fondasi, esensi*).
 * **Definition Prefix**: First sentence of **What it is?** (EN) / **Apa itu?** (ID) follows `[Term] is [Def]` / `[Term] adalah [Def]`.
 

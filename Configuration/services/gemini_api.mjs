@@ -9,7 +9,7 @@ export async function callGemini(prompt, systemInstruction, enableSearch = false
   if (!apiKey) {
     throw new Error('GEMINI_API_KEY is not set. Please set it in your environment or in a .env file.');
   }
-  const model = modelName || process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const model = modelName || process.env.GEMINI_RESEARCH_MODEL || process.env.GEMINI_MODEL || 'gemini-2.0-flash';
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const payload = {
