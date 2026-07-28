@@ -56,9 +56,16 @@ export async function runAccountAudit(rawHandle, platform = 'x', monetizationNot
         const snapshotData = JSON.parse(fs.readFileSync(path.join(SNAPSHOT_DIR, files[0]), 'utf8'));
         const accountList = Array.isArray(snapshotData) ? snapshotData : Object.values(snapshotData);
         beidouMetrics = accountList.find(a => (a.handle || '').toLowerCase() === cleanHandle.toLowerCase());
-
         if (beidouMetrics && Array.isArray(beidouMetrics.tweets)) {
-          const originalTweets = beidouMetrics.tweets.filter(t => !t.is_retweet && (t.author || cleanHandle).toLowerCase() === cleanHandle.toLowerCase());
+          const originalTweets = beidouMetrics.tweets.filter(t => {
+            if (t.is_retweet) return false;
+            if (t.author && t.author.toLowerCase() !== cleanHandle.toLowerCase()) return false;
+            if (t.url) {
+              const match = t.url.match(/(?:x|twitter)\.com\/([^\/]+)\/status/i);
+              if (match && match[1].toLowerCase() !== cleanHandle.toLowerCase()) return false;
+            }
+            return true;
+          });
           const sortedTweets = originalTweets.sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 5);
           topOutlierTweetsContext = sortedTweets.map((t, i) => `
 - Top Original Post #${i+1}: ${t.url || `https://x.com/${cleanHandle}/status/${t.id}`}
@@ -72,25 +79,30 @@ export async function runAccountAudit(rawHandle, platform = 'x', monetizationNot
     }
   }
 
+  // Extract explicit bio text if provided in monetizationNotes or default
+  const bioMatch = monetizationNotes.match(/Bio(?: Text)?:?\s*([^|\n]+)/i);
+  const explicitBioText = beidouMetrics?.bio || (bioMatch ? bioMatch[1].trim() : '');
+
   const metricsContext = beidouMetrics ? `
 - Target Handle: @${cleanHandle}
 - Platform: ${platform.toUpperCase()}
 - Followers: ${beidouMetrics.followers?.toLocaleString() || 'Unknown'}
 - Scraped Original Posts Window: ${(beidouMetrics.tweets || []).length} posts
+${explicitBioText ? `- Exact Scraped Live Bio Text: "${explicitBioText}"` : ''}
 
 Top Mined Original Outlier Posts for Evidentiary Citations:
-${topOutlierTweetsContext || 'No snapshot posts available; perform live web search for recent posts.'}
+${topOutlierTweetsContext || 'No snapshot posts available; perform live web search for recent original posts.'}
 ` : `- Target Handle: @${cleanHandle}\n- Followers & Baseline Metrics: Query via web search for @${cleanHandle} on ${platform}.`;
 
   const systemInstruction = `You are Lulua, the Strategy & Account Audit Engine for Iroi media business.
 Your task is to conduct an in-depth 5-Dimension Account Audit for @${cleanHandle} (${platform.toUpperCase()}).
 
 CRITICAL ANTI-HALLUCINATION & EVIDENTIARY RULES:
-1. **Zero Hallucinated Bio Quotes:** Do NOT fabricate, infer, or guess profile bio text. Quoted profile text MUST be the exact, literal string present on the target's live profile. Never claim a bio contains specific words, titles, or links unless they literally appear in the target profile text.
-2. **Original Posts Only:** Only cite original posts written by @${cleanHandle}. Do NOT attribute third-party retweets or external creator posts to @${cleanHandle}.
+1. **Zero Hallucinated Bio Quotes:** Do NOT fabricate, infer, or guess profile bio text. You MUST ONLY quote words that literally exist in the provided profile bio. Never claim the bio contains titles like "Founder @airdropfinds" or "Build @CVC_Ventures" unless those exact words appear in the provided profile bio text.
+2. **Original Posts Only — NO Third-Party Retweets:** You are STRICTLY FORBIDDEN from citing posts from @Kimi_Moonshot or any handle other than @${cleanHandle}. All cited posts MUST be original posts created by @${cleanHandle}.
 3. **Strict Citation Standard:** Every single strategic conclusion MUST be explicitly backed by:
    - **🎯 Lulua's Audit Finding:** Clear strategic conclusion.
-   - **🔗 Direct Evidence Link:** Exact URL (X post URL, profile URL, bio link, Notion page).
+   - **🔗 Direct Evidence Link:** Exact URL of @${cleanHandle}'s original post, profile URL, or bio link.
    - **📊 Empirical Data / Metrics:** Exact view count, likes, retweets, replies.
    - **🧠 Strategic Proof & Reasoning:** Short explanation connecting link & data to the finding.
 
