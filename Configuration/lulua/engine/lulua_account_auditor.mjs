@@ -158,6 +158,8 @@ Please generate the complete 5-Dimension Dissection Report for @${cleanHandle}.`
   try {
     const rawRes = await callGemini(userPrompt, systemInstruction, true);
     reportMarkdown = rawRes.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    // Sanitize and remove Google Vertex grounding redirect URLs that break in browsers
+    reportMarkdown = reportMarkdown.replace(/\[([^\]]+)\]\(https?:\/\/vertexaisearch\.cloud\.google\.com\/grounding-api-redirect\/[^\)]+\)/g, '$1');
   } catch (err) {
     console.error('⚠️ Gemini call error during audit, falling back to structured template:', err.message);
     reportMarkdown = `# 🏛️ Lulua Account Audit: @${cleanHandle} (${platform.toUpperCase()})
