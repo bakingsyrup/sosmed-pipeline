@@ -9,4 +9,4 @@ This index automatically organizes all 5-Dimension Competitor Account Audits.
 
 | Account Handle | Platform | Audit Date | Executive Summary | File Link |
 | :--- | :--- | :--- | :--- | :--- |
-| **@satyaXBT** | X | July 29, 2026 | @satyaXBT is a prominent Web3 community leader and content creator based in Indo... | [[account-x-satyaXBT]] |
+| **@satyaXBT** | X | July 29, 2026 | @satyaXBT is a highly influential Indonesian Web3 creator and community leader w... | [[account-x-satyaXBT]] |

@@ -85,11 +85,11 @@ ${topOutlierTweetsContext || 'No snapshot posts available; perform live web sear
 Your task is to conduct an in-depth 5-Dimension Account Audit for @${cleanHandle} (${platform.toUpperCase()}).
 
 CRITICAL MANDATE — STRICT EVIDENTIARY CITATION STANDARD:
-You MUST NOT make any vague or unverified claims. Every single claim, conclusion, or strategic assessment in every section MUST be explicitly backed by:
-1. **Claim:** Clear statement of the finding.
-2. **🔗 Direct Evidence Link:** The exact URL (X post URL, Notion portfolio link, YouTube video URL, newsletter signup page, or X profile URL) that proves the claim.
+You MUST NOT make any vague or unverified statements. Every single strategic conclusion in every section MUST be explicitly backed by:
+1. **🎯 Lulua's Audit Finding:** Clear, unambiguous strategic finding deduced by Lulua.
+2. **🔗 Direct Evidence Link:** The exact URL (X post URL, Notion portfolio link, YouTube video URL, newsletter signup page, or X profile URL) that proves the finding.
 3. **📊 Empirical Data / Metrics:** (Where applicable) exact view count, likes, retweets, or follower numbers.
-4. **🧠 Deductive Reasoning:** A short 1-2 sentence explanation of WHY that specific link and data proves the claim.
+4. **🧠 Strategic Proof & Reasoning:** A short 1-2 sentence explanation of WHY that specific link and data proves Lulua's finding.
 
 REQUIRED 5-DIMENSION REPORT STRUCTURE:
 
@@ -102,16 +102,16 @@ REQUIRED 5-DIMENSION REPORT STRUCTURE:
 (High-level synthesis of brand positioning, persona, and core monetization model with citations)
 
 ## Dimension 1: Positioning & Bio Authority
-- **Value Proposition Claim:** ...
+- **🎯 Lulua's Audit Finding:** ...
 - **🔗 Direct Evidence Link:** ...
-- **🧠 Deductive Reasoning:** ...
+- **🧠 Strategic Proof & Reasoning:** ...
 - **Credibility Markers:** ...
 
 ## Dimension 2: Content Ecosystem Pillars
 - **3-Pillar Ratio Breakdown:** (Authority vs Reach vs Trust)
-  - **Authority Pillar:** Claim + 🔗 Post Link + 📊 Metrics + 🧠 Reasoning
-  - **Reach Pillar:** Claim + 🔗 Post Link + 📊 Metrics + 🧠 Reasoning
-  - **Trust Pillar:** Claim + 🔗 Post Link + 📊 Metrics + 🧠 Reasoning
+  - **Authority Pillar:** 🎯 Lulua's Audit Finding + 🔗 Post Link + 📊 Metrics + 🧠 Strategic Proof & Reasoning
+  - **Reach Pillar:** 🎯 Lulua's Audit Finding + 🔗 Post Link + 📊 Metrics + 🧠 Strategic Proof & Reasoning
+  - **Trust Pillar:** 🎯 Lulua's Audit Finding + 🔗 Post Link + 📊 Metrics + 🧠 Strategic Proof & Reasoning
 
 ## Dimension 3: Growth Catalyst & Outlier Engine
 - **Virality Spikes & Outlier Mechanics:** Cite top outlier post URLs provided in context with exact view/retweet counts and explain why they went viral.
