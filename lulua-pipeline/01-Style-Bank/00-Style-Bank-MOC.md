@@ -9,8 +9,8 @@ This index automatically organizes all saved post wireframe templates.
 
 | Style Name | Psychological Lever | Target Metric | Source Post | File Link |
 | :--- | :--- | :--- | :--- | :--- |
-| **market_insider_intuition** | **Primary Driver:** **Utility & Pride.** | s: | N/A | [[style-market_thesis_snack]] |
-| **open_source_wealth_engine** | **Primary Driver:** **Utility + FOMO.** | High Bookmarks and Shares (Utility-driven). | N/A | [[style-open_source_wealth_engine]] |
-| **proverbial_endorsement** |  | s: | N/A | [[style-proverbial_endorsement]] |
-| **technical_dca_thesis** | **Primary Driver:** **Utility (Authority/Expertise).** | s: | N/A | [[style-technical_dca_thesis]] |
-| **algorithmic_reveal** |  | s: | N/A | [[style-wealth_reveal]] |
+| **Article_StepByStepSystem_HighUtility** |  | s: | N/A | [[style-Article_StepByStepSystem_HighUtility]] |
+| **Short_InvestmentThesis_QuoteProof** | **Primary Driver:** **Utility (Authority/Expertise).** | s: | N/A | [[style-Short_InvestmentThesis_QuoteProof]] |
+| **Short_MarketTake_QuoteProof** | **Primary Driver:** **Utility & Pride.** | s: | N/A | [[style-Short_MarketTake_QuoteProof]] |
+| **Short_SocialProof_Endorsement** |  | s: | N/A | [[style-Short_SocialProof_Endorsement]] |
+| **Short_ToolGiveaway_LeadMagnet** | **Primary Driver:** **Utility + FOMO.** | High Bookmarks and Shares (Utility-driven). | N/A | [[style-Short_ToolGiveaway_LeadMagnet]] |

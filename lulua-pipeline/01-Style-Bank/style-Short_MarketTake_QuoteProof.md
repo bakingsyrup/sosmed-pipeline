@@ -1,7 +1,7 @@
 ---
-style_name: "market_insider_intuition"
+style_name: "Short_MarketTake_QuoteProof"
 format: "long_form_article"
-promo_post: "[[style-technical_dca_thesis]]"
+promo_post: "[[style-Short_InvestmentThesis_QuoteProof]]"
 ---
 
 ## 📌 Source Reference & Original Content

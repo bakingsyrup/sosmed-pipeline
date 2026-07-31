@@ -1,7 +1,7 @@
 ---
-style_name: "algorithmic_reveal"
+style_name: "Article_StepByStepSystem_HighUtility"
 format: "long_form_article"
-promo_post: "[[style-open_source_wealth_engine]]"
+promo_post: "[[style-Short_ToolGiveaway_LeadMagnet]]"
 ---
 
 ## 📌 Source Reference & Original Content

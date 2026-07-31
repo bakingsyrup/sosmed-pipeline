@@ -1,7 +1,7 @@
 ---
-style_name: "open_source_wealth_engine"
+style_name: "Short_ToolGiveaway_LeadMagnet"
 format: "short_form_launch"
-attached_article: "[[style-wealth_reveal]]"
+attached_article: "[[style-Article_StepByStepSystem_HighUtility]]"
 ---
 
 ## 📌 Source Reference & Original Content

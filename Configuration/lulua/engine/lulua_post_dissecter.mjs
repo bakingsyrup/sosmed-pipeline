@@ -40,7 +40,7 @@ Part 2: Psychological Lever (Primary emotional driver: Utility, Contrarian, FOMO
 Part 3: Micro-Rhythm & Pacing Rules (Hook length caps, line-break density, sentence caps, thread/section progression).
 Part 4: Plug-and-Play Wireframe Blueprint (Bracketed parameter slots: [Hook], [Setup], [Body], [Closing/CTA]).
 
-Format output cleanly as a standalone Style Bank Markdown file. Include a short 1-word descriptive style name in frontmatter (e.g. style_name: "dialogue_breakdown").`;
+Format output cleanly as a standalone Style Bank Markdown file. Generate a descriptive style_name in frontmatter following the 3-part schema: [Format]_[HookFramework]_[ConversionDriver] using PascalCase for multi-word phrases in each part, separated by single underscores (e.g. style_name: "Short_ToolGiveaway_LeadMagnet" or "Article_StepByStepSystem_HighUtility").`;
 
   const userPrompt = `Target Social Media Content to Dissect (${formatType}):
 ${payloadText}
@@ -58,8 +58,9 @@ Please dissect this content and generate the complete 4-Part Wireframe Schema fo
     const lines = payloadText.split('\n').filter(l => l.trim().length > 0);
     const hook = lines[0] || payloadText;
 
+    const fallbackPrefix = formatType === 'long_form_article' ? 'Article' : 'Short';
     styleMarkdown = `---
-style_name: "${formatType}_wireframe"
+style_name: "${fallbackPrefix}_GenericWireframe_ReachYield"
 platform: "${platform}"
 ---
 
@@ -84,7 +85,17 @@ platform: "${platform}"
   }
 
   const match = styleMarkdown.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
-  const styleName = match ? match[1] : `${formatType}_${Date.now()}`;
+  let styleName = match ? match[1] : `${formatType}_${Date.now()}`;
+
+  // Ensure unique style name handling (_v2, _v3, etc. if collision)
+  let counter = 2;
+  const cleanBase = styleName.replace(/_v\d+$/, '');
+  let testFile = path.join(STYLE_BANK_DIR, `style-${styleName}.md`);
+  while (fs.existsSync(testFile)) {
+    styleName = `${cleanBase}_v${counter}`;
+    testFile = path.join(STYLE_BANK_DIR, `style-${styleName}.md`);
+    counter++;
+  }
 
   // Strip existing frontmatter from styleMarkdown to rebuild pristine frontmatter at line 1
   let bodyMarkdown = styleMarkdown.replace(/^---[\s\S]*?---\n*/, '').trim();

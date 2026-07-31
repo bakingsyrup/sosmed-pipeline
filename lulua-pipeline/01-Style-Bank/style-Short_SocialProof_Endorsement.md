@@ -1,5 +1,5 @@
 ---
-style_name: "proverbial_endorsement"
+style_name: "Short_SocialProof_Endorsement"
 format: "social_post"
 ---
 

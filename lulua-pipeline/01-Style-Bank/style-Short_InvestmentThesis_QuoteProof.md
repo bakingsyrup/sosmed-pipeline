@@ -1,7 +1,7 @@
 ---
-style_name: "technical_dca_thesis"
+style_name: "Short_InvestmentThesis_QuoteProof"
 format: "short_form_launch"
-attached_article: "[[style-market_thesis_snack]]"
+attached_article: "[[style-Short_MarketTake_QuoteProof]]"
 ---
 
 ## 📌 Source Reference & Original Content

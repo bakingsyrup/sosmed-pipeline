@@ -12,7 +12,7 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 ### Folder Pipeline Structure (`lulua-pipeline/` & `Configuration/lulua/`)
 * **`lulua-pipeline/00-Inbox/`**: Input directory for Obsidian note watching (`_NEW_POST_DISSECTION.md` & `_NEW_ACCOUNT_AUDIT.md`).
 * **`lulua-pipeline/00-Outliers/`**: Scraped high-yield competitor posts, ratio signatures, account dissection blueprints (`account-[platform]-[handle].md`), and cached monthly playbooks (`playbook-[cohort].json`).
-* **`lulua-pipeline/01-Style-Bank/`**: Modular post structure templates formatted via 4-part wireframe schema (`style-[name].md`).
+* **`lulua-pipeline/01-Style-Bank/`**: Modular post structure templates formatted via 4-part wireframe schema (`style-[Format]_[HookFramework]_[ConversionDriver]_[vN].md`).
 * **`lulua-pipeline/02-Memory/`**: Persistent memory logs (`memory_log.md` with top 7 rolling window).
 * **`lulua-pipeline/02-Proposals/`**: Tier 2 permission proposals and platform expansion blueprints.
 * **`lulua-pipeline/03-Briefings/`**: Daily executive briefing reports for the human operator.
@@ -88,12 +88,13 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
      - **Dimension 5 (Funnel Architecture & Revenue Matrix)**: Lead magnet mechanics (newsletters/giveaways) & back-end monetization model (courses, SaaS, community, sponsorships).
    - **Long-Form & External Media Extraction**: X Articles & external blog links are parsed for core frameworks; viral long-form text cached in `lulua-pipeline/00-Outliers/references/[handle]_[slug].md`.
    - **Multimodal Visual Blueprinting**: Visual hooks & image preview URLs embedded in report; raw MP4/PNG files excluded to prevent storage bloat.
-   - **Output Artifact**: Saved to `lulua-pipeline/00-Outliers/account-[platform]-[handle].md`.
+   - **Output Artifact**: Saved to `lulua-pipeline/01-Style-Bank/`.
 
 ---
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: Steps 1, 2, and 3 fully built, live, multi-platform enabled (X, IG, YT, TikTok), and integrated into Ad Astra Web UI with real-time MOC index management.
+* **August 1, 2026**: Upgraded **Style Bank Naming System & Collision Resolver**: Migrated to topic-agnostic 3-part schema (`style-[Format]_[HookFramework]_[ConversionDriver]_[vN].md`, e.g., `style-Short_ToolGiveaway_LeadMagnet.md`), added automated `_v2`/`_v3` collision suffixing, and updated MOC table.
 * **August 1, 2026**: Deployed **Universal 2-Tier Content Resolver & Standalone Thread Fetcher** (`lulua_url_fetcher.mjs`) featuring disk cache lookaside, Chrome CDP status permalink loading, 8-step deep scroll for multi-tweet threads (10+ tweets with large image cards), auto-clicking for long-tweet `"Show more"` links with 1.5s async DOM pauses, and X Article text extraction (`x.com/i/article/...`).
 * **August 1, 2026**: Deployed **Single-Link Dual Wireframe Generation & Frontmatter Cross-Linking** (`lulua_post_dissecter.mjs`) automatically generating paired short-form launch (`format: "short_form_launch"`) and long-form article (`format: "long_form_article"`) wireframes from 1 post link submission, with two-way frontmatter Obsidian links (`attached_article` & `promo_post`).
 * **July 29, 2026**: Deployed **Multi-Platform UI Selector** (`𝕏 X`, `📸 Instagram`, `▶️ YouTube`, `🎵 TikTok`) in `SosmedCenter.jsx` connecting dynamically to Lulua's 4-platform tactical audit & wireframe engine.
