@@ -90,6 +90,15 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await sleep(3000);
 
+    // Pre-scroll check for embedded X Article card before timeline virtualized scrolling unmounts top elements
+    let hasArticleCard = await page.evaluate(() => {
+      const el = document.querySelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]');
+      return Boolean(el);
+    });
+    if (hasArticleCard) {
+      console.log(`  🔗 Detected embedded X Article card at top of post!`);
+    }
+
     // Auto-click "Show more" buttons and scroll down to load full thread posts (Tweets 1 to 5+)
     console.log(`  Expanding long tweet 'Show more' links & loading full thread length (deep scroll)...`);
     const allCollectedTweets = new Map();
@@ -215,34 +224,27 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
       fullPayloadText += opTweets[0] || url;
     }
 
-    // If an X Article card is present (either direct link URL or interactive preview div card), navigate and extract full article text
-    if (!extractedArticleUrl) {
-      const embeddedArticleTitle = await page.evaluate(() => {
-        const divs = Array.from(document.querySelectorAll('div, span, a'));
-        const card = divs.find(d => {
-          const txt = (d.innerText || '').trim();
-          return (txt.includes('𝕏 Article') || txt.includes('Article')) && txt.length > 15 && txt.length < 300;
-        });
-        return card ? card.innerText : null;
-      });
+    // If an X Article card is present (via data-testid="article-cover-image", [data-testid*="article"], or href="/article/"), click & extract full article text
+    hasArticleCard = hasArticleCard || await page.evaluate(() => {
+      const el = document.querySelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]');
+      return Boolean(el);
+    });
 
-      if (embeddedArticleTitle) {
-        console.log(`  🔗 Detected embedded X Article card: "${embeddedArticleTitle.slice(0, 50).replace(/\n/g, ' ')}..."`);
-        const foundLink = await page.evaluate((currId) => {
-          const links = Array.from(document.querySelectorAll('a[href*="/status/"], a[href*="/article/"]'));
-          const target = links.find(a => currId ? !a.href.includes(currId) : true);
-          return target ? target.href : null;
-        }, tweetId);
-        if (foundLink) {
-          extractedArticleUrl = foundLink;
-        }
-      }
-    }
-
-    if (extractedArticleUrl) {
-      console.log(`  🔗 Extracting X Article body from: ${extractedArticleUrl}`);
+    if (hasArticleCard || extractedArticleUrl) {
+      console.log(`  🔗 Detected embedded X Article card. Navigating to extract full article body...`);
       try {
-        if (page.url() !== extractedArticleUrl) {
+        if (hasArticleCard && !extractedArticleUrl) {
+          // Scroll back to top to ensure virtualized element is mounted in DOM before clicking
+          await page.evaluate(() => window.scrollTo(0, 0));
+          await sleep(1500);
+
+          // Click the article card element using Playwright native click to trigger navigation
+          await page.click('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]').catch(() => {});
+          await sleep(4000);
+          if (page.url() !== url) {
+            extractedArticleUrl = page.url();
+          }
+        } else if (extractedArticleUrl && page.url() !== extractedArticleUrl) {
           await page.goto(extractedArticleUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
           await sleep(3000);
         }
