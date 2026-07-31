@@ -81,7 +81,8 @@ platform: "x"
 
     if (meta.status === 'ready' && (meta.url || content.includes('http'))) {
       console.log(`📥 [Note Watcher] Detected status: ready for post dissection`);
-      const target = meta.url || content;
+      const urlMatch = content.match(/https?:\/\/[^\s\)\>]+/i);
+      const target = (meta.url && meta.url.trim()) ? meta.url.trim() : (urlMatch ? urlMatch[0] : content);
       await runPostDissection(target, meta.platform || 'x');
 
       // Reset template

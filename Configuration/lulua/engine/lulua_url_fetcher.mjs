@@ -18,13 +18,15 @@ function sleep(ms) {
 export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
   const trimmed = inputUrlOrText ? inputUrlOrText.trim() : '';
 
-  // 1. If not a URL, return raw text directly
-  const isUrl = /^https?:\/\//i.test(trimmed);
+  // 1. Detect if input is a URL directly or contains an embedded URL
+  const embeddedUrlMatch = trimmed.match(/https?:\/\/(?:x|twitter|instagram|tiktok|youtube|youtu\.be)[^\s\)\>]+/i) || trimmed.match(/^https?:\/\/[^\s]+/i);
+  const isUrl = Boolean(embeddedUrlMatch);
+
   if (!isUrl) {
     return { ok: true, isUrl: false, text: trimmed };
   }
 
-  const url = trimmed;
+  const url = embeddedUrlMatch[0];
   console.log(`🌐 [Lulua Fetcher] Resolving post URL: ${url}`);
 
   // Extract status ID if present
