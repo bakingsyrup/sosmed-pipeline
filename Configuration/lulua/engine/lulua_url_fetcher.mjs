@@ -95,7 +95,10 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
 
     console.log(`  Navigating to status URL...`);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await sleep(3000);
+
+    // Wait up to 5s for X lazy-rendered card components to mount into DOM
+    await page.waitForSelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]', { timeout: 5000 }).catch(() => {});
+    await sleep(2000);
 
     // Pre-scroll check for embedded X Article card before timeline virtualized scrolling unmounts top elements
     let hasArticleCard = await page.evaluate(() => {
