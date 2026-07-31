@@ -202,7 +202,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
     if (opTweets.length === 0) {
       console.warn(`  [Lulua Fetcher] Warning: No tweets found on page`);
       await page.goto('about:blank').catch(() => {});
-      return { ok: false, isUrl: true, url, text: url, error: 'No tweets found on page' };
+      return { ok: false, isUrl: true, url, text: null, error: 'No tweets found on page' };
     }
 
     let fullPayloadText = `Author: @${opHandle || 'unknown'}\n\n`;
@@ -282,7 +282,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
 
   } catch (err) {
     console.error(`❌ [Lulua Fetcher] Error during CDP fetch for ${url}:`, err.message);
-    return { ok: false, isUrl: true, url, text: url, error: err.message };
+    return { ok: false, isUrl: true, url, text: null, error: err.message };
   } finally {
     if (releaseLock && lock) {
       try { await releaseLock(lock); } catch {}

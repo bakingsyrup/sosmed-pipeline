@@ -127,6 +127,19 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
   const fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
   const postUrl = inputUrlOrText.match(/https?:\/\/[^\s]+/)?.[0] || null;
 
+  // STRICT VALIDATION GATE: Halt immediately if fetch failed, text is empty, or text is a raw URL string
+  const payloadToDissect = (fetchRes && fetchRes.text) ? fetchRes.text.trim() : '';
+  const isRawUrlOnly = /^https?:\/\/[^\s]+$/i.test(payloadToDissect);
+
+  if (!fetchRes.ok || !payloadToDissect || payloadToDissect.length < 40 || isRawUrlOnly) {
+    const errorDetail = fetchRes.error || (isRawUrlOnly ? 'Scraped text is only a URL' : 'Extracted content is too short or empty');
+    console.error(`❌ [Lulua Dissector] Aborting dissection: ${errorDetail}`);
+    return {
+      ok: false,
+      error: `Scraping failed: ${errorDetail}. Dissection aborted to prevent hallucination.`
+    };
+  }
+
   // 2. Dual Generation if an attached X Article is detected
   if (fetchRes.hasArticle && fetchRes.articleText) {
     console.log(`✨ [Lulua] Dual Content Detected (Launch Post + Attached X Article). Generating paired wireframes...`);
