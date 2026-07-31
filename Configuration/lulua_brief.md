@@ -1,5 +1,5 @@
 # Lulua AI Briefing (`lulua_brief.md`)
-**Last Updated:** July 28, 2026
+**Last Updated:** August 1, 2026
 
 This document serves as the high-density technical blueprint and session context for **Lulua** (Iroi's Competitor Intelligence, Interactive Style R&D, and Multi-Platform Strategy Engine).
 
@@ -16,7 +16,7 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 * **`lulua-pipeline/02-Memory/`**: Persistent memory logs (`memory_log.md` with top 7 rolling window).
 * **`lulua-pipeline/02-Proposals/`**: Tier 2 permission proposals and platform expansion blueprints.
 * **`lulua-pipeline/03-Briefings/`**: Daily executive briefing reports for the human operator.
-* **`Configuration/lulua/engine/`**: Ratio calculation, outlier filtering, note watcher, monthly playbook scanning, account auditing, and interactive prompt orchestration scripts.
+* **`Configuration/lulua/engine/`**: Ratio calculation, outlier filtering, note watcher, monthly playbook scanning, account auditing, interactive prompt orchestration, and standalone URL fetcher (`lulua_url_fetcher.mjs`) scripts.
 
 ---
 
@@ -94,6 +94,8 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: Steps 1, 2, and 3 fully built, live, multi-platform enabled (X, IG, YT, TikTok), and integrated into Ad Astra Web UI with real-time MOC index management.
+* **August 1, 2026**: Deployed **Universal 2-Tier Content Resolver & Standalone Thread Fetcher** (`lulua_url_fetcher.mjs`) featuring disk cache lookaside, Chrome CDP status permalink loading, 8-step deep scroll for multi-tweet threads (10+ tweets with large image cards), auto-clicking for long-tweet `"Show more"` links with 1.5s async DOM pauses, and X Article text extraction (`x.com/i/article/...`).
+* **August 1, 2026**: Deployed **Single-Link Dual Wireframe Generation & Frontmatter Cross-Linking** (`lulua_post_dissecter.mjs`) automatically generating paired short-form launch (`format: "short_form_launch"`) and long-form article (`format: "long_form_article"`) wireframes from 1 post link submission, with two-way frontmatter Obsidian links (`attached_article` & `promo_post`).
 * **July 29, 2026**: Deployed **Multi-Platform UI Selector** (`𝕏 X`, `📸 Instagram`, `▶️ YouTube`, `🎵 TikTok`) in `SosmedCenter.jsx` connecting dynamically to Lulua's 4-platform tactical audit & wireframe engine.
 * **July 29, 2026**: Enforced **Evidentiary Citation & Bio Accuracy Standard** in `lulua_account_auditor.mjs` (`🎯 Lulua's Audit Finding:`, `🔗 Direct Evidence Link:`, `📊 Empirical Metrics:`, `🧠 Strategic Proof:`), strictly separating literal profile bio quotes from external web search research.
 * **July 28, 2026**: Deployed **Ad Astra Web UI 4-Subtab Navigation** (`X Posts` | `Intel` | `Style Bank` | `Account Bank`) with larger text sizes (+2 font steps), search filtering, direct `🔗 X Profile` links, and one-click file deletion.

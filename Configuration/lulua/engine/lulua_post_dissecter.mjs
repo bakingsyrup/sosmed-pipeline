@@ -1,90 +1,78 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { callGemini } from '../../services/gemini_api.mjs';
+import { fetchPostOrThreadText } from './lulua_url_fetcher.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const BASE_DIR = path.resolve(__dirname, '../../../');
 const STYLE_BANK_DIR = path.join(BASE_DIR, 'lulua-pipeline/01-Style-Bank');
 
-// Load .env
 function loadEnv() {
   const envPaths = [
-    path.join(__dirname, '../.env'),
-    path.join(__dirname, '../../.env'),
-    path.join(__dirname, '../../../.env'),
-    path.join(process.cwd(), '.env')
+    path.join(BASE_DIR, 'Configuration/.env'),
+    path.join(BASE_DIR, '.env')
   ];
-  for (const p of envPaths) {
-    if (fs.existsSync(p)) {
-      const content = fs.readFileSync(p, 'utf8');
-      for (const line of content.split('\n')) {
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      const lines = fs.readFileSync(envPath, 'utf8').split('\n');
+      for (const line of lines) {
         const trimmed = line.trim();
-        if (trimmed && !trimmed.startsWith('#')) {
-          const colonIdx = trimmed.indexOf('=');
-          if (colonIdx !== -1) {
-            const key = trimmed.slice(0, colonIdx).trim();
-            let val = trimmed.slice(colonIdx + 1).trim();
-            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-              val = val.slice(1, -1);
-            }
-            process.env[key] = val;
+        if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+          const [k, ...v] = trimmed.split('=');
+          if (!process.env[k.trim()]) {
+            process.env[k.trim()] = v.join('=').trim().replace(/^["']|["']$/g, '');
           }
         }
       }
-      break;
     }
   }
 }
 loadEnv();
 
-export async function runPostDissection(inputUrlOrText, platform = 'x') {
-  console.log(`📐 [Lulua] Dissecting Post Wireframe for Style Bank...`);
-
+async function dissectSinglePayload(payloadText, formatType, postUrl, platform, extraFrontmatterObj = {}) {
   const systemInstruction = `You are Lulua, the Interactive Style R&D Engine for Iroi media business.
-Your task is to dissect a viral social media post into Lulua's Standardized 4-Part Style Bank Wireframe Schema:
+Your task is to dissect viral social media content (${formatType}) into Lulua's Standardized 4-Part Style Bank Wireframe Schema:
 
 Part 1: Metadata & Ratio Trigger (Target metric: Bookmarks, Replies, Retweets, Views).
 Part 2: Psychological Lever (Primary emotional driver: Utility, Contrarian, FOMO, Debate, Pride).
-Part 3: Micro-Rhythm & Pacing Rules (Hook length caps, line-break density, sentence caps).
+Part 3: Micro-Rhythm & Pacing Rules (Hook length caps, line-break density, sentence caps, thread/section progression).
 Part 4: Plug-and-Play Wireframe Blueprint (Bracketed parameter slots: [Hook], [Setup], [Body], [Closing/CTA]).
 
 Format output cleanly as a standalone Style Bank Markdown file. Include a short 1-word descriptive style name in frontmatter (e.g. style_name: "dialogue_breakdown").`;
 
-  const userPrompt = `Input Post / URL:
-${inputUrlOrText}
+  const userPrompt = `Target Social Media Content to Dissect (${formatType}):
+${payloadText}
 
 Platform: ${platform.toUpperCase()}
 
-Please dissect this post and generate the complete 4-Part Wireframe Schema for saving into the Post Style Bank.`;
+Please dissect this content and generate the complete 4-Part Wireframe Schema for saving into the Post Style Bank.`;
 
   let styleMarkdown = '';
   try {
     const rawRes = await callGemini(userPrompt, systemInstruction, true);
     styleMarkdown = rawRes.candidates?.[0]?.content?.parts?.[0]?.text || '';
   } catch (err) {
-    console.warn('⚠️ Gemini call error during dissection, generating fallback wireframe:', err.message);
-    const lines = inputUrlOrText.split('\n').filter(l => l.trim().length > 0);
-    const hook = lines[0] || inputUrlOrText;
+    console.warn(`⚠️ Gemini call error during ${formatType} dissection, generating fallback wireframe:`, err.message);
+    const lines = payloadText.split('\n').filter(l => l.trim().length > 0);
+    const hook = lines[0] || payloadText;
 
     styleMarkdown = `---
-style_name: "custom_wireframe"
+style_name: "${formatType}_wireframe"
 platform: "${platform}"
 ---
 
-# 📐 Post Style Wireframe: Custom Wireframe
+# 📐 Post Style Wireframe: ${formatType}
 
 ## Part 1: Metadata & Ratio Trigger
-- **Target Metric:** Virality & Reach Yield Spike
+- **Target Metric:** Reach Yield & High Retention
 
 ## Part 2: Psychological Lever
 - **Emotional Driver:** High Utility & Authority
 
 ## Part 3: Micro-Rhythm & Pacing Rules
-- **Line Count:** ${lines.length} lines
-- **Pacing:** Spaced multi-paragraph cadence with bold lead-ins.
+- **Pacing:** Structured multi-paragraph cadence.
 
 ## Part 4: Plug-and-Play Wireframe Blueprint
 \`\`\`markdown
@@ -95,49 +83,90 @@ platform: "${platform}"
 `;
   }
 
-  // Extract style name from output or generate timestamp name
   const match = styleMarkdown.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
-  const styleName = match ? match[1] : `wireframe_${Date.now()}`;
+  const styleName = match ? match[1] : `${formatType}_${Date.now()}`;
 
-  // Prepend Source Link & Complete Original Post Text block
-  const urlMatch = inputUrlOrText.match(/https?:\/\/[^\s]+/);
-  const postUrl = urlMatch ? urlMatch[0] : null;
+  // Strip existing frontmatter from styleMarkdown to rebuild pristine frontmatter at line 1
+  let bodyMarkdown = styleMarkdown.replace(/^---[\s\S]*?---\n*/, '').trim();
 
-  let sourceReferenceBlock = `## 📌 Source Reference & Original Post\n`;
+  let frontmatterBlock = `---\nstyle_name: "${styleName}"\n`;
+  if (extraFrontmatterObj.format) frontmatterBlock += `format: "${extraFrontmatterObj.format}"\n`;
+  if (extraFrontmatterObj.attached_article) frontmatterBlock += `attached_article: "${extraFrontmatterObj.attached_article}"\n`;
+  if (extraFrontmatterObj.promo_post) frontmatterBlock += `promo_post: "${extraFrontmatterObj.promo_post}"\n`;
+  frontmatterBlock += `---\n\n`;
+
+  let sourceReferenceBlock = `## 📌 Source Reference & Original Content\n`;
   if (postUrl) {
-    sourceReferenceBlock += `- 🔗 **Direct Post Link:** [Inspect Post on X](${postUrl})\n\n`;
+    sourceReferenceBlock += `- 🔗 **Direct Link:** [Inspect Content on X](${postUrl})\n\n`;
   }
-  sourceReferenceBlock += `### 📜 Complete Original Post Text:\n> ${inputUrlOrText.replace(/\n/g, '\n> ')}\n\n---\n\n`;
+  sourceReferenceBlock += `### 📜 Complete Original Text:\n> ${payloadText.replace(/\n/g, '\n> ')}\n\n---\n\n`;
 
-  // Inject source block right after frontmatter or header
-  let finalMarkdown = styleMarkdown;
-  if (finalMarkdown.includes('---') && finalMarkdown.indexOf('---', 3) !== -1) {
-    const endFrontmatter = finalMarkdown.indexOf('---', 3) + 3;
-    finalMarkdown = finalMarkdown.slice(0, endFrontmatter) + '\n\n' + sourceReferenceBlock + finalMarkdown.slice(endFrontmatter);
-  } else {
-    finalMarkdown = sourceReferenceBlock + finalMarkdown;
-  }
+  const finalMarkdown = frontmatterBlock + sourceReferenceBlock + bodyMarkdown;
+  return { styleName, finalMarkdown };
+}
+
+export async function runPostDissection(inputUrlOrText, platform = 'x') {
+  console.log(`📐 [Lulua] Dissecting Post Wireframe for Style Bank...`);
 
   if (!fs.existsSync(STYLE_BANK_DIR)) {
     fs.mkdirSync(STYLE_BANK_DIR, { recursive: true });
   }
 
-  const outputFile = path.join(STYLE_BANK_DIR, `style-${styleName}.md`);
-  fs.writeFileSync(outputFile, finalMarkdown);
+  // 1. Resolve URL into literal post, thread, and X Article text
+  const fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
+  const postUrl = inputUrlOrText.match(/https?:\/\/[^\s]+/)?.[0] || null;
+
+  // 2. Dual Generation if an attached X Article is detected
+  if (fetchRes.hasArticle && fetchRes.articleText) {
+    console.log(`✨ [Lulua] Dual Content Detected (Launch Post + Attached X Article). Generating paired wireframes...`);
+
+    // First generate article wireframe to derive style name
+    const articleRes = await dissectSinglePayload(fetchRes.articleText, 'long_form_article', postUrl, platform);
+
+    // Then generate post wireframe with attached_article cross-link
+    const postRes = await dissectSinglePayload(fetchRes.postText || fetchRes.text, 'short_form_launch', postUrl, platform, {
+      format: 'short_form_launch',
+      attached_article: `[[style-${articleRes.styleName}]]`
+    });
+
+    // Re-build article wireframe with promo_post cross-link
+    const articleResFinal = await dissectSinglePayload(fetchRes.articleText, 'long_form_article', postUrl, platform, {
+      format: 'long_form_article',
+      promo_post: `[[style-${postRes.styleName}]]`
+    });
+
+    const postFile = path.join(STYLE_BANK_DIR, `style-${postRes.styleName}.md`);
+    const articleFile = path.join(STYLE_BANK_DIR, `style-${articleRes.styleName}.md`);
+
+    fs.writeFileSync(postFile, postRes.finalMarkdown);
+    fs.writeFileSync(articleFile, articleResFinal.finalMarkdown);
+
+    try {
+      const { updateStyleBankMOC } = await import('./lulua_moc_manager.mjs');
+      updateStyleBankMOC();
+    } catch (e) {}
+
+    console.log(`✅ [Lulua] Dual dissection complete! Saved paired wireframes:\n  - Post: style-${postRes.styleName}.md\n  - Article: style-${articleRes.styleName}.md`);
+    return { ok: true, isDual: true, postFile, articleFile, postStyle: postRes.styleName, articleStyle: articleRes.styleName };
+  }
+
+  // 3. Single Content Dissection
+  const singleRes = await dissectSinglePayload(fetchRes.text || inputUrlOrText, 'social_post', postUrl, platform, { format: 'social_post' });
+  const outputFile = path.join(STYLE_BANK_DIR, `style-${singleRes.styleName}.md`);
+  fs.writeFileSync(outputFile, singleRes.finalMarkdown);
 
   try {
     const { updateStyleBankMOC } = await import('./lulua_moc_manager.mjs');
     updateStyleBankMOC();
   } catch (e) {}
 
-  console.log(`✅ [Lulua] Post dissection complete. Saved to Style Bank: style-${styleName}.md`);
-
-  return { ok: true, styleName, file: outputFile, filename: `style-${styleName}.md` };
+  console.log(`✅ [Lulua] Post dissection complete. Saved to Style Bank: style-${singleRes.styleName}.md`);
+  return { ok: true, isDual: false, styleName: singleRes.styleName, file: outputFile, filename: `style-${singleRes.styleName}.md` };
 }
 
 // CLI execution check
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const inputArg = process.argv[2] || 'https://x.com/satyaXBT/status/2081725743814578505';
+  const inputArg = process.argv[2] || 'https://x.com/milesdeutscher/status/2082646132157780412?s=20';
   runPostDissection(inputArg).catch(err => {
     console.error('❌ Dissection execution failed:', err);
     process.exit(1);
