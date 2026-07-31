@@ -22,12 +22,13 @@ export function updateStyleBankMOC() {
       const styleName = styleMatch ? styleMatch[1] : file.replace(/^style-|\.md$/g, '');
 
       const leverMatch = content.match(/Primary Emotional Driver:?\s*\*?\*?([^\*\n]+)\*?\*?/i) || content.match(/Part 2: Psychological Lever\s*\n\s*\*?\s*([^\n]+)/i);
-      const lever = leverMatch ? leverMatch[1].trim() : 'General Virality';
+      const lever = leverMatch ? leverMatch[1].replace(/^\*\*|\*\*$/g, '').trim() : 'General Virality';
 
-      const metricMatch = content.match(/Target Metric:?\s*\*?\*?([^\*\n]+)\*?\*?/i);
-      const metric = metricMatch ? metricMatch[1].trim() : 'Reach Yield';
+      const metricMatch = content.match(/Target Metrics?:?\s*\*?\*?\s*([^\*\n]+)\*?\*?/i) || content.match(/Part 1: Metadata & Ratio Trigger\s*\n\s*\*?\s*([^\n]+)/i);
+      let metric = metricMatch ? metricMatch[1].replace(/^s:\s*/i, '').replace(/^\*\*|\*\*$/g, '').trim() : 'Reach Yield';
+      if (!metric || metric.toLowerCase() === 's:') metric = 'Bookmarks & Engagement';
 
-      const linkMatch = content.match(/\[Inspect Post on X\]\(([^\)]+)\)/);
+      const linkMatch = content.match(/\[Inspect (?:Content|Post) on X\]\(([^\)]+)\)/i) || content.match(/(https?:\/\/(?:x|twitter)\.com\/[^\s\)]+)/i);
       const url = linkMatch ? linkMatch[1] : '#';
 
       items.push({ file, styleName, lever, metric, url });
