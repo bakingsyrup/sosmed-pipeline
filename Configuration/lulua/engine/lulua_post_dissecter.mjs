@@ -129,7 +129,7 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
 
   // STRICT VALIDATION GATE: Halt immediately if fetch failed, text is empty, or text is a raw URL string
   const payloadToDissect = (fetchRes && fetchRes.text) ? fetchRes.text.trim() : '';
-  const isRawUrlOnly = /^https?:\/\/[^\s]+$/i.test(payloadToDissect);
+  const isRawUrlOnly = /^(?:https?:\/\/|\/)?(?:www\.)?(?:x|twitter|instagram|tiktok|youtube|youtu\.be)\.com\/[^\s]+$/i.test(payloadToDissect) || (payloadToDissect.length < 100 && payloadToDissect.includes('status/'));
 
   if (!fetchRes.ok || !payloadToDissect || payloadToDissect.length < 40 || isRawUrlOnly) {
     const errorDetail = fetchRes.error || (isRawUrlOnly ? 'Scraped text is only a URL' : 'Extracted content is too short or empty');

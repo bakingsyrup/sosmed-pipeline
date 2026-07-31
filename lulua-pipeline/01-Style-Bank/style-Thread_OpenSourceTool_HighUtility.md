@@ -1,11 +1,9 @@
 ---
-style_name: "Thread_HowToTool_HighUtility"
+style_name: "Thread_OpenSourceTool_HighUtility"
 format: "social_post"
 ---
 
 ## 📌 Source Reference & Original Content
-- 🔗 **Direct Link:** [Inspect Content on X](https://x.com/milesdeutscher/status/2082646132157780412)
-
 ### 📜 Complete Original Text:
 > Author: @milesdeutscher
 > 
@@ -81,56 +79,60 @@ format: "social_post"
 
 ---
 
+# Lulua Style Bank Wireframe: Thread_OpenSourceTool_HighUtility
+
 ### Part 1: Metadata & Ratio Trigger
-*   **Target Metrics:** Bookmarks (Primary), Retweets (Secondary), Replies (Tertiary).
-*   **Trigger Mechanism:** High-value asset distribution (Open-Source Repo) combined with "proof of work" (Financial result: +$19,537). The content triggers a "save for later" behavior because it requires a technical setup process.
+*   **Primary Metric:** Bookmarks (High utility/reference value).
+*   **Secondary Metric:** Retweets (Social proof/sharing for "free value").
+*   **Tertiary Metric:** Replies (Clarification questions/engagement with the tool).
+*   **Target Audience:** Traders, developers, and AI enthusiasts looking for actionable financial tools.
 
 ### Part 2: Psychological Lever
 *   **Primary Driver:** **Utility (High-Value Asset)**.
-*   **Secondary Drivers:** **Social Proof** (Financial gain results), **Authority** (Building a complex tool), and **Community Participation** (Open-source collaboration).
+*   **Secondary Driver:** **Pride/Authority** (Creator demonstrates expertise and generosity).
+*   **Mechanism:** The "Open Source" trigger removes friction, positioning the content as a gift rather than a sales pitch, which builds immense trust and platform loyalty.
 
 ### Part 3: Micro-Rhythm & Pacing Rules
-*   **Hook Length Cap:** Under 25 words. Must immediately state the benefit (money/tool) and the action (open-source).
-*   **Line-Break Density:** High. Every sentence or sub-step gets its own line to prevent "wall of text" fatigue.
-*   **Sentence Caps:** Short, imperative sentences. Use arrows (→) to denote action steps.
-*   **Thread/Section Progression:** 
-    1. Hook & Proof (The "Why").
-    2. Definition/Context (The "What").
-    3. Instructional Steps (The "How").
-    4. Extensibility/Closing (The "Future/CTA").
+*   **Hook Length:** Maximum 2 sentences. Must include a specific "Result" (e.g., dollar amount) + "Action" (e.g., open-sourced repo).
+*   **Line-Break Density:** High. Use single-line breaks for steps and double-line breaks for section transitions to maximize readability on mobile.
+*   **Sentence Caps:** Short, punchy sentences. Avoid passive voice.
+*   **Thread Progression:** 
+    1.  **The Result/Hook.**
+    2.  **The "What is it" (Contextualizing).**
+    3.  **The "How-to" (Step-by-step instructional).**
+    4.  **The "Extension" (Encouraging community contribution).**
+    5.  **The "Hard Call-to-Action" (Direct link).**
 
 ### Part 4: Plug-and-Play Wireframe Blueprint
 
 **[Hook]**
-I used [AI Tool] to [Result/Action], and it made [Specific Financial/Performance Metric]. 
-I just open-sourced the entire [Asset Type]!
-Here’s how to install and use it so you can [Primary Benefit/Outcome]:
+I used [Tool/Method] to achieve [Specific Quantifiable Result]. 
+I just open-sourced the entire [Platform/Repo]!
+Here is how to [Action: install/use/run] my [Project Name] so you can [Benefit] with [Category]:
 
 **[Setup]**
 What it actually is:
 Think of this as [Metaphor/Simplified Definition].
-[1-2 sentences on core functionality/capabilities].
+[Key Feature 1], [Key Feature 2], and [Key Feature 3].
 
 **[Body]**
 To get started:
-
 Step 1. [Installation Step]
-[Terminal commands or platform link]
+[Code block/Terminal command]
 
 Step 2. [Execution Step]
 → [Action A]
 → [Action B]
-→ [Action C]
 
 Step 3. [Output Interpretation]
-[Explain what the user sees/learns from the data].
+[Explain what the user sees/learns].
 
-Step 4. [Optimization/Iteration]
-[Explain how to refine the process].
+Step 4. [Optimization/Advanced Feature]
+[How to refine the process].
 
 Step 5. [Extend/Customize]
-[Encourage user modification or advanced usage].
+[Instructions on how to modify/contribute to the codebase].
 
 **[Closing/CTA]**
-[Personal note on effort/time invested]. 
-[Final Call to Action/Link to the asset].
+[Personal touch/Time investment note].
+[Direct Link to Repo]

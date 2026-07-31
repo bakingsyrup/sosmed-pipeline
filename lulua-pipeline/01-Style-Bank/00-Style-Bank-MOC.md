@@ -9,4 +9,4 @@ This index automatically organizes all saved post wireframe templates.
 
 | Style Name | Psychological Lever | Target Metric | Source Post | File Link |
 | :--- | :--- | :--- | :--- | :--- |
-| **Thread_HowToTool_HighUtility** | Primary Driver:** **Utility (High-Value Asset)**. | Bookmarks (Primary), Retweets (Secondary), Replies (Tertiary). | [Inspect on X](https://x.com/milesdeutscher/status/2082646132157780412) | [[style-Thread_HowToTool_HighUtility]] |
+| **Thread_OpenSourceTool_HighUtility** | Primary Driver:** **Utility (High-Value Asset)**. | Primary Metric:** Bookmarks (High utility/reference value). | N/A | [[style-Thread_OpenSourceTool_HighUtility]] |

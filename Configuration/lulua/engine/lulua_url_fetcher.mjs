@@ -13,13 +13,18 @@ function sleep(ms) {
 
 /**
  * Decoupled Post & Thread Content Fetcher for Lulua Dissector.
- * Resolves URLs into literal post/thread and X Article text without modifying Beidou daily scripts.
  */
 export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
   const trimmed = inputUrlOrText ? inputUrlOrText.trim() : '';
 
-  // 1. Detect if input is a URL directly or contains an embedded URL
-  const embeddedUrlMatch = trimmed.match(/https?:\/\/(?:x|twitter|instagram|tiktok|youtube|youtu\.be)[^\s\)\>]+/i) || trimmed.match(/^https?:\/\/[^\s]+/i);
+  // 1. Normalize input (strip leading slashes e.g. /x.com/..., prepend https:// if missing)
+  let cleanInput = trimmed.replace(/^\/+/, '');
+  if (!/^https?:\/\//i.test(cleanInput) && /(?:x|twitter|instagram|tiktok|youtube|youtu\.be)\.com\//i.test(cleanInput)) {
+    cleanInput = 'https://' + cleanInput;
+  }
+
+  // Detect if input is a URL directly or contains an embedded URL
+  const embeddedUrlMatch = cleanInput.match(/https?:\/\/(?:www\.)?(?:x|twitter|instagram|tiktok|youtube|youtu\.be)\.com\/[^\s\)\>]+/i) || cleanInput.match(/^https?:\/\/[^\s]+/i);
   const isUrl = Boolean(embeddedUrlMatch);
 
   if (!isUrl) {
