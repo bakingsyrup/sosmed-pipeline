@@ -166,17 +166,17 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
 
     // Auto-click "Show more" buttons and scroll down to load full thread posts (Tweets 1 to 5+)
     console.log(`  Expanding long tweet 'Show more' links & loading full thread length (deep scroll)...`);
-    // Diagnostic: check DOM state before scroll loop
-    const preScrollState = await page.evaluate(() => ({ articles: document.querySelectorAll('article[data-testid="tweet"]').length, url: window.location.href, bodyLen: document.body?.innerHTML?.length || 0 }));
-    console.log(`  [Diag] Pre-scroll state: ${JSON.stringify(preScrollState)}`);
     const allCollectedTweets = new Map();
     let opHandle = authorHandle || '';
     let extractedArticleBodyText = null;
 
     for (let scrollStep = 0; scrollStep < 8; scrollStep++) {
-      // Step A: Click all visible "Show more" links (X renders them outside <article> tags)
+      // Step A: Click "Show more" to expand long tweets (scope to main content column to avoid sidebar clicks)
       await page.evaluate(() => {
-        const candidates = Array.from(document.querySelectorAll('a[role="link"], button, span[role="button"]'));
+        const mainColumn = document.querySelector('[data-testid="primaryColumn"]') || 
+                           document.querySelector('[role="main"]') || 
+                           document.body;
+        const candidates = mainColumn.querySelectorAll('a[role="link"], button, span[role="button"]');
         candidates.forEach(el => {
           const txt = (el.innerText || '').trim().toLowerCase();
           if (txt === 'show more' || txt === 'show more…') {
@@ -190,9 +190,16 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
 
       // Step B: Extract expanded text from DOM
       const stepData = await page.evaluate(({ expectedHandle }) => {
+        const RESERVED_X_ROUTES = new Set([
+          'search', 'home', 'explore', 'notifications', 'messages',
+          'settings', 'i', 'hashtag', 'tos', 'privacy', 'intent',
+          'jobs', 'communities', 'topics', 'lists',
+        ]);
         const extractHandle = (href) => {
           const m = href.match(/(?:x\.com\/|\/)([A-Za-z0-9_]{1,15})(?:\/|$)/i);
-          return m ? m[1].toLowerCase() : '';
+          if (!m) return '';
+          const handle = m[1].toLowerCase();
+          return RESERVED_X_ROUTES.has(handle) ? '' : handle;
         };
 
         const articles = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
