@@ -32,60 +32,81 @@ function loadEnv() {
 loadEnv();
 
 async function dissectSinglePayload(payloadText, formatType, postUrl, platform, extraFrontmatterObj = {}) {
-  const systemInstruction = `You are Lulua, the Interactive Style R&D Engine for Iroi media business.
+  // Pre-clean payload text: strip scraper-prepended metadata headers and standalone stat lines
+  const cleanPayload = payloadText
+    .replace(/^Author:\s*@[A-Za-z0-9_]+\s*\n+/i, '')
+    .replace(/^(?:\d+K?|\d+M?|\d+)\s*\n+/i, '')
+    .trim();
+
+  const systemInstruction = `You are Lulua, an expert Social Media Structural Analyst and Style R&D Engine for Iroi media business.
 Your task is to dissect viral social media content (${formatType}) into Lulua's Standardized 4-Part Style Bank Wireframe Schema:
 
-Part 1: Metadata & Ratio Trigger (Target metric: Bookmarks, Replies, Retweets, Views).
-Part 2: Psychological Lever (Primary emotional driver: Utility, Contrarian, FOMO, Debate, Pride).
-Part 3: Micro-Rhythm & Pacing Rules (Hook length caps, line-break density, sentence caps, thread/section progression).
-Part 4: Plug-and-Play Wireframe Blueprint (Bracketed parameter slots: [Hook], [Setup], [Body], [Closing/CTA]).
+Part 1: Metadata & Ratio Trigger
+- Identify the target metric trigger based on content mechanics: Bookmarks (High Utility/Save Value), Replies (High Debate/Polarization), Retweets (Identity Signal), or Views (Algorithmic Reach Yield).
 
-Format output cleanly as a standalone Style Bank Markdown file. Generate a descriptive style_name in frontmatter following the 3-part schema: [Format]_[HookFramework]_[ConversionDriver] using PascalCase for multi-word phrases in each part, separated by single underscores (e.g. style_name: "Short_ToolGiveaway_LeadMagnet" or "Article_StepByStepSystem_HighUtility").`;
+Part 2: Psychological Lever
+- Primary emotional driver: High Utility & Authority, Contrarian Piercing, FOMO, Debate, Social Proof, or Direct Benefit.
+
+Part 3: Micro-Rhythm & Pacing Rules
+- Analyze exact structural mechanics: hook line length caps, line-break density, whitespace pacing, bullet/list patterns, and section progression rules.
+
+Part 4: Plug-and-Play Wireframe Blueprint
+- Create a parameterized structural formula using bracketed variable slots representing the content's exact structure (e.g. [Hook: Pattern], [Setup / Evidence: Pattern], [Core Mechanism: Step-by-Step], [CTA: Action]). Do NOT use static or generic placeholder text.
+
+CRITICAL FRONTMATTER RULES:
+Generate a descriptive, meaningful style_name in frontmatter following the 3-part schema: [Format]_[HookFramework]_[ConversionDriver] using PascalCase for each part, separated by single underscores (e.g. style_name: "Short_ToolGiveaway_LeadMagnet" or "Article_StepByStepSystem_HighUtility").
+STRICTLY FORBIDDEN: Do NOT use generic terms like "GenericWireframe" or "ReachYield". Output frontmatter at the top as: style_name: "...".`;
 
   const userPrompt = `Target Social Media Content to Dissect (${formatType}):
-${payloadText}
+${cleanPayload}
 
 Platform: ${platform.toUpperCase()}
 
-Please dissect this content and generate the complete 4-Part Wireframe Schema for saving into the Post Style Bank.`;
+Please dissect this content thoroughly and generate the complete 4-Part Wireframe Schema for saving into the Post Style Bank.`;
 
   let styleMarkdown = '';
   try {
-    const rawRes = await callGemini(userPrompt, systemInstruction, true);
+    const rawRes = await callGemini(userPrompt, systemInstruction, false);
     styleMarkdown = rawRes.candidates?.[0]?.content?.parts?.[0]?.text || '';
   } catch (err) {
-    console.warn(`⚠️ Gemini call error during ${formatType} dissection, generating fallback wireframe:`, err.message);
-    const lines = payloadText.split('\n').filter(l => l.trim().length > 0);
-    const hook = lines[0] || payloadText;
+    console.warn(`⚠️ Gemini call error during ${formatType} dissection:`, err.message);
+    const lines = cleanPayload.split('\n').filter(l => l.trim().length > 0);
+    const firstLine = lines[0] || cleanPayload;
 
     const fallbackPrefix = formatType === 'long_form_article' ? 'Article' : 'Short';
     styleMarkdown = `---
-style_name: "${fallbackPrefix}_GenericWireframe_ReachYield"
+style_name: "${fallbackPrefix}_ContentStructure_HighUtility"
 platform: "${platform}"
 ---
 
 # 📐 Post Style Wireframe: ${formatType}
 
 ## Part 1: Metadata & Ratio Trigger
-- **Target Metric:** Reach Yield & High Retention
+- **Target Metric:** High Utility & Retention
 
 ## Part 2: Psychological Lever
 - **Emotional Driver:** High Utility & Authority
 
 ## Part 3: Micro-Rhythm & Pacing Rules
-- **Pacing:** Structured multi-paragraph cadence.
+- **Pacing:** Structured multi-paragraph cadence with whitespace pauses.
 
 ## Part 4: Plug-and-Play Wireframe Blueprint
 \`\`\`markdown
-[Hook]: "${hook}"
-[Setup / Evidence]: [Insert 2-3 supporting bullet points or evidence]
-[Closing / CTA]: [Insert open-ended debate question or takeaway]
+[Hook: Opening Hook Pattern]: "${firstLine.slice(0, 100)}"
+[Body: Structural Framework]: [Insert 2-3 supporting evidence points]
+[CTA: Direct Response Action]: [Insert clear call to action]
 \`\`\`
 `;
   }
 
   const match = styleMarkdown.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
   let styleName = match ? match[1] : `${formatType}_${Date.now()}`;
+
+  // Sanitize styleName to guarantee no generic fallbacks
+  if (styleName.includes('GenericWireframe') || styleName.includes('ReachYield')) {
+    const prefix = formatType === 'long_form_article' ? 'Article' : 'Short';
+    styleName = `${prefix}_StructuralBlueprint_HighUtility`;
+  }
 
   // Ensure unique style name handling (_v2, _v3, etc. if collision)
   let counter = 2;
