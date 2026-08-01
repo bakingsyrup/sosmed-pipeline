@@ -95,37 +95,93 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
 
     console.log(`  Navigating to status URL...`);
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await sleep(2000);
 
     // Wait up to 5s for X lazy-rendered card components to mount into DOM
     await page.waitForSelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]', { timeout: 5000 }).catch(() => {});
     await sleep(2000);
 
-    // Pre-scroll check for embedded X Article card before timeline virtualized scrolling unmounts top elements
-    let hasArticleCard = await page.evaluate(() => {
-      const el = document.querySelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]');
-      return Boolean(el);
+    // Pre-scroll detection & capture of X Article link (direct card OR quoted tweet article)
+    // Must happen before deep-scroll virtualized timeline unmounts elements
+    const findArticleUrl = () => page.evaluate(() => {
+      const res = { strategy: null, url: null };
+      // Strategy 1: CSS selectors for article card elements — try all, prefer real URLs over click-required
+      let clickRequiredFallback = null;
+      const selectors = [
+        'a[href*="/i/article/"]',
+        'a[href*="/article/"]',
+        '[data-testid="article-cover-image"]',
+        '[data-testid*="article"]'
+      ];
+      for (const sel of selectors) {
+        const el = document.querySelector(sel);
+        if (el) {
+          if (el.tagName === 'A') { res.strategy = 'S1-selector:' + sel; res.url = el.href; return res; }
+          const link = el.querySelector('a[href*="/article/"]') || el.closest('a');
+          if (link) { res.strategy = 'S1-selector:' + sel + '-via-link'; res.url = link.href; return res; }
+          if (!clickRequiredFallback) clickRequiredFallback = sel;
+        }
+      }
+      // Strategy 2: Meta tags for quoted tweet article URLs
+      const metaEl = document.querySelector('meta[content*="/i/article/"]');
+      if (metaEl) { res.strategy = 'S2-meta'; res.url = metaEl.content; return res; }
+      // Strategy 3: Brute-force scan of innerHTML for article URLs (relative & absolute)
+      const html = document.body ? document.body.innerHTML : '';
+      // Check visible href links first (they're the actual article), then meta tags
+      const relMatch = html.match(/(?:href|data-href|data-url)=["'](\/i\/article\/\d+)/);
+      if (relMatch) { res.strategy = 'S3-innerHTML-rel'; res.url = 'https://x.com' + relMatch[1]; return res; }
+      const absMatch = html.match(/https?:\/\/[^"'\s<]*\/i\/article\/\d+/);
+      if (absMatch) { res.strategy = 'S3-innerHTML-abs'; res.url = absMatch[0]; return res; }
+      // Strategy 4: Scan data-href attributes & other link attrs
+      const allEls = document.querySelectorAll('[data-href*="/article/"], [href*="/article/"]');
+      for (const el of allEls) {
+        const url = el.getAttribute('href') || el.getAttribute('data-href') || '';
+        if (url && /\/article\/\d+/.test(url)) {
+          res.strategy = 'S4-attrs';
+          res.url = url.startsWith('http') ? url : 'https://x.com' + (url.startsWith('/') ? '' : '/') + url;
+          return res;
+        }
+      }
+      // Last resort: if we found a click-required element but no URL could be extracted
+      if (clickRequiredFallback) {
+        res.strategy = 'S1-click-required:' + clickRequiredFallback;
+        res.url = 'click-required:' + clickRequiredFallback;
+        return res;
+      }
+      res.strategy = 'none-found';
+      return res;
     });
-    if (hasArticleCard) {
-      console.log(`  🔗 Detected embedded X Article card at top of post!`);
+
+    let hasArticleCard = false;
+    let extractedArticleUrl = null;
+    const initialResult = await findArticleUrl();
+    if (!extractedArticleUrl && initialResult.url && !initialResult.url.startsWith('click-required:')) {
+      hasArticleCard = true;
+      extractedArticleUrl = initialResult.url;
+      console.log(`  🔗 Detected embedded X Article card at top of post! URL: ${extractedArticleUrl}`);
+    } else if (!hasArticleCard && initialResult.url && initialResult.url.startsWith('click-required:')) {
+      hasArticleCard = true;
+      console.log(`  🔗 Detected article card (click required) at top of post`);
     }
 
     // Auto-click "Show more" buttons and scroll down to load full thread posts (Tweets 1 to 5+)
     console.log(`  Expanding long tweet 'Show more' links & loading full thread length (deep scroll)...`);
+    // Diagnostic: check DOM state before scroll loop
+    const preScrollState = await page.evaluate(() => ({ articles: document.querySelectorAll('article[data-testid="tweet"]').length, url: window.location.href, bodyLen: document.body?.innerHTML?.length || 0 }));
+    console.log(`  [Diag] Pre-scroll state: ${JSON.stringify(preScrollState)}`);
     const allCollectedTweets = new Map();
     let opHandle = authorHandle || '';
-    let extractedArticleUrl = null;
     let extractedArticleBodyText = null;
 
     for (let scrollStep = 0; scrollStep < 8; scrollStep++) {
-      // Step A: Click all visible "Show more" buttons inside tweet articles
+      // Step A: Click all visible "Show more" links (X renders them outside <article> tags)
       await page.evaluate(() => {
-        const showMoreElements = Array.from(document.querySelectorAll('article[data-testid="tweet"] [data-testid="tweet-text-show-more-link"], article[data-testid="tweet"] button, article[data-testid="tweet"] span'))
-          .filter(el => {
-            const txt = (el.innerText || '').trim().toLowerCase();
-            return txt === 'show more' || txt === 'show more…';
-          });
-        showMoreElements.forEach(el => {
-          try { el.click(); } catch {}
+        const candidates = Array.from(document.querySelectorAll('a[role="link"], button, span[role="button"]'));
+        candidates.forEach(el => {
+          const txt = (el.innerText || '').trim().toLowerCase();
+          if (txt === 'show more' || txt === 'show more…') {
+            try { el.click(); } catch {}
+          }
         });
       });
 
@@ -133,32 +189,30 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
       await sleep(1500);
 
       // Step B: Extract expanded text from DOM
-      const stepData = await page.evaluate(({ expectedHandle, currentTweetId }) => {
+      const stepData = await page.evaluate(({ expectedHandle }) => {
+        const extractHandle = (href) => {
+          const m = href.match(/(?:x\.com\/|\/)([A-Za-z0-9_]{1,15})(?:\/|$)/i);
+          return m ? m[1].toLowerCase() : '';
+        };
+
         const articles = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
         let foundHandle = expectedHandle || '';
         if (!foundHandle && articles[0]) {
           const handleLinks = articles[0].querySelectorAll('a[role="link"]');
           for (const a of handleLinks) {
-            const href = a.getAttribute('href') || '';
-            if (/^\/[A-Za-z0-9_]{1,15}$/.test(href)) {
-              foundHandle = href.slice(1).toLowerCase();
-              break;
-            }
+            const h = extractHandle(a.getAttribute('href') || '');
+            if (h) { foundHandle = h; break; }
           }
         }
 
         const tweets = [];
-        let articleUrl = null;
 
         for (const article of articles) {
           const handleLinks = article.querySelectorAll('a[role="link"]');
           let articleAuthor = '';
           for (const a of handleLinks) {
-            const href = a.getAttribute('href') || '';
-            if (/^\/[A-Za-z0-9_]{1,15}$/.test(href)) {
-              articleAuthor = href.slice(1).toLowerCase();
-              break;
-            }
+            const h = extractHandle(a.getAttribute('href') || '');
+            if (h) { articleAuthor = h; break; }
           }
 
           if (!foundHandle || articleAuthor === foundHandle) {
@@ -178,32 +232,14 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
             if (text) {
               tweets.push({ id, text, author: articleAuthor });
             }
-
-            if (!articleUrl) {
-              const pageArticleLink = document.querySelector('a[href*="/article/"], a[href*="/i/article/"]');
-              if (pageArticleLink) {
-                articleUrl = pageArticleLink.href;
-              } else {
-                // Check for embedded quote cards on the page pointing to another status/article link
-                const quoteLink = Array.from(document.querySelectorAll('a[href*="/status/"]'))
-                  .find(a => {
-                    const href = a.href || '';
-                    return currentTweetId && !href.includes(currentTweetId) && !href.includes('/analytics') && !href.includes('/quotes') && !href.includes('/retweets') && !href.includes('/likes');
-                  });
-                if (quoteLink) {
-                  articleUrl = quoteLink.href;
-                }
-              }
-            }
           }
         }
 
         window.scrollBy(0, 1000);
-        return { foundHandle, tweets, articleUrl };
-      }, { expectedHandle: opHandle, currentTweetId: tweetId });
+        return { foundHandle, tweets };
+      }, { expectedHandle: opHandle });
 
       if (stepData.foundHandle) opHandle = stepData.foundHandle;
-      if (stepData.articleUrl && !extractedArticleUrl) extractedArticleUrl = stepData.articleUrl;
 
       if (stepData.tweets && Array.isArray(stepData.tweets)) {
         for (const t of stepData.tweets) {
@@ -214,6 +250,16 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
       }
 
       await sleep(1000);
+    }
+
+    // Post-scroll re-scan: quoted tweet article cards may have lazy-loaded during scrolling
+    if (!extractedArticleUrl) {
+      const postScrollResult = await findArticleUrl();
+      if (postScrollResult.url && !postScrollResult.url.startsWith('click-required:')) {
+        hasArticleCard = true;
+        extractedArticleUrl = postScrollResult.url;
+        console.log(`  🔗 Post-scroll scan found article URL: ${extractedArticleUrl}`);
+      }
     }
 
     const opTweets = Array.from(allCollectedTweets.values()).map(t => t.text);
@@ -234,17 +280,43 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
       fullPayloadText += opTweets[0] || url;
     }
 
-    // If an X Article card is present (via data-testid="article-cover-image", [data-testid*="article"], or href="/article/"), click & extract full article text
-    hasArticleCard = hasArticleCard || await page.evaluate(() => {
-      const el = document.querySelector('[data-testid*="article"], [data-testid="article-cover-image"], a[href*="/article/"]');
-      return Boolean(el);
-    });
+    // If we landed on a Grok share page (JS redirect after page load), the article card
+    // from the quoted tweet is not rendered. Fetch the raw status page HTML to extract the
+    // article URL, then navigate directly to it.
+    if ((page.url().includes('/grok/') || page.url().includes('/i/share/')) && !extractedArticleUrl && tweetId) {
+      console.log(`  ⚠️ Grok share page detected, fetching raw status HTML for article URL...`);
+      try {
+        const htmlRes = await fetch(url, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (compatible; LuluaFetcher/1.0)' }
+        });
+        if (htmlRes.ok) {
+          const html = await htmlRes.text();
+          const patterns = [
+            /content="(https?:\/\/[^"]*\/i\/article\/\d+)/,  // schema.org sharedContent — canonical article ID
+            /href="(\/i\/article\/\d+)/,                     // visible article card link — status page entry
+            /https?:\/\/[^"'\s<]*\/i\/article\/\d+/,         // absolute article URL in HTML
+          ];
+          for (const pat of patterns) {
+            const m = html.match(pat);
+            if (m) {
+              const articleUrl = m[1] || m[0];
+              extractedArticleUrl = articleUrl.startsWith('http') ? articleUrl : 'https://x.com' + articleUrl;
+              hasArticleCard = true;
+              console.log(`  ✅ Extracted article URL from raw HTML: ${extractedArticleUrl}`);
+              break;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn(`  ⚠️ Raw HTML fetch for article URL failed: ${e.message}`);
+      }
+    }
 
+    // If an X Article card was detected pre-scroll or an article URL was captured, extract full article text
     if (hasArticleCard || extractedArticleUrl) {
-      console.log(`  🔗 Detected embedded X Article card. Navigating to extract full article body...`);
+      console.log(`  🔗 Extracting X Article content...`);
       try {
         if (hasArticleCard && !extractedArticleUrl) {
-          // Scroll back to top to ensure virtualized element is mounted in DOM before clicking
           await page.evaluate(() => window.scrollTo(0, 0));
           await sleep(1500);
 
@@ -259,10 +331,69 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
           await sleep(3000);
         }
 
-        const articleContent = await page.evaluate(() => {
-          const articleEl = document.querySelector('[data-testid="article"]') || document.querySelector('article') || document.querySelector('main');
-          return articleEl ? articleEl.innerText.trim() : document.body.innerText.trim();
-        });
+        const articleContent = await page.evaluate(({ targetHandle }) => {
+          const isArticlePage = window.location.href.includes('/article/');
+
+          if (isArticlePage) {
+            const fullText = document.body.innerText || '';
+            const lines = fullText.split('\n').map(l => l.trim());
+            
+            // Find article body start: after the header stats (e.g. "20\n41\n268\n392K")
+            let startIdx = -1;
+            let statCount = 0;
+            for (let i = 0; i < lines.length; i++) {
+              if (/^\d+K?$/.test(lines[i])) {
+                statCount++;
+                if (statCount >= 3) { startIdx = i + 1; break; }
+              } else if (lines[i].length > 0) {
+                statCount = 0;
+              }
+            }
+            if (startIdx === -1) startIdx = 0;
+
+            // Find end: article footer has date + numeric stats in consecutive lines
+            // Pattern: "· Jul 28" / "Jul 11" → "12" → "53" → "226" → "198K"
+            let endIdx = lines.length;
+            for (let i = lines.length - 1; i > startIdx + 5; i--) {
+              const window = lines.slice(i - 4, i + 1);
+              const combo = window.join('|');
+              const dateMatch = /^(·\s+)?[A-Z][a-z]{2}\s+\d{1,2}$/.test(window[0]);
+              const numCount = window.slice(1).filter(l => /^\d+K?$/.test(l)).length;
+              if (dateMatch && numCount >= 3) {
+                endIdx = i - 4;
+                break;
+              }
+            }
+
+            // Collect body text from start to end
+            let articleText = '';
+            for (let i = startIdx; i < endIdx; i++) {
+              const line = lines[i];
+              if (line === 'Want to publish your own Article?') break;
+              if (line === 'Upgrade to Premium' && i > startIdx + 10) break;
+              articleText += (articleText ? '\n' : '') + line;
+            }
+            if (articleText.trim().length > 100) return articleText.trim();
+          }
+
+          // Fallback: extract from <article> elements for non-article pages or if body text parsing failed
+          const articles = Array.from(document.querySelectorAll('article'));
+          const opArticles = articles.filter(art => {
+            const handleLinks = Array.from(art.querySelectorAll('a[role="link"]'));
+            const author = handleLinks.map(a => a.getAttribute('href') || '').find(h => /^\/[A-Za-z0-9_]{1,15}$/.test(h))?.slice(1)?.toLowerCase();
+            return !author || (targetHandle && author === targetHandle.toLowerCase());
+          });
+          const opTexts = opArticles.map(art => {
+            const textEls = Array.from(art.querySelectorAll('[data-testid="tweetText"]'));
+            if (textEls.length > 0) {
+              return textEls.map(el => el.innerText.trim()).filter(Boolean).join('\n\n');
+            }
+            return art.innerText ? art.innerText.trim() : '';
+          }).filter(t => t.length > 30);
+          if (opTexts.length > 0) return opTexts.join('\n\n---\n\n');
+          const topArticle = document.querySelector('article[data-testid="tweet"]') || document.querySelector('[data-testid="article"]');
+          return topArticle ? topArticle.innerText.trim() : '';
+        }, { targetHandle: opHandle });
 
         if (articleContent && articleContent.length > 100) {
           extractedArticleBodyText = articleContent;
@@ -271,6 +402,8 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
           fullPayloadText += `=========================================\n\n`;
           fullPayloadText += articleContent;
           console.log(`  ✅ Successfully extracted full X Article text (${articleContent.length} chars).`);
+        } else {
+          console.log(`  ⚠️ Article content too short or empty (${articleContent ? articleContent.length : 0} chars), skipping article dissection.`);
         }
       } catch (articleErr) {
         console.warn('  ⚠️ Failed to extract full X Article body:', articleErr.message);
