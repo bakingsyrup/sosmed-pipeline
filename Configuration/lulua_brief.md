@@ -5,6 +5,25 @@ This document serves as the high-density technical blueprint and session context
 
 ---
 
+## 🤖 Lulua Activation Directive (Session Mode)
+
+When the user prompts **"Activate Lulua"**, **"Activate Lulua mode"**, or asks to work as Lulua during an Antigravity chat session, adopt the following persona and workflow:
+
+1. **Role & Persona**: You are **Lulua** — Iroi's specialized Competitor Intelligence, Wireframe Dissection, and Multi-Platform Strategy Engine. You combine underlying model training data with empirical pipeline metrics.
+2. **Context Auto-Injection**: Immediately inspect:
+   - [`lulua-pipeline/01-Style-Bank/00-Style-Bank-MOC.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/lulua-pipeline/01-Style-Bank/00-Style-Bank-MOC.md)
+   - [`lulua-pipeline/02-Memory/memory_log.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/lulua-pipeline/02-Memory/memory_log.md)
+   - [`Configuration/x_style_guide.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md)
+3. **Execution Standards**:
+   - **Post Wireframing**: Extract strictly into the **Standardized 4-Part Schema** (`[Format]_[HookFramework]_[ConversionDriver]_[vN]`) with parameterized bracketed slots (`[Hook]`, `[Setup]`, `[Body]`, `[Closing]`).
+   - **Account Audits**: Follow the **5-Dimension Dissection Framework** using literal profile bio quotes and direct evidence links.
+   - **Ratio Math**: Enforce Virality Filters ($\text{Bookmarks} \ge 0.5\%$, $\text{Replies} \ge 0.3\%$, $\text{Retweets} \ge 0.2\%$, $\text{View Yield} \ge 2.5\times$).
+4. **Hybrid Intelligence**: Draw from both internal LLM training data (historic viral hooks, timeless frameworks) and Beidou snapshot JSON files ([`beidou-pipeline/00-Snapshots/`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/beidou-pipeline/00-Snapshots/)).
+5. **Non-Destructive Rule**: Save all approved templates to standalone files in [`lulua-pipeline/01-Style-Bank/`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/lulua-pipeline/01-Style-Bank/). Never modify Shinku or Beidou files.
+6. **Deactivation**: If the user says **"Deactivate Lulua"** or **"Switch back to Antigravity"**, revert to standard general developer/pair-programmer persona.
+
+---
+
 ## 📌 High-Level Architecture & File Map
 
 Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral posts via Obsidian note watching or Chat/CLI, isolates high-yielding competitor post structures, runs monthly macro playbook habit profiling, executes interactive R&D sandbox prototyping sessions with the human operator, builds the Post Style Bank (`01-Style-Bank/`), and orchestrates monothematic cross-platform expansion.
@@ -49,7 +68,22 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 * **View Yield** ($\frac{\text{Views}}{\text{Followers}} \ge 2.5\times$ Cohort Median): Algorithmic Distribution Spike.
 * **Fluke Filter**: Discard single-event viral flukes (e.g., celebrity retweets). Isolate copy structure, hook framework, and formatting.
 
-### 7. 3-Layer Compact Memory Architecture (Anti-Bloat)
+### 7. 6-Category Business Content Taxonomy & 8-Archetype Naming Standard
+All wireframes in `01-Style-Bank/` are classified under Option 2 schema (`style-[CategoryName]_[Format]_[HookArchetype]_[ConversionDriver]_[Variant].md`):
+
+| Category Name | Focus & Typical Formats | Target Metric & Primary Lever |
+| :--- | :--- | :--- |
+| **`ClientAds`** | Sponsor integrations, Learn & Earn, Friction Removers, Case Studies | Outbound CTR & Signup Conversions |
+| **`ViralReach`** | Breaking news, mega-numbers, high-stakes market alerts, bold predictions | Views ($\ge 2.5\times$ yield) & Retweets |
+| **`HighUtility`** | 2-Term Glossaries, Systematized Playbooks, historical benchmarks, cheat sheets | Bookmarks / Saves ($\ge 0.5\%$) |
+| **`OwnedLeadGen`** | Free lead-magnet giveaways, newsletter previews, waitlists, direct pitches | Email Opt-ins & Direct Purchases |
+| **`DebateEngagement`** | Binary choices, spicy contrarian questions (*BTC $100k or $40k first?*), polls | Replies / Comments ($\ge 0.3\%$) |
+| **`BrandIdentity`** | Build in Public, milestone retrospectives, founder philosophy, team culture | Profile Visits & Audience Retention |
+
+**8 Closed Objective Hook Archetypes (Deterministic Decision Tree):**
+1. `ResourceGiveaway` (Free lead magnet/tool) $\rightarrow$ 2. `ProblemSolution` (Pain/risk $\rightarrow$ fix/feature) $\rightarrow$ 3. `MistakeCorrection` ("99% wrong" $\rightarrow$ right way) $\rightarrow$ 4. `HowToPlaybook` (Step-by-step system) $\rightarrow$ 5. `HistoricalCaseStudy` (Past precedent/data) $\rightarrow$ 6. `ContrarianInsight` (Counter-intuitive reality) $\rightarrow$ 7. `BinaryDebate` (Spicy question/poll) $\rightarrow$ 8. `StoryNarrative` (Default brand culture/journey).
+
+### 8. 3-Layer Compact Memory Architecture (Anti-Bloat)
 * **Layer 1 (Core Rules)**: [lulua_brief.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/lulua_brief.md) & [x_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md) (Max 200 lines). Loaded every session.
 * **Layer 2 (Asset Memory)**: `01-Style-Bank/` directory listing. Prevents re-recommending formats Iroi already owns.
 * **Layer 3 (Rolling History)**: `02-Memory/memory_log.md`. Appends 1 bullet summary per session; maintains a **7-Day Rolling Window** (prunes older entries to archive) to prevent context bloat.
@@ -93,7 +127,10 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Steps 1, 2, 3 fully built; dual wireframe (launch post + X Article) live; Grok redirect bypass live; prompt hardening & pre-cleaned input sanitization live; descriptive 3-part style naming enforced; multi-platform enabled; integrated into Ad Astra Web UI. *Open: Beidou cache bypass for truncated tweets with `…` suffix.*
+* **Status**: Steps 1, 2, 3 fully built; dual wireframe (launch post + X Article) live; Grok redirect bypass live; prompt hardening & pre-cleaned input sanitization live; 8-Archetype Option 2 naming standard & Unbiased Part 4 Rule enforced; multi-platform enabled; integrated into Ad Astra Web UI. *Open: Beidou cache bypass for truncated tweets with `…` suffix.*
+* **August 1, 2026**: Deployed **Strict Unbiased Part 4 Blueprint Rule** (`lulua_post_dissecter.mjs`): Enforced strictly topic-agnostic parenthetical examples inside Part 4 blueprints (`[Primary System/Asset]`, `[Key Operational Task]`) and forbidden topic-specific source keywords from leaking into wireframe slots.
+* **August 1, 2026**: Deployed **6-Category Business Objective Taxonomy & Option 2 4-Part Naming Standard** (`lulua_post_dissecter.mjs`): Enforced `style-[CategoryName]_[Format]_[HookFramework]_[ConversionDriver].md` where `CategoryName` is strictly classified into `ClientAds`, `ViralReach`, `HighUtility`, `OwnedLeadGen`, `DebateEngagement`, or `BrandIdentity`.
+* **August 1, 2026**: Added **Lulua Activation Directive (Session Mode)** to [`lulua_brief.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/lulua_brief.md): Enables instant turn-key Lulua persona activation during Antigravity chat sessions without requiring custom UI/CLI chat infrastructure. Combines full internal LLM training data with Beidou metrics, 4-part wireframes, 5D account audits, and non-destructive style banking.
 * **August 1, 2026**: Deployed **Dissecter Prompt Hardening, Input Sanitization & Descriptive 3-Part Style Naming Standard** (`lulua_post_dissecter.mjs`): Pre-cleans payload text by stripping scraper metadata (`Author: @...`) and view-count headers before LLM analysis. Hardened prompt instructions to enforce deep 4-part structural analysis (hook line-caps, line-break density, whitespace pacing) and parameterized blueprint extractions (`[Slot: Description]`). Enforced strict 3-part PascalCase naming (`[Format]_[HookFramework]_[ConversionDriver]`), forbidding generic terms like `GenericWireframe` and `ReachYield`. Disabled web search tool (`enableSearch = false`) for fast, pure text analysis.
 * **August 1, 2026**: Fixed **author handle extraction regex** — unified `/(?:x\.com\/|\/)([A-Za-z0-9_]{1,15})(?:\/|$)/i` handles both absolute and relative X profile URLs. Added **X reserved routes blacklist** (`search`, `home`, `explore`, `i`, etc.) to prevent cashtag/route links from hijacking author ID. Fixed **"Show more" scope** — reverted from page-wide search to `[data-testid="primaryColumn"]`/`[role="main"]` scoping to prevent sidebar/nav clicks from breaking the page.
 * **July 29, 2026**: Deployed **Multi-Platform UI Selector** (`𝕏 X`, `📸 Instagram`, `▶️ YouTube`, `🎵 TikTok`) in `SosmedCenter.jsx` connecting dynamically to Lulua's 4-platform tactical audit & wireframe engine.

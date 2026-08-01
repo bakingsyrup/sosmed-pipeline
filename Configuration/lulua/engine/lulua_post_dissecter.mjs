@@ -54,7 +54,46 @@ Part 4: Plug-and-Play Wireframe Blueprint
 - Create a parameterized structural formula using bracketed variable slots representing the content's exact structure (e.g. [Hook: Pattern], [Setup / Evidence: Pattern], [Core Mechanism: Step-by-Step], [CTA: Action]). Do NOT use static or generic placeholder text.
 
 CRITICAL FRONTMATTER RULES:
-Generate a descriptive, meaningful style_name in frontmatter following the 3-part schema: [Format]_[HookFramework]_[ConversionDriver] using PascalCase for each part, separated by single underscores (e.g. style_name: "Short_ToolGiveaway_LeadMagnet" or "Article_StepByStepSystem_HighUtility").
+Generate a descriptive, meaningful style_name in frontmatter following the 4-part Option 2 schema: [CategoryName]_[Format]_[HookArchetype]_[ConversionDriver] using PascalCase for each part, separated by single underscores.
+
+1. CategoryName MUST be strictly chosen from:
+- ClientAds (Client Sponsorships & Paid Promo)
+- ViralReach (Viral Reach, Impressions & Discovery)
+- HighUtility (Educational Deep-Dives, Glossaries & Save Value)
+- OwnedLeadGen (Owned Email Opt-ins, Sales & Product Lead-Gen)
+- DebateEngagement (Polarization, Reply Farming & Comments)
+- BrandIdentity (Culture, Build in Public & Personal Brand)
+
+2. Format MUST be strictly chosen from: Short, Thread, Article, Video.
+
+3. HookArchetype MUST be strictly chosen using this 8-Step Decision Tree (FORBIDDEN to invent new terms):
+   - Step 1: Offers a free downloadable tool, template, PDF, or lead magnet? ➔ ResourceGiveaway
+   - Step 2: Exposes a specific flaw/risk/pain point AND presents a step-by-step fix? ➔ ProblemSolution
+   - Step 3: Calls out a common mistake/misconception ("99% do this wrong") AND provides correct method? ➔ MistakeCorrection
+   - Step 4: Teaches a structured system, framework, or operational methodology from scratch? ➔ HowToPlaybook
+   - Step 5: Analyzes a specific historical benchmark, past event, or quantitative case study? ➔ HistoricalCaseStudy
+   - Step 6: Challenges popular consensus or presents a counter-intuitive market reality? ➔ ContrarianInsight
+   - Step 7: Asks a spicy binary question, poll, or polarized topic to drive comments? ➔ BinaryDebate
+   - Step 8: Default fallback (Shares a personal journey, build-in-public update, or brand culture check-in) ➔ StoryNarrative
+
+4. ConversionDriver MUST be strictly chosen from: AppDownload, SponsorSignup, BookmarkSave, NewsletterOptin, ReplyFarming, RetweetIdentity, ProfileVisit.
+
+Example valid style_names:
+- "ClientAds_Thread_ProblemSolution_AppDownload"
+- "HighUtility_Short_MistakeCorrection_BookmarkSave"
+- "ViralReach_Article_HistoricalCaseStudy_RetweetIdentity"
+- "OwnedLeadGen_Short_ResourceGiveaway_NewsletterOptin"
+- "DebateEngagement_Short_BinaryDebate_ReplyFarming"
+- "BrandIdentity_Short_StoryNarrative_ProfileVisit"
+
+PART 4 BLUEPRINT REQUIREMENTS:
+Part 4 MUST follow the Dynamic & Adaptive Blueprint format. Tag every structural slot explicitly as [Mandatory], [Adaptive], or [Optional] with clear evaluation guidance so the wireframe remains versatile and avoids AI slop.
+
+STRICT UNBIASED PART 4 BLUEPRINT RULE:
+- Part 4 MUST be 100% topic-agnostic and generalized.
+- Parenthetical examples (e.g. ...) inside Part 4 MUST use generic structural slots (e.g., [Primary System/Asset], [Key Operational Task], [Resource A], [Keyword]), NEVER specific niche terms from the source post (do NOT use terms like "Claude", "AI agents", "Crypto", or specific job titles inside Part 4).
+- Niche-specific source post details belong ONLY in Parts 1–3 and the Example Implementation section!
+
 STRICTLY FORBIDDEN: Do NOT use generic terms like "GenericWireframe" or "ReachYield". Output frontmatter at the top as: style_name: "...".`;
 
   const userPrompt = `Target Social Media Content to Dissect (${formatType}):
@@ -75,7 +114,7 @@ Please dissect this content thoroughly and generate the complete 4-Part Wirefram
 
     const fallbackPrefix = formatType === 'long_form_article' ? 'Article' : 'Short';
     styleMarkdown = `---
-style_name: "${fallbackPrefix}_ContentStructure_HighUtility"
+style_name: "HighUtility_${fallbackPrefix}_ContentStructure_BookmarkSave"
 platform: "${platform}"
 ---
 
@@ -105,7 +144,7 @@ platform: "${platform}"
   // Sanitize styleName to guarantee no generic fallbacks
   if (styleName.includes('GenericWireframe') || styleName.includes('ReachYield')) {
     const prefix = formatType === 'long_form_article' ? 'Article' : 'Short';
-    styleName = `${prefix}_StructuralBlueprint_HighUtility`;
+    styleName = `HighUtility_${prefix}_StructuralBlueprint_BookmarkSave`;
   }
 
   // Ensure unique style name handling (_v2, _v3, etc. if collision)
