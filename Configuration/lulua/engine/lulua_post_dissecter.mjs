@@ -183,9 +183,40 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
     fs.mkdirSync(STYLE_BANK_DIR, { recursive: true });
   }
 
+  const postUrl = inputUrlOrText.match(/https?:\/\/[^\s]+/)?.[0] || null;
+  const statusMatch = inputUrlOrText.match(/status\/(\d+)/i);
+  const targetStatusId = statusMatch ? statusMatch[1] : null;
+
+  // DUPLICATE PRE-CHECK GATE: Scan Source Reference header of existing Style Bank files
+  if (fs.existsSync(STYLE_BANK_DIR) && (postUrl || targetStatusId)) {
+    const existingFiles = fs.readdirSync(STYLE_BANK_DIR).filter(f => f.endsWith('.md') && f !== '00-Style-Bank-MOC.md');
+    for (const file of existingFiles) {
+      const filePath = path.join(STYLE_BANK_DIR, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      
+      // Extract the ## 📌 Source Reference & Original Content section (header before Part 1 / Metadata)
+      const sourceHeaderSection = fileContent.split(/###?\s*Part\s*1/i)[0] || fileContent.slice(0, 800);
+      
+      const isUrlMatch = postUrl && sourceHeaderSection.includes(postUrl);
+      const isStatusMatch = targetStatusId && sourceHeaderSection.includes(`status/${targetStatusId}`);
+      
+      if (isUrlMatch || isStatusMatch) {
+        const styleNameMatch = fileContent.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
+        const styleName = styleNameMatch ? styleNameMatch[1] : file.replace(/^style-|\.md$/g, '');
+        console.log(`⚡ [Lulua Dissector] Post URL already dissected in Style Bank: ${file}`);
+        return {
+          ok: true,
+          isDuplicate: true,
+          filename: file,
+          styleName: styleName,
+          msg: `Post URL has already been dissected and saved as ${file}`
+        };
+      }
+    }
+  }
+
   // 1. Resolve URL into literal post, thread, and X Article text
   const fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
-  const postUrl = inputUrlOrText.match(/https?:\/\/[^\s]+/)?.[0] || null;
 
   // STRICT VALIDATION GATE: Halt immediately if fetch failed, text is empty, or text is a raw URL string
   const payloadToDissect = (fetchRes && fetchRes.text) ? fetchRes.text.trim() : '';
