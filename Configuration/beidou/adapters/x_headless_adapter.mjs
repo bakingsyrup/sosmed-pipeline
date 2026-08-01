@@ -68,6 +68,15 @@ async function extractTweetsFromPage(page, skipIds = []) {
 
     for (const article of articles) {
       try {
+        // Expand long tweet "Show more" / "Show more…" buttons if present on timeline card
+        const showMoreButtons = article.querySelectorAll('a[role="link"], button, span[role="button"]');
+        for (const btn of showMoreButtons) {
+          const btnTxt = (btn.innerText || '').trim().toLowerCase();
+          if (btnTxt === 'show more' || btnTxt === 'show more…') {
+            try { btn.click(); } catch (e) {}
+          }
+        }
+
         const textEl = article.querySelector('[data-testid="tweetText"]');
         const text = textEl ? textEl.innerText.trim() : '';
 

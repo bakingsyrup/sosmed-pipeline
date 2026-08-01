@@ -42,37 +42,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
   const handleMatch = url.match(/x\.com\/([a-zA-Z0-9_]+)\/status/i) || url.match(/twitter\.com\/([a-zA-Z0-9_]+)\/status/i);
   let authorHandle = handleMatch ? handleMatch[1].toLowerCase() : null;
 
-  // 2. Try Disk Cache Lookaside first (fast check)
-  if (tweetId && fs.existsSync(SNAPSHOT_DIR)) {
-    try {
-      const files = fs.readdirSync(SNAPSHOT_DIR).filter(f => f.startsWith('snapshot-') && f.endsWith('.json')).sort().reverse();
-      for (const file of files) {
-        const content = fs.readFileSync(path.join(SNAPSHOT_DIR, file), 'utf8');
-        const snapshot = JSON.parse(content);
-        const accounts = Array.isArray(snapshot) ? snapshot : Object.values(snapshot);
-        for (const acc of accounts) {
-          if (acc.tweets && Array.isArray(acc.tweets)) {
-            const match = acc.tweets.find(t => String(t.id) === String(tweetId));
-            if (match && match.text && match.text.length > 50 && !match.has_card) {
-              console.log(`⚡ [Lulua Fetcher] Found exact tweet in Beidou snapshot cache: ${file}`);
-              return {
-                ok: true,
-                isUrl: true,
-                url,
-                text: `Author: @${acc.handle || authorHandle || 'unknown'}\n\n${match.text}`,
-                author: acc.handle || authorHandle,
-                fromCache: true
-              };
-            }
-          }
-        }
-      }
-    } catch (e) {
-      console.warn('⚠️ Disk cache lookaside check warning:', e.message);
-    }
-  }
-
-  // 3. Live Chrome CDP Fetcher (Full Thread & X Article Support)
+  // 2. Live Chrome CDP Fetcher (Always Live-Fetch for 100% Full Thread & X Article Support)
   let acquireLock, releaseLock, connectCDP;
   try {
     const cdpLockMod = await import('/home/silvester/Documents/skills/ui/server/lib/cdp-lock.mjs');
