@@ -690,6 +690,7 @@ angles:
   - ""
   - ""
 niche_focus: all # macro | crypto | ai | all
+lang: id # id (Indonesian, default) | en (English)
 ---
 
 # 📝 Raw Notes & Links (Optional)
@@ -855,7 +856,10 @@ async function processVideoInput(inputFilePath) {
     const topic = frontmatter.topic || '';
     const angles = Array.isArray(frontmatter.angles) ? frontmatter.angles.filter(a => a && a.trim() !== '') : [];
     const nicheFocus = frontmatter.niche_focus || 'macro';
+    const lang = (frontmatter.lang || 'id').toLowerCase();
     const rawNotes = body.trim();
+
+    const styleGuideContent = lang === 'id' ? fs.readFileSync(paths.styleGuide, 'utf8') : '';
 
     const researchModel = process.env.GEMINI_RESEARCH_MODEL || 'gemini-3.1-flash-lite';
     const draftModel = resolveDraftModel();
@@ -1027,17 +1031,10 @@ For each requested search item, provide the exact verified facts, surprising met
     const links3 = extractSourceLinks(step3Brief, step3Result);
     console.log(`[Step 3/4 Completed] 2nd-degree high-signal facts and links gathered (${links3.size} URLs extracted).`);
 
-    // Build Master Source Link Bank (Layer 1)
-    const masterLinkMap = new Map([...links1, ...links3]);
-    let linkBankStr = `\nAUTHORITATIVE SOURCE LINK BANK (ONLY USE THESE EXACT URLS):\n`;
-    for (const [url, title] of masterLinkMap.entries()) {
-      linkBankStr += `- [${title}](${url})\n`;
-    }
-
     // STEP 4: Final 6-Part Video Skeleton Generation (DeepSeek-v4-pro)
     console.log(`[Step 4/4] DeepSeek-v4-pro: Synthesizing final 6-part Video Research Skeleton...`);
-    const step4System = getVideoSkeletonSystemInstruction();
-    const step4Prompt = getVideoSkeletonPromptStr(topic, angles, rawNotes, nicheFocus, mode) + `
+    const step4System = getVideoSkeletonSystemInstruction(lang, styleGuideContent);
+    const step4Prompt = getVideoSkeletonPromptStr(topic, angles, rawNotes, nicheFocus, mode, lang) + `
 
 COMPLETION DATA:
 --- 1ST DEGREE RESEARCH ---
@@ -1045,9 +1042,6 @@ ${step1Brief}
 
 --- 2ND DEGREE RESEARCH & HIGH-SIGNAL FACTS ---
 ${step3Brief}
-
---- AUTHORITATIVE SOURCE LINK BANK ---
-${linkBankStr}
 `;
     const finalSkeletonContent = await callDraftingModel(step4Prompt, step4System, draftModel);
 
@@ -1085,7 +1079,13 @@ created_at: ${dateStr}
     console.error(`[Video Skeleton] Error during processing video input:`, err);
     writeStatus('ERROR', `Video Skeleton error: ${err.message}`);
     if (fs.existsSync(researchingPath)) {
-      try { fs.unlinkSync(researchingPath); } catch (e) {}
+      try {
+        const restorePath = path.join(paths.videoInputsDir, lockFileName);
+        fs.renameSync(researchingPath, restorePath);
+        console.log(`[Video Skeleton] Restored ${lockFileName} to 01-Inbox/00-Video-Inputs/ for retry.`);
+      } catch (e) {
+        console.error(`[Video Skeleton] Could not restore ${lockFileName}:`, e.message);
+      }
     }
   }
 }

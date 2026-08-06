@@ -52,9 +52,8 @@ Every generated file in `03-Ready/` must strictly follow this block structure:
 - Data subset grouped under each angle.
 - Includes **2nd-degree deep dives** with high-signal/surprising facts and their direct news/report links `[Source Name](URL)`.
 
-### 5. Historical Chart References (with 100% Links)
-- Direct links/references to trusted data portals (TradingEconomics, FRED, Wikipedia, Yahoo Finance, etc.) for visual display during recording.
-
-### 6. Silver Linings & Core Takeaways Menu (2–3 Options per Angle)
-- Bulleted takeaways for each angle summarizing the core conclusion (e.g., *Data A + 2nd Degree Fact B = Takeaway C*).
-- Provides 2–3 takeaway choices per angle so the user has a menu of 8–12 points to select from.
+### 2. Angle Options & Shot-by-Shot Guide (Merged)
+- Each of the 5 angles receives a 4-step narrative flow (e.g. Problem → Proof → Mechanism → Takeaway) directly under its title — no separate section.
+- The flow type varies across angles to prevent monotone content (4 flow types distributed across 5 angles).
+- Every narrative step is anchored with 1-2 📊 data bullets pulled directly from research, each with its source link: 📊 [Fact] — [Source](URL).
+- Step 4 of each angle serves as the closing takeaway / silver lining for that segment.

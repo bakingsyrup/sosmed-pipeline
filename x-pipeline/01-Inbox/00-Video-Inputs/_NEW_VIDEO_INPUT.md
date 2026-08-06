@@ -8,6 +8,7 @@ angles:
   - ""
   - ""
 niche_focus: all # macro | crypto | ai | all
+lang: id # id (Indonesian, default) | en (English)
 ---
 
 # 📝 Raw Notes & Links (Optional)
