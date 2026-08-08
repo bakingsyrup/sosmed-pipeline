@@ -107,22 +107,37 @@ Every output file starts with a 2-part executive pitch written **STRICTLY IN ENG
    * **Part 1 (Strategic Angle Rationale)**: 2–3 analytical paragraphs in English explaining the presentation rationale and how the core solution was preserved.
    * **Part 2 (Slide-by-Slide Executive Outline)**: A 1-line English micro-summary per card/section detailing its narrative role.
 
-### C. Instagram Carousel (Dynamic Dual-Library Variation Engine)
+### C. Universal 3-Tier Image Sourcing & Fetching Hierarchy
+During Step 2 & Step 3, the engine auto-classifies the reference content visual subject into 1 of 3 universal tiers to fetch high-CTR cover/card imagery:
+- **Tier 1 (Recognized Entity / Person)**: Prominent figures or brands (e.g. executive portraits) ➔ Queries `"[Subject Name] [Niche] high resolution portrait neutral background"`.
+- **Tier 2 (Historic Event / Scene)**: Specific market crises, historic deals, or events ➔ Queries `"[Event Name] historic press photo high resolution"`.
+- **Tier 3 (Abstract SOP / Conceptual)**: Pure educational guides ➔ Queries `"minimalist [Niche Topic] dark aesthetic high resolution background"`.
+
+### D. Universal Visual Asset Card Schema
+Every slide (Card 1 to Card N) explicitly includes a dedicated **Visual Asset** block under its card heading for human review in Obsidian and Playwright rendering:
+```markdown
+### CARD [N]: [CARD TITLE]
+- **Layout Placement**: [LAYOUT_PLACEMENT] (Auto-detected: `layout-left-split` Option B | `layout-bottom` | `layout-top` | `layout-right-split` Option B)
+- **Visual Asset**: 
+  ![Card [N] Visual Asset]([LOCAL_IMAGE_PATH_OR_SEARCH_URL])
+```
+
+### E. Instagram Carousel (Dynamic Dual-Library Variation Engine)
 * **Elastic Slide Budget**: Dynamically scales (3 to 15 cards) based on natural topic depth.
 * **5 Combined Variations Per Card**: Under every card header (`### CARD [N]`), DeepSeek generates **all 5 Combined Variations** (`#### 🔵 Variation 1` to `#### 🟡 Variation 5`), pairing 1 Semantic Phrasing Style (Library A) with 1 Visual Delivery Format (Library B):
   * **Library A (Phrasing)**: Ultra-Compact & Direct, Fluid Conversational, Condition-Action-Outcome, Outcome & Metric First, Interrogative Q&A.
   * **Library B (Visual Formats)**: Compact Paragraph, Bullet List (•), Key-Value Table, Rhetorical Q&A Split, Directional Arrow Flow (➔).
 
-### D. YouTube Shorts & TikTok (Vertical Short Video)
+### F. YouTube Shorts & TikTok (Vertical Short Video)
 * **Word Count**: **130–145 words max** (55s duration at 150 WPM speech rate).
 * **Sentence Length**: Max 12 words per sentence.
 * **Structure**: 4-stage timestamp table with visual editing cues.
 
-### E. YouTube Long-Form & Community
+### G. YouTube Long-Form & Community
 * **Long-Form**: 5-Chapter structured video essay outline + B-roll/graphic asset cues.
 * **Community Post**: Bulleted text + visual card spec + discussion question.
 
-### F. LinkedIn Post
+### H. LinkedIn Post
 * **Format**: PDF Carousel spec or long-text B2B article with 1–2 sentences per block.
 
 ---
@@ -141,13 +156,13 @@ Once a draft in `03-Ready/` is approved by the human operator, media production 
 ### Level 2: 100% Programmatic HTML-to-PDF & Image Rendering (Zero-Touch Agent)
 * **Target Platforms**: High-volume, automated IG PNG slide carousels & LinkedIn PDF decks.
 * **Workflow**:
-  1. A Node.js Playwright script (`carousel_renderer.mjs` / `test_render_3_styles.mjs`) reads slide blocks & image assets from the Markdown draft file.
-  2. If a cutout hook is required, Python `rembg` (`auto_cutout.mjs`) automatically strips the subject background in ~1s.
-  3. Injects text & images into custom HTML5/CSS3 templates (`Style_A_FullBleed.html`, `Style_B_WhiteCard.html`, `Style_C_CutoutSplit.html`).
-  4. Headless Chromium renders slides at 1080×1350 resolution (2x retina scale) and exports pixel-perfect PNG/PDF carousels.
+  1. A Node.js Playwright script (`designer_agent.mjs`) watches `ig-pipeline/02-Processing/` for drafts with `type: "INSTAGRAM - Repurposed Draft"` and `status: "design"`.
+  2. Parses slide blocks, auto-detects body format types, fetches visual image assets, and injects content into 3 core HTML5 templates (`Style_A_FullBleed.html`, `body_cards/Format_1-5`, `Outro_CTA_Card.html`).
+  3. Applies **Pillar 1B (Bidirectional Auto-Scaler Engine)** and **Pillar 2 (Flex Container Distribution)** to scale typography dynamically.
+  4. Headless Chromium renders high-res 1080×1350 PNG slide decks into `ig-pipeline/03-Ready/<topic_slug>/` and updates frontmatter `status: ready`.
 * **Detailed Technical Documentation**:
-  * See [`instagram_carousel_rendering_stack.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/instagram_carousel_rendering_stack.md) for the complete software dependencies and setup.
-  * See [`master_hook_archetypes_reference.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/master_hook_archetypes_reference.md) for the 7 Cover Hook Layout Archetypes.
+  * See [`instagram_carousel_rendering_stack.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/instagram_carousel_rendering_stack.md) for software dependencies and setup.
+  * See [`master_hook_archetypes_reference.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/master_hook_archetypes_reference.md) for Cover Hook Layout Archetypes.
 
 ### Level 3: Short-Form Video Production (Shorts & TikTok)
 * **Workflow A (Talking Head + AI Captions — 2 Mins)**:

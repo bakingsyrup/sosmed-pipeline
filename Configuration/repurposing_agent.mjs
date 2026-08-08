@@ -103,6 +103,59 @@ const WIREFRAME_FILES = {
   11: 'style-BrandIdentity_Thread_StoryNarrative_ProfileVisit_v2.md'
 };
 
+// Single-Platform Format Specs (injected dynamically per target_platform)
+const PLATFORM_SPECS = {
+  instagram: `   - INSTAGRAM CAROUSEL:
+     * ELASTIC CARD COUNT: Do NOT force a fixed 6-card or 8-card limit. Dynamically scale the slide deck (3 to 15 cards) based on natural topic depth. 1 core thought per card.
+     * COVER CARD (Slide 1): Headline MAX 12 words, Sub-headline MAX 18 words (Total MAX 30 words).
+     * BODY CARDS (Slides 2 to N): Step/Header MAX 6 words, Core body text MAX 25 words per block (Total MAX 40 words per card).
+     * OUTRO CARD (Final Slide): Takeaway MAX 15 words, Action CTA MAX 15 words (Total MAX 30 words).`,
+  youtube: `   - YOUTUBE SHORTS: 130-145 words max (55s @ 150 WPM), sentence max 12 words, 4-stage timestamp table with visual editing cues.
+   - YOUTUBE LONG-FORM: 5-chapter structured video essay outline + B-roll/graphic asset cues.
+   - YOUTUBE COMMUNITY: Bulleted text + visual card spec + discussion question.`,
+  tiktok: `   - TIKTOK: 130-145 words max (55s @ 150 WPM), sentence max 12 words, 4-stage timestamp table with visual editing cues.`,
+  linkedin: `   - LINKEDIN: 1-2 sentences per block (whitespace formatting), bold first line.`,
+  x: `   - X (TWITTER): Compact thread format, double line breaks, sentence case headlines.`
+};
+
+// Dynamic Wireframe Loader: Extract only the target platform's section from the full wireframe
+function extractWireframeSection(wireframeMd, targetPlatform) {
+  const platformKeywords = {
+    instagram: /instagram/i,
+    youtube: /youtube/i,
+    tiktok: /tiktok/i,
+    linkedin: /linkedin/i,
+    x: /x\s*\(twitter\)|twitter\s*thread/i
+  };
+  const keyword = platformKeywords[targetPlatform];
+  if (!keyword) return wireframeMd;
+
+  const lines = wireframeMd.split('\n');
+
+  const introEnd = lines.findIndex(line => /^###\s/.test(line));
+  const intro = introEnd >= 0 ? lines.slice(0, introEnd).join('\n') : '';
+
+  let startIdx = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^###\s/.test(lines[i]) && keyword.test(lines[i])) {
+      startIdx = i;
+      break;
+    }
+  }
+  if (startIdx < 0) return wireframeMd;
+
+  let endIdx = lines.length;
+  for (let i = startIdx + 1; i < lines.length; i++) {
+    if (/^###\s/.test(lines[i]) || /^---/.test(lines[i])) {
+      endIdx = i;
+      break;
+    }
+  }
+
+  const section = lines.slice(startIdx, endIdx).join('\n');
+  return intro + '\n' + section;
+}
+
 // Ensure all directories exist
 for (const p of Object.values(paths)) {
   if (!p.endsWith('.md') && !p.endsWith('.json') && !fs.existsSync(p)) {
@@ -168,9 +221,17 @@ async function callDraftingModel(prompt, systemInstruction, modelName) {
 
   const draftingPromise = (async () => {
     if (modelName.toLowerCase().includes('deepseek')) {
-      console.log(`[Drafting Engine] Calling DeepSeek API (${modelName})...`);
-      const result = await callDeepSeek(prompt, systemInstruction, modelName);
-      return result.choices?.[0]?.message?.content || '';
+      try {
+        console.log(`[Drafting Engine] Calling DeepSeek API (${modelName})...`);
+        const result = await callDeepSeek(prompt, systemInstruction, modelName);
+        const text = result.choices?.[0]?.message?.content || '';
+        if (text) return text;
+        throw new Error('Empty DeepSeek response');
+      } catch (err) {
+        console.warn(`[Drafting Engine Warning] DeepSeek API call failed (${err.message}). Falling back to Gemini 2.5 Flash...`);
+        const fallbackResult = await callGemini(prompt, systemInstruction, false, 'gemini-2.5-flash');
+        return fallbackResult.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      }
     } else {
       console.log(`[Drafting Engine] Calling Gemini API (${modelName})...`);
       const result = await callGemini(prompt, systemInstruction, false, modelName);
@@ -332,23 +393,25 @@ function archiveFinishedRepurposedDrafts() {
 // Main Repurposing Processor
 async function processRepurposeInputFile(inputFilePath) {
   const filename = path.basename(inputFilePath);
-  const lockFileName = `${Date.now()}-repurpose-${filename.replace(/[^a-z0-9.]+/gi, '-')}`;
-  const lockPath = path.join(paths.researching, lockFileName);
-
   console.log(`\n========================================`);
   console.log(`[Repurpose Agent] Triggered! Processing input file: ${filename}`);
   writeStatus('STANDBY', `Processing ${filename}...`);
 
-  // Acquire lock: Move file to 02-Researching/
-  try {
-    fs.renameSync(inputFilePath, lockPath);
-  } catch (err) {
-    console.error(`Failed to acquire lock for ${filename}:`, err.message);
-    return;
-  }
+  let lockPath = inputFilePath;
+  const isInInbox = inputFilePath.includes(paths.repurposeInputsDir);
 
-  // Instantly auto-respawn fresh input template in 01-Inbox/00-Repurpose-Inputs/
-  ensureRepurposeInputTemplate();
+  if (isInInbox) {
+    const lockFileName = `${Date.now()}-repurpose-${filename.replace(/[^a-z0-9.]+/gi, '-')}`;
+    lockPath = path.join(paths.researching, lockFileName);
+    try {
+      fs.renameSync(inputFilePath, lockPath);
+    } catch (err) {
+      console.error(`Failed to acquire lock for ${filename}:`, err.message);
+      return;
+    }
+    // Instantly auto-respawn fresh input template in 01-Inbox/00-Repurpose-Inputs/
+    ensureRepurposeInputTemplate();
+  }
 
   try {
     const rawInput = fs.readFileSync(lockPath, 'utf8');
@@ -421,6 +484,12 @@ Tasks:
 3. Assign a native presentation angle for ${targetPlatform.toUpperCase()} that PRESERVES this core intent and format purpose 100%.
    CRITICAL MANDATE: You MUST NOT invert or flip the core solution/message of the source content into a contradictory warning post!
 4. List 3 to 5 specific 2nd-degree deep-dive search queries needed to support this presentation angle with real verified facts/numbers.
+5. Image Sourcing Hierarchy Directive:
+   Analyze the source reference input and classify the primary visual subject into 1 of 3 Universal Tiers:
+   - TIER 1 (Recognized Entity / Person): If a prominent figure or organization is present: generate query: "[Primary Subject Name] [Relevant Niche] high resolution portrait neutral background"
+   - TIER 2 (Event / Historic Scene): If a specific historic event, market crisis, or deal is present: generate query: "[Event/Topic Name] historic press photo high resolution"
+   - TIER 3 (Abstract SOP / Conceptual): If an abstract guide, framework, or SOP: generate query: "minimalist [Niche Topic] dark aesthetic high resolution background"
+   Output 1 to 2 targeted image search queries under "Image Search Queries Needed:".
 `;
     const step2Brief = await callDraftingModel(step2Prompt, step2System, draftModel);
     console.log(`[Step 2/4 Completed] Native angles selected & 2nd-degree search items identified.`);
@@ -436,6 +505,8 @@ Tasks:
       : '';
 
     console.log(`[Targeted Wireframe Loader] Selected Format ${selectedFormatNum} ➔ Loading ${selectedFileName}`);
+
+    const platformWireframe = extractWireframeSection(selectedFormatContent, targetPlatform);
 
     // STEP 3: Targeted 2nd-Degree Deep-Dive Search (Gemini 2.5 Flash)
     console.log(`[Step 3/4] Gemini 2.5 Flash: Executing 2nd-degree search queries for deep-dive metrics...`);
@@ -453,7 +524,7 @@ Execute Google Search for these specific queries and return verified high-signal
     console.log(`[Step 4/4] DeepSeek: Writing final production-ready drafts for all target platforms...`);
     const step4System = `
 You are the Master Copywriter for the primary publication channel.
-Your task is to write production-ready, ultra-high quality drafts for all requested target platforms.
+Your task is to write production-ready, ultra-high quality drafts for the requested target platform.
 
 CRITICAL DIRECTIVES:
 1. VOICE & STYLE: Strict compliance with x_style_guide.md (dynamic prefix stripping, active voice, sentence case headlines, double line breaks, dry cynical endings).
@@ -462,15 +533,7 @@ CRITICAL DIRECTIVES:
    - If repurpose_sponsorship is 'yes': Incorporate sponsor details from the input brief.
 3. LANGUAGE: Produce drafts in target language: ${targetLang.toUpperCase()}.
 4. DYNAMIC CONTENT-DRIVEN ELASTICITY & SECTION WORD CAPS:
-   - INSTAGRAM CAROUSEL:
-     * ELASTIC CARD COUNT: Do NOT force a fixed 6-card or 8-card limit. Dynamically scale the slide deck (3 to 15 cards) based on natural topic depth. 1 core thought per card.
-     * COVER CARD (Slide 1): Headline MAX 12 words, Sub-headline MAX 18 words (Total MAX 30 words).
-     * BODY CARDS (Slides 2 to N): Step/Header MAX 6 words, Core body text MAX 25 words per block (Total MAX 40 words per card).
-     * OUTRO CARD (Final Slide): Takeaway MAX 15 words, Action CTA MAX 15 words (Total MAX 30 words).
-   - YOUTUBE SHORTS / TIKTOK: 130-145 words max (55s @ 150 WPM), sentence max 12 words, 4-stage timestamp table with visual editing cues.
-   - YOUTUBE LONG-FORM: 5-chapter structured video essay outline + B-roll/graphic asset cues.
-   - YOUTUBE COMMUNITY: Bulleted text + visual card spec + discussion question.
-   - LINKEDIN: 1-2 sentences per block (whitespace formatting), bold first line.
+${PLATFORM_SPECS[targetPlatform] || PLATFORM_SPECS['instagram']}
 
 5. 5 CORE NARRATIVE WRITING RULES:
    - Rule 1 (Red Thread): Every line/card MUST logically answer the question raised by the previous line.
@@ -550,7 +613,7 @@ Output your response cleanly formatted with the Markdown header for the target p
 
     const step4Prompt = `
 TARGET WIREFRAME FORMAT SPECIFICATION (Format ${selectedFormatNum}):
-${selectedFormatContent}
+${platformWireframe}
 
 STYLE GUIDE (VOICE):
 ${styleGuideStr}
@@ -612,7 +675,7 @@ ${step1Brief}
 ${step3Brief}
 `;
     fs.writeFileSync(outPath, outFrontmatterWithBrief, 'utf8');
-    console.log(`[Dispatch] Saved single draft to: ${targetPlatform.toUpperCase()} ➔ ${outFilename}`);
+    console.log(`[Dispatch] Saved single draft to: ${outPath}`);
 
     // STEP 7: Update History Logger & Discard Lock File in 02-Researching/
     updateTopicHistory(usedAnglesLog);
