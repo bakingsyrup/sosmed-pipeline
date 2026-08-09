@@ -70,8 +70,7 @@ Configuration/templates/instagram/
 | **Tier 1: Punchy** | 20 – 50 chars | 4 – 10 words | Title: **38px – 48px**<br>Body: **26px – 32px** | Box Padding: **44px – 52px**<br>Badge/Icon: **64px – 72px**<br>Max white space, 1-column. |
 | **Tier 2: Standard** | 50 – 140 chars | 10 – 25 words | Title: **28px – 32px**<br>Body: **22px – 24px** | Box Padding: **36px – 40px**<br>Badge/Icon: **48px – 56px**<br>Standard 3-box vertical stack. |
 | **Tier 3: Executive** | 140 – 250 chars | 25 – 45 words | Title: **22px – 24px**<br>Body: **18px – 20px** | Box Padding: **24px – 28px**<br>Badge/Icon: **36px – 44px**<br>Compact micro-copy, tight gaps. |
-| **Tier 4: High-Density** | 250 – 500 chars | 45 – 90 words | Title: **20px – 22px**<br>Body: **15px – 18px** | **Auto-switch to 2-Column Grid**<br>Box Padding: **20px**<br>Badge/Icon: **28px – 32px** |
-| **Tier 5: Overflow** | > 500 chars | > 90 words | N/A | **Auto-Split into 2 Sequential Cards**<br>(Card N.1 & Card N.2). |
+| **Tier 4: High-Density** | 250 – 500+ chars | 45 – 90+ words | Title: **20px – 22px**<br>Body: **15px – 18px** | Box Padding: **20px–36px**<br>Badge/Icon: **28px – 38px**<br>Compact multi-box / narrative block. |
 
 ---
 
