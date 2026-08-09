@@ -79,6 +79,19 @@ The rendering stack processes copy across 3 distinct density tiers (Tier 1: Mini
 
 ---
 
+### Tier 4: Ultra-High Density (250–500 chars per item)
+* **Goal**: Maximum readable typography scaling and compact container padding for extensive educational copy.
+* **Target Character Range**: `250–500 chars` / `45–90 words` per point or block.
+* **Template Path**: `Configuration/templates/instagram/body_cards/tier4_high_density/`
+* **Calibrated Proportions & Approved Specs**:
+  * **Format 1: Bullet SOP (`Format_1_BulletSOP_T4.html`)**: Headline `52px`, Lead `34px`, Body `28px`, Icon `38px`, Padding `26px 36px`, Gap `10px`.
+  * **Format 2: Key-Value Comparison Table (`Format_2_KeyValueTable_T4.html`)**: Headline `52px`, Badge `32px`, Desc `32px`, Padding `56px 48px`, Gap `22px`.
+  * **Format 3: Directional Arrow Flow (`Format_3_ArrowFlow_T4.html`)**: Headline `52px`, Step Badge `84px × 84px` (`40px` font), Step Title `36px`, Step Desc `27px`, Arrow `42px`, Padding `36px 36px`, Gap `6px`.
+  * **Format 4: Q&A Split (`Format_4_QASplit_T4.html`)**: Headline `60px`, Question `42px`, Answer `33px`, Padding `44px 44px`, Gap `10px`.
+  * **Format 5: Narrative Quote Block (`Format_5_NarrativeBlock_T4.html`)**: Headline `64px`, Quote Lead `48px`, Body Text `36px`, Quote Icon `100px`, Padding `28px 32px`.
+
+---
+
 ## 🖼️ 3. Output Preview Repositories
 
 * **Tier 1 Gallery**: `/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/templates/instagram/previews/tier1_gallery/`
