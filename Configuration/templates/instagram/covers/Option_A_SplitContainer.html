@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Option A: Structural Container Split Cover Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    body {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06090E;
+    }
+
+    /* -------------------------------------------------------------
+       OPTION A: STRUCTURAL CONTAINER SPLIT (LEFT SPLIT)
+       ------------------------------------------------------------- */
+    .layout-left-split .copy-zone {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 520px;
+      height: 100%;
+      background-color: #06090E;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 110px 40px 110px 70px;
+    }
+
+    .layout-left-split .image-window {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 620px;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .layout-left-split .seam-blend {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 140px;
+      height: 100%;
+      background: linear-gradient(to right, #06090E 0%, rgba(6, 9, 14, 0.7) 45%, rgba(6, 9, 14, 0) 100%);
+      z-index: 5;
+    }
+
+    /* -------------------------------------------------------------
+       OPTION A: STRUCTURAL CONTAINER SPLIT (RIGHT SPLIT)
+       ------------------------------------------------------------- */
+    .layout-right-split .copy-zone {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 520px;
+      height: 100%;
+      background-color: #06090E;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 110px 70px 110px 40px;
+      text-align: right;
+    }
+
+    .layout-right-split .image-window {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 620px;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .layout-right-split .seam-blend {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 140px;
+      height: 100%;
+      background: linear-gradient(to left, #06090E 0%, rgba(6, 9, 14, 0.7) 45%, rgba(6, 9, 14, 0) 100%);
+      z-index: 5;
+    }
+
+    /* -------------------------------------------------------------
+       OPTION A: STRUCTURAL CONTAINER SPLIT (BOTTOM SPLIT)
+       ------------------------------------------------------------- */
+    .layout-bottom .copy-zone {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 540px;
+      background-color: #06090E;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 70px 80px 70px;
+    }
+
+    .layout-bottom .image-window {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 860px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .layout-bottom .seam-blend {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(to top, #06090E 0%, rgba(6, 9, 14, 0.7) 45%, rgba(6, 9, 14, 0) 100%);
+      z-index: 5;
+    }
+
+    /* -------------------------------------------------------------
+       OPTION A: STRUCTURAL CONTAINER SPLIT (TOP SPLIT)
+       ------------------------------------------------------------- */
+    .layout-top .copy-zone {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 540px;
+      background-color: #06090E;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px 70px 60px 70px;
+    }
+
+    .layout-top .image-window {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 860px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .layout-top .seam-blend {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(to bottom, #06090E 0%, rgba(6, 9, 14, 0.7) 45%, rgba(6, 9, 14, 0) 100%);
+      z-index: 5;
+    }
+
+    .split-img {
+      width: 100%;
+      height: 100%;
+      object-fit: var(--object-fit, cover);
+      object-position: var(--object-position, center center);
+    }
+
+    /* -------------------------------------------------------------
+       TYPOGRAPHY STYLES
+       ------------------------------------------------------------- */
+    .headline {
+      font-size: 60px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #FFFFFF;
+      letter-spacing: -2px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.85);
+      margin-bottom: 0;
+      width: 100%;
+    }
+    
+    .highlight-emerald {
+      color: #10B981;
+      border-bottom: 5px solid #10B981;
+      padding-bottom: 2px;
+    }
+
+    .subtext-italic {
+      font-size: 26px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.55;
+      color: #E2E8F0;
+      border-left: 5px solid var(--accent-color, #10B981);
+      padding-left: 20px;
+      width: 100%;
+    }
+
+    .layout-right-split .subtext-italic {
+      border-left: none;
+      border-right: 5px solid var(--accent-color, #10B981);
+      padding-left: 0;
+      padding-right: 20px;
+    }
+  </style>
+</head>
+<body class="layout-{{TEXT_PLACEMENT}}" style="--accent-color: {{ACCENT_HEX}}; --object-position: {{OBJECT_POSITION}}; --object-fit: {{OBJECT_FIT}};">
+
+  <div class="copy-zone">
+    <h1 class="headline" id="headline-text">
+      {{HEADLINE_HTML}}
+    </h1>
+    <p class="subtext-italic" id="subtext-text">
+      {{SUBHEADLINE_TEXT}}
+    </p>
+  </div>
+
+  <div class="image-window">
+    <img class="split-img" src="{{IMAGE_SRC}}" alt="Cover Image" />
+    <div class="seam-blend"></div>
+  </div>
+
+</body>
+</html>

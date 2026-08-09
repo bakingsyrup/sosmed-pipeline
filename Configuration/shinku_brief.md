@@ -12,11 +12,12 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 * **`00-Settings.md`**: Master pipeline feature configuration file managed by Ad Astra Sosmed Center UI.
 * **`00-Status.md`**: Live pipeline status dashboard file for Ad Astra Sosmed Center UI.
 * **`00-Media-Vault/`**: Centralized video vault for trimmed `.mp4` video clips linked in notes.
-* **`01-Inbox/`**: Raw curated news notes input.
+* **`01-Inbox/`**: Raw curated news notes input (`_NEW_EVENT_INPUT.md`) and strategic post input template (`_NEW_STRATEGIC_INPUT.md`).
 * **`01-Inbox/00-Video-Inputs/`**: Input notes for video skeleton generation.
 * **`01a-Idea-Pitches/`**: Content pitch storage.
 * **`02-Researching/`**: Processing lock directory.
 * **`03-Ready/`**: Finished Event News, Morning Briefings, and How-To drafts.
+* **`03-Ready/00-Strategic-Drafts/`**: Finished Strategic Taxonomy Wireframe drafts.
 * **`03-Ready/00-Glossary-Drafts/`**: Bilingual X Glossary thread drafts.
 * **`03-Ready/00-Video-Skeletons/`**: Completed video script skeletons.
 * **`05-Archive/video-skeletons/`**: Archive for processed video inputs.

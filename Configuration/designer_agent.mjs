@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
+import { analyzeImageSaliency, selectUniversalLayout } from './services/vision_analyzer.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,9 +11,9 @@ const __dirname = path.dirname(__filename);
 const PIPELINE_BASE = path.join(__dirname, '..', 'ig-pipeline');
 const PROCESSING_DIR = path.join(PIPELINE_BASE, '02-Processing');
 const READY_DIR = path.join(PIPELINE_BASE, '03-Ready');
-const TEMPLATES_DIR = path.join(__dirname, 'templates');
+const TEMPLATES_DIR = path.join(__dirname, 'templates', 'instagram');
 const BODY_TEMPLATES_DIR = path.join(TEMPLATES_DIR, 'body_cards');
-const REF_DESIGNS_DIR = path.join(TEMPLATES_DIR, 'reference_designs');
+const REF_DESIGNS_DIR = path.join(__dirname, 'templates', 'reference_designs');
 
 const DEFAULT_VISUAL_ASSET = path.join(REF_DESIGNS_DIR, 'GettyImages-2221816314-1920x1280.jpg');
 
@@ -186,12 +187,36 @@ function parseMarkdownDraft(bodyText) {
   return slides;
 }
 
+function extractOutroCopy(body) {
+  const match = body.match(/\*\*Kata si [^*]+\*\*:\s*([\s\S]*?)(?=\n---|#|$)/i) || 
+                body.match(/(?:Outro|Closing|CTA):\s*([\s\S]*?)(?=\n---|#|$)/i);
+  if (match) {
+    const fullText = match[1].trim();
+    const labelMatch = body.match(/(\*\*Kata si [^*]+\*\*)/i);
+    const headline = labelMatch ? labelMatch[1].replace(/\*/g, '') : "Bear Market Survival";
+    return { headline, subtext: fullText };
+  }
+  return {
+    headline: "Kuasai Hedging, Modalnya Nggak Tergerus Bear Market",
+    subtext: "Simpan panduan ini & follow buat SOP taktis kripto tanpa gorengan."
+  };
+}
+
 function formatBodyToHtml(subtext, format) {
   if (!subtext) return '<div class="bullet-item"><div class="bullet-text">Sub-pembahasan strategi.</div></div>';
   const lines = subtext.split('\n').map(l => l.trim()).filter(l => l.length > 0);
 
   if (format.includes('Format_5') || format.includes('Narrative')) {
-    return `<div class="narrative-text" id="quote-text">"${subtext.replace(/"/g, '')}"</div>`;
+    let cleanText = subtext.replace(/^["'\s]+|["'\s]+$/g, '');
+    cleanText = cleanText.replace(/(support|breakdown|funding rate|volume|sideways|range|short|spot|hedging)/gi, '<span style="color: #10B981; font-weight: 800;">$1</span>');
+
+    const periodIdx = cleanText.indexOf('.');
+    if (periodIdx > 0 && periodIdx < 70) {
+      const lead = cleanText.slice(0, periodIdx + 1);
+      const rest = cleanText.slice(periodIdx + 1).trim();
+      return `<div class="narrative-text" id="quote-text"><span style="font-size: 36px; font-weight: 800; color: #FFFFFF; display: block; margin-bottom: 14px; line-height: 1.4;">${lead}</span><span style="font-size: 28px; font-weight: 500; color: #CBD5E1; line-height: 1.55; display: block;">${rest}</span></div>`;
+    }
+    return `<div class="narrative-text" id="quote-text">"${cleanText}"</div>`;
   }
 
   if (format.includes('Format_1') || format.includes('Bullet')) {
@@ -206,36 +231,105 @@ function formatBodyToHtml(subtext, format) {
   }
 
   if (format.includes('Format_4') || format.includes('QASplit') || format.includes('Split')) {
-    let question = lines[0] || 'Pertanyaan Strategi?';
-    let answer = lines.slice(1).join(' ') || subtext;
-    question = question.replace(/^(?:Q|Question|Pertanyaan|\?)\s*:?\s*/i, '');
-    answer = answer.replace(/^(?:A|Answer|Jawaban|\!)\s*:?\s*/i, '');
-    return `
-      <div class="question-card">
-        <div class="question-tag">❓ PERTANYAAN / MITOS</div>
-        <div class="question-text auto-q-text">"${question.replace(/"/g, '')}"</div>
+    const qaPairs = [];
+    let currentQ = null;
+    let currentA = [];
+
+    lines.forEach(line => {
+      const qMatch = line.match(/^(?:Q|Question|Pertanyaan|\?)\s*:?\s*(.+)/i);
+      const aMatch = line.match(/^(?:A|Answer|Jawaban|\!)\s*:?\s*(.+)/i);
+
+      if (qMatch) {
+        if (currentQ) {
+          qaPairs.push({ q: currentQ, a: currentA.join(' ') });
+        }
+        currentQ = qMatch[1].trim();
+        currentA = [];
+      } else if (aMatch) {
+        currentA.push(aMatch[1].trim());
+      } else if (currentQ) {
+        currentA.push(line);
+      }
+    });
+    if (currentQ) {
+      qaPairs.push({ q: currentQ, a: currentA.join(' ') });
+    }
+
+    if (qaPairs.length === 0) {
+      const question = lines[0]?.replace(/^(?:Q|Question|Pertanyaan|\?)\s*:?\s*/i, '') || 'Pertanyaan Strategi?';
+      const answer = lines.slice(1).join(' ').replace(/^(?:A|Answer|Jawaban|\!)\s*:?\s*/i, '') || subtext;
+      qaPairs.push({ q: question, a: answer });
+    }
+
+    if (qaPairs.length === 1) {
+      return `
+        <div class="question-card">
+          <div class="question-tag">❓ PERTANYAAN / MITOS</div>
+          <div class="question-text auto-q-text">"${qaPairs[0].q.replace(/"/g, '')}"</div>
+        </div>
+        <div class="answer-card" id="ans-card">
+          <div class="answer-tag">💡 JAWABAN & SOLUSI</div>
+          <div class="answer-text auto-a-text">${qaPairs[0].a}</div>
+        </div>
+      `;
+    }
+
+    return qaPairs.map(pair => `
+      <div class="qa-pair-container">
+        <div class="question-row">
+          <div class="question-tag-mini">❓ PERTANYAAN</div>
+          <div class="question-text-mini">${pair.q}</div>
+        </div>
+        <div class="answer-row">
+          <div class="answer-tag-mini">💡 JAWABAN & INSIGHT</div>
+          <div class="answer-text-mini">${pair.a}</div>
+        </div>
       </div>
-      <div class="answer-card" id="ans-card">
-        <div class="answer-tag">💡 JAWABAN & SOLUSI</div>
-        <div class="answer-text auto-a-text">${answer}</div>
-      </div>
-    `;
+    `).join('\n');
   }
 
   if (format.includes('Format_3') || format.includes('Arrow') || format.includes('Flow')) {
-    return lines.map((line, idx) => {
-      const cleanLine = line.replace(/^[•\-\*\d\.]+\s*/, '');
-      const parts = cleanLine.split(':');
+    const cleanLines = lines.filter(l => !/^[↓➔→\-\s]+$/.test(l.trim()));
+    const steps = [];
+    let currentTitle = null;
+    let currentDescs = [];
+
+    cleanLines.forEach(line => {
+      const cleanLine = line.replace(/^[•\-\*\d\.\s↓➔→]+/, '').trim();
+      if (!cleanLine) return;
+
+      const colonIdx = cleanLine.indexOf(':');
+      if (colonIdx > 0 && colonIdx < 35 && !cleanLine.toLowerCase().startsWith('http')) {
+        if (currentTitle) {
+          steps.push({ title: currentTitle, desc: currentDescs.join(' ') });
+        }
+        currentTitle = cleanLine.slice(0, colonIdx).trim();
+        const rest = cleanLine.slice(colonIdx + 1).trim();
+        currentDescs = rest ? [rest] : [];
+      } else if (currentTitle) {
+        currentDescs.push(cleanLine);
+      } else {
+        currentTitle = `Langkah ${steps.length + 1}`;
+        currentDescs = [cleanLine];
+      }
+    });
+    if (currentTitle) {
+      steps.push({ title: currentTitle, desc: currentDescs.join(' ') });
+    }
+
+    if (steps.length === 0) {
+      steps.push({ title: 'Langkah 1', desc: subtext });
+    }
+
+    return steps.map((st, idx) => {
       const stepNum = String(idx + 1).padStart(2, '0');
-      const title = parts.length > 1 ? parts[0].trim() : `Langkah ${idx + 1}`;
-      const desc = parts.length > 1 ? parts.slice(1).join(':').trim() : cleanLine;
-      const arrow = idx < lines.length - 1 ? '<div class="arrow-divider">↓</div>' : '';
+      const arrow = idx < steps.length - 1 ? '<div class="arrow-divider">↓</div>' : '';
       return `
         <div class="step-card">
           <div class="step-number-badge">${stepNum}</div>
           <div class="step-content">
-            <div class="step-title">${title}</div>
-            <div class="step-desc">${desc}</div>
+            <div class="step-title">${st.title}</div>
+            <div class="step-desc">${st.desc}</div>
           </div>
         </div>
         ${arrow}
@@ -244,18 +338,64 @@ function formatBodyToHtml(subtext, format) {
   }
 
   if (format.includes('Format_2') || format.includes('KeyValue') || format.includes('Table')) {
+    const qaPairs = [];
+    let currentQ = null;
+    let currentA = [];
+
+    lines.forEach(line => {
+      const qMatch = line.match(/^(?:Q|Question|Pertanyaan|\?)\s*:?\s*(.+)/i);
+      const aMatch = line.match(/^(?:A|Answer|Jawaban|\!)\s*:?\s*(.+)/i);
+
+      if (qMatch) {
+        if (currentQ) {
+          qaPairs.push({ q: currentQ, a: currentA.join(' ') });
+        }
+        currentQ = qMatch[1].trim();
+        currentA = [];
+      } else if (aMatch) {
+        currentA.push(aMatch[1].trim());
+      } else if (currentQ) {
+        currentA.push(line);
+      }
+    });
+    if (currentQ) {
+      qaPairs.push({ q: currentQ, a: currentA.join(' ') });
+    }
+
+    if (qaPairs.length > 0) {
+      const half = Math.ceil(qaPairs.length / 2);
+      const leftPairs = qaPairs.slice(0, half);
+      const rightPairs = qaPairs.slice(half);
+
+      const renderCol = (pairs) => pairs.map(p => `
+        <div style="margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+          <div style="font-size: 22px; font-weight: 800; color: #EF4444; margin-bottom: 6px;">Q: ${p.q}</div>
+          <div style="font-size: 20px; font-weight: 500; color: #CBD5E1; line-height: 1.45;">A: ${p.a}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="card-positive" id="card-pos" style="padding: 40px 36px; justify-content: flex-start;">
+          <div class="card-badge-pos" style="margin-bottom: 20px;">📌 PERTANYAAN & SOP</div>
+          <div class="card-desc auto-desc" style="font-size: 20px;">${renderCol(leftPairs)}</div>
+        </div>
+        <div class="card-negative" id="card-neg" style="padding: 40px 36px; justify-content: flex-start;">
+          <div class="card-badge-neg" style="margin-bottom: 20px;">💡 JAWABAN & MANFAAT</div>
+          <div class="card-desc auto-desc" style="font-size: 20px;">${renderCol(rightPairs)}</div>
+        </div>
+      `;
+    }
+
     const half = Math.ceil(lines.length / 2);
     const leftLines = lines.slice(0, half).join(' ');
     const rightLines = lines.slice(half).join(' ');
     return `
       <div class="card-positive" id="card-pos">
-        <div class="card-badge-pos">✓ REKOMENDASI POSITIF</div>
-        <div class="card-metric-val auto-metric">OPSI A</div>
+        <div class="card-badge-pos">✓ REKOMENDASI</div>
         <div class="card-desc auto-desc">${leftLines || subtext}</div>
       </div>
       <div class="card-negative" id="card-neg">
-        <div class="card-badge-neg">✗ MITOS / HINDARI</div>
-        <div class="card-metric-val auto-metric">OPSI B</div>
+        <div class="card-badge-neg">✓ DETAIL & HASIL</div>
         <div class="card-desc auto-desc">${rightLines || subtext}</div>
       </div>
     `;
@@ -286,6 +426,12 @@ async function renderCarouselPost(filePath) {
   const targetTopicDir = path.join(READY_DIR, topicSlug);
   if (!fs.existsSync(targetTopicDir)) {
     fs.mkdirSync(targetTopicDir, { recursive: true });
+  } else {
+    // Clean up any old rendered PNGs to avoid orphaned files from previous runs
+    const existingPngs = fs.readdirSync(targetTopicDir).filter(f => f.endsWith('.png'));
+    for (const png of existingPngs) {
+      try { fs.unlinkSync(path.join(targetTopicDir, png)); } catch {}
+    }
   }
 
   console.log(`[Designer Agent] Parsed ${slides.length} slides for topic: "${topicSlug}"`);
@@ -296,19 +442,30 @@ async function renderCarouselPost(filePath) {
   try {
     console.log('[Designer Agent] Rendering Slide 1 (Cover Card)...');
     const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 2 });
-    const templateCover = fs.readFileSync(path.join(TEMPLATES_DIR, 'Style_A_FullBleed.html'), 'utf8');
-
+    
     const coverAssetPath = frontmatter.image_path || extractCoverImageFromMarkdown(body, fileDir);
     const base64Cover = getBase64DataUri(coverAssetPath);
+
+    // Dynamic Gemini Flash 2.0 Vision Analysis & Layout Rule Engine
+    console.log(`[Designer Agent] Analyzing cover image saliency with Gemini Flash Vision: ${coverAssetPath}`);
+    const visionData = await analyzeImageSaliency(coverAssetPath);
+    const layout = selectUniversalLayout(visionData);
+    console.log(`[Designer Agent] Selected Universal Cover Layout:`, layout);
+
+    const templateCoverPath = path.join(TEMPLATES_DIR, 'covers', 'Option_A_SplitContainer.html');
+    const templateCover = fs.readFileSync(templateCoverPath, 'utf8');
 
     const coverHeadlineText = card1Header || slides[0]?.headline || cleanTitle;
     const coverHeadlineHtml = coverHeadlineText.replace(/(Bitcoin|Futures|Hedging|Crash|Stop‑Loss|Rekt|Monopoli|Cashflow)/gi, '<span class="highlight-emerald">$1</span>');
     const coverSubheadline = slides[0]?.subtext || frontmatter.subheadline || 'Tips batasi kerugian spot menggunakan teknik hedging Futures.';
+    const accentHex = visionData.recommended_accent_hex || '#10B981';
 
     const htmlCover = templateCover
-      .replace(/\{\{TEXT_PLACEMENT\}\}/g, 'left-split')
-      .replace(/\{\{ACCENT_HEX\}\}/g, '#10B981')
-      .replace(/\{\{IMAGE_PATH\}\}/g, base64Cover)
+      .replace(/\{\{TEXT_PLACEMENT\}\}/g, layout.placement)
+      .replace(/\{\{OBJECT_POSITION\}\}/g, layout.objectPosition)
+      .replace(/\{\{OBJECT_FIT\}\}/g, layout.objectFit || 'cover')
+      .replace(/\{\{ACCENT_HEX\}\}/g, accentHex)
+      .replace(/\{\{IMAGE_SRC\}\}/g, base64Cover)
       .replace(/\{\{HEADLINE_HTML\}\}/g, coverHeadlineHtml)
       .replace(/\{\{SUBHEADLINE_TEXT\}\}/g, coverSubheadline);
 
@@ -359,7 +516,12 @@ async function renderCarouselPost(filePath) {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 2 });
     const templateOutro = fs.readFileSync(path.join(TEMPLATES_DIR, 'Outro_CTA_Card.html'), 'utf8');
 
-    await page.setContent(templateOutro, { waitUntil: 'networkidle' });
+    const outroData = extractOutroCopy(body);
+    const htmlOutro = templateOutro
+      .replace(/\{\{OUTRO_HEADLINE\}\}/g, outroData.headline)
+      .replace(/\{\{OUTRO_SUBTEXT\}\}/g, outroData.subtext.replace(/\n/g, '<br>'));
+
+    await page.setContent(htmlOutro, { waitUntil: 'networkidle' });
     const outroOutPath = path.join(targetTopicDir, `Slide_${outroSlideIdx}_OutroCTA.png`);
     await page.screenshot({ path: outroOutPath, type: 'png' });
     console.log(`  ✓ Saved: ${outroOutPath}`);

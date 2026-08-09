@@ -255,8 +255,10 @@ function mergeSnapshotData(existing, fresh) {
     const old = merged.get(a.handle.toLowerCase());
     const freshCount = a.tweets?.length || 0;
     const oldCount = old?.tweets?.length || 0;
-    // Prefer fresh data unless old has more tweets AND no error
     if (!old || old.error || freshCount > oldCount) {
+      if (old && !old.error && (a.followers || 0) === 0 && old.followers > 0) {
+        a.followers = old.followers;
+      }
       merged.set(a.handle.toLowerCase(), a);
     }
   }
@@ -270,7 +272,7 @@ export function processSnapshotMetrics(rawAccounts) {
   const now = Date.now();
 
   return rawAccounts.map(account => {
-    const followers = account.followers || 1;
+    const followers = account.followers > 0 ? account.followers : 0;
 
     const processedTweets = (account.tweets || []).map(tweet => {
       const pubTime = tweet.ts_epoch || (tweet.timestamp ? new Date(tweet.timestamp).getTime() : now);
@@ -279,7 +281,7 @@ export function processSnapshotMetrics(rawAccounts) {
       const impressions = tweet.views || 0;
       const engagements = (tweet.likes || 0) + (tweet.retweets || 0) + (tweet.replies || 0) + (tweet.bookmarks || 0);
 
-      const impression_yield_pct = (impressions / followers) * 100;
+      const impression_yield_pct = followers > 0 ? parseFloat(((impressions / followers) * 100).toFixed(2)) : undefined;
       const engagement_rate_pct = impressions > 0 ? (engagements / impressions) * 100 : 0;
 
       let time_window = 'LIVE';

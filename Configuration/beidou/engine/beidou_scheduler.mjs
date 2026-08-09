@@ -56,6 +56,15 @@ try {
     process.exit(1);
   }
 
+  // ── Step 3: Trigger Lulua Outlier Scanner & Executive Briefing ──
+  console.log('[beidou-scheduler] Triggering Lulua Outlier Scanner & Executive Briefing...');
+  try {
+    const { runOutlierScanner } = await import('../../lulua/engine/lulua_outlier_scanner.mjs');
+    await runOutlierScanner();
+  } catch (luluaErr) {
+    console.error('[beidou-scheduler] Error triggering Lulua outlier scan:', luluaErr.message);
+  }
+
   console.log('[beidou-scheduler] Daily run complete successfully.');
   process.exit(0);
 } catch (err) {

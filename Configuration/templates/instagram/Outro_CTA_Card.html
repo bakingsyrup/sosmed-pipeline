@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Outro / CTA Card (Ultra-Pure Black, White & Gold)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06090E;
+      color: #F8FAFC;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Minimalist Elegant Gold/Silver Background Glow */
+    .ambient-glow-gold {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(226, 232, 240, 0.03) 45%, rgba(6, 9, 14, 0) 70%);
+      pointer-events: none;
+    }
+
+    /* Ultra-Pure Center Content Container */
+    .cta-center-container {
+      width: 100%;
+      max-width: 920px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      padding: 0 40px;
+    }
+
+    .cta-headline {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #FFFFFF;
+      letter-spacing: -1.5px;
+      text-shadow: 0 4px 32px rgba(0,0,0,0.6);
+    }
+    .cta-subtext {
+      font-size: 32px;
+      color: #D4AF37; /* Warm Gold Accent */
+      line-height: 1.5;
+      margin-top: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow-gold"></div>
+
+  <div class="cta-center-container" id="cta-container">
+    <h1 class="cta-headline" id="cta-head-text">{{OUTRO_HEADLINE}}</h1>
+    <p class="cta-subtext" id="cta-sub-text">{{OUTRO_SUBTEXT}}</p>
+  </div>
+
+  <!-- Pillar 1B: Bidirectional Auto-Scaler Engine -->
+  <script>
+    function fitUltraPureCTA(containerEl, headTextEl) {
+      let fontSize = 96;
+      while (containerEl.offsetHeight < 850 && fontSize < 112) {
+        fontSize += 2;
+        headTextEl.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fitUltraPureCTA(document.getElementById('cta-container'), document.getElementById('cta-head-text'));
+    });
+  </script>
+</body>
+</html>

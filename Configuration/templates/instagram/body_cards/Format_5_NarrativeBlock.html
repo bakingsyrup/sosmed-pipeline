@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Format 5: Executive Narrative Block (Ultra-Clean No Header/Footer)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06090E;
+      color: #F8FAFC;
+      padding: 90px 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ambient-glow {
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .main-body-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      gap: 32px;
+    }
+
+    .headline-box {
+      min-height: 100px;
+      max-height: 180px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .headline {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.18;
+      color: #FFFFFF;
+      letter-spacing: -1.5px;
+      width: 100%;
+    }
+
+    .narrative-card {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 8px solid #10B981;
+      border-radius: 28px;
+      padding: 56px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 10;
+    }
+    .narrative-tag {
+      font-size: 16px;
+      font-weight: 900;
+      color: #10B981;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .quote-icon {
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--accent-color, #10B981);
+      opacity: 0.4;
+      line-height: 0.5;
+      margin-bottom: 16px;
+    }
+    .narrative-box {
+      display: flex;
+      align-items: center;
+    }
+    .narrative-text {
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #F8FAFC;
+      width: 100%;
+    }
+    .highlight-word {
+      color: var(--accent-color, #10B981);
+    }
+  </style>
+</head>
+<body style="--accent-color: {{ACCENT_HEX}};">
+  <div class="ambient-glow"></div>
+
+  <div class="main-body-container">
+    <div class="headline-box">
+      <h1 class="headline" id="headline-text">{{HEADLINE_TEXT}}</h1>
+    </div>
+
+    <div class="narrative-card" id="narrative-card">
+      <div class="narrative-tag">💬 INSIGHT STRATEGI MEKANIK</div>
+      <div class="quote-icon">“</div>
+      <div class="narrative-box" id="quote-box">
+        {{BODY_CONTENT_HTML}}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fitQuoteToBox(cardEl, quoteBoxEl, targetFillPercent = 0.85) {
+      let qTextEl = quoteBoxEl.querySelector('.narrative-text');
+      let currentFont = 48;
+
+      while (cardEl.offsetHeight < cardEl.parentElement.clientHeight * 0.85 && currentFont < 58) {
+        currentFont += 1;
+        qTextEl.style.fontSize = currentFont + 'px';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fitQuoteToBox(document.getElementById('narrative-card'), document.getElementById('quote-box'));
+    });
+  </script>
+</body>
+</html>

@@ -3,6 +3,7 @@
 **Created:** August 8, 2026  
 **Status:** Active System Specification & Operating Standard  
 **Parent Framework:** [iroi_strategy_roadmap.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/iroi_strategy_roadmap.md)  
+**Layout & Design System Spec:** [carousel_layout_matrix_and_design_system.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/carousel_layout_matrix_and_design_system.md)  
 
 ---
 

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tier 1: Punchy Key-Value Table (Stacked Ultra Weighted)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06090E;
+      color: #F8FAFC;
+      padding: 90px 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ambient-glow {
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+    .main-body-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      gap: 44px;
+    }
+    .headline-box {
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+    }
+    .headline {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.16;
+      color: #FFFFFF;
+      letter-spacing: -1.8px;
+      width: 100%;
+    }
+    .comparison-grid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 40px;
+    }
+    .card-positive {
+      width: 100%;
+      min-height: 280px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      border-left: 14px solid #10B981;
+      border-radius: 36px;
+      padding: 60px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+    }
+    .card-negative {
+      width: 100%;
+      min-height: 280px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1.5px solid rgba(244, 63, 94, 0.45);
+      border-left: 14px solid #F43F5E;
+      border-radius: 36px;
+      padding: 60px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+    }
+    .card-badge-pos {
+      font-size: 28px;
+      font-weight: 900;
+      color: #10B981;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .card-badge-neg {
+      font-size: 28px;
+      font-weight: 900;
+      color: #F43F5E;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .card-desc {
+      font-size: 40px;
+      line-height: 1.45;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body style="--accent-color: {{ACCENT_HEX}};">
+  <div class="ambient-glow"></div>
+  <div class="main-body-container">
+    <div class="headline-box">
+      <h1 class="headline" id="headline-text">{{HEADLINE_TEXT}}</h1>
+    </div>
+    <div class="comparison-grid" id="comp-box">
+      {{BODY_CONTENT_HTML}}
+    </div>
+  </div>
+</body>
+</html>

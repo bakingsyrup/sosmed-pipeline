@@ -97,19 +97,20 @@ export function runCohortDiagnostics(cohortId, days = 1) {
 
       rawData.forEach(acc => {
         const handle = (acc.handle || '').toLowerCase();
+        const followers = acc.followers || 0;
         if (!accountMap.has(handle)) {
           accountMap.set(handle, {
-            latestFollowers: acc.followers || 0,
-            oldestFollowers: acc.followers || 0,
+            latestFollowers: followers,
+            oldestFollowers: followers,
+            bestFollowers: followers,
             tweetsMap: new Map(),
           });
         }
 
         const entry = accountMap.get(handle);
-        // First snapshot in array is latest
-        if (snapIndex === 0) entry.latestFollowers = acc.followers || 0;
-        // Last snapshot in array is oldest in window
-        entry.oldestFollowers = acc.followers || 0;
+        if (snapIndex === 0 && followers > 0) entry.latestFollowers = followers;
+        if (followers > 0) entry.oldestFollowers = followers;
+        if (followers > entry.bestFollowers) entry.bestFollowers = followers;
 
         // Merge tweets deduplicated by ID, filtered to target timestamp window
         if (Array.isArray(acc.tweets)) {
@@ -118,9 +119,10 @@ export function runCohortDiagnostics(cohortId, days = 1) {
               ? t.ts_epoch >= tweetStartMs && t.ts_epoch < tweetEndMs
               : true;
             if (t.id && !entry.tweetsMap.has(t.id) && inWindow) {
-              // Backfill snapshots may lack computed metrics — compute on-the-fly
-              if (t.impression_yield_pct === undefined && acc.followers > 0) {
-                t.impression_yield_pct = parseFloat(((t.views || 0) / acc.followers * 100).toFixed(2));
+              // Recompute yield when undefined OR when snapshot had followers=0 (old bug)
+              const snapshotFollowers = acc.followers || 0;
+              if ((t.impression_yield_pct === undefined || snapshotFollowers === 0) && entry.bestFollowers > 0) {
+                t.impression_yield_pct = parseFloat(((t.views || 0) / entry.bestFollowers * 100).toFixed(2));
               }
               if (t.engagement_rate_pct === undefined) {
                 const eng = (t.likes || 0) + (t.retweets || 0) + (t.replies || 0) + (t.bookmarks || 0);
@@ -134,6 +136,16 @@ export function runCohortDiagnostics(cohortId, days = 1) {
       });
     } catch (e) {}
   });
+
+  // Second pass: recompute yields using best-known followers across all snapshots.
+  // Fixes legacy snapshots where followers scraped as 0 but tweets carry inflated yields.
+  for (const [handle, entry] of accountMap) {
+    if (entry.bestFollowers > 0) {
+      entry.tweetsMap.forEach(t => {
+        t.impression_yield_pct = parseFloat(((t.views || 0) / entry.bestFollowers * 100).toFixed(2));
+      });
+    }
+  }
 
   // Calculate Peer Tier Medians
   const peerYields = [];
@@ -192,15 +204,28 @@ export function runCohortDiagnostics(cohortId, days = 1) {
     const acc = accountMap.get(h);
     if (acc) {
       acc.tweetsMap.forEach(t => {
+        const followers = acc.latestFollowers || 1;
+        const impressionYield = t.impression_yield_pct || 0;
+        const bookmarkYield = parseFloat((((t.bookmarks || 0) / followers) * 100).toFixed(2));
+        const repostYield = parseFloat((((t.retweets || 0) / followers) * 100).toFixed(2));
+        const likeYield = parseFloat((((t.likes || 0) / followers) * 100).toFixed(2));
+        const commentYield = parseFloat((((t.replies || 0) / followers) * 100).toFixed(2));
+
         leaderTopPosts.push({
           handle: `@${h}`,
-          followers: acc.latestFollowers,
+      followers: acc.latestFollowers || acc.bestFollowers || 0,
           text: t.text,
           url: t.url,
-          impression_yield_pct: t.impression_yield_pct || 0,
-          likes: t.likes,
-          retweets: t.retweets,
-          replies: t.replies,
+          views: t.views || 0,
+          impression_yield_pct: impressionYield,
+          bookmark_yield_pct: bookmarkYield,
+          repost_yield_pct: repostYield,
+          like_yield_pct: likeYield,
+          comment_yield_pct: commentYield,
+          likes: t.likes || 0,
+          retweets: t.retweets || 0,
+          replies: t.replies || 0,
+          bookmarks: t.bookmarks || 0,
         });
       });
     }
@@ -248,7 +273,7 @@ export function runCohortDiagnostics(cohortId, days = 1) {
       id: `@${handle}`,
       name: `@${handle}`,
       role,
-      followers: acc.latestFollowers || 0,
+      followers: acc.latestFollowers || acc.bestFollowers || 0,
       tweets: tweets.sort((a, b) => (b.ts_epoch || 0) - (a.ts_epoch || 0)),
       daily_impression_timeline,
       metrics: {
@@ -321,7 +346,7 @@ export function runCohortDiagnostics(cohortId, days = 1) {
     net_variance_pct: netVariancePct,
     summary_message: summaryMessage,
     target_metrics: {
-      follower_count: targetAcc?.latestFollowers || 0,
+      follower_count: targetAcc?.latestFollowers || targetAcc?.bestFollowers || 0,
       median_impression_yield_pct: targetMedianYield,
       median_engagement_rate_pct: targetMedianEngagement,
     },
@@ -331,7 +356,7 @@ export function runCohortDiagnostics(cohortId, days = 1) {
       median_engagement_rate_pct: peerMedianEngagement,
     },
     entities,
-    leader_tier_top_archetypes: leaderTopPosts.slice(0, 5),
+    leader_tier_top_archetypes: leaderTopPosts.slice(0, 30),
     generated_at: new Date().toISOString(),
   };
 

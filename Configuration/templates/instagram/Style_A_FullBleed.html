@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Style A Full Bleed (Bidirectional Auto-Fit Option B)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    body {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      background-color: #06090E;
+    }
+    .background-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* 3. OPTION B: SPLIT VERTICAL STACK (Headline at Top-Left, Subtext at Bottom-Left) */
+    .layout-left-split .vignette-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(6, 9, 14, 0.98) 0%, rgba(6, 9, 14, 0.88) 48%, rgba(6, 9, 14, 0.35) 68%, rgba(0, 0, 0, 0) 88%);
+    }
+    .layout-left-split .headline-container {
+      position: absolute;
+      top: 90px;
+      left: 70px;
+      width: 530px;
+      max-height: 520px;
+      z-index: 10;
+      display: flex;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+    .layout-left-split .subtext-container {
+      position: absolute;
+      bottom: 90px;
+      left: 70px;
+      width: 530px;
+      max-height: 260px;
+      z-index: 10;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    /* General Typography & Highlighting */
+    .headline {
+      font-size: 68px;
+      font-weight: 900;
+      line-height: 1.14;
+      color: #FFFFFF;
+      letter-spacing: -2px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.85);
+      margin-bottom: 0;
+      width: 100%;
+    }
+    
+    .highlight-emerald {
+      color: #10B981;
+      border-bottom: 5px solid #10B981;
+      padding-bottom: 2px;
+    }
+
+    .subtext-italic {
+      font-size: 26px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.55;
+      color: #E2E8F0;
+      border-left: 5px solid var(--accent-color, #10B981);
+      padding-left: 20px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="layout-{{TEXT_PLACEMENT}}" style="--accent-color: {{ACCENT_HEX}};">
+  <img class="background-img" src="{{IMAGE_PATH}}" alt="Background" />
+  <div class="vignette-overlay"></div>
+
+  <!-- Separate Bounded Containers for Split Option B -->
+  <div class="headline-container" id="headline-box">
+    <h1 class="headline" id="headline-text">
+      {{HEADLINE_HTML}}
+    </h1>
+  </div>
+  <div class="subtext-container" id="subtext-box">
+    <p class="subtext-italic" id="subtext-text">
+      {{SUBHEADLINE_TEXT}}
+    </p>
+  </div>
+
+  <!-- Pillar 1B: Bidirectional Auto-Scaler Engine for Cover Card -->
+  <script>
+    function fitCoverHeadline(boxEl, textEl) {
+      let fontSize = 68;
+      
+      // Grow if short copy (< 60% of bounded headline height)
+      while (boxEl.offsetHeight < 420 && fontSize < 78) {
+        fontSize += 2;
+        textEl.style.fontSize = fontSize + 'px';
+      }
+      // Shrink if long copy (> 95% overflow)
+      while (textEl.offsetHeight > 500 && fontSize > 48) {
+        fontSize -= 2;
+        textEl.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    function fitCoverSubtext(boxEl, textEl) {
+      let fontSize = 26;
+      
+      while (textEl.offsetHeight > 250 && fontSize > 20) {
+        fontSize -= 1;
+        textEl.style.fontSize = fontSize + 'px';
+      }
+      while (textEl.offsetHeight < 140 && fontSize < 34) {
+        fontSize += 1;
+        textEl.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fitCoverHeadline(document.getElementById('headline-box'), document.getElementById('headline-text'));
+      fitCoverSubtext(document.getElementById('subtext-box'), document.getElementById('subtext-text'));
+    });
+  </script>
+</body>
+</html>

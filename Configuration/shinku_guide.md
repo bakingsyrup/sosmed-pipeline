@@ -67,9 +67,11 @@ pm2 restart x-draft-agent
 ```
 
 ### Input Note Preparation Checklist
-* **Standard Event News**: Drop note into `01-Inbox/` with title, source link (`url: ...`), and handle (`handle: ...`).
+* **Standard Event News**: 
+  - **Option A (UI Feed)**: Approve a post in the X feed UI; `sync_to_obsidian.mjs` automatically generates a note in `01-Inbox/`.
+  - **Option B (Template Note)**: Edit `01-Inbox/_NEW_EVENT_INPUT.md`, paste raw news text, and toggle `status: ready`. The daemon will process it and auto-recreate a fresh template.
 * **Morning Briefing**: Create note in `01-Inbox/` with frontmatter `type: X - Morning Briefing`.
-* **Video Skeleton**: Drop note into `01-Inbox/00-Video-Inputs/` with frontmatter `status: ready` and `type: Video - Topic Input`.
+* **Video Skeleton**: Drop note into `01-Inbox/00-Video-Inputs/` (or edit `_NEW_VIDEO_INPUT.md`) with frontmatter `status: ready` and `type: Video - Topic Input`.
 
 ### Troubleshooting
 * **File Stuck in `02-Researching/`**: If a run crashed, move the note from `02-Researching/` back to `01-Inbox/` (or `01-Inbox/00-Video-Inputs/`) and run `pm2 restart x-draft-agent`.

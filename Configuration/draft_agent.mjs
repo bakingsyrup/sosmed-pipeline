@@ -689,7 +689,7 @@ angles:
   - ""
   - ""
   - ""
-niche_focus: all # macro | crypto | ai | all
+niche_focus: all # macro | crypto | ai | ai_productivity | all
 lang: id # id (Indonesian, default) | en (English)
 ---
 
@@ -867,16 +867,96 @@ async function processVideoInput(inputFilePath) {
     // MODE: AUTO (Topic Discovery Digest Mode)
     if (mode === 'auto') {
       console.log(`[Video Discovery] Mode: AUTO triggered (Niche Focus: ${nicheFocus})`);
+
+      const isAiProductivity = (nicheFocus === 'ai_productivity');
+      const isAllNiches = (!isAiProductivity && (nicheFocus === 'all' || !nicheFocus || nicheFocus === 'auto'));
+      const targetCount = isAllNiches ? 30 : 10;
+
+      // ── Shared AI Productivity prompt (used by both dedicated 'ai_productivity' mode and 'all' mode append) ──
+      const aiProdSystemInstruction = `
+You are a senior content strategist specializing in AI productivity and practical tech adoption.
+Your task is to discover the top trending practical AI use cases, productivity tools, and workflow hacks that are going viral among small business owners, solopreneurs, and individual operators.
+
+SEARCH METHODOLOGY:
+1. Search YouTube for viral AI productivity tool demos, workflow tutorials, and "how I use AI for my business" videos from the past 7 days.
+2. Search Reddit (r/smallbusiness, r/Entrepreneur, r/productivity, r/ChatGPT, r/ClaudeAI, r/LocalLLaMA) for highly-upvoted threads about AI tools saving time/money, concrete use cases, and real-world results.
+3. Search Google News for newly launched AI tools, major feature updates to existing tools, and case studies of non-tech businesses adopting AI.
+4. OUTLIER FILTER: prioritize topics with 2x-5x higher engagement than typical content in these communities. A YouTube video with 50K views about an Excel AI hack is more valuable than a 10K-view GPU benchmark.
+5. PRESERVE THE USE CASE: If a video title is generic (e.g. "You're using ChatGPT wrong"), extract the specific workflow or tool that made it go viral.
+6. DISCARD: purely technical AI research paper summaries, GPU hardware reviews, AI model benchmark comparisons, and enterprise "press release" announcements with no practical user takeaway.
+
+FORMATTING REQUIREMENTS:
+- Output exactly 10 topics.
+- For EVERY topic, provide:
+  - Title: Clear, benefit-driven headline written for a small business owner (e.g. "How a bakery owner uses ChatGPT to write 30 Instagram captions in 10 minutes").
+  - Summary: Maximum 3 sentences: (1) the specific tool/workflow, (2) the time or money saved, (3) the skill level needed (no-code, low-code, simple prompting).
+  - Origin Link: Direct URL to the YouTube video, Reddit thread, or news article [Source Title](URL).
+  - Outlier Proof: Engagement metric (views, upvotes) demonstrating viral breakout.
+`;
+
+      const aiProdPromptStr = `
+Perform the viral AI productivity topic scan and output the Top 10 Trending AI Productivity Topics.
+
+SEARCH FOCUS:
+- Practical AI use cases for small business owners, solopreneurs, and individual operators
+- Tools: ChatGPT, Claude, Perplexity, Make.com, Notion AI, and new AI productivity launches
+- Workflows: content creation, data analysis, customer communication, automation, research
+- Language: English (primary) and Indonesian (secondary — viral content from Indonesian creators)
+
+Please format your response strictly using this Markdown structure:
+
+# 🛠️ Trending AI Productivity Topics (Top 10)
+
+### 1. [Topic Title]
+- **Summary:** [Max 3 sentence explainer: tool + time/money saved + skill level]
+- **Origin Link:** [Source Name](URL)
+- **Outlier Proof:** [Engagement metric proving viral breakout]
+
+(Repeat for topics 2 to 10)
+`;
+
+      if (isAiProductivity) {
+        // ── AI Productivity Niche (practical use cases, tools, workflows) ──
+        console.log(`[Video Discovery] AI Productivity mode: scanning for viral practical AI use cases...`);
+
+        const aiProdResult = await callGemini(aiProdPromptStr, aiProdSystemInstruction, true, researchModel);
+        const rawAiProdContent = aiProdResult.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+        const verifiedAiProdContent = await verifyAndCleanMarkdownContent(rawAiProdContent);
+
+        const dateStr = new Date().toISOString().split('T')[0];
+        const outputFilename = `${dateStr}-video-topics-ai-productivity.md`;
+        const outputPath = path.join(paths.videoSkeletonsDir, outputFilename);
+
+        const outputFrontmatter = `---
+type: Video - Topic Menu
+status: ready
+mode: auto
+niche_focus: ai_productivity
+created_at: ${dateStr}
+---
+
+`;
+
+        fs.writeFileSync(outputPath, outputFrontmatter + verifiedAiProdContent, 'utf8');
+        console.log(`[Video Discovery] Saved AI Productivity Topics Digest to: 03-Ready/00-Video-Skeletons/${outputFilename}`);
+
+        if (fs.existsSync(researchingPath)) {
+          fs.unlinkSync(researchingPath);
+        }
+
+        writeStatus('OK');
+        return;
+      }
+
+      // ── Standard News Niche (Macro, Crypto, AI, All) ──
+      console.log(`[Video Discovery] Performing 2-step baseline outlier scan for Top ${targetCount} trending topics...`);
+
       const sourcingConfigPath = path.join(__dirname, 'video_sourcing_config.md');
       let sourcingConfigContent = '';
       if (fs.existsSync(sourcingConfigPath)) {
         sourcingConfigContent = fs.readFileSync(sourcingConfigPath, 'utf8');
       }
-
-      const isAllNiches = (nicheFocus === 'all' || !nicheFocus || nicheFocus === 'auto');
-      const targetCount = isAllNiches ? 30 : 10;
-      
-      console.log(`[Video Discovery] Performing 2-step baseline outlier scan for Top ${targetCount} trending topics...`);
 
       const autoSystemInstruction = `
 You are a senior video producer and growth content strategist.
@@ -897,7 +977,7 @@ FORMATTING REQUIREMENTS:
   - Summary: Maximum 3 sentences explaining the core news event and market impact.
   - Origin Link: Direct URL link to the YouTube video, Reddit thread, or primary news article [Source Title](URL).
   - Outlier Proof: View count / upvote metric demonstrating why it is a 2x-5x breakout outlier vs the baseline anchors.
-`;
+`;	  
 
       const autoPromptStr = `
 Perform the 2-step outlier discovery scan and output the Top ${targetCount} Trending Video Topics.
@@ -967,6 +1047,18 @@ created_at: ${dateStr}
 
       fs.writeFileSync(outputPath, outputFrontmatter + verifiedAutoContent, 'utf8');
       console.log(`[Video Discovery] Saved completed Top Topics Digest to: 03-Ready/00-Video-Skeletons/${outputFilename}`);
+
+      // If 'all' mode, also run AI Productivity scan and append to the same file
+      if (isAllNiches) {
+        console.log(`[Video Discovery] Appending AI Productivity topics to 'all' digest...`);
+        const aiProdResult = await callGemini(aiProdPromptStr, aiProdSystemInstruction, true, researchModel);
+        const rawAiProdContent = aiProdResult.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const verifiedAiProdContent = await verifyAndCleanMarkdownContent(rawAiProdContent);
+
+        const aiProdSection = `\n\n---\n\n# 🛠️ AI Productivity (Top 10)\n\n${verifiedAiProdContent}`;
+        fs.appendFileSync(outputPath, aiProdSection, 'utf8');
+        console.log(`[Video Discovery] AI Productivity section appended — digest now contains 40 topics.`);
+      }
 
       if (fs.existsSync(researchingPath)) {
         fs.unlinkSync(researchingPath);

@@ -55,6 +55,13 @@ export function parseMarkdown(content) {
       if (colonIndex !== -1) {
         const key = line.slice(0, colonIndex).trim();
         let val = line.slice(colonIndex + 1).trim();
+        // Strip inline YAML comments if not inside quotes
+        if (!val.startsWith('"') && !val.startsWith("'")) {
+          const commentIdx = val.indexOf('#');
+          if (commentIdx !== -1) {
+            val = val.slice(0, commentIdx).trim();
+          }
+        }
         if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
           val = val.slice(1, -1);
         }
@@ -273,3 +280,69 @@ export function appendGlossaryAlphabetically(filePath, newEntriesText) {
   }
   fs.writeFileSync(filePath, finalFileContent, 'utf8');
 }
+
+/**
+ * Resolve taxonomy details from Configuration/taxonomies/*.md given a topic_id
+ */
+export function resolveTaxonomyTopic(topicId, pipelineBase) {
+  if (!topicId) return { found: false };
+
+  const id = topicId.trim().toLowerCase();
+  let taxonomyFile = '';
+  if (id.startsWith('ai_')) {
+    taxonomyFile = path.join(pipelineBase, 'Configuration', 'taxonomies', 'ai_taxonomy.md');
+  } else if (id.startsWith('solo_') || id.startsWith('solopreneur_')) {
+    taxonomyFile = path.join(pipelineBase, 'Configuration', 'taxonomies', 'solopreneur_taxonomy.md');
+  } else if (id.startsWith('macro_')) {
+    taxonomyFile = path.join(pipelineBase, 'Configuration', 'taxonomies', 'macro_taxonomy.md');
+  } else if (id.startsWith('crypto_')) {
+    taxonomyFile = path.join(pipelineBase, 'Configuration', 'taxonomies', 'crypto_taxonomy.md');
+  }
+
+  if (!taxonomyFile || !fs.existsSync(taxonomyFile)) {
+    return { found: false };
+  }
+
+  try {
+    const content = fs.readFileSync(taxonomyFile, 'utf8');
+    const lines = content.split('\n');
+    let sectionLines = [];
+    let inTargetSection = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.includes(`\`${topicId}\``) || line.includes(`(${topicId})`)) {
+        inTargetSection = true;
+        // Include preceding headline if available
+        if (i > 0 && lines[i - 1].startsWith('####')) {
+          sectionLines.push(lines[i - 1]);
+        }
+        sectionLines.push(line);
+        continue;
+      }
+
+      if (inTargetSection) {
+        if (line.startsWith('#### ') || line.startsWith('### ') || line.startsWith('## ')) {
+          break; // Next section reached
+        }
+        sectionLines.push(line);
+      }
+    }
+
+    if (sectionLines.length === 0) {
+      return { found: false };
+    }
+
+    const rawSection = sectionLines.join('\n').trim();
+    return {
+      found: true,
+      topicId,
+      taxonomyFile: path.basename(taxonomyFile),
+      rawSection
+    };
+  } catch (err) {
+    console.error(`Error resolving taxonomy topic ${topicId}:`, err.message);
+    return { found: false };
+  }
+}
+

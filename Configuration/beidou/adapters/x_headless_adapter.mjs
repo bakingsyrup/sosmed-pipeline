@@ -174,8 +174,21 @@ async function scrapeAccount(page, handle, opts) {
     return { handle, followers: 0, tweets: [], error: 'profile not found' };
   }
 
-  const followers = await page.evaluate(() => {
-    const link = document.querySelector('a[href$="/verified_followers"], a[href$="/followers"]');
+  const extractFollowers = () => page.evaluate(() => {
+    let link = document.querySelector('a[href$="/followers"]');
+    if (!link) link = document.querySelector('a[href$="/verified_followers"]');
+    if (!link) {
+      const allLinks = document.querySelectorAll('a[role="link"]');
+      for (const a of allLinks) {
+        const href = (a.getAttribute('href') || '');
+        const aria = (a.getAttribute('aria-label') || '').toLowerCase();
+        if (href.endsWith('/followers') || href.endsWith('/verified_followers') ||
+            (aria.includes('followers') && /\d/.test(aria))) {
+          link = a;
+          break;
+        }
+      }
+    }
     if (!link) return 0;
     const label = link.getAttribute('aria-label') || link.innerText || '';
     const m = label.match(/([\d,.]+)\s*([KMkm]?)/);
@@ -186,6 +199,12 @@ async function scrapeAccount(page, handle, opts) {
     if (unit === 'M') num *= 1000000;
     return Math.round(num);
   });
+
+  let followers = await extractFollowers();
+  if (followers === 0) {
+    await sleep(2000);
+    followers = await extractFollowers();
+  }
 
   const allTweets = new Map();
   let staleCount = 0;
