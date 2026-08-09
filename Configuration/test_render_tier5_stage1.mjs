@@ -1,0 +1,250 @@
+import playwright from 'playwright';
+import fs from 'fs';
+import path from 'path';
+
+const BASE_DIR = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/templates/instagram';
+const TIER3_TEMPLATES_DIR = path.join(BASE_DIR, 'body_cards/tier3_dense');
+const OUTPUT_DIR = path.join(BASE_DIR, 'previews/tier5_gallery');
+
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+}
+
+// Stage 1 Tier 5 Overflow Copy (>500 chars split into Part 1 & Part 2 sequential cards)
+const STAGE1_TIER5_DATA = [
+  // Format 1: Bullet SOP Split (Part 1 & Part 2)
+  {
+    slideNumber: '2a',
+    templateFile: 'Format_1_BulletSOP_T3.html',
+    outputFile: 'Slide_2a_Format_1_BulletSOP_T5_Part1.png',
+    headline: 'SOP Manajemen Portofolio High-Risk (Bagian 1/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="bullet-item">
+        <div class="bullet-icon">●</div>
+        <div class="bullet-text">
+          <span class="bullet-lead">DCA Terstruktur & Sistematis:</span> Melakukan pembelian bertahap setiap minggu pada aset tier 1 seperti Bitcoin dan Ethereum tanpa menggunakan leverage berlebih. Langkah ini sangat efektif meminimalkan dampak psikologis akibat fluktuasi pasar ekstrem dalam jangka panjang serta menjaga rata-rata harga masuk pasar tetap optimal di tengah ketidakpastian makroekonomi global.
+        </div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon">●</div>
+        <div class="bullet-text">
+          <span class="bullet-lead">Distribusi Margin Netral Risk-Off:</span> Menempatkan 50% modal di aset spot utama dan 50% sisanya pada posisi short hedging saat terjadi pembalikan tren harga harian. Strategi ini menjaga nilai total portofolio tetap 100% stabil di tengah fase crash besar tanpa perlu khawatir terkena gelombang likuidasi beruntun bursa crypto.
+        </div>
+      </div>
+    `
+  },
+  {
+    slideNumber: '2b',
+    templateFile: 'Format_1_BulletSOP_T3.html',
+    outputFile: 'Slide_2b_Format_1_BulletSOP_T5_Part2.png',
+    headline: 'SOP Manajemen Portofolio High-Risk (Bagian 2/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="bullet-item">
+        <div class="bullet-icon">●</div>
+        <div class="bullet-text">
+          <span class="bullet-lead">Disiplin Cut-Loss Automasi Parsial:</span> Memasang perintah stop-loss otomatis di 3% tepat di bawah garis indikator MA-50 jam. Jika harga menembus level tersebut, sistem akan langsung mengeksekusi likuidasi parsial sebesar 50% posisi demi mengamankan sisa modal dingin dan mencegah risiko drawdown berlebihan.
+        </div>
+      </div>
+      <div class="bullet-item">
+        <div class="bullet-icon">●</div>
+        <div class="bullet-text">
+          <span class="bullet-lead">Evaluasi Audit Portofolio Bulanan:</span> Mengukur tingkat rasio Sharpe dan Max Drawdown setiap akhir bulan untuk memastikan seluruh alokasi aset modal tetap berada di dalam koridor toleransi risiko yang telah ditetapkan sejak awal perencanaan investasi.
+        </div>
+      </div>
+    `
+  },
+  // Format 2: Key-Value Table Split (Part 1 & Part 2)
+  {
+    slideNumber: '3a',
+    templateFile: 'Format_2_KeyValueTable_T3.html',
+    outputFile: 'Slide_3a_Format_2_KeyValueTable_T5_Part1.png',
+    headline: 'Analisis Strategi Spot DCA vs Futures (Bagian 1/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="comparison-grid">
+        <div class="card-positive">
+          <div class="card-badge-pos">✓ KEUNGGULAN UTAMA SPOT DCA INVESTMENT</div>
+          <div class="card-desc">Membeli aset crypto secara berkala tanpa menggunakan leverage berisiko tinggi. Strategi ini sangat aman, bebas dari beban biaya funding rate harian bursa yang membengkak, dan secara historis terbukti mampu menghasilkan imbal hasil konsisten bagi investor jangka panjang yang berfokus pada pertumbuhan kapital secara berkelanjutan.</div>
+        </div>
+      </div>
+    `
+  },
+  {
+    slideNumber: '3b',
+    templateFile: 'Format_2_KeyValueTable_T3.html',
+    outputFile: 'Slide_3b_Format_2_KeyValueTable_T5_Part2.png',
+    headline: 'Analisis Strategi Spot DCA vs Futures (Bagian 2/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="comparison-grid">
+        <div class="card-negative">
+          <div class="card-badge-neg">✗ BAHAYA BAHAYA HIGH-LEVERAGE FUTURES</div>
+          <div class="card-desc">Membuka posisi leverage tinggi 20x hingga 50x saat tren pasar tidak menentu. Memiliki risiko likuidasi total 100% modal jika pergerakan harga berlawanan 2% saja dalam hitungan detik, serta dibebani biaya bunga overnight harian bursa yang terus menggerus saldo margin tanpa disadari.</div>
+        </div>
+      </div>
+    `
+  },
+  // Format 3: Arrow Flow Split (Part 1 & Part 2)
+  {
+    slideNumber: '4a',
+    templateFile: 'Format_3_ArrowFlow_T3.html',
+    outputFile: 'Slide_4a_Format_3_ArrowFlow_T5_Part1.png',
+    headline: 'Alur Sinyal Reversal Trend (Langkah 1 & 2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="step-flow-container">
+        <div class="step-card">
+          <div class="step-number-badge">01</div>
+          <div class="step-content">
+            <div class="step-title">Deteksi Divergence RSI & MACD</div>
+            <div class="step-desc">Perhatikan grafik timeframe 4 jam dengan teliti. Jika pergerakan harga terus membentuk Lower Low baru namun indikator RSI dan histogram MACD justru menunjukkan kenaikan Higher Low beruntun, ini merupakan sinyal awal akumulasi institusi besar yang siap memicu pembalikan arah harga.</div>
+          </div>
+        </div>
+        <div class="arrow-divider">↓</div>
+        <div class="step-card">
+          <div class="step-number-badge">02</div>
+          <div class="step-content">
+            <div class="step-title">Konfirmasi Breakout Volume Lonjakan</div>
+            <div class="step-desc">Tunggu batang candlestick harian menembus garis resistance utama dengan lonjakan volume transaksi minimal 200% di atas rata-rata bulanan untuk memastikan breakout bukan merupakan pergerakan jebakan (fakeout) dari para pemain market maker bursa.</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    slideNumber: '4b',
+    templateFile: 'Format_3_ArrowFlow_T3.html',
+    outputFile: 'Slide_4b_Format_3_ArrowFlow_T5_Part2.png',
+    headline: 'Alur Sinyal Reversal Trend (Langkah 3 & 4)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="step-flow-container">
+        <div class="step-card">
+          <div class="step-number-badge">03</div>
+          <div class="step-content">
+            <div class="step-title">Entry Re-test Area Support Baru</div>
+            <div class="step-desc">Buka posisi buy hanya saat harga melakukan penurunan kembali untuk menguji area bekas resistance yang kini resmi berubah menjadi garis support baru, dengan batas stop-loss 1.5% di bawah candle konfirmasi demi mempertahankan rasio risk-to-reward di atas 1:3.</div>
+          </div>
+        </div>
+        <div class="arrow-divider">↓</div>
+        <div class="step-card">
+          <div class="step-number-badge">04</div>
+          <div class="step-content">
+            <div class="step-title">Eksekusi Trailing Profit Bertahap</div>
+            <div class="step-desc">Kunci keuntungan secara berkala saat harga naik menyentuh target fibonacci extension 1.618 dengan memindahkan titik stop-loss ke area break-even entry untuk memastikan posisi trading bebas risiko kerugian modal.</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  // Format 4: Q&A Split (Part 1 & Part 2)
+  {
+    slideNumber: '5a',
+    templateFile: 'Format_4_QASplit_T3.html',
+    outputFile: 'Slide_5a_Format_4_QASplit_T5_Part1.png',
+    headline: 'Tanya Jawab Trading Crypto (Bagian 1/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="qa-stack">
+        <div class="qa-pair-container">
+          <div class="question-text-mini">Apakah aman menahan posisi futures overnight tanpa batas waktu?</div>
+          <div class="answer-row">
+            <div class="answer-text-mini">Sangat berisiko jika kamu tidak memasang perintah Stop Loss yang ketat. Selain risiko lonjakan volatilitas mendadak saat tidur yang bisa memicu likuidasi kilat, akumulasi biaya funding rate harian bursa akan terus menggerus modal portofolio kamu secara perlahan hingga habis tak tersisa.</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    slideNumber: '5b',
+    templateFile: 'Format_4_QASplit_T3.html',
+    outputFile: 'Slide_5b_Format_4_QASplit_T5_Part2.png',
+    headline: 'Tanya Jawab Trading Crypto (Bagian 2/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="qa-stack">
+        <div class="qa-pair-container">
+          <div class="question-text-mini">Kapan waktu terbaik mengambil eksekusi Take Profit posisi short?</div>
+          <div class="answer-row">
+            <div class="answer-text-mini">Lakukan eksekusi parsial sebesar 50% saat harga menyentuh garis support kuat pertama di timeframe harian. Biarkan 50% posisi sisanya tetap berjalan dengan memanfaatkan sistem trailing stop otomatis mengunci keuntungan sesuai arah tren bearish yang sedang berlangsung.</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  // Format 5: Narrative Block Split (Part 1 & Part 2)
+  {
+    slideNumber: '6a',
+    templateFile: 'Format_5_NarrativeBlock_T3.html',
+    outputFile: 'Slide_6a_Format_5_NarrativeBlock_T5_Part1.png',
+    headline: 'Prinsip Utama Manajemen Modal (Bagian 1/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="narrative-card">
+        <div class="quote-icon">“</div>
+        <div class="narrative-box">
+          <div class="narrative-lead">"Pasar crypto tidak pernah peduli dengan analisis teknikal kamu, tetapi pasar selalu menghargai trader yang disiplin mengendalikan batas risiko kerugian modal secara ketat."</div>
+          <div class="narrative-body">Sebagian besar trader pemula mengalami kegagalan total bukan karena analisis teknikal yang buruk, melainkan akibat keserakahan menggunakan posisi leverage tinggi tanpa pernah menghitung batas risiko kerugian maksimal per transaksi.</div>
+        </div>
+      </div>
+    `
+  },
+  {
+    slideNumber: '6b',
+    templateFile: 'Format_5_NarrativeBlock_T3.html',
+    outputFile: 'Slide_6b_Format_5_NarrativeBlock_T5_Part2.png',
+    headline: 'Prinsip Utama Manajemen Modal (Bagian 2/2)',
+    accentColor: '#10B981',
+    bodyHtml: `
+      <div class="narrative-card">
+        <div class="quote-icon">“</div>
+        <div class="narrative-box">
+          <div class="narrative-lead">"Disiplin position sizing adalah kunci bertahan hidup utama di pasar finansial dalam jangka panjang."</div>
+          <div class="narrative-body">Ketika pasar bergejolak ekstrem, trader yang berhasil bertahan hidup dan bertumbuh konsisten adalah mereka yang selalu mendahulukan proteksi modal dingin dibanding mengejar keuntungan semata tanpa perhitungan matang.</div>
+        </div>
+      </div>
+    `
+  }
+];
+
+async function runStage1Tier5() {
+  console.log('======================================================');
+  console.log('🚀 STAGE 1: TIER 5 OVERFLOW SPLIT RENDERING (>500 Chars)');
+  console.log('======================================================\n');
+
+  const browser = await playwright.chromium.launch({ headless: true });
+  const context = await browser.newContext({
+    viewport: { width: 1080, height: 1350 },
+    deviceScaleFactor: 1
+  });
+  const page = await context.newPage();
+
+  for (const item of STAGE1_TIER5_DATA) {
+    const templatePath = path.join(TIER3_TEMPLATES_DIR, item.templateFile);
+    let htmlContent = fs.readFileSync(templatePath, 'utf8');
+
+    htmlContent = htmlContent
+      .replace(/{{HEADLINE_TEXT}}/g, item.headline)
+      .replace(/{{ACCENT_HEX}}/g, item.accentColor)
+      .replace(/{{BODY_CONTENT_HTML}}/g, item.bodyHtml);
+
+    await page.setContent(htmlContent, { waitUntil: 'networkidle' });
+    await page.evaluate(() => document.fonts.ready);
+
+    const outputPath = path.join(OUTPUT_DIR, item.outputFile);
+    await page.screenshot({ path: outputPath, type: 'png' });
+    console.log(`   ✓ Rendered Stage 1 Tier 5 Slide ${item.slideNumber} (${item.templateFile}): ${outputPath}`);
+  }
+
+  await browser.close();
+  console.log('\n======================================================');
+  console.log(`✅ STAGE 1 TIER 5 COMPLETE. Outputs saved to: ${OUTPUT_DIR}`);
+  console.log('======================================================\n');
+}
+
+runStage1Tier5().catch(err => {
+  console.error('❌ Error during Stage 1 Tier 5 rendering:', err);
+  process.exit(1);
+});

@@ -92,6 +92,14 @@ The rendering stack processes copy across 3 distinct density tiers (Tier 1: Mini
 
 ---
 
+### Tier 5: Overflow Auto-Splitting (>500 chars per section)
+* **Goal**: Automatic sequential splitting into 2 multi-card slides (Part 1/2 and Part 2/2) when section character volume exceeds 500 characters, preventing text compression or clipping.
+* **Target Character Range**: `>500 chars` / `>90 words`.
+* **Template Strategy**: Dynamically maps split items into Tier 2 / Tier 3 calibrated body card master templates with sequential title badge appending (`Bagian 1/2`, `Bagian 2/2`).
+* **Calibrated Output Gallery**: `Configuration/templates/instagram/previews/tier5_gallery/`
+
+---
+
 ## 🖼️ 3. Output Preview Repositories
 
 * **Tier 1 Gallery**: `/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/templates/instagram/previews/tier1_gallery/`
