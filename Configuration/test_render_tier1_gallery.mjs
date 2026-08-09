@@ -172,8 +172,8 @@ async function renderFullCarouselGallery() {
   const outroTemplatePath = path.join(OUTRO_DIR, 'Outro_Card_CTA.html');
   let outroHtml = fs.readFileSync(outroTemplatePath, 'utf8');
   outroHtml = outroHtml
-    .replace(/{{OUTRO_HEADLINE}}/g, `Gunakan Mekanik Hedging Saat Market Bearish!`)
-    .replace(/{{OUTRO_SUBTEXT}}/g, `Sudahkah kamu menyiapkan SOP manajemen risiko portofolio kamu hari ini?`);
+    .replace(/{{OUTRO_HEADLINE}}/g, `Kamu Suka?`)
+    .replace(/{{OUTRO_SUBTEXT}}/g, `Follow. Like. Comment`);
   
   const outroOutPath = path.join(OUTPUT_DIR, 'Slide_7_Outro_CTA.png');
   await page.setContent(outroHtml, { waitUntil: 'networkidle' });

@@ -16,16 +16,17 @@ The rendering stack processes copy across 3 distinct density tiers (Tier 1: Mini
 
 ## 📐 2. Tier Density Specifications
 
-### Tier 1: Ultra-Minimalist Density (15–50 chars per item)
+### Tier 1: Punchy Micro-Copy Density (20–50 chars per item)
 * **Goal**: Maximized visual punchiness, ultra-large text, and heavy whitespace.
-* **Target Character Range**: `15–50 chars` / `3–8 words` per point or block.
-* **Template Path**: `Configuration/templates/instagram/body_cards/tier1_minimalist/`
-* **Calibrated Proportions**:
-  * **Bullet SOP (`Format_1_BulletSOP.html`)**: Headline `54px`, Bullet lead `42px`, Body `32px`, Bullet dot `46px`, Padding `56px 52px`.
-  * **Key-Value Table (`Format_2_KeyValueTable.html`)**: Headline `54px`, Badge `32px`, Description `40px`, Card padding `76px 60px`.
-  * **Arrow Flow (`Format_3_ArrowFlow.html`)**: Headline `56px`, Step Title `40px`, Step Desc `32px`, Number badge `96px × 96px` (`46px` font), Arrow divider `56px`.
-  * **Q&A Split (`Format_4_QASplit.html`)**: Headline `58px`, Question `42px`, Answer `36px`, Card padding `62px 56px`.
-  * **Narrative Block (`Format_5_NarrativeBlock.html`)**: Headline `64px`, Quote lead `52px`, Body text `40px`, Quote icon `180px`, Card padding `40px 48px`.
+* **Target Character Range**: `20–50 chars` / `4–10 words` per point or block.
+* **Template Path**: `Configuration/templates/instagram/body_cards/tier1_punchy/`
+* **Calibrated Proportions & Approved Specs**:
+  * **Bullet SOP (`Format_1_BulletSOP_T1.html`)**: Headline `72px`, Bullet lead `58px`, Body `48px`, Bullet icon `74px`, Card padding `46px 48px`, Gap `20px`.
+  * **Key-Value Table (`Format_2_KeyValueTable_T1.html`)**: Headline `70px`, Badge `38px`, Description `52px`, Card padding `72px 60px`, Grid gap `24px`.
+  * **Arrow Flow (`Format_3_ArrowFlow_T1.html`)**: Headline `74px`, Step Badge `124px × 124px` (`56px` font), Step Title `52px`, Step Desc `44px`, Arrow divider `68px`, Card padding `40px 42px`, Stack gap `6px`.
+  * **Q&A Split (`Format_4_QASplit_T1.html`)**: Headline `78px`, Question `60px`, Answer `48px`, Card padding `40px 42px`, Stack gap `16px`.
+  * **Narrative Block (`Format_5_NarrativeBlock_T1.html`)**: Headline `78px`, Quote lead `80px`, Body text `66px`, Quote icon `260px`, Card padding `52px 52px`, Gap `24px`.
+  * **Outro CTA Card (`Outro_Card_CTA.html`)**: Headline `"Kamu Suka?"` (`84px` white `#FFFFFF`), Subtext `"Follow. Like. Comment"` (`52px` emerald green `#10B981`).
 
 ---
 
