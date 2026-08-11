@@ -1,0 +1,171 @@
+{
+  "cohort_id": "saham-indo",
+  "target_account": "@kenalkripto",
+  "niche": "saham",
+  "snapshot_date": "snapshot-2026-08-11.json",
+  "time_range": "1D",
+  "days_window": 1,
+  "snapshots_counted": 2,
+  "total_data_days": 103,
+  "diagnostic_status": "MACRO_DOWNTURN",
+  "status_badge": "🟡 MACRO_DOWNTURN",
+  "net_variance_pct": -13.43,
+  "summary_message": "Overall niche engagement is down (Peer median yield: 13.425%). Target account is moving with the market wave. Do NOT panic-pivot strategy.",
+  "target_metrics": {
+    "follower_count": 26600,
+    "median_impression_yield_pct": 0,
+    "median_engagement_rate_pct": 0
+  },
+  "peer_tier_benchmarks": {
+    "peer_count": 1,
+    "median_impression_yield_pct": 13.425,
+    "median_engagement_rate_pct": 1.59
+  },
+  "entities": [
+    {
+      "id": "@kenalkripto",
+      "name": "@kenalkripto",
+      "role": "TARGET",
+      "followers": 26600,
+      "tweets": [],
+      "daily_impression_timeline": [],
+      "metrics": {
+        "impression_yield_pct": 0,
+        "max_impression_yield_pct": 0,
+        "engagement_rate_pct": 0,
+        "daily_post_count": 0,
+        "follower_growth_pct": 0,
+        "total_views": 0,
+        "total_engagements": 0
+      }
+    },
+    {
+      "id": "@kr39__",
+      "name": "@kr39__",
+      "role": "PEER",
+      "followers": 21100,
+      "tweets": [
+        {
+          "id": "2086854205718032518",
+          "text": "Casual meetup turned out crowded instead, thanks to \n@kr39__\n heading to scbd. There was uncle \n@azdipm\n, bro \n@RezhaChaniago\n, lord \n@neollexador\n, sis \n@ndut_indah\n, IB \n@sahamsushi\n (why's he got such long hair now ), chili youth \n@bigdigjohnny\n and \n@MYasfika\n as the new scbd resident.",
+          "author": "kr39__",
+          "timestamp": "2026-08-10T16:36:29.000Z",
+          "ts_epoch": 1786379789000,
+          "likes": 20,
+          "retweets": 2,
+          "replies": 7,
+          "bookmarks": 0,
+          "views": 1583,
+          "url": "https://x.com/sakamototaro16/status/2086854205718032518",
+          "is_retweet": true,
+          "has_image": true,
+          "has_video": false,
+          "has_card": false,
+          "post_age_hours": 9.86,
+          "time_window": "LIVE",
+          "impression_yield_pct": 7.5,
+          "engagement_rate_pct": 1.83
+        },
+        {
+          "id": "2086713608910860303",
+          "text": "Kondisi Discord \n@klinikp88\n siang hari ini\nPanic button mode on",
+          "author": "kr39__",
+          "timestamp": "2026-08-10T07:17:48.000Z",
+          "ts_epoch": 1786346268000,
+          "likes": 49,
+          "retweets": 2,
+          "replies": 4,
+          "bookmarks": 0,
+          "views": 4082,
+          "url": "https://x.com/kr39__/status/2086713608910860303",
+          "is_retweet": false,
+          "has_image": true,
+          "has_video": false,
+          "has_card": false,
+          "post_age_hours": 19.17,
+          "time_window": "LIVE",
+          "impression_yield_pct": 19.35,
+          "engagement_rate_pct": 1.35
+        }
+      ],
+      "daily_impression_timeline": [
+        {
+          "date": "2026-08-10",
+          "total_views": 5665,
+          "post_count": 2,
+          "max_yield": 19.35,
+          "tweets": [
+            {
+              "id": "2086713608910860303",
+              "text": "Kondisi Discord \n@klinikp88\n siang hari ini\nPanic button mode on",
+              "author": "kr39__",
+              "timestamp": "2026-08-10T07:17:48.000Z",
+              "ts_epoch": 1786346268000,
+              "likes": 49,
+              "retweets": 2,
+              "replies": 4,
+              "bookmarks": 0,
+              "views": 4082,
+              "url": "https://x.com/kr39__/status/2086713608910860303",
+              "is_retweet": false,
+              "has_image": true,
+              "has_video": false,
+              "has_card": false,
+              "post_age_hours": 19.17,
+              "time_window": "LIVE",
+              "impression_yield_pct": 19.35,
+              "engagement_rate_pct": 1.35
+            },
+            {
+              "id": "2086854205718032518",
+              "text": "Casual meetup turned out crowded instead, thanks to \n@kr39__\n heading to scbd. There was uncle \n@azdipm\n, bro \n@RezhaChaniago\n, lord \n@neollexador\n, sis \n@ndut_indah\n, IB \n@sahamsushi\n (why's he got such long hair now ), chili youth \n@bigdigjohnny\n and \n@MYasfika\n as the new scbd resident.",
+              "author": "kr39__",
+              "timestamp": "2026-08-10T16:36:29.000Z",
+              "ts_epoch": 1786379789000,
+              "likes": 20,
+              "retweets": 2,
+              "replies": 7,
+              "bookmarks": 0,
+              "views": 1583,
+              "url": "https://x.com/sakamototaro16/status/2086854205718032518",
+              "is_retweet": true,
+              "has_image": true,
+              "has_video": false,
+              "has_card": false,
+              "post_age_hours": 9.86,
+              "time_window": "LIVE",
+              "impression_yield_pct": 7.5,
+              "engagement_rate_pct": 1.83
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "impression_yield_pct": 13.425,
+        "max_impression_yield_pct": 19.35,
+        "engagement_rate_pct": 1.59,
+        "daily_post_count": 2,
+        "follower_growth_pct": 0,
+        "total_views": 5665,
+        "total_engagements": 84
+      }
+    },
+    {
+      "id": "peer-collective",
+      "name": "👥 Peer Collective",
+      "role": "COLLECTIVE",
+      "followers": 21100,
+      "metrics": {
+        "impression_yield_pct": 13.425,
+        "max_impression_yield_pct": 19.35,
+        "engagement_rate_pct": 1.59,
+        "daily_post_count": 2,
+        "follower_growth_pct": 0,
+        "total_views": 5665,
+        "total_engagements": 84
+      }
+    }
+  ],
+  "leader_tier_top_archetypes": [],
+  "generated_at": "2026-08-11T02:28:06.175Z"
+}

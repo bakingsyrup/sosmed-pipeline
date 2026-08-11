@@ -1,0 +1,84 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2057792051379589131",
+        "text": "Is the effect of yesterday's Prabowo campaign the reason \n@Polymarket\n got hacked?",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-22T11:53:51.000Z",
+        "ts_epoch": 1779450831000,
+        "likes": 24,
+        "retweets": 2,
+        "replies": 8,
+        "bookmarks": 0,
+        "views": 3522,
+        "url": "https://x.com/duta_crypto/status/2057792051379589131",
+        "is_retweet": false
+      },
+      {
+        "id": "2057820015878140119",
+        "text": "Friends in Sumatra, is it true the whole island has lost power?",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-22T13:44:58.000Z",
+        "ts_epoch": 1779457498000,
+        "likes": 105,
+        "retweets": 10,
+        "replies": 49,
+        "bookmarks": 0,
+        "views": 29041,
+        "url": "https://x.com/duta_crypto/status/2057820015878140119",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2057669064861057039",
+        "text": "Giving a kid's name that's super programmer-y?\n\nPangpra Dwiminja (nickname for becoming a programmer in 2 weeks)\n\nPang = Panggil  \nPra = Programmer  \nDwi = 2  \nMin = Minggu  \nJa = Jadi",
+        "author": "yanzero_",
+        "timestamp": "2026-05-22T03:45:09.000Z",
+        "ts_epoch": 1779421509000,
+        "likes": 16,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1199,
+        "url": "https://x.com/yanzero_/status/2057669064861057039",
+        "is_retweet": false
+      },
+      {
+        "id": "2057761531966959772",
+        "text": "Goodhart's Law: When a metric or measure becomes a target, that measure ceases to be a good measure.\n\nExample: Law enforcement officers are targeted with 10 corruption cases per month. They go after those they can find faults with.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-22T09:52:35.000Z",
+        "ts_epoch": 1779443555000,
+        "likes": 9,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 526,
+        "url": "https://x.com/yanzero_/status/2057761531966959772",
+        "is_retweet": false
+      },
+      {
+        "id": "2057967283843240425",
+        "text": "After this, per-AI-ans will undergo a major change",
+        "author": "yanzero_",
+        "timestamp": "2026-05-22T23:30:10.000Z",
+        "ts_epoch": 1779492610000,
+        "likes": 991,
+        "retweets": 45,
+        "replies": 18,
+        "bookmarks": 0,
+        "views": 84541,
+        "url": "https://x.com/yanzero_/status/2057967283843240425",
+        "is_retweet": false
+      }
+    ]
+  }
+]

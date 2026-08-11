@@ -1,0 +1,22 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2054017312618119220",
+        "text": "Kenapa ada blockchain khusus payment seperti Tempo dan Arc?\nKamu akan tahu kalau udah bikin sistem pembayaran dgn blockchain.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-12T01:54:23.000Z",
+        "ts_epoch": 1778550863000,
+        "likes": 19,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 1705,
+        "url": "https://x.com/yanzero_/status/2054017312618119220",
+        "is_retweet": false
+      }
+    ]
+  }
+]

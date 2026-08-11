@@ -1,0 +1,22 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2051117597031370816",
+        "text": "Jika pakai agentic AI untuk develop software, saya selalu wajibkan ada unit test, integration test, E2E test, API test, security test dan performance test.\n\nTips:\n- integration test pakai Testcontainer biar gak ribet",
+        "author": "yanzero_",
+        "timestamp": "2026-05-04T01:51:57.000Z",
+        "ts_epoch": 1777859517000,
+        "likes": 250,
+        "retweets": 20,
+        "replies": 3,
+        "bookmarks": 0,
+        "views": 6370,
+        "url": "https://x.com/yanzero_/status/2051117597031370816",
+        "is_retweet": false
+      }
+    ]
+  }
+]

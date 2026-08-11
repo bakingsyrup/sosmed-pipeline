@@ -7,7 +7,7 @@ angles:
   - ""
   - ""
   - ""
-niche_focus: all # macro | crypto | ai | all
+niche_focus: all # macro | crypto | ai | ai_productivity | all
 lang: id # id (Indonesian, default) | en (English)
 ---
 

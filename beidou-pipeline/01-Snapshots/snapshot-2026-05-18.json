@@ -1,0 +1,36 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2056179447943066098",
+        "text": "Jika koperasi merah putih rugi, apakah pengurusnya bisa kena pasal \"merugikan negara\"?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-18T01:05:57.000Z",
+        "ts_epoch": 1779066357000,
+        "likes": 839,
+        "retweets": 97,
+        "replies": 68,
+        "bookmarks": 0,
+        "views": 27048,
+        "url": "https://x.com/yanzero_/status/2056179447943066098",
+        "is_retweet": false
+      },
+      {
+        "id": "2056515172983058920",
+        "text": "One of the software engineering tasks that can take a long time is optimization. Test - revision - test - revision - repeat.\n\nPreviously P99 = 211 seconds\nNow it has become P99 = 51 seconds\n\nWe test performance using P95 and P99 metrics.\n\nCan we use AI? Absolutely, and it's very",
+        "author": "yanzero_",
+        "timestamp": "2026-05-18T23:20:00.000Z",
+        "ts_epoch": 1779146400000,
+        "likes": 92,
+        "retweets": 4,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 4314,
+        "url": "https://x.com/yanzero_/status/2056515172983058920",
+        "is_retweet": false
+      }
+    ]
+  }
+]

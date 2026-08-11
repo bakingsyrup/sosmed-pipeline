@@ -1,0 +1,36 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2054715391407276121",
+        "text": "Wow perusahaan AI lagi banyak Forward Deployed Engineer (FDE) untuk mempercepat implementasi AI untuk bisnis.\nZaman sebelum startup2an ramai di Indonesia pekerjaan ini bernama : implementator.\nJago ngomong, jago ngecustom, jago ngetraining, yah pokoknya sampai berjalan dgn benar",
+        "author": "yanzero_",
+        "timestamp": "2026-05-14T00:08:18.000Z",
+        "ts_epoch": 1778717298000,
+        "likes": 17,
+        "retweets": 2,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1151,
+        "url": "https://x.com/yanzero_/status/2054715391407276121",
+        "is_retweet": false
+      },
+      {
+        "id": "2054797143815471376",
+        "text": "Dulu saya membayangkan kerja jadi programmer itu di perusahaan IT / software house pakai Delphi/VB/Foxpro/PHP dengan reporting Crystal report/Fast report.\nSemua berubah setelah era startup",
+        "author": "yanzero_",
+        "timestamp": "2026-05-14T05:33:10.000Z",
+        "ts_epoch": 1778736790000,
+        "likes": 41,
+        "retweets": 1,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 4452,
+        "url": "https://x.com/yanzero_/status/2054797143815471376",
+        "is_retweet": false
+      }
+    ]
+  }
+]

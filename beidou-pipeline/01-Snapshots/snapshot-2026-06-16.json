@@ -1,0 +1,90 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2066744967146721725",
+        "text": "Alhamdulillah, the Rupiah is getting stronger and stronger. Super optimistic that this year we can hit 15,000/USD.\n\nFor sure, anyone who doesn't dare to share about the Rupiah's strengthening must be foreign agents!",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-16T04:49:33.000Z",
+        "ts_epoch": 1781585373000,
+        "likes": 58,
+        "retweets": 5,
+        "replies": 20,
+        "bookmarks": 0,
+        "views": 4823,
+        "url": "https://x.com/duta_crypto/status/2066744967146721725",
+        "is_retweet": false
+      },
+      {
+        "id": "2066813791405269133",
+        "text": "Video unboxing dan Review pertama di youtube Duta Crypto bang. \n\nGaslah kita review kartu dan cincin crypto. Gasken!\n\n \nhttps://\nyoutu.be/V5ScfRv2kcU\n\nNext kita unboxing apa lagi nich....",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-16T09:23:02.000Z",
+        "ts_epoch": 1781601782000,
+        "likes": 5,
+        "retweets": 2,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1250,
+        "url": "https://x.com/duta_crypto/status/2066813791405269133",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2066805485622513977",
+        "text": "$SPCX\n GG",
+        "author": "setyamickala",
+        "timestamp": "2026-06-16T08:50:01.000Z",
+        "ts_epoch": 1781599801000,
+        "likes": 78,
+        "retweets": 3,
+        "replies": 17,
+        "bookmarks": 0,
+        "views": 8677,
+        "url": "https://x.com/setyamickala/status/2066805485622513977",
+        "is_retweet": false
+      },
+      {
+        "id": "2066848520326480020",
+        "text": "I wrote a complete guide to install Hermes Agent from zero.\n\nAutonomous AI agent by Nous Research self-improving, multi-platform (Telegram/Discord/Slack/WA)\n\nruns on a $5/mo VPS / $0 Termux  No coding skills required.\n\nBuilt on Vercel, all sources referenced",
+        "author": "setyamickala",
+        "timestamp": "2026-06-16T11:41:02.000Z",
+        "ts_epoch": 1781610062000,
+        "likes": 533,
+        "retweets": 107,
+        "replies": 62,
+        "bookmarks": 0,
+        "views": 27662,
+        "url": "https://x.com/setyamickala/status/2066848520326480020",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2066885592613589287",
+        "text": "Not a PHP expert but thanks Claude Code for helping a lot with learning PHP optimization so I get which runtime performs well   \nNo matter what programming language you use, whether you understand it or not, with AI it becomes much easier.",
+        "author": "yanzero_",
+        "timestamp": "2026-06-16T14:08:20.000Z",
+        "ts_epoch": 1781618900000,
+        "likes": 17,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1008,
+        "url": "https://x.com/yanzero_/status/2066885592613589287",
+        "is_retweet": false
+      }
+    ]
+  }
+]

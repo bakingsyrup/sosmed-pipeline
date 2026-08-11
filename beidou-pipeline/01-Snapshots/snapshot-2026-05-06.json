@@ -1,0 +1,78 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2051824250114429302",
+        "text": "Berbulan-bulan ngulik AI untuk GTM B2B akhirnya mulai ketemu polanya.\nSecanggih apapun AI nya tetap kembali ke orang yg mengoperasikan. Tetap butuh skill. Gak semua orang cocok pakai AI apalagi yg end to end dengan prinsip \"menjadi manager\".\n\nContoh seorang SDR/sales diminta",
+        "author": "yanzero_",
+        "timestamp": "2026-05-06T00:39:56.000Z",
+        "ts_epoch": 1778027996000,
+        "likes": 16,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 1082,
+        "url": "https://x.com/yanzero_/status/2051824250114429302",
+        "is_retweet": false
+      },
+      {
+        "id": "2051827730233380878",
+        "text": "Shifting menjadi manager yg ngurusin end to end fleet of AI, ini perjalanan yg tidak mudah.\n\nContoh di engineering software.\n\nEnd to end dari desain sampai layak production dan ada feedback loop.\n\nEngineernya harus paham desain sistem, security, testing, QA, monitoring  dll tidak",
+        "author": "yanzero_",
+        "timestamp": "2026-05-06T00:53:46.000Z",
+        "ts_epoch": 1778028826000,
+        "likes": 3,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 616,
+        "url": "https://x.com/yanzero_/status/2051827730233380878",
+        "is_retweet": false
+      },
+      {
+        "id": "2051871505412509937",
+        "text": "Workflow untuk AI video :\n1. Mudah revisi\n2. Mudah ngasih konteks\n3. Mudah generate prompt\n4. Mudah kerja secara team\n\nYang jadi rahasia perusahaan:\n1. Format prompt yg controllable dan bisa ditrack\n2. Strategi biar hasilnya bagus\n3. Strategi hemat token",
+        "author": "yanzero_",
+        "timestamp": "2026-05-06T03:47:43.000Z",
+        "ts_epoch": 1778039263000,
+        "likes": 120,
+        "retweets": 9,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 6170,
+        "url": "https://x.com/yanzero_/status/2051871505412509937",
+        "is_retweet": false
+      },
+      {
+        "id": "2051965372434358762",
+        "text": "Higgsfield + Image GPT 2 + Seedance 2\n\nYang paling penting workflownya gimana cocok untuk profesional, workflow yg cepat, hemat token, minim revisi, hasil sesuai ekspektasi, mudah untuk improvement",
+        "author": "yanzero_",
+        "timestamp": "2026-05-06T10:00:43.000Z",
+        "ts_epoch": 1778061643000,
+        "likes": 28,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 1723,
+        "url": "https://x.com/yanzero_/status/2051965372434358762",
+        "is_retweet": false
+      },
+      {
+        "id": "2052045857365913939",
+        "text": "Saya pakai metode biar 1x generate hasilnya bagus sesuai ekspektasi. Jika perlu revisi, gak lebih dari 2x.\n\nSemua bisa generate video tapi gak semua paham biar 1x atau 2x generate hasil sesuai.\n\nHemat waktu, hemat token, less stress",
+        "author": "yanzero_",
+        "timestamp": "2026-05-06T15:20:32.000Z",
+        "ts_epoch": 1778080832000,
+        "likes": 8,
+        "retweets": 1,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 1128,
+        "url": "https://x.com/yanzero_/status/2052045857365913939",
+        "is_retweet": false
+      }
+    ]
+  }
+]

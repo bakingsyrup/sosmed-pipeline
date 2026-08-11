@@ -1,0 +1,56 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2058429287536218323",
+        "text": "The good news is, the government is optimistic that the Rupiah will strengthen to 15,000.\n\nThe bad news is, the one saying it is the government.",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-24T06:06:00.000Z",
+        "ts_epoch": 1779602760000,
+        "likes": 34,
+        "retweets": 1,
+        "replies": 19,
+        "bookmarks": 0,
+        "views": 3193,
+        "url": "https://x.com/duta_crypto/status/2058429287536218323",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2058374916609867912",
+        "text": "Cool AI apps for accounting and financial reporting too:\n1. automated reconciliation\n2. automated input of notes/invoices in photo and PDF form into journals\n3. checking/validating PO against receiving evidence and invoices, etc., until it becomes AP\n4. Business owners with",
+        "author": "yanzero_",
+        "timestamp": "2026-05-24T02:29:57.000Z",
+        "ts_epoch": 1779589797000,
+        "likes": 83,
+        "retweets": 8,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 5445,
+        "url": "https://x.com/yanzero_/status/2058374916609867912",
+        "is_retweet": false
+      },
+      {
+        "id": "2058538585863959032",
+        "text": "Ghosts in Indonesia are so discriminatory. Pocong only terrorizes villages, not fancy gated communities",
+        "author": "yanzero_",
+        "timestamp": "2026-05-24T13:20:19.000Z",
+        "ts_epoch": 1779628819000,
+        "likes": 13,
+        "retweets": 3,
+        "replies": 3,
+        "bookmarks": 0,
+        "views": 1164,
+        "url": "https://x.com/yanzero_/status/2058538585863959032",
+        "is_retweet": false
+      }
+    ]
+  }
+]

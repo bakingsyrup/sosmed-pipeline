@@ -29,7 +29,7 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 
 ---
 
-> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample below uses N data points purely for illustration. You MUST NOT default to 5 posts or 5 cards. Dynamically scale the output length (from 3 to 15 units) to fit the actual depth of the input source content!
+> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation below is provided purely for illustration and context. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms (e.g., finance, market asset, hedging) used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
 
 ## 📌 Illustrative Universal Sample Content (Market Crash Backtest Data)
 

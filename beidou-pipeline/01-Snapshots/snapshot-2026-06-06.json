@@ -1,0 +1,76 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2063061278839787946",
+        "text": "Payday X + Rupiah Inflation = Max Gains",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-06T00:51:53.000Z",
+        "ts_epoch": 1780707113000,
+        "likes": 62,
+        "retweets": 2,
+        "replies": 38,
+        "bookmarks": 0,
+        "views": 3685,
+        "url": "https://x.com/duta_crypto/status/2063061278839787946",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2063137526731391201",
+        "text": "",
+        "author": "setyamickala",
+        "timestamp": "2026-06-06T05:54:52.000Z",
+        "ts_epoch": 1780725292000,
+        "likes": 26,
+        "retweets": 0,
+        "replies": 9,
+        "bookmarks": 0,
+        "views": 8212,
+        "url": "https://x.com/setyamickala/status/2063137526731391201",
+        "is_retweet": false
+      },
+      {
+        "id": "2063222365044216190",
+        "text": "in this economy getting an airdrop $5 is already lucky",
+        "author": "setyamickala",
+        "timestamp": "2026-06-06T11:31:59.000Z",
+        "ts_epoch": 1780745519000,
+        "likes": 240,
+        "retweets": 19,
+        "replies": 86,
+        "bookmarks": 0,
+        "views": 16623,
+        "url": "https://x.com/setyamickala/status/2063222365044216190",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2063272566064914892",
+        "text": "There are people whose political careers are successful because they're funny and entertaining.",
+        "author": "yanzero_",
+        "timestamp": "2026-06-06T14:51:28.000Z",
+        "ts_epoch": 1780757488000,
+        "likes": 8,
+        "retweets": 1,
+        "replies": 6,
+        "bookmarks": 0,
+        "views": 682,
+        "url": "https://x.com/yanzero_/status/2063272566064914892",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2069378672013005038",
+        "text": "Money is moving to the Prediction Market for gambling on football.",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-23T11:14:57.000Z",
+        "ts_epoch": 1782213297000,
+        "likes": 24,
+        "retweets": 2,
+        "replies": 10,
+        "bookmarks": 0,
+        "views": 10599,
+        "url": "https://x.com/duta_crypto/status/2069378672013005038",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "coinvestasi",
+    "followers": 67700,
+    "tweets": [
+      {
+        "id": "2069284682764820526",
+        "text": "JUST IN : Indonesia’s Crypto Transaction Value Reaches Rp100 Trillion in 2026",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-23T05:01:28.000Z",
+        "ts_epoch": 1782190888000,
+        "likes": 70,
+        "retweets": 9,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 6797,
+        "url": "https://x.com/idcryptonetwork/status/2069284682764820526",
+        "is_retweet": true
+      },
+      {
+        "id": "2069286122438688852",
+        "text": "Shouldn't the rupiah be on par with the dollar?",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-23T05:07:11.000Z",
+        "ts_epoch": 1782191231000,
+        "likes": 52,
+        "retweets": 8,
+        "replies": 7,
+        "bookmarks": 0,
+        "views": 6497,
+        "url": "https://x.com/coinvestasi/status/2069286122438688852",
+        "is_retweet": false
+      },
+      {
+        "id": "2069286175299481711",
+        "text": "",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-23T05:07:24.000Z",
+        "ts_epoch": 1782191244000,
+        "likes": 0,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 611,
+        "url": "https://x.com/coinvestasi/status/2069286175299481711",
+        "is_retweet": false
+      },
+      {
+        "id": "2069286188549317108",
+        "text": "Context:\n\nUS economist Steve Hanke, who once served as Special Economic Advisor to President Soeharto, has revisited the 1998 Indonesian monetary crisis.\n\nThrough his personal X account, Hanke claims the rupiah could have been far more stable—even on par with the US dollar—if the",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-23T05:07:27.000Z",
+        "ts_epoch": 1782191247000,
+        "likes": 2,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 558,
+        "url": "https://x.com/coinvestasi/status/2069286188549317108",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -25,11 +25,11 @@ style_name: ViralReach_Thread_ContrarianInsight_RetweetIdentity
 
 ### Part 1: Metadata & Ratio Trigger
 - **Target Metric:** Retweets (Identity Signal).
-- **Mechanics:** The post relies on "In-Group Signaling." By mocking a future scenario, it filters for an audience that understands the specific niche context (DeFi/Yield), turning the post into a badge of "I know how this market works."
+- **Mechanics:** The post relies on "In-Group Signaling." By mocking a scenario, it filters for an audience that understands the specific industry context, turning the post into a badge of "I know how this market/topic works."
 
 ### Part 2: Psychological Lever
 - **Primary Emotional Driver:** Contrarian Piercing. 
-- **Mechanism:** It creates a sense of shared cynicism. By dismissing a common expectation (7.5% yield) as laughable, it positions the author as an "insider" who sees through the hype, inviting the audience to validate that perspective via the "Retweet" (Identity Signal).
+- **Mechanism:** It creates a sense of shared cynicism. By dismissing a common expectation as laughable, it positions the author as an "insider" who sees through the hype, inviting the audience to validate that perspective via the "Retweet" (Identity Signal).
 
 ### Part 3: Micro-Rhythm & Pacing Rules
 - **Hook Line Length:** Ultra-short (under 60 characters).

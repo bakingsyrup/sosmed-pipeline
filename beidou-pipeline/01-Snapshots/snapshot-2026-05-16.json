@@ -1,0 +1,50 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2055494159386165314",
+        "text": "Kita punya sawit, nickel dll. Apakah bisa jadi industri yg kompleks seperti mobil listrik? AI? Semikonduktor atau seperti apa?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-16T03:42:51.000Z",
+        "ts_epoch": 1778902971000,
+        "likes": 8,
+        "retweets": 1,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 889,
+        "url": "https://x.com/yanzero_/status/2055494159386165314",
+        "is_retweet": false
+      },
+      {
+        "id": "2055515894877761806",
+        "text": "Semua orang akan pakai AI tapi yg unggul tetap yang menguasai domain knowledge.\nCombo besar: ahli AI + ahli keuangan. Ahli AI + ahli marketing. Ahli AI + ahli legal. Dst.\nTugas AI engineer mendorong para ahli di bidangnya menjadi ahli AI.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-16T05:09:13.000Z",
+        "ts_epoch": 1778908153000,
+        "likes": 50,
+        "retweets": 4,
+        "replies": 3,
+        "bookmarks": 0,
+        "views": 2089,
+        "url": "https://x.com/yanzero_/status/2055515894877761806",
+        "is_retweet": false
+      },
+      {
+        "id": "2055598481667248492",
+        "text": "Harga bensin sama\nHarga pulsa sama\nHarga listrik sama\nHarga motor sama\nBiaya BPJS sama\nHarga Indomie sama \n\nTapi kok bisa UMR Jogja 2,8jt sedangkan Jakarta 5,7jt?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-16T10:37:23.000Z",
+        "ts_epoch": 1778927843000,
+        "likes": 3971,
+        "retweets": 366,
+        "replies": 145,
+        "bookmarks": 0,
+        "views": 137076,
+        "url": "https://x.com/yanzero_/status/2055598481667248492",
+        "is_retweet": false
+      }
+    ]
+  }
+]

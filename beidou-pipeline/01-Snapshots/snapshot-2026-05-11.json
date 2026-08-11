@@ -1,0 +1,50 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2053642277021753638",
+        "text": "If AI makes it so everyone can make videos, why are there so few whose results are this good?\n\nAI doesn't turn people who aren't skilled at filmmaking into filmmaking experts. AI makes those who are already experts at filmmaking even more expert at filmmaking.\n\nMarko Slavnic is",
+        "author": "yanzero_",
+        "timestamp": "2026-05-11T01:04:08.000Z",
+        "ts_epoch": 1778461448000,
+        "likes": 292,
+        "retweets": 28,
+        "replies": 14,
+        "bookmarks": 0,
+        "views": 22502,
+        "url": "https://x.com/yanzero_/status/2053642277021753638",
+        "is_retweet": false
+      },
+      {
+        "id": "2053669952268464557",
+        "text": "Banyak perusahaan gagal implementasi AI krn gak bisa bedakan antara Agent dan Workflow.\n\nAgent = lebih fleksibel, butuh pengguna yg berpikir, ada proses pengambilan keputusan yg kompleks. \nContoh : content marketing butuh brainstorm, ideation, planning. Ini abstrak sehingga butuh",
+        "author": "yanzero_",
+        "timestamp": "2026-05-11T02:54:06.000Z",
+        "ts_epoch": 1778468046000,
+        "likes": 186,
+        "retweets": 25,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 21150,
+        "url": "https://x.com/yanzero_/status/2053669952268464557",
+        "is_retweet": false
+      },
+      {
+        "id": "2053753334096687523",
+        "text": "Apa itu clean code ? \nyg penting lolos unit test, integration test, E2E test, API test, security test, performance test.\n\nwakakaka",
+        "author": "yanzero_",
+        "timestamp": "2026-05-11T08:25:26.000Z",
+        "ts_epoch": 1778487926000,
+        "likes": 278,
+        "retweets": 19,
+        "replies": 12,
+        "bookmarks": 0,
+        "views": 12593,
+        "url": "https://x.com/yanzero_/status/2053753334096687523",
+        "is_retweet": false
+      }
+    ]
+  }
+]

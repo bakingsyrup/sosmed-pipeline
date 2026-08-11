@@ -38,7 +38,7 @@ Beidou tracks Iroi's account performance relative to direct competitor cohorts, 
 * **Dedup**: Per-handle tweet-ID indices stored in `01-Snapshots/tweet-ids/{handle}.json`. Only passed to adapter on first-ever scrape; re-scrapes skip dedup so deeper scrolling picks up missed tweets.
 * **Cap**: Target accounts get ALL tweets from window. Peer/leader accounts capped at 20 oldest (most mature metrics).
 * **Per-Account Skip**: Instead of all-or-nothing daily skip, snapshot manager checks each account individually. Targets need ≥30 tweets, peers/leaders need ≥20. Only under-counted accounts are re-scraped. Results are smart-merged (keeps data with more tweets, never replaces good data with worse).
-* **Scheduler**: PM2 cron at 05:00 UTC daily (`beidou_scheduler.mjs` + `/home/silvester/beidou_daily.sh` wrapper). Runs snapshot batch → diagnostics for all cohorts → exits.
+* **Scheduler**: PM2 cron at 01:30 UTC daily (`beidou_scheduler.mjs` + `/home/silvester/beidou_daily.sh` wrapper). Runs snapshot batch → diagnostics for all cohorts → exits.
 
 ### 3. Diagnostic Core & VS/ALL Mode Architecture
 * **Baseline Threshold Floor**: Absolute minimum healthy reach yield set to `0.5%`.

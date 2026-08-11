@@ -92,7 +92,7 @@ All wireframes in `01-Style-Bank/` are classified under Option 2 schema (`style-
 * **Layer 3 (Rolling History)**: `02-Memory/memory_log.md`. Appends 1 bullet summary per session; maintains a **7-Day Rolling Window** (prunes older entries to archive) to prevent context bloat.
 
 ### 8. Dual-Layer Analysis Scope & Monthly Playbook Cache
-* **Daily Layer 1 (Micro Post Outliers)**: Scans daily snapshots at 05:00 UTC to isolate high-yield post structures.
+* **Daily Layer 1 (Micro Post Outliers)**: Scans daily snapshots at 01:30 UTC to isolate high-yield post structures.
 * **Monthly Layer 2 (Macro Account Playbooks)**: Runs every 30 days (or on-demand). Aggregates 30-day snapshot data to profile competitor habits (posting time heatmaps, word count ratios, prefix flags) and uses an **Open-Ended Hybrid Discovery Prompt** to catch unscripted narrative/visual habits. Results are cached in `00-Outliers/playbook-[cohort].json`.
 
 ---

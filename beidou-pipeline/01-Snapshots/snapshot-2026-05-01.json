@@ -1,0 +1,36 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2050047699194618146",
+        "text": "Progress kami belajar AI :\n1. Engineering udah pakai Claude Code semua.\n2. Marketing udah pakai Claude Cowork dan Higgsfield. Otw Canvas dan Marketing Studio.\n\nSisa finance dan HR.\n\nGimana perjalanannya?\n\n3 bulan pertama fase pembiasan: user bisa ngulik konteks, sebagian besar",
+        "author": "yanzero_",
+        "timestamp": "2026-05-01T03:00:34.000Z",
+        "ts_epoch": 1777604434000,
+        "likes": 271,
+        "retweets": 32,
+        "replies": 5,
+        "bookmarks": 0,
+        "views": 8495,
+        "url": "https://x.com/yanzero_/status/2050047699194618146",
+        "is_retweet": false
+      },
+      {
+        "id": "2050120066268909914",
+        "text": "Membayangkan para driver kaget penghasilannya sebagian dipotong BPJS",
+        "author": "yanzero_",
+        "timestamp": "2026-05-01T07:48:07.000Z",
+        "ts_epoch": 1777621687000,
+        "likes": 10,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1902,
+        "url": "https://x.com/yanzero_/status/2050120066268909914",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "cohort_id": "saham-indo",
+  "target_account": "@kenalkripto",
+  "niche": "saham",
+  "language": "id",
+  "tiers": {
+    "peer_tier": [
+      "@kr39__"
+    ],
+    "leader_tier": []
+  },
+  "updated_at": "2026-07-31T13:48:14.410Z"
+}

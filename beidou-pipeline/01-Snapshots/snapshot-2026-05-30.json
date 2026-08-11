@@ -1,0 +1,70 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2060553228903911784",
+        "text": "Metamask collaborates with Frankythefrog to release the Digital Fox Plushy SBT. Come on, mint it. Totally free.\n\n- \nhttps://\nfrankythefrog.com/metamask-mirac\nle\n…\n- Connect wallet\n- Mint",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-30T02:45:47.000Z",
+        "ts_epoch": 1780109147000,
+        "likes": 31,
+        "retweets": 3,
+        "replies": 6,
+        "bookmarks": 0,
+        "views": 8076,
+        "url": "https://x.com/duta_crypto/status/2060553228903911784",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2060548004407595152",
+        "text": "You're a large company in an industry.  \nYou want to have employees with learning and thinking abilities that are in the top 5% in Indonesia.  \nOne way is to recruit graduates from universities that are the target of Indonesia's smartest students.  \nMake sense?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-30T02:25:02.000Z",
+        "ts_epoch": 1780107902000,
+        "likes": 13,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 1510,
+        "url": "https://x.com/yanzero_/status/2060548004407595152",
+        "is_retweet": false
+      },
+      {
+        "id": "2060550469010030920",
+        "text": "After this, social media has to register using ID card, right?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-30T02:34:49.000Z",
+        "ts_epoch": 1780108489000,
+        "likes": 6,
+        "retweets": 0,
+        "replies": 3,
+        "bookmarks": 0,
+        "views": 880,
+        "url": "https://x.com/yanzero_/status/2060550469010030920",
+        "is_retweet": false
+      },
+      {
+        "id": "2060713274862387250",
+        "text": "There are 4 companies that I know of whose software engineers have won many international hackathons. One of them is IDRX.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-30T13:21:45.000Z",
+        "ts_epoch": 1780147305000,
+        "likes": 23,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 2317,
+        "url": "https://x.com/yanzero_/status/2060713274862387250",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -7,7 +7,7 @@ source_type: "LLM_Training_Data_Synthesis"
 is_real_post: false
 ---
 
-> ℹ️ **SYNTHETIC WIREFRAME NOTICE**: This wireframe and accompanying sample post were synthesized from Lulua's internal training data knowledge base. They are not derived from a single scraped real-world URL and serve as an illustrative reference model.
+> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation below is provided purely for illustration and context. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms (e.g., finance, crypto, trading) used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
 
 ## 📌 Illustrative Sample Content (Ajaib Futures Token Unlock Event Ad)
 

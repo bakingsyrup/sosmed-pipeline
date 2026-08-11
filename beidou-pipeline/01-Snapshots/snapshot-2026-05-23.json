@@ -1,0 +1,70 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2058004992301130101",
+        "text": "Check your wallet, bro. There's a USDC Cashdrop (HyperEVM Network) from PRJX.\n\nThe points system has also been removed and replaced with USDC rewards.\n\nWill PRJX release a token? No idea. \n\nCurrently, the only dApp on HyperEVM that's proven to deliver wins is \n@Kinetiq_xyz\n.",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-23T02:00:00.000Z",
+        "ts_epoch": 1779501600000,
+        "likes": 18,
+        "retweets": 1,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 3198,
+        "url": "https://x.com/duta_crypto/status/2058004992301130101",
+        "is_retweet": false
+      },
+      {
+        "id": "2058084438907789571",
+        "text": "Even \n@Polymarket\n, the world's largest Prediction Market app, can be blocked by the Government in just a short time.\n\nWhy do these low-rent web2 gambling sites still roam around? Web2 gambling duplicates, local-level volume, and even the market's human resources are low.",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-23T07:15:42.000Z",
+        "ts_epoch": 1779520542000,
+        "likes": 283,
+        "retweets": 66,
+        "replies": 138,
+        "bookmarks": 0,
+        "views": 35653,
+        "url": "https://x.com/duta_crypto/status/2058084438907789571",
+        "is_retweet": false
+      },
+      {
+        "id": "2058172292249887179",
+        "text": "Is it true that Sumatra is having another power outage?",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-23T13:04:48.000Z",
+        "ts_epoch": 1779541488000,
+        "likes": 49,
+        "retweets": 3,
+        "replies": 26,
+        "bookmarks": 0,
+        "views": 10354,
+        "url": "https://x.com/duta_crypto/status/2058172292249887179",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2058114643386937645",
+        "text": "The secret to mastering prompts is to end every prompt with this sentence:  \nAsk me for more detailed and in-depth information.  \n\nInstead of the AI making things up, the AI will ask questions and provide plenty of options for accuracy",
+        "author": "yanzero_",
+        "timestamp": "2026-05-23T09:15:43.000Z",
+        "ts_epoch": 1779527743000,
+        "likes": 868,
+        "retweets": 86,
+        "replies": 15,
+        "bookmarks": 0,
+        "views": 21696,
+        "url": "https://x.com/yanzero_/status/2058114643386937645",
+        "is_retweet": false
+      }
+    ]
+  }
+]

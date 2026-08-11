@@ -1,0 +1,42 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2058909671759729108",
+        "text": "Time to claim $SLX \n@solsticefi\n, bro.\n\n- \nhttps://\nclaim.solstice.finance/flow\n- Connect your Solana wallet\n- Claim and select vesting duration\n- Choose to stake or not\n\nAs usual. Vesting and staking are the enemies of airdrops.",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-25T13:54:53.000Z",
+        "ts_epoch": 1779717293000,
+        "likes": 23,
+        "retweets": 1,
+        "replies": 5,
+        "bookmarks": 0,
+        "views": 4749,
+        "url": "https://x.com/duta_crypto/status/2058909671759729108",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2058737859176386625",
+        "text": "Imagine having a company that's AI native. All the repetitive day-to-day tasks are already handled entirely by AI. Meeting materials are fully prepared. Employees start getting upgraded to focus on strategic matters, becoming \"AI whip-crackers\"",
+        "author": "yanzero_",
+        "timestamp": "2026-05-25T02:32:09.000Z",
+        "ts_epoch": 1779676329000,
+        "likes": 18,
+        "retweets": 1,
+        "replies": 3,
+        "bookmarks": 0,
+        "views": 1374,
+        "url": "https://x.com/yanzero_/status/2058737859176386625",
+        "is_retweet": false
+      }
+    ]
+  }
+]

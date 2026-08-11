@@ -1,0 +1,70 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2060334456821686492",
+        "text": "Inflasi 2,4%?",
+        "author": "duta_crypto",
+        "timestamp": "2026-05-29T12:16:28.000Z",
+        "ts_epoch": 1780056988000,
+        "likes": 20,
+        "retweets": 2,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 3541,
+        "url": "https://x.com/duta_crypto/status/2060334456821686492",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2060227164071674206",
+        "text": "I copied this\n\nKausaLayer this > the first flexible privacy layer project on Solana.\n\nIts focus: enabling users to interact with the Solana ecosystem (DeFi, swaps, etc.) without leaving an on-chain trace to the main wallet.",
+        "author": "setyamickala",
+        "timestamp": "2026-05-29T05:10:07.000Z",
+        "ts_epoch": 1780031407000,
+        "likes": 201,
+        "retweets": 27,
+        "replies": 32,
+        "bookmarks": 0,
+        "views": 43040,
+        "url": "https://x.com/setyamickala/status/2060227164071674206",
+        "is_retweet": false
+      },
+      {
+        "id": "2060331996665270627",
+        "text": "rusdi call again",
+        "author": "setyamickala",
+        "timestamp": "2026-05-29T12:06:41.000Z",
+        "ts_epoch": 1780056401000,
+        "likes": 71,
+        "retweets": 6,
+        "replies": 13,
+        "bookmarks": 0,
+        "views": 14287,
+        "url": "https://x.com/setyamickala/status/2060331996665270627",
+        "is_retweet": false
+      },
+      {
+        "id": "2060365712934498451",
+        "text": "Post-quantum Layer-1 blockchain that’s blowing up right now.\n\nOver 1,000+ builders already joined the waitlist in just days.\n\nJoin : \nhttps://\nqms.finance\nX : \n@QMSNetwork",
+        "author": "setyamickala",
+        "timestamp": "2026-05-29T14:20:40.000Z",
+        "ts_epoch": 1780064440000,
+        "likes": 159,
+        "retweets": 19,
+        "replies": 21,
+        "bookmarks": 0,
+        "views": 13926,
+        "url": "https://x.com/setyamickala/status/2060365712934498451",
+        "is_retweet": false
+      }
+    ]
+  }
+]

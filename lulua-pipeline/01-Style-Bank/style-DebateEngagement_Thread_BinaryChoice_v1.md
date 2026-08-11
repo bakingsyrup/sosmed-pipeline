@@ -10,14 +10,14 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 # Master Wireframe: Format 6 (BinaryChoice / Market Debate)
 
 > **Psychological Lever**: Tribal Alignment & Market Debate.  
-> **Core Intent**: Presents a sharp 2-way choice or decision matrix (e.g. Selling Spot vs Hedging Futures) to provoke active discussion and engagement in the comments.
+> **Core Intent**: Presents a sharp 2-way choice or decision matrix (e.g. Approach A vs Approach B) to provoke active discussion and engagement in the comments.
 
 ---
 
 ## 📐 1. Elastic Narrative Rhythm
 
 ### 🔵 X (Twitter) Thread Rhythm (Dynamic 3 to N Posts)
-* **Post 1 (Hook)**: Option A vs Option B dilemma ("Selling Spot vs Short Hedging: Which is smarter when support breaks?").
+* **Post 1 (Hook)**: Option A vs Option B dilemma ("Approach A vs Approach B: Which is smarter when [Constraint] shifts?").
 * **Post 2 (Option A Breakdown)**: Pros and cons of Option A.
 * **Post 3 (Option B Breakdown)**: Pros and cons of Option B.
 * **Final Post (Outro & Poll/Reply CTA)**: Reply prompt ("Which strategy do you execute? Drop your thesis below 👇").
@@ -29,7 +29,7 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 
 ---
 
-> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample below uses N points purely for illustration. You MUST NOT default to 5 posts or 5 cards. Dynamically scale the output length (from 3 to 15 units) to fit the actual depth of the input source content!
+> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation below is provided purely for illustration and context. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms (e.g., trading, finance, spot/futures) used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
 
 ## 📌 Illustrative Universal Sample Content (Sell vs Hedge Decision Matrix)
 

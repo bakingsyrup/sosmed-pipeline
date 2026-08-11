@@ -1,0 +1,84 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2070825794696286431",
+        "text": "Just bought some Kwetiau, man, but why's the spot right across from the most promising business right now? #MBG",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-27T11:05:18.000Z",
+        "ts_epoch": 1782558318000,
+        "likes": 42,
+        "retweets": 3,
+        "replies": 11,
+        "bookmarks": 0,
+        "views": 8440,
+        "url": "https://x.com/duta_crypto/status/2070825794696286431",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "coinvestasi",
+    "followers": 67700,
+    "tweets": [
+      {
+        "id": "2070823816155275303",
+        "text": "This Is Asia’s Crypto In One Place.\n\n 20–21 August 2026 | Melasti Beach, Bali\n\nGet your tickets at \nhttp://\ncoinfest.asia",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-27T10:57:26.000Z",
+        "ts_epoch": 1782557846000,
+        "likes": 26,
+        "retweets": 9,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 1769,
+        "url": "https://x.com/CoinfestAsia/status/2070823816155275303",
+        "is_retweet": true
+      },
+      {
+        "id": "2070835556591054882",
+        "text": "This is the starting XI in crypto according to mimin, what about your version?",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-27T11:44:05.000Z",
+        "ts_epoch": 1782560645000,
+        "likes": 19,
+        "retweets": 0,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 6688,
+        "url": "https://x.com/coinvestasi/status/2070835556591054882",
+        "is_retweet": false
+      },
+      {
+        "id": "2070835583090569518",
+        "text": "",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-27T11:44:11.000Z",
+        "ts_epoch": 1782560651000,
+        "likes": 5,
+        "retweets": 3,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 3247,
+        "url": "https://x.com/coinvestasi/status/2070835583090569518",
+        "is_retweet": false
+      },
+      {
+        "id": "2070835601713312255",
+        "text": "",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-27T11:44:16.000Z",
+        "ts_epoch": 1782560656000,
+        "likes": 3,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 403,
+        "url": "https://x.com/coinvestasi/status/2070835601713312255",
+        "is_retweet": false
+      }
+    ]
+  }
+]

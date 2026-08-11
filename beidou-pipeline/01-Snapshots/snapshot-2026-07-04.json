@@ -1,0 +1,42 @@
+[
+  {
+    "handle": "kenalkripto",
+    "followers": 26600,
+    "tweets": [
+      {
+        "id": "2073376282487017763",
+        "text": "Vietnam and the Philippines Get Promoted\n\nto upper-middle-income countries\n(previously lower-middle)\n\nThis is a disaster, not a blessing.\n\nWhy?\n\nbecause for ordinary citizens, their welfare is still far from sufficient.\n\nthe minimum wage for workers is still smaller than the cost",
+        "author": "KenalKripto",
+        "timestamp": "2026-07-04T12:00:01.000Z",
+        "ts_epoch": 1783166401000,
+        "likes": 38,
+        "retweets": 10,
+        "replies": 5,
+        "bookmarks": 0,
+        "views": 5725,
+        "url": "https://x.com/KenalKripto/status/2073376282487017763",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2073248152556310917",
+        "text": "Difomoin CT \nDifomoin Solana \n\nMarket sedang ter \n$ANSEM\n \n$ANSEM",
+        "author": "duta_crypto",
+        "timestamp": "2026-07-04T03:30:53.000Z",
+        "ts_epoch": 1783135853000,
+        "likes": 52,
+        "retweets": 3,
+        "replies": 13,
+        "bookmarks": 0,
+        "views": 8673,
+        "url": "https://x.com/duta_crypto/status/2073248152556310917",
+        "is_retweet": false
+      }
+    ]
+  }
+]

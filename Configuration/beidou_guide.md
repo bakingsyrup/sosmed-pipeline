@@ -77,7 +77,7 @@ Ranks and surfaces top viral content format archetypes from the **Leader Tier** 
 
 ## Section 4: Operational Commands & Automation
 
-* **Daily Scheduler**: Managed via PM2 cron (`beidou_scheduler.mjs` + `/home/silvester/beidou_daily.sh` wrapper) running daily at 05:00 UTC.
+* **Daily Scheduler**: Managed via PM2 cron (`beidou_scheduler.mjs` + `/home/silvester/beidou_daily.sh` wrapper) running daily at 01:30 UTC.
 * **Manual Diagnostic Trigger**: Run diagnostics on-demand via the UI **Run Diagnostics** button or via API:
   `POST /api/beidou/run-diagnostics` with `{ "cohort_id": "crypto-indonesia" }`.
 

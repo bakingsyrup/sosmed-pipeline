@@ -1,0 +1,36 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2051490213873287635",
+        "text": "Untuk profesional marketing, AI video ini bikin stress. Ubah prompt dikit hasil video bisa berubah drastis, gak konsisten, susah nge track perubahan prompt dll\nBeberapa solusinya punya character sheet, background, story board.\nCuma itu saja? Tentu saja tidak.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-05T02:32:36.000Z",
+        "ts_epoch": 1777948356000,
+        "likes": 20,
+        "retweets": 1,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 1548,
+        "url": "https://x.com/yanzero_/status/2051490213873287635",
+        "is_retweet": false
+      },
+      {
+        "id": "2051692679277486224",
+        "text": "Kasta AI tertinggi adalah yang berhasil bikin workflow video dgn hasil konsisten \nBisa bikin video dgn shot yg kompleks dan gak terlalu slop... Sangatlah tidak mudah....\nContoh iklan obat nyamuk bapak2 pakai peci datang ke warung, berbicara ke penjaga warung lalu pindah scene",
+        "author": "yanzero_",
+        "timestamp": "2026-05-05T15:57:08.000Z",
+        "ts_epoch": 1777996628000,
+        "likes": 73,
+        "retweets": 6,
+        "replies": 6,
+        "bookmarks": 0,
+        "views": 3963,
+        "url": "https://x.com/yanzero_/status/2051692679277486224",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2067196550678446253",
+        "text": "Is this the power outage across the whole island of Java?",
+        "author": "setyamickala",
+        "timestamp": "2026-06-17T10:43:58.000Z",
+        "ts_epoch": 1781693038000,
+        "likes": 133,
+        "retweets": 4,
+        "replies": 126,
+        "bookmarks": 0,
+        "views": 29554,
+        "url": "https://x.com/setyamickala/status/2067196550678446253",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "coinvestasi",
+    "followers": 67700,
+    "tweets": [
+      {
+        "id": "2067110318413918419",
+        "text": "JUST IN: Indonesia's Financial Services Authority (OJK) Is Set to Release a Real World Asset Tokenization Regulation in Q3 2026.",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T05:01:19.000Z",
+        "ts_epoch": 1781672479000,
+        "likes": 414,
+        "retweets": 106,
+        "replies": 41,
+        "bookmarks": 0,
+        "views": 69503,
+        "url": "https://x.com/idcryptonetwork/status/2067110318413918419",
+        "is_retweet": true
+      },
+      {
+        "id": "2067167586622836817",
+        "text": "Will GOAT Messi bring home the World Cup trophy for the second time? \n\nIf so, this bro will make 10x gains and pocket Rp186.5 billion",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T08:48:53.000Z",
+        "ts_epoch": 1781686133000,
+        "likes": 21,
+        "retweets": 4,
+        "replies": 7,
+        "bookmarks": 0,
+        "views": 2376,
+        "url": "https://x.com/coinvestasi/status/2067167586622836817",
+        "is_retweet": false
+      },
+      {
+        "id": "2067167634282656023",
+        "text": "",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T08:49:04.000Z",
+        "ts_epoch": 1781686144000,
+        "likes": 0,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 434,
+        "url": "https://x.com/coinvestasi/status/2067167634282656023",
+        "is_retweet": false
+      },
+      {
+        "id": "2067199387424698739",
+        "text": "To keep it short, tonight is BTC heading right or left, bro?",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T10:55:15.000Z",
+        "ts_epoch": 1781693715000,
+        "likes": 96,
+        "retweets": 7,
+        "replies": 9,
+        "bookmarks": 0,
+        "views": 12957,
+        "url": "https://x.com/coinvestasi/status/2067199387424698739",
+        "is_retweet": false
+      },
+      {
+        "id": "2067199406399684860",
+        "text": "",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T10:55:19.000Z",
+        "ts_epoch": 1781693719000,
+        "likes": 3,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 1746,
+        "url": "https://x.com/coinvestasi/status/2067199406399684860",
+        "is_retweet": false
+      },
+      {
+        "id": "2067199411600658574",
+        "text": "Context:\n\nTonight, all eyes are on the FOMC meeting room.\n\nKevin Warsh, the new Fed Chair, will lead the FOMC for the first time. And the decision coming out at 01:00 WIB early this morning isn't just about interest rates, but about Bitcoin's direction through the end of the",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T10:55:21.000Z",
+        "ts_epoch": 1781693721000,
+        "likes": 3,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1599,
+        "url": "https://x.com/coinvestasi/status/2067199411600658574",
+        "is_retweet": false
+      },
+      {
+        "id": "2067202640443064455",
+        "text": "This Saturday, Coinvestasi & Beyond Canvas is gonna be a blast hosting a community meetup in South Jakarta!\n\nWhat’s on the agenda? \n  Tote bag painting together \n  Creating a giant collaborative canvas \n  Coffee & chill chats\n\nCome prove that crypto traders aren’t just pros",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-17T11:08:10.000Z",
+        "ts_epoch": 1781694490000,
+        "likes": 9,
+        "retweets": 2,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1890,
+        "url": "https://x.com/coinvestasi/status/2067202640443064455",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2067227990774501671",
+        "text": "Tips for refactoring legacy code with Claude Code the Yanzero way:\n1. Build a \"harness refactor\":\n- create unit tests until 80% coverage\n- create integration tests that are end-to-end/full flow\n- create property and fuzz tests if needed\n- create load testing\n2. Ask Claude to",
+        "author": "yanzero_",
+        "timestamp": "2026-06-17T12:48:54.000Z",
+        "ts_epoch": 1781700534000,
+        "likes": 97,
+        "retweets": 10,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 3660,
+        "url": "https://x.com/yanzero_/status/2067227990774501671",
+        "is_retweet": false
+      }
+    ]
+  }
+]

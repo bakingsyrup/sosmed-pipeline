@@ -1,0 +1,62 @@
+[
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2068374316841119981",
+        "text": "We're later than some wanted, but look what's ready:\n\n→ Website live: \nhttps://\nmodeloslab.xyz\n→ A huge lineup of open models served by miners, our MoE already running on our own miner in testing. More models being added after testing\n→ Image generation working (cursed two-eyed",
+        "author": "setyamickala",
+        "timestamp": "2026-06-20T16:44:00.000Z",
+        "ts_epoch": 1781973840000,
+        "likes": 40,
+        "retweets": 13,
+        "replies": 14,
+        "bookmarks": 0,
+        "views": 11916,
+        "url": "https://x.com/ModelosMDL/status/2068374316841119981",
+        "is_retweet": true
+      }
+    ]
+  },
+  {
+    "handle": "coinvestasi",
+    "followers": 67700,
+    "tweets": [
+      {
+        "id": "2068276798962684346",
+        "text": "Excited to announce that Gabriel Rey (\n@GabRey99\n), Founder & CEO of Triv Group (\n@TrivExchange\n), will be joining Coinfest Asia 2026 to share his insights at The World’s Crypto Festival!\n\nAn OG of the Indonesian crypto ecosystem, Gabriel has led one of the nation's oldest and",
+        "author": "coinvestasi",
+        "timestamp": "2026-06-20T10:16:30.000Z",
+        "ts_epoch": 1781950590000,
+        "likes": 22,
+        "retweets": 3,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 1049,
+        "url": "https://x.com/CoinfestAsia/status/2068276798962684346",
+        "is_retweet": true
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2068225723169636542",
+        "text": "Income below 8.5jt/month falls into the poverty category.\n85% of Indonesia's population falls into the poverty category",
+        "author": "yanzero_",
+        "timestamp": "2026-06-20T06:53:32.000Z",
+        "ts_epoch": 1781938412000,
+        "likes": 17,
+        "retweets": 3,
+        "replies": 5,
+        "bookmarks": 0,
+        "views": 3426,
+        "url": "https://x.com/yanzero_/status/2068225723169636542",
+        "is_retweet": false
+      }
+    ]
+  }
+]

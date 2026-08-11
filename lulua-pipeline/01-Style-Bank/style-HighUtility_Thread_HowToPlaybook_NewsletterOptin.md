@@ -10,7 +10,7 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 # Master Wireframe: Format 9 (MasterFramework / Institutional Model)
 
 > **Psychological Lever**: Master Framework Architecture & Systematized Insight.  
-> **Core Intent**: Presents an institutional macro model or portfolio architecture (e.g. Delta Neutral Portfolio Model) as a structured mental framework.
+> **Core Intent**: Presents an institutional macro model or system architecture (e.g. Modular Workflow Model, Operational Risk Framework) as a structured mental framework.
 
 ---
 
@@ -28,7 +28,7 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 
 ---
 
-> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample below uses N components purely for illustration. You MUST NOT default to 5 posts or 5 cards. Dynamically scale the output length (from 3 to 15 units) to fit the actual depth of the input source content!
+> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation below is provided purely for illustration and context. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms (e.g., finance, delta neutral, portfolio) used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
 
 ## 📌 Illustrative Universal Sample Content (Delta Neutral Risk Framework)
 

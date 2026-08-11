@@ -1,0 +1,42 @@
+[
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2059819648699486246",
+        "text": "Thank for using my api key sir",
+        "author": "setyamickala",
+        "timestamp": "2026-05-28T02:10:48.000Z",
+        "ts_epoch": 1779934248000,
+        "likes": 120,
+        "retweets": 3,
+        "replies": 16,
+        "bookmarks": 0,
+        "views": 22233,
+        "url": "https://x.com/setyamickala/status/2059819648699486246",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2059789455683412026",
+        "text": "AI agents at the company are very useful when they have access to company data. \nExample:\n1. Prepare materials for this week's meeting\n2. Create a profit and loss report for all companies and then consolidate it\n3. Which sales rep has the highest turnover and analyze their",
+        "author": "yanzero_",
+        "timestamp": "2026-05-28T00:10:49.000Z",
+        "ts_epoch": 1779927049000,
+        "likes": 40,
+        "retweets": 2,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 1798,
+        "url": "https://x.com/yanzero_/status/2059789455683412026",
+        "is_retweet": false
+      }
+    ]
+  }
+]

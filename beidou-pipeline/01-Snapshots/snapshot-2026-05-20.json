@@ -1,0 +1,36 @@
+[
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2056909027029004667",
+        "text": "Everyone can make software because of the coding vibe.  \nThey say software engineers are dead.  \nNo.  \nStandards are rising.  \nSoftware engineers will learn security to raise the standards.  \nNope  \n-non-software engineers are still learning to build apps.",
+        "author": "yanzero_",
+        "timestamp": "2026-05-20T01:25:02.000Z",
+        "ts_epoch": 1779240302000,
+        "likes": 99,
+        "retweets": 14,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 6132,
+        "url": "https://x.com/yanzero_/status/2056909027029004667",
+        "is_retweet": false
+      },
+      {
+        "id": "2056960788104179768",
+        "text": "Why is Es Teler 77 being mentioned?",
+        "author": "yanzero_",
+        "timestamp": "2026-05-20T04:50:43.000Z",
+        "ts_epoch": 1779252643000,
+        "likes": 3,
+        "retweets": 0,
+        "replies": 0,
+        "bookmarks": 0,
+        "views": 1249,
+        "url": "https://x.com/yanzero_/status/2056960788104179768",
+        "is_retweet": false
+      }
+    ]
+  }
+]

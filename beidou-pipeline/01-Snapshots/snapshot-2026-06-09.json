@@ -1,0 +1,56 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2064496567672098975",
+        "text": "Good morning, people of Indonesia.",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-09T23:55:12.000Z",
+        "ts_epoch": 1781049312000,
+        "likes": 24,
+        "retweets": 3,
+        "replies": 11,
+        "bookmarks": 0,
+        "views": 1850,
+        "url": "https://x.com/duta_crypto/status/2064496567672098975",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2064164900168233419",
+        "text": "Not all competitions are the same.  \nNational-scope competitions where the participants are top national high school students, like IC, Teladan, Padma, etc., competing against each other—Indonesia's top students—will be considered more valuable than competitions with a",
+        "author": "yanzero_",
+        "timestamp": "2026-06-09T01:57:17.000Z",
+        "ts_epoch": 1780970237000,
+        "likes": 5,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 970,
+        "url": "https://x.com/yanzero_/status/2064164900168233419",
+        "is_retweet": false
+      },
+      {
+        "id": "2064273780835504276",
+        "text": "Mortgage Warrior with floating interest rates",
+        "author": "yanzero_",
+        "timestamp": "2026-06-09T09:09:56.000Z",
+        "ts_epoch": 1780996196000,
+        "likes": 19,
+        "retweets": 0,
+        "replies": 1,
+        "bookmarks": 0,
+        "views": 2358,
+        "url": "https://x.com/yanzero_/status/2064273780835504276",
+        "is_retweet": false
+      }
+    ]
+  }
+]

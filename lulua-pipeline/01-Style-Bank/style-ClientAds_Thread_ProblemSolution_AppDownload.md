@@ -77,12 +77,12 @@ format: "social_post"
 style_name: ClientAds_Thread_ProblemSolution_AppDownload
 
 ### Part 1: Metadata & Ratio Trigger
-- **Target Metric Trigger:** BookmarkSave (High utility in market analysis) & AppDownload (Direct conversion via platform feature).
-- **Mechanics:** The content uses technical market observation (Inventory Analysis) to build authority, then pivots to a proprietary tool to solve the analytical complexity, driving a high-intent click-through.
+- **Target Metric Trigger:** BookmarkSave (High utility in workflow/methodology analysis) & AppDownload (Direct conversion via platform feature).
+- **Mechanics:** The content uses a technical workflow observation to build authority, then pivots to a proprietary software/app to solve the analytical complexity, driving a high-intent click-through.
 
 ### Part 2: Psychological Lever
 - **Primary Emotional Driver:** High Utility & Authority.
-- **Secondary Driver:** FOMO (The fear of missing the "accumulation" phase of a market cycle) combined with Social Proof (referencing institutional buying activity).
+- **Secondary Driver:** FOMO (The fear of missing a critical operational shift) combined with Social Proof (referencing peer/institutional activity).
 
 ### Part 3: Micro-Rhythm & Pacing Rules
 - **Hook Line Length:** Under 15 words. Immediate transition to "Why" (The logical hook).
@@ -97,23 +97,23 @@ style_name: ClientAds_Thread_ProblemSolution_AppDownload
 ### Part 4: Plug-and-Play Wireframe Blueprint
 
 **[Hook: Pattern]**
-[Mandatory: State a contrarian market observation or a specific investment shift].
-[Mandatory: Mention the specific analytical methodology being applied].
+[Mandatory: State a contrarian industry observation or a specific workflow shift].
+[Mandatory: Mention the specific analytical methodology or process being applied].
 [Mandatory: (1/X) sequence indicator].
 
 **[Setup / Evidence: Pattern]**
-[Mandatory: Present [Asset A] performance data].
-[Mandatory: Contrast [Asset A] with [Asset B] to show a broader trend].
-[Adaptive: Insert analytical observation regarding [Market Force] or [Transaction Pattern]].
+[Mandatory: Present [Primary Subject A] performance/usage data].
+[Mandatory: Contrast [Primary Subject A] with [Alternative B] to show a broader trend].
+[Adaptive: Insert analytical observation regarding [Industry Phenomenon] or [Behavioral Pattern]].
 
 **[Core Mechanism: Step-by-Step]**
-[Mandatory: Introduce the [Primary System/Asset] used to verify the observation].
+[Mandatory: Introduce the [Primary Tool / System Name] used to verify the observation].
 [Mandatory: Explain the [Key Operational Task] (e.g., filtering, monitoring, or analyzing) required to reach the conclusion].
-[Adaptive: Show proof of [Market Entity] behavior (e.g., accumulation vs. distribution)].
+[Adaptive: Show proof of [Target Audience / User Entity] behavioral shift].
 
 **[Synthesis: Pattern]**
-[Mandatory: Reiterate why the [Primary System/Asset] makes the task easier/faster].
-[Mandatory: Provide the [Resource A] link for the reader to replicate the analysis].
+[Mandatory: Reiterate why the [Primary Tool / System Name] makes the task easier/faster].
+[Mandatory: Provide the [Resource / Tool Link] for the reader to replicate the result].
 [Mandatory: Explicit acknowledgement of the [Sponsor/Client] partner].
 
 **[Closing: Pattern]**
@@ -121,8 +121,10 @@ style_name: ClientAds_Thread_ProblemSolution_AppDownload
 
 ***
 
+> ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation below is provided purely for illustration and context. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms (e.g., finance, banking, stocks, trading) used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
+
 ### Example Implementation (For Context Only)
-*   **Hook:** "Why I’m starting my DCA strategy on banking stocks now. Let's look at the Inventory Analysis." (1/5)
-*   **Setup:** "BMRI rose 10% today. I’m looking at transaction patterns, not just price charts, to see who is absorbing the sell-off."
-*   **Mechanism:** "Using [Terminal Name], I filter by Done Details to see the exact moment institutional entities absorbed the sell-off."
-*   **Synthesis:** "Don't just DCA blindly—verify the accumulation. Use [Terminal Name] here: [Link]. Thanks [Partner]!"
+*   **Hook:** "Why I’m starting a new optimization workflow. Let's look at the methodology breakdown." (1/5)
+*   **Setup:** "Subject A utilization rose 10% today. I’m looking at transaction patterns to see who is absorbing the supply."
+*   **Mechanism:** "Using [Tool Name], I filter by Activity Details to see the exact moment key entities absorbed the shift."
+*   **Synthesis:** "Don't just execute blindly—verify the data. Use [Tool Name] here: [Link]. Thanks [Partner]!"

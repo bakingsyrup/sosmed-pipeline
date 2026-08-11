@@ -1,0 +1,76 @@
+[
+  {
+    "handle": "duta_crypto",
+    "followers": 53900,
+    "tweets": [
+      {
+        "id": "2063977498254487720",
+        "text": "His conviction in $ETH is greater than that of the $ETH founder himself. \n\n\n@VitalikButerin",
+        "author": "duta_crypto",
+        "timestamp": "2026-06-08T13:32:37.000Z",
+        "ts_epoch": 1780925557000,
+        "likes": 24,
+        "retweets": 3,
+        "replies": 4,
+        "bookmarks": 0,
+        "views": 2145,
+        "url": "https://x.com/duta_crypto/status/2063977498254487720",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "setyamickala",
+    "followers": 51200,
+    "tweets": [
+      {
+        "id": "2063806654437838975",
+        "text": "Panik  BBCA",
+        "author": "setyamickala",
+        "timestamp": "2026-06-08T02:13:44.000Z",
+        "ts_epoch": 1780884824000,
+        "likes": 301,
+        "retweets": 29,
+        "replies": 78,
+        "bookmarks": 0,
+        "views": 24001,
+        "url": "https://x.com/setyamickala/status/2063806654437838975",
+        "is_retweet": false
+      },
+      {
+        "id": "2063988401540595718",
+        "text": "Later, I'll just ask for merch from you \n@nkskrdwyn\n if we meet again, so it can be super crypto.",
+        "author": "setyamickala",
+        "timestamp": "2026-06-08T14:15:56.000Z",
+        "ts_epoch": 1780928156000,
+        "likes": 63,
+        "retweets": 0,
+        "replies": 21,
+        "bookmarks": 0,
+        "views": 5998,
+        "url": "https://x.com/setyamickala/status/2063988401540595718",
+        "is_retweet": false
+      }
+    ]
+  },
+  {
+    "handle": "yanzero_",
+    "followers": 0,
+    "tweets": [
+      {
+        "id": "2063956695488086258",
+        "text": "Story IG Chatib Basri. Meaning refusing to become finance minister",
+        "author": "yanzero_",
+        "timestamp": "2026-06-08T12:09:57.000Z",
+        "ts_epoch": 1780920597000,
+        "likes": 19,
+        "retweets": 0,
+        "replies": 2,
+        "bookmarks": 0,
+        "views": 3090,
+        "url": "https://x.com/yanzero_/status/2063956695488086258",
+        "is_retweet": false
+      }
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 /**
  * Beidou Daily Scheduler (`beidou_scheduler.mjs`)
  *
- * Runs once per day at 05:00 UTC via PM2 cron.
+ * Runs once per day at 01:30 UTC via PM2 cron.
  * 1. Runs snapshot batch (scrapes yesterday's posts).
  * 2. Runs diagnostics for all cohorts.
  * 3. Exits with code 0 on success, 1 on failure.
