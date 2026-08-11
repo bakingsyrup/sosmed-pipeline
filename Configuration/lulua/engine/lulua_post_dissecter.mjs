@@ -20,10 +20,10 @@ function debugLog(msg) {
   } catch (e) {}
 }
 
-function logNewDissection(styleName) {
-  debugLog(`logNewDissection called: styleName=${styleName}`);
+function logNewDissection(styleName, status = 'succeed') {
+  debugLog(`logNewDissection called: styleName=${styleName} status=${status}`);
   const ts = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
-  const line = `- [succeed] [[style-${styleName}]] — ${ts}\n`;
+  const line = `- [${status}] [[style-${styleName}]] — ${ts}\n`;
   try {
     const exists = fs.existsSync(DISSECTIONS_LOG);
     debugLog(`  DISSECTIONS_LOG=${DISSECTIONS_LOG}, exists=${exists}`);
@@ -74,18 +74,20 @@ Part 1: Post-by-Post Dissection Matrix (Source Analysis Table)
   5. Topic-Agnostic Wireframe Variable Slot (Parameter slot, e.g. [Slot: Thesis Statement & Teaser]).
 
 Part 2a: Reference Source Content (Original Text)
-- DO NOT WRITE THIS SECTION. It will be injected automatically by the system with the exact source text.
+- DO NOT WRITE THIS SECTION. SKIP IT COMPLETELY. It is injected automatically by the system. You MUST NOT output any Part 2a content.
 
 Part 2b: Cross-Domain Applied Demonstration Output
+- Write 100% in Indonesian only, using natural sentence-case copywriting. Never use English in Part 2b.
 - Randomly select a COMPLETELY UNRELATED industry domain from the target topic (e.g. Specialty Coffee, Skincare, SaaS, Real Estate, Fitness, Productivity).
 - Apply the Part 3 Wireframe Blueprint you generated.
-- Write 100% in Indonesian, using natural sentence-case copywriting per strict x_style_guide.md rules.
 - CRITICAL: You MUST translate and write ALL headlines, list headers, bullet titles, and body text in Indonesian together. NEVER leave English headers with Indonesian body text.
 - CRITICAL: You MUST write the full post starting from the top hook/intro line down to the final CTA. Never skip the opening intro sentence.
 - Include the mandatory anti-bias banner at the top of Part 2b:
   > ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation in Part 2b is provided purely for multi-domain illustration. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
+- CRITICAL: Before writing Part 2b, identify the structural parts the source content actually contains (hook, setup, value, steps, CTA, etc.). Part 2b MUST contain exactly the same number of parts as the source. Never create parts the source doesn't have.
 
 Part 3: Master Universal Wireframe Blueprint (Elastic Narrative Phases)
+- Write 100% in English only. Never use Indonesian or any other language for Part 3.
 - Create a 100% topic-agnostic, phase-based wireframe blueprint for drafting agents (Shinku).
 - Organize content into Elastic Narrative Phases adapted to the content's structural archetype.
 - Include explicit DYNAMIC CONTENT SCALING DIRECTIVES for adaptive phases, instructing the drafting agent to analyze input data depth first and scale post count dynamically (1/N ... N/N). Never hardcode fixed post counts.
@@ -164,6 +166,12 @@ Phase 3: Conversion CTA
 `;
   }
 
+  // Strip any Part 2a that DeepSeek wrote (model ignores SKIP directive)
+  styleMarkdown = styleMarkdown.replace(
+    /(?:^|\n)#{1,3}\s*(?:📜\s*)?Part 2a:[\s\S]*?(?=\n#{1,3}\s*(?:📜\s*)?Part [23][bB]|\n#{1,3}\s*(?:🤖\s*)?Part 3|$)/i,
+    '\n'
+  );
+
   // Inject Part 2a directly with the exact source text (no AI involved)
   let part2aBlock = `## 📜 Part 2a: Reference Source Content\n\n`;
   if (postUrl) {
@@ -175,8 +183,10 @@ Phase 3: Conversion CTA
     styleMarkdown = styleMarkdown.replace('## 📜 Part 2b:', part2aBlock + '\n\n## 📜 Part 2b:');
   } else if (styleMarkdown.includes('## Part 2b:')) {
     styleMarkdown = styleMarkdown.replace('## Part 2b:', part2aBlock + '\n\n## Part 2b:');
-  } else if (styleMarkdown.includes('## 🤖 Part 3:') || styleMarkdown.includes('## Part 3:')) {
-    styleMarkdown = styleMarkdown.replace(/(## 🤖 Part 3:|## Part 3:)/i, part2aBlock + '\n\n## 📜 Part 2b: Cross-Domain Applied Output\n\n$1');
+  } else if (styleMarkdown.match(/(?:^|\n)# Part 2b:/)) {
+    styleMarkdown = styleMarkdown.replace(/(# Part 2b:)/, part2aBlock + '\n\n$1');
+  } else if (styleMarkdown.includes('## 🤖 Part 3:') || styleMarkdown.includes('## Part 3:') || styleMarkdown.match(/(?:^|\n)# Part 3:/)) {
+    styleMarkdown = styleMarkdown.replace(/(#+\s*(?:🤖\s*)?Part 3:)/i, part2aBlock + '\n\n# Part 2b: Cross-Domain Applied Output\n\n$1');
   }
 
   // Inject source_url into frontmatter (dedup relies on it, no AI hallucination risk)
@@ -224,7 +234,7 @@ Phase 3: Conversion CTA
   return { styleName, finalMarkdown };
 }
 
-export async function runPostDissection(inputUrlOrText, platform = 'x') {
+export async function runPostDissection(inputUrlOrText, platform = 'x', postCount = 0) {
   debugLog('=== DISSECTION START ===');
   debugLog(`Input: ${inputUrlOrText.slice(0, 200)}`);
 
@@ -257,6 +267,7 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
         const styleName = styleNameMatch ? styleNameMatch[1] : file.replace(/^style-|\.md$/g, '');
         debugLog(`DUPLICATE FOUND: ${file}`);
         debugLog('=== DISSECTION END (duplicate, discarded) ===');
+        logNewDissection(styleName, 'duplicate');
         console.log(`⚡ [Lulua Dissector] Post URL already dissected in Style Bank: ${file}`);
         return {
           ok: true,
@@ -282,7 +293,7 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
     fetchRes = { ok: true, isUrl: false, text: textWithoutUrls, articleUrl: null, isDual: false, hasArticle: false };
   } else {
     debugLog('Fetching post content...');
-    fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
+    fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform, postCount);
   }
   debugLog(`Fetch result: isDual=${fetchRes.isDual}, hasArticle=${fetchRes.hasArticle}, textLen=${fetchRes.text?.length || 0}`);
 

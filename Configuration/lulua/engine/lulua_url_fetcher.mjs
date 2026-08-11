@@ -14,7 +14,7 @@ function sleep(ms) {
 /**
  * Decoupled Post & Thread Content Fetcher for Lulua Dissector.
  */
-export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
+export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x', postCount = 0) {
   const trimmed = inputUrlOrText ? inputUrlOrText.trim() : '';
 
   // 1. Normalize input (strip leading slashes e.g. /x.com/..., prepend https:// if missing)
@@ -226,6 +226,11 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
         }
       }
 
+      if (postCount > 0 && allCollectedTweets.size >= postCount) {
+        console.log(`  Reached post count limit (${postCount}), stopping scroll.`);
+        break;
+      }
+
       await sleep(1000);
     }
 
@@ -237,6 +242,13 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
         extractedArticleUrl = postScrollResult.url;
         console.log(`  🔗 Post-scroll scan found article URL: ${extractedArticleUrl}`);
       }
+    }
+
+    // Trim to exact post_count if specified (batch collection may overshoot)
+    if (postCount > 0) {
+      const entries = Array.from(allCollectedTweets.entries()).slice(0, postCount);
+      allCollectedTweets.clear();
+      for (const [k, v] of entries) allCollectedTweets.set(k, v);
     }
 
     const opTweets = Array.from(allCollectedTweets.values()).map(t => t.text);

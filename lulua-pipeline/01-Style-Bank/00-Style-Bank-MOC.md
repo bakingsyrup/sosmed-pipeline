@@ -6,8 +6,6 @@ kanban-plugin: board
 
 ## 01 - Step-by-Step SOP
 
-- [ ] [[00-Waiting-Lounge|Unique Hook → Core Execution → Conversion CTA. X.Thread]]
-- [ ] [[new_dissections|Unique Hook → Core Execution → Conversion CTA. X.Thread]]
 - [ ] [[style-Format1_HighUtility_StepByStep_v1|Time-saved promise → 3 to 5 setup steps → Tool link CTA. X.Thread]]
 - [ ] [[style-HighUtility_Short_ContentStructure_BookmarkSave|Time-saved promise → 3 to 5 setup steps → Tool link CTA. X.Thread]]
 - [ ] [[style-Utility_Thread_AuthorityHook_EducationalConversion|High Stakes Promise → Step-by-Step Execution → Actionable Resource Bridge. X.Thread]]
@@ -29,6 +27,7 @@ kanban-plugin: board
 
 ## 05 - Mega Number Alert
 
+- [ ] [[style-Mega|Shocking data hook → Interconnected crisis loop → Inescapable conclusion CTA. X.Thread]]
 
 ## 06 - Binary Choice Debate
 

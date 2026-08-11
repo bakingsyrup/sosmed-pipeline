@@ -90,9 +90,10 @@ platform: "x"
 
       // 2. Process the moved file inside 02-Memory
       const processingContent = fs.readFileSync(processingPath, 'utf8');
-      const processingMeta = parseFrontmatter(processingContent);
+       const processingMeta = parseFrontmatter(processingContent);
       const urlMatch = processingContent.match(/https?:\/\/[^\s\)\>]+/i);
       const frontmatterUrl = (processingMeta.url && processingMeta.url.trim()) ? processingMeta.url.trim() : null;
+      const postCount = parseInt(processingMeta.post_count, 10) || 0;
       const bodyContent = processingContent.replace(/^---\n[\s\S]*?\n---\n?/, '').trim();
       const userText = bodyContent
         .replace(/## 📌 Target Post Content \/ URL\n?/gi, '')
@@ -106,7 +107,7 @@ platform: "x"
         : (frontmatterUrl || (urlMatch ? urlMatch[0] : processingContent));
 
       try {
-        await runPostDissection(target, processingMeta.platform || 'x');
+        await runPostDissection(target, processingMeta.platform || 'x', postCount);
 
         // 3. Remove temporary processing note from 02-Memory once saved to 01-Style-Bank
         if (fs.existsSync(processingPath)) {
@@ -120,6 +121,7 @@ platform: "x"
 status: draft
 url: ""
 platform: "x"
+post_count: ""
 ---
 
 # Post Dissection Template

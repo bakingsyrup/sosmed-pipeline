@@ -1,4 +1,5 @@
 ---
+category: "01 - Step-by-Step SOP"
 style_name: "HighUtility_Short_ContentStructure_BookmarkSave"
 authority_persona: "Tool Mechanic"
 funnel_stage: "TOFU"
@@ -6,8 +7,7 @@ target_metric: "Bookmarks_and_Saves"
 elasticity: "dynamic (3 to 15 posts)"
 supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "linkedin"]
 narrative_flow_summary: "Time-saved promise → 3 to 5 setup steps → Tool link CTA"
-source_url: "https://x.com/icalbhimaa/status/2086821104962969909"
-source_url: "https://x.com/icalbhimaa/status/2086821104962969909"
+source_url: "https://x.com/icalbhimaa/status/2084187014476575059"
 ---
 
 # 🔬 Dissected Style Wireframe: social_post
@@ -18,347 +18,159 @@ source_url: "https://x.com/icalbhimaa/status/2086821104962969909"
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Post 1** | **Hook Arc** | "Author: @icalbhimaa" | *Bridge line* | Curiosity | [Slot: Hook] |
 
-## 📜 Part 2a: Reference Source Content (Original Text)
-
-Author: @icalbhimaa
-
---- Thread Content (25 Posts) ---
-
-[Post 1]:
-A 35-year-old man, exercising for 3 hours after a month of inactivity.
-
-The next day, his urine turned dark and his body felt utterly wrecked.
-
-That night, his heart stopped. This wasn't just soreness.
-
-[Post 2]:
-It's been months since he last exercised.
-
-Then one day, he forced himself to train for 3 hours.
-
-His muscles felt extremely sore afterward.
-
-At first, it might have seemed like just the usual stiffness.
-
-But it turned out something far more dangerous was happening inside his body.
-
-[Post 3]:
-The next day, his urine turned dark like cola.
-
-This is one of the signs to watch out for after extreme exercise.
-
-Not because the body is "detoxifying."
-
-It could mean the muscles are experiencing severe damage.
-
-This condition is called:
-Rhabdomyolysis.
-
-[Post 4]:
-Rhabdomyolysis occurs when muscle fibers experience extensive damage.
-
-Triggers can vary.
-
-One of them is extremely strenuous physical activity, especially when the body is not yet accustomed to it.
-
-Damaged muscle cells then release various substances into the bloodstream.
-
-Including myoglobin and potassium.
-
-[Post 5]:
-Myoglobin is a protein found inside muscle cells.
-
-When muscles are severely damaged, myoglobin is released and enters the bloodstream.
-
-The kidneys then have to filter it out.
-
-A very large amount can overburden the kidneys and increase the risk of acute kidney injury.
-
-One of its consequences?
-
-Urine becomes very dark.
-
-[Post 6]:
-But myoglobin isn't the only problem.
-
-There are other substances that are far more concerning:
-Potassium.
-
-Potassium is normally inside the cells and is needed for body functions.
-
-However, when a large number of muscle cells are destroyed at once, potassium can be released in large amounts into the blood.
-
-[Post 7]:
-If potassium levels spike too high, the heart's electrical system can be disrupted.
-
-The heart may experience:
-dangerous arrhythmias → severe rhythm disturbances → cardiac arrest.
-
-So, rhabdomyolysis complications aren't just about painful muscles.
-
-It can affect the kidneys and heart at the same time.
-
-[Post 8]:
-Therefore, do not assume all muscle pain after exercise is normal.
-
-Especially if it appears along with:
-
-• Dark-colored urine
-• Severe muscle pain or swelling
-• Extreme weakness
-• Reduced urine production
-• Body feels extremely lethargic
-
-This requires immediate medical evaluation.
-
-[Post 9]:
-And this doesn't mean that sports are dangerous.
-
-The problem is forcing the body to do something far beyond its capacity, especially after a long period of inactivity.
-
-The body needs time to adapt.
-
-Muscles, heart, and metabolic system aren't immediately ready to handle extreme loads.
-
-[Post 10]:
-If you're just getting back to exercise after a long break:
-
-Start slowly.
-
-Gradually increase duration and intensity.
-
-Don't chase extreme workouts just because you feel strong.
-
-And don't ignore your body's signals after a workout.
-
-Normal soreness will improve.
-
-Severe muscle damage can continue to develop.
-
-[Post 11]:
-One thing to remember:
-
-Dark urine like cola after a heavy workout is not a sign of a successful workout.
-
-It could be a sign of myoglobin entering the urine due to muscle damage.
-
-If accompanied by severe muscle pain or weakness, don't just sleep it off and see tomorrow.
-
-Seek medical help immediately.
-
-[Post 12]:
-Take it slow, man, don't go full throttle right away.
-
-[Post 13]:
-bener pak, harus step by step, biar ga kaget badannya
-
-[Post 14]:
-iya pak karena ada metabolisme yang ga bener
-
-[Post 15]:
-The thing is, incidents like this don't happen every day, sir.
-
-[Post 16]:
-Hopefully it can become knowledge that, share it with people who need it
-
-[Post 17]:
-urin akibat metabolisme yang kaget
-
-[Post 18]:
-bisa sambil peregangan kak
-
-[Post 19]:
-semoga bisa jadi pengetahuan pak
-
-[Post 20]:
-It's already explained above, sir.
-
-[Post 21]:
-You're right, sir, got pounded right away for 3 hours.
-
-[Post 22]:
-iya kak, jangan lagi lagi, intensitasnya bertahap aja buat olahraga
-
-[Post 23]:
-ada kak penjelasannya di bacaan
-
-[Post 24]:
-staying chill or heated is all the same if you just go full throttle right away
-
-[Post 25]:
-nah, it can also be because of this, right?
 
 ## 📜 Part 2a: Reference Source Content
 
-> 🔗 **Source Reference**: [https://x.com/icalbhimaa/status/2086821104962969909](https://x.com/icalbhimaa/status/2086821104962969909)
+> 🔗 **Source Reference**: [https://x.com/icalbhimaa/status/2084187014476575059](https://x.com/icalbhimaa/status/2084187014476575059)
 
 Author: @icalbhimaa
 
---- Thread Content (25 Posts) ---
+--- Thread Content (19 Posts) ---
 
 [Post 1]:
-A 35-year-old man, exercising for 3 hours after a month of inactivity.
+A 34-year-old man came to the doctor because of a purple spot that kept spreading on his thigh.
 
-The next day, his urine turned dark and his body felt utterly wrecked.
+In 2 months, his weight dropped 12 kg. He also had a persistent cough, frequent fevers, and started having trouble swallowing.
 
-That night, his heart stopped. This wasn't just soreness.
+The doctor immediately suspected something—this wasn't an ordinary skin condition.
 
 [Post 2]:
-It's been months since he last exercised.
+When asked, he admitted that the spot initially was only as big as the tip of a finger.
 
-Then one day, he forced himself to train for 3 hours.
+Now the number has increased and its size has grown larger.
 
-His muscles felt extremely sore afterward.
-
-At first, it might have seemed like just the usual stiffness.
-
-But it turned out something far more dangerous was happening inside his body.
+Lately, he has also frequently experienced canker sores and has been hospitalized several times due to pneumonia.
 
 [Post 3]:
-The next day, his urine turned dark like cola.
+All the symptoms are starting to form one pattern.
 
-This is one of the signs to watch out for after extreme exercise.
+• Drastic weight loss.
+• Prolonged fever.
+• Chronic cough.
+• Recurrent infections.
+• Purple skin lesions.
 
-Not because the body is "detoxifying."
-
-It could mean the muscles are experiencing severe damage.
-
-This condition is called:
-Rhabdomyolysis.
+This points to a severe immune system disorder.
 
 [Post 4]:
-Rhabdomyolysis occurs when muscle fibers experience extensive damage.
+The doctor suspects Kaposi Sarcoma.
 
-Triggers can vary.
+This is not a bruise or an allergy.
 
-One of them is extremely strenuous physical activity, especially when the body is not yet accustomed to it.
-
-Damaged muscle cells then release various substances into the bloodstream.
-
-Including myoglobin and potassium.
+Kaposi Sarcoma is a cancer of blood vessels that often appears in patients with advanced-stage HIV.
 
 [Post 5]:
-Myoglobin is a protein found inside muscle cells.
+Even so, HIV is not the direct cause of the cancer.
 
-When muscles are severely damaged, myoglobin is released and enters the bloodstream.
+Kaposi Sarcoma is caused by Human Herpesvirus-8 (HHV-8).
 
-The kidneys then have to filter it out.
-
-A very large amount can overburden the kidneys and increase the risk of acute kidney injury.
-
-One of its consequences?
-
-Urine becomes very dark.
+This virus is usually not harmful if the immune system is still strong.
 
 [Post 6]:
-But myoglobin isn't the only problem.
+Problems arise when the immune system weakens.
 
-There are other substances that are far more concerning:
-Potassium.
+In untreated HIV, the number of CD4 cells can drop very low.
 
-Potassium is normally inside the cells and is needed for body functions.
-
-However, when a large number of muscle cells are destroyed at once, potassium can be released in large amounts into the blood.
+That is when HHV-8 can trigger the formation of Kaposi's Sarcoma.
 
 [Post 7]:
-If potassium levels spike too high, the heart's electrical system can be disrupted.
+It is usually red, purple, or brownish in color.
 
-The heart may experience:
-dangerous arrhythmias → severe rhythm disturbances → cardiac arrest.
+Initially, it appears as a flat spot.
 
-So, rhabdomyolysis complications aren't just about painful muscles.
-
-It can affect the kidneys and heart at the same time.
+Over time, it can become a lump, grow larger, and even bleed easily.
 
 [Post 8]:
-Therefore, do not assume all muscle pain after exercise is normal.
+Kaposi's Sarcoma also does not only affect the skin.
 
-Especially if it appears along with:
+This disease can affect the mouth, esophagus, lungs, digestive tract, and even lymph nodes.
 
-• Dark-colored urine
-• Severe muscle pain or swelling
-• Extreme weakness
-• Reduced urine production
-• Body feels extremely lethargic
-
-This requires immediate medical evaluation.
+That's why its symptoms can be very diverse.
 
 [Post 9]:
-And this doesn't mean that sports are dangerous.
+Difficulty swallowing can occur if a lesion grows in the esophagus.
 
-The problem is forcing the body to do something far beyond its capacity, especially after a long period of inactivity.
+Coughing or shortness of breath may appear if the lungs are also affected.
 
-The body needs time to adapt.
-
-Muscles, heart, and metabolic system aren't immediately ready to handle extreme loads.
+Sometimes patients are only diagnosed after internal organs become involved.
 
 [Post 10]:
-If you're just getting back to exercise after a long break:
+Is this disease contagious?
 
-Start slowly.
+Kaposi Sarcoma is not contagious.
 
-Gradually increase duration and intensity.
-
-Don't chase extreme workouts just because you feel strong.
-
-And don't ignore your body's signals after a workout.
-
-Normal soreness will improve.
-
-Severe muscle damage can continue to develop.
+However, the HHV-8 virus that causes it can be transmitted through contact with bodily fluids, although not everyone who is infected will develop cancer.
 
 [Post 11]:
-One thing to remember:
+To ensure a diagnosis, doctors usually perform:
 
-Dark urine like cola after a heavy workout is not a sign of a successful workout.
-
-It could be a sign of myoglobin entering the urine due to muscle damage.
-
-If accompanied by severe muscle pain or weakness, don't just sleep it off and see tomorrow.
-
-Seek medical help immediately.
+• HIV test.
+• CD4 and viral load examination.
+• Skin lesion biopsy.
+• Examination of other organs if necessary.
 
 [Post 12]:
-Take it slow, man, don't go full throttle right away.
+The main treatment is antiretroviral therapy (ART).
+
+ART helps restore the immune system.
+
+In many patients, Kaposi's lesions also shrink after the immune function improves.
 
 [Post 13]:
-bener pak, harus step by step, biar ga kaget badannya
+If the disease has already spread widely or affects internal organs, additional therapy may be necessary.
+
+For example, chemotherapy, radiotherapy, or local treatment on specific lesions.
+
+Everything is tailored to the patient's condition.
 
 [Post 14]:
-iya pak karena ada metabolisme yang ga bener
+Can it be cured?
+
+Many patients improve with ART, especially if treatment is started earlier.
+
+However, HIV control must still be maintained so that the disease does not recur.
 
 [Post 15]:
-The thing is, incidents like this don't happen every day, sir.
+This case reminds us that purple spots aren't always a skin issue.
+
+If accompanied by weight loss, prolonged fever, and recurring infections, the cause could be far more serious.
+
+Early detection of HIV and prompt treatment can save lives.
 
 [Post 16]:
-Hopefully it can become knowledge that, share it with people who need it
+besides HIV, the disease caused by that virus is the flu
+
+don't just take antibiotics if you have the flu
+
+So annoying, just a little flu and they immediately ask for antibiotics.
+
+Even though antibiotics can't kill viruses.
+
+What happens instead is it creates the risk of bacteria becoming resistant if used carelessly.
+
+Who here still does that? I'm snapping them with a rubber band,
 
 [Post 17]:
-urin akibat metabolisme yang kaget
+There's a woman who's already 19 years old and hasn't gotten her period yet, turns out when the doctor checked, she was actually a man, how could that be?
+
+A 19-year-old girl came to the doctor because she'd never had her period in her entire life.
+
+Even though her body shape was normal, just like any other woman.
+
+But the results of her examination shocked everyone.
 
 [Post 18]:
-bisa sambil peregangan kak
+Can't bathe at night? Myth or fact?
+
+A 45-year-old patient came to the doctor because of trouble sleeping.
+
+"Doc, I want to take a night bath so I can sleep, but the neighbors say it'll cause rheumatism, catch a cold, high blood pressure. Is that true?"
+
+The doctor smiled and said, that's just a myth, then
 
 [Post 19]:
-semoga bisa jadi pengetahuan pak
-
-[Post 20]:
-It's already explained above, sir.
-
-[Post 21]:
-You're right, sir, got pounded right away for 3 hours.
-
-[Post 22]:
-iya kak, jangan lagi lagi, intensitasnya bertahap aja buat olahraga
-
-[Post 23]:
-ada kak penjelasannya di bacaan
-
-[Post 24]:
-staying chill or heated is all the same if you just go full throttle right away
-
-[Post 25]:
-nah, it can also be because of this, right?
+True, for healthy people it doesn't have an effect, right?  
+For HIV patients with strong immunity, it's also safe.
 
 ## 📜 Part 2b: Cross-Domain Applied Output
 

@@ -2,6 +2,7 @@
 status: draft
 url: ""
 platform: "x"
+post_count: ""
 ---
 
 # Post Dissection Template
