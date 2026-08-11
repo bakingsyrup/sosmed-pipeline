@@ -46,7 +46,9 @@ import {
   getPlannerSystemInstruction,
   getPlannerPromptStr,
   getWireframeSystemInstruction,
-  getWireframeDraftPromptStr
+  getWireframeDraftPromptStr,
+  getStyleSelectionSystemInstruction,
+  getStyleSelectionPromptStr
 } from './prompts/wireframe_drafting_prompt.mjs';
 
 import {
@@ -653,6 +655,281 @@ ${generatedDrafts}
   }
 }
 
+// Strategic Post Wireframe Drafter — Phase 5.1
+// Planner → Researcher → Drafter ping-pong pipeline
+async function processStrategicPost(filename, styleGuideContent) {
+  const inboxPath = path.join(paths.inbox, filename);
+  const researchingPath = path.join(paths.researching, filename);
+  const strategicDraftsDir = path.join(paths.ready, '00-Strategic-Drafts');
+  const STYLE_BANK_DIR = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/lulua-pipeline/01-Style-Bank';
+  const STYLE_INDEX_PATH = path.join(STYLE_BANK_DIR, 'style-index.md');
+
+  console.log(`\n----------------------------------------`);
+  console.log(`[Strategic Post] Processing: ${filename}`);
+
+  try {
+    fs.renameSync(inboxPath, researchingPath);
+  } catch (err) {
+    console.error(`Failed to lock ${filename}:`, err.message);
+    return;
+  }
+
+  try {
+    const rawContent = fs.readFileSync(researchingPath, 'utf8');
+    const { frontmatter, body } = parseMarkdown(rawContent);
+    const lang = (frontmatter.lang || 'id').toLowerCase();
+    const coreTopic = frontmatter.core_topic || '';
+    const contextSnippet = frontmatter.context_snippet || body.trim().slice(0, 500);
+    const sourceUrl = frontmatter.source_url || '';
+    const funnelStage = frontmatter.funnel_stage || 'TOFU';
+    const persona = frontmatter.persona || '';
+    const customStyles = frontmatter.custom_styles || '';
+
+    if (!coreTopic) {
+      console.error('[Strategic Post] Missing core_topic in frontmatter. Aborting.');
+      fs.renameSync(researchingPath, inboxPath);
+      return;
+    }
+
+    // Ensure output dir
+    if (!fs.existsSync(strategicDraftsDir)) {
+      fs.mkdirSync(strategicDraftsDir, { recursive: true });
+    }
+
+    const draftModel = resolveDraftModel();
+    const researchModel = process.env.GEMINI_RESEARCH_MODEL || 'gemini-2.5-flash';
+
+    // === STEP 1: Style Selection ===
+    console.log(`[Step 1/5] Selecting top 4 wireframe styles...`);
+    let selectedStyles = [];
+
+    if (customStyles) {
+      selectedStyles = customStyles.split(',').map(s => s.trim()).filter(Boolean);
+      console.log(`  Using custom styles: ${selectedStyles.join(', ')}`);
+    } else {
+      const styleIndexContent = fs.existsSync(STYLE_INDEX_PATH)
+        ? fs.readFileSync(STYLE_INDEX_PATH, 'utf8')
+        : 'No style index available.';
+
+      const selSystem = getStyleSelectionSystemInstruction();
+      const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, styleIndexContent);
+      const selResult = await callDraftingModel(selPrompt, selSystem, draftModel);
+
+      try {
+        const selJson = JSON.parse((selResult || '').replace(/```json|```/g, '').trim());
+        selectedStyles = selJson.selected_styles || [];
+        console.log(`  Selected: ${selectedStyles.join(', ')}`);
+        if (selJson.reasoning) {
+          selJson.reasoning.forEach((r, i) => console.log(`    ${i + 1}. ${r}`));
+        }
+      } catch (e) {
+        console.warn('  Style selection JSON parse failed, using first 4 from index.');
+        const lines = styleIndexContent.split('\n').filter(l => l.includes('[[style-'));
+        selectedStyles = lines.slice(0, 4).map(l => {
+          const m = l.match(/\[\[(style-[^\]]+)\]\]/);
+          return m ? m[1] : '';
+        }).filter(Boolean);
+      }
+    }
+
+    if (selectedStyles.length === 0) {
+      console.error('[Strategic Post] No styles selected. Aborting.');
+      fs.renameSync(researchingPath, inboxPath);
+      return;
+    }
+
+    // === STEP 2: Read selected style files & extract Part 3 blueprints ===
+    console.log(`[Step 2/5] Reading ${selectedStyles.length} wireframe blueprints...`);
+    const wireframeBlueprints = [];
+    for (const styleFile of selectedStyles.slice(0, 4)) {
+      const filePath = path.join(STYLE_BANK_DIR, `${styleFile}.md`);
+      if (!fs.existsSync(filePath)) {
+        console.warn(`  Style file not found: ${styleFile}.md — skipping.`);
+        continue;
+      }
+      const styleContent = fs.readFileSync(filePath, 'utf8');
+      const bpMatch = styleContent.match(/## Part 3:[\s\S]+/);
+      const blueprintText = bpMatch ? bpMatch[0].trim() : styleContent;
+      const nameMatch = styleContent.match(/style_name:\s*["']?([^"'\n]+)["']?/);
+      wireframeBlueprints.push({
+        template_name: nameMatch ? nameMatch[1] : styleFile,
+        blueprint_text: blueprintText,
+        filename: styleFile
+      });
+      console.log(`  Loaded: ${styleFile}`);
+    }
+
+    if (wireframeBlueprints.length === 0) {
+      console.error('[Strategic Post] No valid wireframes loaded. Aborting.');
+      fs.renameSync(researchingPath, inboxPath);
+      return;
+    }
+
+    // === STEP 3: Planner — skeleton + research shopping list ===
+    console.log(`[Step 3/5] Planner generating skeleton & research shopping list...`);
+    const inputPayload = {
+      topic_id: coreTopic.replace(/[^a-z0-9]+/g, '_').slice(0, 40),
+      core_topic: coreTopic,
+      context_snippet: contextSnippet,
+      source_url: sourceUrl,
+      funnel_stage: funnelStage,
+      persona: persona
+    };
+
+    let plannerResult;
+    let falsePremiseFeedback = null;
+    const MAX_PINGPONG = 2;
+
+    for (let pingpong = 0; pingpong < MAX_PINGPONG; pingpong++) {
+      const bpForPlanner = wireframeBlueprints.length > 0
+        ? wireframeBlueprints[0]
+        : { blueprint_text: 'Generic multi-phase elastic blueprint.' };
+
+      const plannerSystem = getPlannerSystemInstruction();
+      const plannerPrompt = getPlannerPromptStr(inputPayload, bpForPlanner, falsePremiseFeedback);
+      plannerResult = await callDraftingModel(plannerPrompt, plannerSystem, draftModel);
+
+      // Extract research shopping list from planner JSON
+      let researchList = [];
+      try {
+        const plannerJson = JSON.parse((plannerResult || '').replace(/```json|```/g, '').trim());
+        researchList = plannerJson.research_shopping_list || [];
+        if (!falsePremiseFeedback) {
+          console.log(`  Skeleton: ${plannerJson.planned_post_count || '?'} posts planned.`);
+        }
+      } catch (e) {
+        researchList = [];
+      }
+
+      if (researchList.length === 0) {
+        console.log(`  No research items needed. Skipping research phase.`);
+        break;
+      }
+
+      // === STEP 4: Researcher — verify facts ===
+      console.log(`[Step 4/5] Researcher verifying facts (${researchList.length} items)...`);
+      const researchItemsStr = researchList.map((item, i) =>
+        `${i + 1}. DATA WANTED: ${item.data_wanted}\n   INTENT: ${item.intent || 'Fact verification'}`
+      ).join('\n\n');
+
+      const researchPrompt = `
+You are a fact-checking research agent. Verify the following data requests using web search.
+
+RESEARCH SHOPPING LIST:
+${researchItemsStr}
+
+For each item, return:
+- STATUS: [VERIFIED / PARTIAL / FALSE_PREMISE]
+- FINDINGS: What you found (with specific numbers if available)
+- SOURCE: Direct URL to the source
+
+If any item's premise is fundamentally wrong (FALSE_PREMISE), explain the correct ground truth.
+`;
+      const researchResult = await callGemini(researchPrompt,
+        'You are a fact-verification agent. Search the web and return verified findings. Use FALSE_PREMISE only when the underlying assumption is wrong.',
+        true, researchModel);
+      const researchBrief = researchResult.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+      // Check for false premises
+      if (researchBrief.includes('FALSE_PREMISE')) {
+        console.log(`  ⚠️ False premise detected! Re-planning (ping-pong ${pingpong + 1}/${MAX_PINGPONG})...`);
+        falsePremiseFeedback = {
+          research_findings: researchBrief,
+          instruction: 'Update your skeleton to reflect the true ground truth above.'
+        };
+        continue;
+      }
+
+      falsePremiseFeedback = researchBrief;
+      break;
+    }
+
+    const finalResearchBrief = typeof falsePremiseFeedback === 'string'
+      ? falsePremiseFeedback
+      : (falsePremiseFeedback?.research_findings || 'No research data required.');
+
+    // === STEP 5: Drafter — generate 4 drafts ===
+    console.log(`[Step 5/5] Drafter generating ${wireframeBlueprints.length} draft variations...`);
+    const drafterSystem = getWireframeSystemInstruction(styleGuideContent, lang);
+    const drafterPrompt = getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, finalResearchBrief, lang);
+    const drafts = await callDraftingModel(drafterPrompt, drafterSystem, draftModel);
+
+    // Save output
+    const topicSlug = coreTopic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60);
+    const dateStr = new Date().toISOString().split('T')[0];
+    const outputFilename = `${dateStr}-strategic-${topicSlug}.md`;
+    const outputPath = path.join(strategicDraftsDir, outputFilename);
+
+    const selectedStylesStr = selectedStyles.slice(0, 4).map(s => `  - [[${s}]]`).join('\n');
+    const outputFrontmatter = `---
+type: Strategic Post
+status: ready
+core_topic: "${coreTopic}"
+funnel_stage: ${funnelStage}
+persona: ${persona || 'auto'}
+lang: ${lang}
+selected_styles:
+${selectedStylesStr}
+generated_at: ${new Date().toISOString()}
+---
+
+# Research Brief
+
+${finalResearchBrief}
+
+# Generated Drafts
+
+${drafts}
+`;
+
+    fs.writeFileSync(outputPath, outputFrontmatter, 'utf8');
+    console.log(`[Strategic Post] Saved: ${outputPath}`);
+
+    // Cleanup & regenerate template
+    if (fs.existsSync(researchingPath)) {
+      fs.unlinkSync(researchingPath);
+    }
+
+    const blankTemplate = `---
+type: Strategic Post
+status: draft
+core_topic: ""
+context_snippet: ""
+source_url: ""
+target_metric: ""
+primary_lever: ""
+funnel_stage: ""
+lang: "id"
+persona: ""
+custom_styles: ""
+---
+
+# Strategic Post Briefing
+
+## 🎯 Core Topic & Angle
+<!-- What is the post about? What narrative angle? -->
+
+## 📌 Context & Key Points
+<!-- Supporting context, data points, product links, source references -->
+
+## 🎨 Style Preferences (Optional)
+<!-- Leave empty for auto-selection. Or specify up to 4 style filenames from style-index.md -->
+`;
+    fs.writeFileSync(inboxPath, blankTemplate);
+    console.log(`[Strategic Post] Re-created clean template in 01-Inbox.`);
+    writeStatus('OK');
+
+  } catch (err) {
+    console.error(`[Strategic Post] Error:`, err);
+    writeStatus('ERROR', `Strategic post error: ${err.message}`);
+    if (fs.existsSync(researchingPath) && !fs.existsSync(inboxPath)) {
+      try {
+        fs.renameSync(researchingPath, inboxPath);
+      } catch (e) {}
+    }
+  }
+}
+
 // Helper to check if DeepSeek peak pricing is active in Singapore Time (SGT)
 // Morning Peak: 9:00 AM – 12:00 PM SGT. Buffer 10m before & after: 8:50 AM – 12:10 PM SGT.
 // Afternoon Peak: 2:00 PM – 6:00 PM SGT. Buffer 10m before & after: 1:50 PM – 6:10 PM SGT.
@@ -1198,6 +1475,19 @@ async function processInbox() {
     process.exit(1);
   }
   const styleGuideContent = fs.readFileSync(paths.styleGuide, 'utf8');
+
+  // Check for Strategic Post input (Priority 1 overrides all)
+  const strategicInputPath = path.join(paths.inbox, '_NEW_STRATEGIC_INPUT.md');
+  if (fs.existsSync(strategicInputPath)) {
+    const stratContent = fs.readFileSync(strategicInputPath, 'utf8');
+    const { frontmatter } = parseMarkdown(stratContent);
+    if (frontmatter.status === 'ready' && frontmatter.type === 'Strategic Post') {
+      console.log(`\n----------------------------------------`);
+      console.log(`[Strategic Post] Detected status: ready.`);
+      await processStrategicPost('_NEW_STRATEGIC_INPUT.md', styleGuideContent);
+      return;
+    }
+  }
 
   // Maintain template note in 01-Inbox/00-Video-Inputs/
   ensureVideoInputTemplate();

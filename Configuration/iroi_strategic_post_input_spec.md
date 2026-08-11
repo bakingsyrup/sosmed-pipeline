@@ -14,7 +14,7 @@ In the **Iroi Business Architecture**, content creation is divided into two dist
 | :--- | :--- | :--- |
 | **Primary Trigger** | Real-time breaking news, market events, or macro announcements. | Strategic business objectives, evergreen value, affiliate monetization, & audience expansion. |
 | **Input Source** | Curated raw news notes / RSS / link clippings dropped in `x-pipeline/01-Inbox/`. | 4-Tier Hybrid Input Priority System (Manual, Outliers, Revenue Rotation, Curriculum/Taxonomy Tree). |
-| **Blueprint Format** | Standard 7-Draft Copywriting System (Drafts 1a, 1b, 1c, 2, 3, 4, 5). | Standardized 4-Part Style Bank Wireframe (`style-[Category]_[Format]_[Hook]_[Driver].md`). |
+| **Blueprint Format** | Standard 7-Draft Copywriting System (Drafts 1a, 1b, 1c, 2, 3, 4, 5). | Standardized 3-Part Style Bank Wireframe: Part 1 (Dissection Matrix), Part 2a (Reference Source), Part 2b (Indonesian Cross-Domain), Part 3 (Elastic Blueprint). |
 | **Primary Goal** | Real-time narrative hijacking, market timeliness, & immediate audience reach. | High utility saves (bookmarks), debate engagement, lead-gen opt-ins, & direct revenue yield. |
 
 ---
@@ -215,7 +215,7 @@ When an input topic is selected, it is converted into a standardized **Input Pay
 
 ## 🚀 7. Actionable Build Roadmap for Input Pipeline
 
-1. **Phase 5.1 (Wireframe Drafting Engine)**: Complete `prompts/wireframe_drafting_prompt.mjs` and dual-mode execution in `draft_agent.mjs`.
+1. **Phase 5.1 (Wireframe Drafting Engine)**: ✅ Complete. `draft_agent.mjs` + `wireframe_drafting_prompt.mjs` with 5-step Planner→Researcher→Drafter ping-pong pipeline. Monitors `_NEW_STRATEGIC_INPUT.md`, auto-selects 4 wireframes from `style-index.md`.
 2. **Priority 1 Handler**: Implement `01-Inbox/` note watcher frontmatter parser (`style_wireframe` selector).
 3. **Priority 3 Handler**: Connect `iroi_command_center.md` Module 3 revenue rotation schedule into automated prompt generator.
 4. **Priority 2 Handler**: Build Lulua outlier topic extraction parser on top of Beidou daily snapshots.

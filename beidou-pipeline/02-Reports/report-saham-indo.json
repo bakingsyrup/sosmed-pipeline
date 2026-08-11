@@ -61,8 +61,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.86,
-          "time_window": "LIVE",
+          "post_age_hours": 24.98,
+          "time_window": "T+24h",
           "impression_yield_pct": 7.5,
           "engagement_rate_pct": 1.83
         },
@@ -82,7 +82,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 19.17,
+          "post_age_hours": 34.29,
           "time_window": "LIVE",
           "impression_yield_pct": 19.35,
           "engagement_rate_pct": 1.35
@@ -111,7 +111,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 19.17,
+              "post_age_hours": 34.29,
               "time_window": "LIVE",
               "impression_yield_pct": 19.35,
               "engagement_rate_pct": 1.35
@@ -132,8 +132,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.86,
-              "time_window": "LIVE",
+              "post_age_hours": 24.98,
+              "time_window": "T+24h",
               "impression_yield_pct": 7.5,
               "engagement_rate_pct": 1.83
             }
@@ -167,5 +167,5 @@
     }
   ],
   "leader_tier_top_archetypes": [],
-  "generated_at": "2026-08-11T02:28:06.175Z"
+  "generated_at": "2026-08-11T17:35:12.383Z"
 }

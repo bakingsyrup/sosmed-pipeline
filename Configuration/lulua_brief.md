@@ -1,5 +1,5 @@
 # Lulua AI Briefing (`lulua_brief.md`)
-**Last Updated:** August 1, 2026
+**Last Updated:** August 12, 2026
 
 This document serves as the high-density technical blueprint and session context for **Lulua** (Iroi's Competitor Intelligence, Interactive Style R&D, and Multi-Platform Strategy Engine).
 
@@ -33,7 +33,7 @@ Lulua monitors Beidou's daily metric snapshots, ingests human-curated viral post
 ### Folder Pipeline Structure (`lulua-pipeline/` & `Configuration/lulua/`)
 * **`lulua-pipeline/00-Inbox/`**: Input directory for Obsidian note watching (`_NEW_POST_DISSECTION.md` & `_NEW_ACCOUNT_AUDIT.md`).
 * **`lulua-pipeline/00-Outliers/`**: Scraped high-yield competitor posts, ratio signatures, account dissection blueprints (`account-[platform]-[handle].md`), and cached monthly playbooks (`playbook-[cohort].json`).
-* **`lulua-pipeline/01-Style-Bank/`**: Modular post structure templates formatted via 4-part wireframe schema (`style-[Format]_[HookFramework]_[ConversionDriver]_[vN].md`).
+* **`lulua-pipeline/01-Style-Bank/`**: Modular post structure templates via standardized 3-part wireframe schema (Part 1: Dissection Matrix, Part 2a: Reference Source, Part 2b: Cross-Domain Indonesian Output, Part 3: Elastic Blueprint). Auto-maintained index at `style-index.md` for AI style selection.
 * **`lulua-pipeline/02-Memory/`**: Persistent memory logs (`memory_log.md` with top 7 rolling window).
 * **`lulua-pipeline/02-Proposals/`**: Tier 2 permission proposals and platform expansion blueprints.
 * **`lulua-pipeline/03-Briefings/`**: Daily executive briefing reports for the human operator.
@@ -101,14 +101,15 @@ All wireframes in `01-Style-Bank/` are classified under Option 2 schema (`style-
 
 1. **Daily Outlier Mining**: Scans Beidou's daily `snapshot-YYYY-MM-DD.json`, calculates ratio signatures, and flags repeatable competitor structures.
 2. **Human-Curated & Automated Post Dissection & Post Style Bank**:
-   - **Step A (Discovery & Ingestion)**: Initiated via Beidou metric scan, Obsidian note watcher (`_NEW_POST_DISSECTION.md`), or Chat/CLI command.
-   - **Step B (Dissection Engine)**: Extracts structural wireframe according to the **Standardized 4-Part Style Bank Wireframe Schema**:
-     - **Part 1: Metadata & Ratio Trigger**: Targeted engagement metric (Bookmarks, Replies, Retweets, Views).
-     - **Part 2: Psychological Lever**: Primary emotional driver (Utility, Contrarian Piercing, FOMO, Debate).
-     - **Part 3: Micro-Rhythm & Pacing Rules**: Hook length limits, line-break cadence, sentence caps.
-     - **Part 4: Plug-and-Play Wireframe**: Bracketed parameter slots (`[Hook]`, `[Setup]`, `[Body]`, `[Closing]`).
-   - **Step C (Interactive R&D Prototyping & Feedback)**: Prototyped in sandbox via [x_style_guide.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md); operator gives qualitative feedback to adjust tone/layout.
-   - **Step D (Style Banking)**: Approved wireframe is saved into `01-Style-Bank/style-[name].md` for Shinku reference.
+   - **Step A (Discovery & Ingestion)**: Initiated via Obsidian note watcher (`_NEW_POST_DISSECTION.md`) or Chat/CLI command. Supports URL fetch via Chrome CDP or direct text paste.
+   - **Step B (Dissection Engine)**: DeepSeek V4 Pro extracts structural wireframe according to the **Standardized 3-Part Style Bank Wireframe Schema**:
+     - **Part 1: Post-by-Post Dissection Matrix**: 5-column table mapping every post in the source across Structural Arc Role, Core Message Payload, Closing Bridge Line, Psychological Trigger, and Wireframe Variable Slot.
+     - **Part 2a: Reference Source Content**: Auto-injected by the system with the exact original text and source URL. No AI involved — zero hallucination.
+     - **Part 2b: Cross-Domain Applied Output**: DeepSeek-generated Indonesian copywriting applying the wireframe to an unrelated industry domain.
+     - **Part 3: Elastic Universal Wireframe Blueprint**: Topic-agnostic phase-based blueprint with dynamic content scaling directives.
+     - **Frontmatter**: Includes `category` (auto-assigned to correct Kanban column), `source_url` (for deduplication), `narrative_flow_summary`, and `article_url` (when embedded articles are detected).
+   - **Step C (Post-Processing)**: Appends to `new_dissections.md` log with timestamps. Auto-updates `style-index.md` for AI style selection. Dedup gate checks `source_url` in frontmatter to instantly reject re-dissections.
+   - **Step D (Style Banking)**: Wireframe saved into `01-Style-Bank/style-[name].md` for Shinku reference. MOC Kanban board auto-regenerated categorizing each style into its proper column.
 3. **Daily Executive Briefing**: Outputs daily summary covering cohort diagnostics, outlier discoveries, R&D recommendations, and Tier 2 permission proposals.
 4. **Monothematic Multi-Platform Expansion**:
    - **Repurposing Proposals**: Identifies high-bookmark X research ($\ge 0.5\%$), presents a short-form video script proposal in the Daily Briefing / Chat Window, and waits for human direction before sending to Shinku's `01-Inbox/00-Video-Inputs/`.
@@ -130,7 +131,14 @@ All wireframes in `01-Style-Bank/` are classified under Option 2 schema (`style-
 ---
 
 ## 🚀 Current State & Rolling Changelog
-* **Status**: Steps 1, 2, 3 fully built; dual wireframe (launch post + X Article) live; Grok redirect bypass live; prompt hardening & pre-cleaned input sanitization live; 8-Archetype Option 2 naming standard & Unbiased Part 4 Rule enforced; Always Live-Fetch & Targeted Duplicate Pre-Check Gate active; multi-platform enabled; integrated into Ad Astra Web UI.
+* **Status**: Steps 1-3 fully built; DeepSeek V4 Pro single-model dissection pipeline; Gemini removed from dissection; Part 2a code-injected; 00 - New column removed; `new_dissections.md` write-only inbox; `dissection_debug.log` tracing; `style-index.md` auto-index; `post_count` fetch limiter; `article_url` frontmatter capture; pasted-text CDP skip; `source_url` dedup gate; category frontmatter for Kanban; wireframe drafting Phase 5.1 live with Planner→Researcher→Drafter ping-pong.
+* **August 12, 2026**: Deployed **Phase 5.1 Wireframe Drafting Engine** (`draft_agent.mjs` + `wireframe_drafting_prompt.mjs`): Automated strategic post pipeline with style-index-based selection, Planner→Researcher→Drafter ping-pong loop with false premise correction, and output to `03-Ready/00-Strategic-Drafts/`. Created `_NEW_STRATEGIC_INPUT.md` template with `custom_styles` override.
+* **August 12, 2026**: Deployed **style-index.md Auto-Index** (`lulua_moc_manager.mjs`): Compact table extracted from all style frontmatter (category + narrative_flow_summary). Auto-regenerated every dissection. Sorted by file modification time, newest at bottom.
+* **August 12, 2026**: Deployed **Single DeepSeek V4 Pro Dissection Pipeline** (`lulua_post_dissecter.mjs`): Replaced 2-stage Gemini+DeepSeek with single DeepSeek call handling Part 1 Matrix, Part 2b Indonesian, and Part 3 Blueprint. Part 2a injected by code (zero hallucination). Part 2b proportional scaling rule (match source part count).
+* **August 12, 2026**: Deployed **Category Frontmatter & Inbox Removal** (`lulua_moc_manager.mjs`): Stripped 00 - New column from MOC. Added `category` field to all style frontmatter. `categorizeStyle` reads frontmatter first, falls back to filename keywords. Enable proper Kanban column distribution.
+* **August 12, 2026**: Deployed **new_dissections.md Write-Only Log** (`lulua_post_dissecter.mjs`): Chronological append-only log with timestamps and [succeed]/[duplicate] status. Replaces inbox-based new style tracking.
+* **August 12, 2026**: Deployed **source_url Dedup Gate** (`lulua_post_dissecter.mjs`): Frontmatter-based duplicate detection reading `source_url` field. Instant rejection of previously dissected URLs.
+* **August 12, 2026**: Deployed **post_count Fetch Limiter** (`lulua_url_fetcher.mjs` + note watcher): Frontmatter `post_count` property limits CDP scroll collection. Template-available `article_url` capture in fetcher return and frontmatter injection. Pasted-text detection skips CDP fetch when content provided.
 * **August 3, 2026**: Added **Checkpoint 1 Factual Proposal Rule** to Lulua Activation Directive in [`lulua_brief.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/lulua_brief.md): Forbids fictional, speculative, or unverified claims during chat proposals. Created [iroi_strategic_post_input_spec.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/iroi_strategic_post_input_spec.md) and 4 Natural Taxonomies ([`ai_taxonomy.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/taxonomies/ai_taxonomy.md), [`crypto_taxonomy.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/taxonomies/crypto_taxonomy.md), [`macro_taxonomy.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/taxonomies/macro_taxonomy.md), [`solopreneur_taxonomy.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/taxonomies/solopreneur_taxonomy.md)).
 * **August 1, 2026**: Deployed **Targeted Source Header Duplicate Pre-Check Gate** (`lulua_post_dissecter.mjs`): Scans the `## 📌 Source Reference & Original Content` header of existing Style Bank files before execution. Instantly intercepts duplicate post URLs in `< 0.05s`, preventing wasted Chrome CDP scraping and LLM calls while ignoring cited links in post body text.
 * **August 1, 2026**: Deployed **Always Live-Fetch Architecture** (`lulua_url_fetcher.mjs`) & **Beidou Timeline Expansion** (`x_headless_adapter.mjs`): Removed disk cache lookaside from Lulua so URL dissections always live-fetch via Chrome CDP for 100% complete thread & X Article text. Added `"Show more…"` button expansion to Beidou timeline scraper so daily snapshots store untruncated tweet text.

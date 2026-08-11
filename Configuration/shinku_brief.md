@@ -80,6 +80,7 @@ Shinku parses curated Obsidian notes, runs web fact-verification via Gemini (Goo
 
 ## 🚀 Current State & Rolling Changelog
 * **Status**: `x-draft-agent` actively running via PM2 in watch mode; syncs real-time state & feature settings with Ad Astra UI (`00-Status.md`, `00-Settings.md`).
+* **August 12, 2026**: Deployed **Wireframe Drafting Phase 5.1** in `draft_agent.mjs`: Added `processStrategicPost()` function with 5-step Planner→Researcher→Drafter ping-pong pipeline. Monitors `_NEW_STRATEGIC_INPUT.md` for `status: ready`. Auto-selects 4 wireframes from `style-index.md` or uses `custom_styles` override. Outputs to `03-Ready/00-Strategic-Drafts/`.
 * **July 25, 2026**: Added **Narrative Alignment & Logical Bridge Rule** across `research_prompt.mjs`, `x_style_guide.md`, and `drafting_prompt.mjs`. Historical precedents MUST logically match the directional premise of current news (e.g. surge ➔ past surge), requiring explicit logical bridges when contrasting counter-mechanisms.
 * **July 25, 2026**: Enforced **Data-Gated Historical Outcome Rule** across `research_prompt.mjs`, `x_style_guide.md`, and `drafting_prompt.mjs`. Historical precedents in Draft 1a, 1b, and 1c MUST be backed by concrete quantitative data points (exact percentages, dollar amounts, basis points, or index metrics), strictly eliminating vague qualitative claims.
 * **July 25, 2026**: Updated Style Markers in `x_style_guide.md` to explicitly forbid "AS" when referring to the United States and mandate "US" (e.g. `pemerintah US`, `bursa saham US`).

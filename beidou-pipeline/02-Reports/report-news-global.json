@@ -78,7 +78,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 3.14,
+          "post_age_hours": 18.26,
           "time_window": "LIVE",
           "impression_yield_pct": 0.9,
           "engagement_rate_pct": 0.2
@@ -99,7 +99,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.47,
+          "post_age_hours": 18.59,
           "time_window": "LIVE",
           "impression_yield_pct": 0.86,
           "engagement_rate_pct": 0.45
@@ -120,7 +120,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.8,
+          "post_age_hours": 18.92,
           "time_window": "LIVE",
           "impression_yield_pct": 0.97,
           "engagement_rate_pct": 0.41
@@ -141,7 +141,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.12,
+          "post_age_hours": 19.24,
           "time_window": "LIVE",
           "impression_yield_pct": 1.23,
           "engagement_rate_pct": 0.98
@@ -162,7 +162,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.47,
+          "post_age_hours": 19.59,
           "time_window": "LIVE",
           "impression_yield_pct": 1.02,
           "engagement_rate_pct": 0.28
@@ -183,7 +183,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.79,
+          "post_age_hours": 19.91,
           "time_window": "LIVE",
           "impression_yield_pct": 1.04,
           "engagement_rate_pct": 0.29
@@ -204,7 +204,7 @@
           "has_image": true,
           "has_video": true,
           "has_card": false,
-          "post_age_hours": 5.13,
+          "post_age_hours": 20.25,
           "time_window": "LIVE",
           "impression_yield_pct": 1.22,
           "engagement_rate_pct": 0.4
@@ -225,7 +225,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 5.39,
+          "post_age_hours": 20.5,
           "time_window": "LIVE",
           "impression_yield_pct": 1.24,
           "engagement_rate_pct": 0.54
@@ -246,7 +246,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 5.79,
+          "post_age_hours": 20.9,
           "time_window": "LIVE",
           "impression_yield_pct": 1.35,
           "engagement_rate_pct": 0.33
@@ -267,7 +267,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 6.12,
+          "post_age_hours": 21.24,
           "time_window": "LIVE",
           "impression_yield_pct": 1.42,
           "engagement_rate_pct": 0.59
@@ -288,7 +288,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 6.47,
+          "post_age_hours": 21.59,
           "time_window": "LIVE",
           "impression_yield_pct": 1.28,
           "engagement_rate_pct": 0.22
@@ -309,7 +309,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 6.79,
+          "post_age_hours": 21.91,
           "time_window": "LIVE",
           "impression_yield_pct": 1.34,
           "engagement_rate_pct": 0.35
@@ -330,8 +330,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 7.12,
-          "time_window": "LIVE",
+          "post_age_hours": 22.24,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.37,
           "engagement_rate_pct": 0.46
         },
@@ -351,8 +351,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 7.45,
-          "time_window": "LIVE",
+          "post_age_hours": 22.57,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.23,
           "engagement_rate_pct": 0.29
         },
@@ -372,8 +372,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 7.79,
-          "time_window": "LIVE",
+          "post_age_hours": 22.9,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.67,
           "engagement_rate_pct": 0.76
         },
@@ -393,8 +393,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 8.12,
-          "time_window": "LIVE",
+          "post_age_hours": 23.24,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.56,
           "engagement_rate_pct": 1.3
         },
@@ -414,8 +414,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 8.45,
-          "time_window": "LIVE",
+          "post_age_hours": 23.57,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.65,
           "engagement_rate_pct": 0.39
         },
@@ -435,8 +435,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 8.79,
-          "time_window": "LIVE",
+          "post_age_hours": 23.9,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.86,
           "engagement_rate_pct": 0.68
         },
@@ -456,8 +456,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.12,
-          "time_window": "LIVE",
+          "post_age_hours": 24.24,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.44,
           "engagement_rate_pct": 0.4
         },
@@ -477,8 +477,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.42,
-          "time_window": "LIVE",
+          "post_age_hours": 24.54,
+          "time_window": "T+24h",
           "impression_yield_pct": 1.69,
           "engagement_rate_pct": 0.4
         }
@@ -506,8 +506,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.42,
-              "time_window": "LIVE",
+              "post_age_hours": 24.54,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.69,
               "engagement_rate_pct": 0.4
             },
@@ -527,8 +527,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.12,
-              "time_window": "LIVE",
+              "post_age_hours": 24.24,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.44,
               "engagement_rate_pct": 0.4
             },
@@ -548,8 +548,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 8.79,
-              "time_window": "LIVE",
+              "post_age_hours": 23.9,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.86,
               "engagement_rate_pct": 0.68
             },
@@ -569,8 +569,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 8.45,
-              "time_window": "LIVE",
+              "post_age_hours": 23.57,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.65,
               "engagement_rate_pct": 0.39
             },
@@ -590,8 +590,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 8.12,
-              "time_window": "LIVE",
+              "post_age_hours": 23.24,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.56,
               "engagement_rate_pct": 1.3
             },
@@ -611,8 +611,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 7.79,
-              "time_window": "LIVE",
+              "post_age_hours": 22.9,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.67,
               "engagement_rate_pct": 0.76
             },
@@ -632,8 +632,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 7.45,
-              "time_window": "LIVE",
+              "post_age_hours": 22.57,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.23,
               "engagement_rate_pct": 0.29
             },
@@ -653,8 +653,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 7.12,
-              "time_window": "LIVE",
+              "post_age_hours": 22.24,
+              "time_window": "T+24h",
               "impression_yield_pct": 1.37,
               "engagement_rate_pct": 0.46
             },
@@ -674,7 +674,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 6.79,
+              "post_age_hours": 21.91,
               "time_window": "LIVE",
               "impression_yield_pct": 1.34,
               "engagement_rate_pct": 0.35
@@ -695,7 +695,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 6.47,
+              "post_age_hours": 21.59,
               "time_window": "LIVE",
               "impression_yield_pct": 1.28,
               "engagement_rate_pct": 0.22
@@ -716,7 +716,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 6.12,
+              "post_age_hours": 21.24,
               "time_window": "LIVE",
               "impression_yield_pct": 1.42,
               "engagement_rate_pct": 0.59
@@ -737,7 +737,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 5.79,
+              "post_age_hours": 20.9,
               "time_window": "LIVE",
               "impression_yield_pct": 1.35,
               "engagement_rate_pct": 0.33
@@ -758,7 +758,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 5.39,
+              "post_age_hours": 20.5,
               "time_window": "LIVE",
               "impression_yield_pct": 1.24,
               "engagement_rate_pct": 0.54
@@ -779,7 +779,7 @@
               "has_image": true,
               "has_video": true,
               "has_card": false,
-              "post_age_hours": 5.13,
+              "post_age_hours": 20.25,
               "time_window": "LIVE",
               "impression_yield_pct": 1.22,
               "engagement_rate_pct": 0.4
@@ -800,7 +800,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.79,
+              "post_age_hours": 19.91,
               "time_window": "LIVE",
               "impression_yield_pct": 1.04,
               "engagement_rate_pct": 0.29
@@ -821,7 +821,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.47,
+              "post_age_hours": 19.59,
               "time_window": "LIVE",
               "impression_yield_pct": 1.02,
               "engagement_rate_pct": 0.28
@@ -842,7 +842,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.12,
+              "post_age_hours": 19.24,
               "time_window": "LIVE",
               "impression_yield_pct": 1.23,
               "engagement_rate_pct": 0.98
@@ -863,7 +863,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.8,
+              "post_age_hours": 18.92,
               "time_window": "LIVE",
               "impression_yield_pct": 0.97,
               "engagement_rate_pct": 0.41
@@ -884,7 +884,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.47,
+              "post_age_hours": 18.59,
               "time_window": "LIVE",
               "impression_yield_pct": 0.86,
               "engagement_rate_pct": 0.45
@@ -905,7 +905,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 3.14,
+              "post_age_hours": 18.26,
               "time_window": "LIVE",
               "impression_yield_pct": 0.9,
               "engagement_rate_pct": 0.2
@@ -945,7 +945,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 2.8,
+          "post_age_hours": 17.92,
           "time_window": "LIVE",
           "impression_yield_pct": 1.71,
           "engagement_rate_pct": 0.21
@@ -966,7 +966,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 2.82,
+          "post_age_hours": 17.94,
           "time_window": "LIVE",
           "impression_yield_pct": 6.4,
           "engagement_rate_pct": 1.74
@@ -987,7 +987,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 3.22,
+          "post_age_hours": 18.33,
           "time_window": "LIVE",
           "impression_yield_pct": 1.76,
           "engagement_rate_pct": 0.16
@@ -1008,7 +1008,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 3.63,
+          "post_age_hours": 18.75,
           "time_window": "LIVE",
           "impression_yield_pct": 2.12,
           "engagement_rate_pct": 0.5
@@ -1029,7 +1029,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.74,
+          "post_age_hours": 18.86,
           "time_window": "LIVE",
           "impression_yield_pct": 4.39,
           "engagement_rate_pct": 0.36
@@ -1050,7 +1050,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.86,
+          "post_age_hours": 18.98,
           "time_window": "LIVE",
           "impression_yield_pct": 3.89,
           "engagement_rate_pct": 0.37
@@ -1071,7 +1071,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 3.95,
+          "post_age_hours": 19.07,
           "time_window": "LIVE",
           "impression_yield_pct": 1.03,
           "engagement_rate_pct": 0.19
@@ -1092,7 +1092,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.97,
+          "post_age_hours": 19.09,
           "time_window": "LIVE",
           "impression_yield_pct": 2.36,
           "engagement_rate_pct": 0.21
@@ -1113,7 +1113,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 4.05,
+          "post_age_hours": 19.17,
           "time_window": "LIVE",
           "impression_yield_pct": 1.7,
           "engagement_rate_pct": 0.21
@@ -1134,7 +1134,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.38,
+          "post_age_hours": 19.5,
           "time_window": "LIVE",
           "impression_yield_pct": 4.22,
           "engagement_rate_pct": 1.11
@@ -1155,7 +1155,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 4.47,
+          "post_age_hours": 19.58,
           "time_window": "LIVE",
           "impression_yield_pct": 1.76,
           "engagement_rate_pct": 0.23
@@ -1176,7 +1176,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.64,
+          "post_age_hours": 19.76,
           "time_window": "LIVE",
           "impression_yield_pct": 2.93,
           "engagement_rate_pct": 0.2
@@ -1197,7 +1197,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 4.8,
+          "post_age_hours": 19.92,
           "time_window": "LIVE",
           "impression_yield_pct": 1.82,
           "engagement_rate_pct": 0.32
@@ -1218,7 +1218,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 5.13,
+          "post_age_hours": 20.25,
           "time_window": "LIVE",
           "impression_yield_pct": 4.31,
           "engagement_rate_pct": 0.12
@@ -1239,7 +1239,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 5.3,
+          "post_age_hours": 20.42,
           "time_window": "LIVE",
           "impression_yield_pct": 68.7,
           "engagement_rate_pct": 0.73
@@ -1260,7 +1260,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 5.38,
+          "post_age_hours": 20.5,
           "time_window": "LIVE",
           "impression_yield_pct": 3.24,
           "engagement_rate_pct": 0.46
@@ -1281,7 +1281,7 @@
           "has_image": true,
           "has_video": true,
           "has_card": false,
-          "post_age_hours": 6.16,
+          "post_age_hours": 21.28,
           "time_window": "LIVE",
           "impression_yield_pct": 12.25,
           "engagement_rate_pct": 2.08
@@ -1302,7 +1302,7 @@
           "has_image": true,
           "has_video": true,
           "has_card": false,
-          "post_age_hours": 6.19,
+          "post_age_hours": 21.31,
           "time_window": "LIVE",
           "impression_yield_pct": 3.25,
           "engagement_rate_pct": 0.37
@@ -1323,7 +1323,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 6.61,
+          "post_age_hours": 21.73,
           "time_window": "LIVE",
           "impression_yield_pct": 3.95,
           "engagement_rate_pct": 1.27
@@ -1344,7 +1344,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 6.83,
+          "post_age_hours": 21.95,
           "time_window": "LIVE",
           "impression_yield_pct": 6.9,
           "engagement_rate_pct": 0.88
@@ -1373,7 +1373,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 6.83,
+              "post_age_hours": 21.95,
               "time_window": "LIVE",
               "impression_yield_pct": 6.9,
               "engagement_rate_pct": 0.88
@@ -1394,7 +1394,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 6.61,
+              "post_age_hours": 21.73,
               "time_window": "LIVE",
               "impression_yield_pct": 3.95,
               "engagement_rate_pct": 1.27
@@ -1415,7 +1415,7 @@
               "has_image": true,
               "has_video": true,
               "has_card": false,
-              "post_age_hours": 6.19,
+              "post_age_hours": 21.31,
               "time_window": "LIVE",
               "impression_yield_pct": 3.25,
               "engagement_rate_pct": 0.37
@@ -1436,7 +1436,7 @@
               "has_image": true,
               "has_video": true,
               "has_card": false,
-              "post_age_hours": 6.16,
+              "post_age_hours": 21.28,
               "time_window": "LIVE",
               "impression_yield_pct": 12.25,
               "engagement_rate_pct": 2.08
@@ -1457,7 +1457,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 5.38,
+              "post_age_hours": 20.5,
               "time_window": "LIVE",
               "impression_yield_pct": 3.24,
               "engagement_rate_pct": 0.46
@@ -1478,7 +1478,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 5.3,
+              "post_age_hours": 20.42,
               "time_window": "LIVE",
               "impression_yield_pct": 68.7,
               "engagement_rate_pct": 0.73
@@ -1499,7 +1499,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 5.13,
+              "post_age_hours": 20.25,
               "time_window": "LIVE",
               "impression_yield_pct": 4.31,
               "engagement_rate_pct": 0.12
@@ -1520,7 +1520,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 4.8,
+              "post_age_hours": 19.92,
               "time_window": "LIVE",
               "impression_yield_pct": 1.82,
               "engagement_rate_pct": 0.32
@@ -1541,7 +1541,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.64,
+              "post_age_hours": 19.76,
               "time_window": "LIVE",
               "impression_yield_pct": 2.93,
               "engagement_rate_pct": 0.2
@@ -1562,7 +1562,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 4.47,
+              "post_age_hours": 19.58,
               "time_window": "LIVE",
               "impression_yield_pct": 1.76,
               "engagement_rate_pct": 0.23
@@ -1583,7 +1583,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.38,
+              "post_age_hours": 19.5,
               "time_window": "LIVE",
               "impression_yield_pct": 4.22,
               "engagement_rate_pct": 1.11
@@ -1604,7 +1604,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 4.05,
+              "post_age_hours": 19.17,
               "time_window": "LIVE",
               "impression_yield_pct": 1.7,
               "engagement_rate_pct": 0.21
@@ -1625,7 +1625,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.97,
+              "post_age_hours": 19.09,
               "time_window": "LIVE",
               "impression_yield_pct": 2.36,
               "engagement_rate_pct": 0.21
@@ -1646,7 +1646,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 3.95,
+              "post_age_hours": 19.07,
               "time_window": "LIVE",
               "impression_yield_pct": 1.03,
               "engagement_rate_pct": 0.19
@@ -1667,7 +1667,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.86,
+              "post_age_hours": 18.98,
               "time_window": "LIVE",
               "impression_yield_pct": 3.89,
               "engagement_rate_pct": 0.37
@@ -1688,7 +1688,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.74,
+              "post_age_hours": 18.86,
               "time_window": "LIVE",
               "impression_yield_pct": 4.39,
               "engagement_rate_pct": 0.36
@@ -1709,7 +1709,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 3.63,
+              "post_age_hours": 18.75,
               "time_window": "LIVE",
               "impression_yield_pct": 2.12,
               "engagement_rate_pct": 0.5
@@ -1730,7 +1730,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 3.22,
+              "post_age_hours": 18.33,
               "time_window": "LIVE",
               "impression_yield_pct": 1.76,
               "engagement_rate_pct": 0.16
@@ -1751,7 +1751,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 2.82,
+              "post_age_hours": 17.94,
               "time_window": "LIVE",
               "impression_yield_pct": 6.4,
               "engagement_rate_pct": 1.74
@@ -1772,7 +1772,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 2.8,
+              "post_age_hours": 17.92,
               "time_window": "LIVE",
               "impression_yield_pct": 1.71,
               "engagement_rate_pct": 0.21
@@ -1812,7 +1812,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 3.43,
+          "post_age_hours": 18.55,
           "time_window": "LIVE",
           "impression_yield_pct": 3.65,
           "engagement_rate_pct": 1.6
@@ -1833,7 +1833,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 4.68,
+          "post_age_hours": 19.8,
           "time_window": "LIVE",
           "impression_yield_pct": 6.19,
           "engagement_rate_pct": 1.13
@@ -1854,8 +1854,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.76,
-          "time_window": "LIVE",
+          "post_age_hours": 24.88,
+          "time_window": "T+24h",
           "impression_yield_pct": 9.83,
           "engagement_rate_pct": 0.97
         },
@@ -1875,8 +1875,8 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.93,
-          "time_window": "LIVE",
+          "post_age_hours": 25.05,
+          "time_window": "T+24h",
           "impression_yield_pct": 6.11,
           "engagement_rate_pct": 1.38
         },
@@ -1896,8 +1896,8 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 10.3,
-          "time_window": "LIVE",
+          "post_age_hours": 25.42,
+          "time_window": "T+24h",
           "impression_yield_pct": 7.45,
           "engagement_rate_pct": 0.79
         },
@@ -1917,7 +1917,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 11.18,
+          "post_age_hours": 26.29,
           "time_window": "LIVE",
           "impression_yield_pct": 10.69,
           "engagement_rate_pct": 0.81
@@ -1938,7 +1938,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 13.18,
+          "post_age_hours": 28.29,
           "time_window": "LIVE",
           "impression_yield_pct": 6.55,
           "engagement_rate_pct": 1.23
@@ -1959,7 +1959,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 14.42,
+          "post_age_hours": 29.54,
           "time_window": "LIVE",
           "impression_yield_pct": 15.39,
           "engagement_rate_pct": 0.83
@@ -1980,7 +1980,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 15.47,
+          "post_age_hours": 30.58,
           "time_window": "LIVE",
           "impression_yield_pct": 8.46,
           "engagement_rate_pct": 1.04
@@ -2001,7 +2001,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 15.94,
+          "post_age_hours": 31.05,
           "time_window": "LIVE",
           "impression_yield_pct": 9.08,
           "engagement_rate_pct": 1.25
@@ -2022,7 +2022,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 16.24,
+          "post_age_hours": 31.36,
           "time_window": "LIVE",
           "impression_yield_pct": 12.01,
           "engagement_rate_pct": 0.83
@@ -2051,7 +2051,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 16.24,
+              "post_age_hours": 31.36,
               "time_window": "LIVE",
               "impression_yield_pct": 12.01,
               "engagement_rate_pct": 0.83
@@ -2072,7 +2072,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 15.94,
+              "post_age_hours": 31.05,
               "time_window": "LIVE",
               "impression_yield_pct": 9.08,
               "engagement_rate_pct": 1.25
@@ -2093,7 +2093,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 15.47,
+              "post_age_hours": 30.58,
               "time_window": "LIVE",
               "impression_yield_pct": 8.46,
               "engagement_rate_pct": 1.04
@@ -2114,7 +2114,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 14.42,
+              "post_age_hours": 29.54,
               "time_window": "LIVE",
               "impression_yield_pct": 15.39,
               "engagement_rate_pct": 0.83
@@ -2135,7 +2135,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 13.18,
+              "post_age_hours": 28.29,
               "time_window": "LIVE",
               "impression_yield_pct": 6.55,
               "engagement_rate_pct": 1.23
@@ -2156,7 +2156,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 11.18,
+              "post_age_hours": 26.29,
               "time_window": "LIVE",
               "impression_yield_pct": 10.69,
               "engagement_rate_pct": 0.81
@@ -2177,8 +2177,8 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 10.3,
-              "time_window": "LIVE",
+              "post_age_hours": 25.42,
+              "time_window": "T+24h",
               "impression_yield_pct": 7.45,
               "engagement_rate_pct": 0.79
             },
@@ -2198,8 +2198,8 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.93,
-              "time_window": "LIVE",
+              "post_age_hours": 25.05,
+              "time_window": "T+24h",
               "impression_yield_pct": 6.11,
               "engagement_rate_pct": 1.38
             },
@@ -2219,8 +2219,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.76,
-              "time_window": "LIVE",
+              "post_age_hours": 24.88,
+              "time_window": "T+24h",
               "impression_yield_pct": 9.83,
               "engagement_rate_pct": 0.97
             },
@@ -2240,7 +2240,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 4.68,
+              "post_age_hours": 19.8,
               "time_window": "LIVE",
               "impression_yield_pct": 6.19,
               "engagement_rate_pct": 1.13
@@ -2261,7 +2261,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 3.43,
+              "post_age_hours": 18.55,
               "time_window": "LIVE",
               "impression_yield_pct": 3.65,
               "engagement_rate_pct": 1.6
@@ -2301,8 +2301,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 8.94,
-          "time_window": "LIVE",
+          "post_age_hours": 24.06,
+          "time_window": "T+24h",
           "impression_yield_pct": 0.47,
           "engagement_rate_pct": 1.04
         },
@@ -2322,8 +2322,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 8.95,
-          "time_window": "LIVE",
+          "post_age_hours": 24.07,
+          "time_window": "T+24h",
           "impression_yield_pct": 8.08,
           "engagement_rate_pct": 1.89
         },
@@ -2343,8 +2343,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.47,
-          "time_window": "LIVE",
+          "post_age_hours": 24.59,
+          "time_window": "T+24h",
           "impression_yield_pct": 5.31,
           "engagement_rate_pct": 1.58
         },
@@ -2364,8 +2364,8 @@
           "has_image": false,
           "has_video": false,
           "has_card": true,
-          "post_age_hours": 9.61,
-          "time_window": "LIVE",
+          "post_age_hours": 24.72,
+          "time_window": "T+24h",
           "impression_yield_pct": 0.23,
           "engagement_rate_pct": 5.35
         },
@@ -2385,8 +2385,8 @@
           "has_image": true,
           "has_video": true,
           "has_card": false,
-          "post_age_hours": 9.61,
-          "time_window": "LIVE",
+          "post_age_hours": 24.72,
+          "time_window": "T+24h",
           "impression_yield_pct": 12.69,
           "engagement_rate_pct": 3.18
         },
@@ -2406,8 +2406,8 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.7,
-          "time_window": "LIVE",
+          "post_age_hours": 24.82,
+          "time_window": "T+24h",
           "impression_yield_pct": 5.83,
           "engagement_rate_pct": 1.47
         },
@@ -2427,8 +2427,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 9.97,
-          "time_window": "LIVE",
+          "post_age_hours": 25.09,
+          "time_window": "T+24h",
           "impression_yield_pct": 5.62,
           "engagement_rate_pct": 1.53
         },
@@ -2448,8 +2448,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 10.23,
-          "time_window": "LIVE",
+          "post_age_hours": 25.34,
+          "time_window": "T+24h",
           "impression_yield_pct": 7.08,
           "engagement_rate_pct": 1.75
         },
@@ -2469,8 +2469,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 10.47,
-          "time_window": "LIVE",
+          "post_age_hours": 25.59,
+          "time_window": "T+24h",
           "impression_yield_pct": 6.21,
           "engagement_rate_pct": 1.82
         },
@@ -2490,8 +2490,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 10.54,
-          "time_window": "LIVE",
+          "post_age_hours": 25.66,
+          "time_window": "T+24h",
           "impression_yield_pct": 9.54,
           "engagement_rate_pct": 0.68
         },
@@ -2511,8 +2511,8 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 10.64,
-          "time_window": "LIVE",
+          "post_age_hours": 25.75,
+          "time_window": "T+24h",
           "impression_yield_pct": 7.8,
           "engagement_rate_pct": 1.33
         },
@@ -2532,7 +2532,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 11.02,
+          "post_age_hours": 26.14,
           "time_window": "LIVE",
           "impression_yield_pct": 5.87,
           "engagement_rate_pct": 1.81
@@ -2553,7 +2553,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 11.25,
+          "post_age_hours": 26.37,
           "time_window": "LIVE",
           "impression_yield_pct": 10.23,
           "engagement_rate_pct": 1.1
@@ -2574,7 +2574,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 11.72,
+          "post_age_hours": 26.84,
           "time_window": "LIVE",
           "impression_yield_pct": 9.48,
           "engagement_rate_pct": 1.48
@@ -2595,7 +2595,7 @@
           "has_image": false,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 12.83,
+          "post_age_hours": 27.95,
           "time_window": "LIVE",
           "impression_yield_pct": 6.76,
           "engagement_rate_pct": 1.59
@@ -2616,7 +2616,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 14.14,
+          "post_age_hours": 29.25,
           "time_window": "LIVE",
           "impression_yield_pct": 8.35,
           "engagement_rate_pct": 1.83
@@ -2637,7 +2637,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 14.93,
+          "post_age_hours": 30.05,
           "time_window": "LIVE",
           "impression_yield_pct": 10.87,
           "engagement_rate_pct": 1.34
@@ -2658,7 +2658,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 15.44,
+          "post_age_hours": 30.56,
           "time_window": "LIVE",
           "impression_yield_pct": 10.25,
           "engagement_rate_pct": 1.29
@@ -2679,7 +2679,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 15.82,
+          "post_age_hours": 30.94,
           "time_window": "LIVE",
           "impression_yield_pct": 9.23,
           "engagement_rate_pct": 1.52
@@ -2700,7 +2700,7 @@
           "has_image": true,
           "has_video": false,
           "has_card": false,
-          "post_age_hours": 16.28,
+          "post_age_hours": 31.4,
           "time_window": "LIVE",
           "impression_yield_pct": 7.17,
           "engagement_rate_pct": 1.65
@@ -2729,7 +2729,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 16.28,
+              "post_age_hours": 31.4,
               "time_window": "LIVE",
               "impression_yield_pct": 7.17,
               "engagement_rate_pct": 1.65
@@ -2750,7 +2750,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 15.82,
+              "post_age_hours": 30.94,
               "time_window": "LIVE",
               "impression_yield_pct": 9.23,
               "engagement_rate_pct": 1.52
@@ -2771,7 +2771,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 15.44,
+              "post_age_hours": 30.56,
               "time_window": "LIVE",
               "impression_yield_pct": 10.25,
               "engagement_rate_pct": 1.29
@@ -2792,7 +2792,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 14.93,
+              "post_age_hours": 30.05,
               "time_window": "LIVE",
               "impression_yield_pct": 10.87,
               "engagement_rate_pct": 1.34
@@ -2813,7 +2813,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 14.14,
+              "post_age_hours": 29.25,
               "time_window": "LIVE",
               "impression_yield_pct": 8.35,
               "engagement_rate_pct": 1.83
@@ -2834,7 +2834,7 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 12.83,
+              "post_age_hours": 27.95,
               "time_window": "LIVE",
               "impression_yield_pct": 6.76,
               "engagement_rate_pct": 1.59
@@ -2855,7 +2855,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 11.72,
+              "post_age_hours": 26.84,
               "time_window": "LIVE",
               "impression_yield_pct": 9.48,
               "engagement_rate_pct": 1.48
@@ -2876,7 +2876,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 11.25,
+              "post_age_hours": 26.37,
               "time_window": "LIVE",
               "impression_yield_pct": 10.23,
               "engagement_rate_pct": 1.1
@@ -2897,7 +2897,7 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 11.02,
+              "post_age_hours": 26.14,
               "time_window": "LIVE",
               "impression_yield_pct": 5.87,
               "engagement_rate_pct": 1.81
@@ -2918,8 +2918,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 10.64,
-              "time_window": "LIVE",
+              "post_age_hours": 25.75,
+              "time_window": "T+24h",
               "impression_yield_pct": 7.8,
               "engagement_rate_pct": 1.33
             },
@@ -2939,8 +2939,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 10.54,
-              "time_window": "LIVE",
+              "post_age_hours": 25.66,
+              "time_window": "T+24h",
               "impression_yield_pct": 9.54,
               "engagement_rate_pct": 0.68
             },
@@ -2960,8 +2960,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 10.47,
-              "time_window": "LIVE",
+              "post_age_hours": 25.59,
+              "time_window": "T+24h",
               "impression_yield_pct": 6.21,
               "engagement_rate_pct": 1.82
             },
@@ -2981,8 +2981,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 10.23,
-              "time_window": "LIVE",
+              "post_age_hours": 25.34,
+              "time_window": "T+24h",
               "impression_yield_pct": 7.08,
               "engagement_rate_pct": 1.75
             },
@@ -3002,8 +3002,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.97,
-              "time_window": "LIVE",
+              "post_age_hours": 25.09,
+              "time_window": "T+24h",
               "impression_yield_pct": 5.62,
               "engagement_rate_pct": 1.53
             },
@@ -3023,8 +3023,8 @@
               "has_image": false,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.7,
-              "time_window": "LIVE",
+              "post_age_hours": 24.82,
+              "time_window": "T+24h",
               "impression_yield_pct": 5.83,
               "engagement_rate_pct": 1.47
             },
@@ -3044,8 +3044,8 @@
               "has_image": true,
               "has_video": true,
               "has_card": false,
-              "post_age_hours": 9.61,
-              "time_window": "LIVE",
+              "post_age_hours": 24.72,
+              "time_window": "T+24h",
               "impression_yield_pct": 12.69,
               "engagement_rate_pct": 3.18
             },
@@ -3065,8 +3065,8 @@
               "has_image": false,
               "has_video": false,
               "has_card": true,
-              "post_age_hours": 9.61,
-              "time_window": "LIVE",
+              "post_age_hours": 24.72,
+              "time_window": "T+24h",
               "impression_yield_pct": 0.23,
               "engagement_rate_pct": 5.35
             },
@@ -3086,8 +3086,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 9.47,
-              "time_window": "LIVE",
+              "post_age_hours": 24.59,
+              "time_window": "T+24h",
               "impression_yield_pct": 5.31,
               "engagement_rate_pct": 1.58
             },
@@ -3107,8 +3107,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 8.95,
-              "time_window": "LIVE",
+              "post_age_hours": 24.07,
+              "time_window": "T+24h",
               "impression_yield_pct": 8.08,
               "engagement_rate_pct": 1.89
             },
@@ -3128,8 +3128,8 @@
               "has_image": true,
               "has_video": false,
               "has_card": false,
-              "post_age_hours": 8.94,
-              "time_window": "LIVE",
+              "post_age_hours": 24.06,
+              "time_window": "T+24h",
               "impression_yield_pct": 0.47,
               "engagement_rate_pct": 1.04
             }
@@ -3644,5 +3644,5 @@
       "bookmarks": 0
     }
   ],
-  "generated_at": "2026-08-11T02:28:06.172Z"
+  "generated_at": "2026-08-11T17:35:12.380Z"
 }

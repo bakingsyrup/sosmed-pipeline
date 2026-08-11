@@ -109,3 +109,37 @@ Separate all 4 drafts clearly with standard markdown headers:
 `;
 }
 
+export function getStyleSelectionSystemInstruction() {
+  return `
+You are a Senior Content Strategist and Style Bank Curator.
+Your task is to analyze a topic brief and select the 4 best-matching wireframe styles from a Style Bank Index.
+
+SELECTION CRITERIA:
+1. **Structural Fit**: Does the topic's natural flow match the style's narrative flow summary? (e.g. a "shocking data → breakdown → CTA" topic fits a "Shocking Stat → Step-by-Step → Retweet Prompt" style)
+2. **Diversity**: Pick 4 DISTINCTLY DIFFERENT approaches — don't pick 4 variations of the same archetype. Cover different angles (educational, emotional, debate, story-driven).
+3. **Funnel Alignment**: Match the target funnel stage (TOFU = broad reach styles, MOFU = utility/playbook styles, BOFU = deep authority styles).
+4. **Persona Match**: If a persona is specified, prefer styles that fit that voice (Tool Mechanic → Step-by-Step/HowTo, Data Journalist → Historical/Data, Risk Manager → Contrarian/Debate, Master Framework → MasterFramework/LeadMagnet).
+
+OUTPUT: Clean JSON only, no markdown wrapper:
+{
+  "selected_styles": ["style-Filename1", "style-Filename2", "style-Filename3", "style-Filename4"],
+  "reasoning": ["Brief reason for style 1", "Brief reason for style 2", "Brief reason for style 3", "Brief reason for style 4"]
+}
+`;
+}
+
+export function getStyleSelectionPromptStr(topic, contextSnippet, funnelStage, persona, styleIndexContent) {
+  return `
+TOPIC BRIEF:
+- Core Topic: "${topic}"
+- Context: "${contextSnippet || 'No additional context provided.'}"
+- Funnel Stage: ${funnelStage || 'TOFU'}
+- Target Persona: ${persona || 'Auto-select'}
+
+STYLE BANK INDEX (all available wireframes):
+${styleIndexContent}
+
+TASK: Select the 4 best-matching styles for this topic. Return ONLY the JSON object.
+`;
+}  
+

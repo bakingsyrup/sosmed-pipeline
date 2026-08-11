@@ -118,9 +118,10 @@ function extractNarrativeFlow(baseName, content) {
 export function updateStyleBankMOC(newlyDissectedFile = null) {
   if (!fs.existsSync(STYLE_BANK_DIR)) return;
 
-  const files = fs.readdirSync(STYLE_BANK_DIR).filter(f => f.startsWith('style-') && f.endsWith('.md') && f !== '00-Style-Bank-MOC.md');
+  const files = fs.readdirSync(STYLE_BANK_DIR).filter(f => f.startsWith('style-') && f.endsWith('.md') && f !== '00-Style-Bank-MOC.md' && f !== 'style-index.md');
   const categoryMap = {};
   CATEGORIES.forEach(cat => categoryMap[cat] = []);
+  const indexEntries = [];
 
   for (const file of files) {
     try {
@@ -136,8 +137,12 @@ export function updateStyleBankMOC(newlyDissectedFile = null) {
 
       const cardText = `- [ ] [[${baseName}|${narrativeFlow}. ${platformTag}]]`;
       categoryMap[category].push(cardText);
+      const mtime = fs.statSync(path.join(STYLE_BANK_DIR, file)).mtimeMs;
+      indexEntries.push({ baseName, category, narrativeFlow, mtime });
     } catch (e) {}
   }
+
+  // Sort index by file modification time (newest at bottom)
 
   const mocLines = [
     `---`,
@@ -164,6 +169,20 @@ export function updateStyleBankMOC(newlyDissectedFile = null) {
 
   fs.writeFileSync(path.join(STYLE_BANK_DIR, '00-Style-Bank-MOC.md'), mocLines.join('\n'));
   console.log(`✅ Updated Style Bank MOC to Kanban Board: 00-Style-Bank-MOC.md (${files.length} styles indexed)`);
+
+  // Build style index for AI topic-to-style matching
+  const indexLines = [
+    `# Lulua Style Bank Index`,
+    ``,
+    `| # | Style | Category | Narrative Flow Summary |`,
+    `|---|-------|----------|------------------------|`
+  ];
+  indexEntries.sort((a, b) => a.mtime - b.mtime);
+  indexEntries.forEach((entry, i) => {
+    indexLines.push(`| ${i + 1} | [[${entry.baseName}]] | ${entry.category} | ${entry.narrativeFlow} |`);
+  });
+  fs.writeFileSync(path.join(STYLE_BANK_DIR, 'style-index.md'), indexLines.join('\n'));
+  console.log(`✅ Updated Style Index: style-index.md (${indexEntries.length} styles)`);
 }
 
 export function updateAccountAuditsMOC() {
