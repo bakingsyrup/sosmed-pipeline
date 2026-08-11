@@ -397,7 +397,9 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x') {
       text: fullPayloadText,
       postText: `Author: @${opHandle || 'unknown'}\n\n` + opTweets.join('\n\n'),
       articleText: extractedArticleBodyText || null,
+      articleUrl: extractedArticleUrl || null,
       hasArticle: Boolean(extractedArticleBodyText),
+      isDual: Boolean(extractedArticleBodyText && extractedArticleBodyText.length > 50),
       author: opHandle,
       threadCount: opTweets.length
     };

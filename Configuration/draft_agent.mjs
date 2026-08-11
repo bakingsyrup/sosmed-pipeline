@@ -31,7 +31,9 @@ import {
 // Import Modular Prompts
 import {
   getResearchSystemInstruction,
-  getResearchPromptStr
+  getResearchPromptStr,
+  getTargetedResearchSystemInstruction,
+  getTargetedResearchPromptStr
 } from './prompts/research_prompt.mjs';
 
 import {
@@ -39,6 +41,13 @@ import {
   getStandardSystemInstruction,
   getStandardPromptStr
 } from './prompts/drafting_prompt.mjs';
+
+import {
+  getPlannerSystemInstruction,
+  getPlannerPromptStr,
+  getWireframeSystemInstruction,
+  getWireframeDraftPromptStr
+} from './prompts/wireframe_drafting_prompt.mjs';
 
 import {
   getVideoSkeletonSystemInstruction,
@@ -1441,3 +1450,74 @@ main().catch(err => {
   console.error('Fatal error in agent script:', err);
   process.exit(1);
 });
+
+/**
+ * 3-Step Ping-Pong Research & Drafting Pipeline:
+ * Step 1: Planner Agent generates thread skeleton + Research Shopping List [Data + Intent].
+ * Step 2: Search Grounding Agent (Gemini Flash + Web Search) fulfills shopping list & audits false premises.
+ * Step 3: Ping-Pong Loop (Max 1 retry): If false premise detected, re-plan skeleton with true ground-truth facts.
+ * Step 4: Final Writer Agent (DeepSeek Pro / Gemini) populates Part 3 Elastic Blueprint into publication-ready thread.
+ */
+export async function executePingPongDraftingPipeline(topicPayload, wireframeBlueprint, styleGuideContent, lang = 'id') {
+  console.log(`🚀 [Ping-Pong Pipeline] Starting 3-step targeted research loop for: "${topicPayload.core_topic || topicPayload.topic_id}"`);
+
+  // Step 1: Planner Agent
+  const plannerSystem = getPlannerSystemInstruction();
+  const plannerPrompt = getPlannerPromptStr(topicPayload, wireframeBlueprint);
+  
+  let plannerResStr = await callDeepSeek(plannerPrompt, plannerSystem, false);
+  let plannerObj = {};
+  try {
+    const jsonMatch = plannerResStr.match(/\{[\s\S]*\}/);
+    plannerObj = jsonMatch ? JSON.parse(jsonMatch[0]) : {};
+  } catch (e) {
+    console.warn('⚠️ Planner JSON parse fallback:', e.message);
+  }
+
+  const shoppingList = plannerObj.research_shopping_list || [
+    { slot_id: "General Facts", data_wanted: topicPayload.core_topic, intent: "Verify core claims and numbers" }
+  ];
+
+  // Step 2: Targeted Search Grounding (Gemini 2.5 Flash + Web Search)
+  console.log(`🌐 [Ping-Pong Pipeline] Executing targeted search grounding for ${shoppingList.length} items...`);
+  const researchSystem = getTargetedResearchSystemInstruction();
+  const researchPrompt = getTargetedResearchPromptStr(topicPayload, shoppingList);
+  
+  const researchRes = await callGemini(researchPrompt, researchSystem, false);
+  const researchBrief = researchRes.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+  // Step 3: Check for False Premise Flag & Execute Re-plan Loop (Max 1 Loop)
+  let finalResearchBrief = researchBrief;
+  let finalPlannerObj = plannerObj;
+
+  if (researchBrief.includes('FALSE_PREMISE_DETECTED')) {
+    console.log('⚠️ [Ping-Pong Pipeline] False premise caught by Research Agent. Triggering Round 2 Re-plan loop...');
+    const revisedPlannerPrompt = getPlannerPromptStr(topicPayload, wireframeBlueprint, researchBrief);
+    const revisedPlannerStr = await callDeepSeek(revisedPlannerPrompt, plannerSystem, false);
+    
+    try {
+      const jsonMatch2 = revisedPlannerStr.match(/\{[\s\S]*\}/);
+      finalPlannerObj = jsonMatch2 ? JSON.parse(jsonMatch2[0]) : plannerObj;
+    } catch (e) {}
+
+    const revisedShoppingList = finalPlannerObj.research_shopping_list || shoppingList;
+    const revisedResearchPrompt = getTargetedResearchPromptStr(topicPayload, revisedShoppingList, researchBrief);
+    const revisedResearchRes = await callGemini(revisedResearchPrompt, researchSystem, false);
+    finalResearchBrief = revisedResearchRes.candidates?.[0]?.content?.parts?.[0]?.text || researchBrief;
+    console.log('✅ [Ping-Pong Pipeline] Round 2 Re-plan complete with corrected ground truth!');
+  }
+
+  // Step 4: Final Writer Agent Generation
+  console.log('✍️ [Ping-Pong Pipeline] Generating final publication-ready Indonesian thread output...');
+  const writerSystem = getWireframeSystemInstruction(styleGuideContent, lang);
+  const writerPrompt = getWireframeDraftPromptStr(topicPayload, [wireframeBlueprint], finalResearchBrief, lang);
+  
+  const finalDrafts = await callDeepSeek(writerPrompt, writerSystem, false);
+  return {
+    ok: true,
+    plannerObj: finalPlannerObj,
+    researchBrief: finalResearchBrief,
+    drafts: finalDrafts
+  };
+}
+

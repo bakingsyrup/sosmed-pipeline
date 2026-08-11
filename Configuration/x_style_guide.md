@@ -21,7 +21,6 @@ The writing is primarily in **Indonesian**, heavily blended with English busines
 *   **Colloquial & Trading Slang (Indonesian):** 
     *   *Cuan* (profit/profitable)
     *   *Retail* (individual/small investors)
-    *   *Rekt* (suffering heavy losses, capitalized as *REKT*)
     *   *Ngeri* (scary/concerning)
     *   *Sepele* (trivial/minor)
     *   *Apesnya* (unfortunately / bad luck)
@@ -170,7 +169,7 @@ For complex macro topics, add a small, isolated context section at the bottom to
 *   **DON'T** present isolated statistics or percentages without comparative context (e.g., avoid stating *"GDP tumbuh 4.3%"* without showing how it relates to the previous period, expectations, or forecasts).
 *   **DON'T** use lazy adjective labels or hype words (e.g., "raksasa", "masif", "huge", "sangat besar", "sangat bahaya") to declare a conclusion.
 *   **DON'T** introduce technical terms or complex actions without explanation. Never assume the reader knows financial acronyms or why institutional players structured a trade in a certain way.
-*   **DON'T** default to retail ("kita retail" or "Retail REKT") as the victim or target audience unless they are indeed the group impacted the most by the news.
+*   **DON'T** default to retail ("kita retail") as the victim or target audience unless they are indeed the group impacted the most by the news.
 
 ---
 
@@ -196,7 +195,7 @@ a. KPR Rumah Tetap Mahal
 
 Bank sentral tidak akan buru-buru turunkan suku bunga.
 
-Bagi kita retail, ini artinya bunga cicilan dan KPR rumah akan tetap nangkring di atas.
+Bagi kita retail, ini artinya bunga cicilan dan KPR rumah akan tetap tinggi di atas.
 
 b. Developer Property Mulai Tumbang
 
@@ -209,8 +208,6 @@ Lalu sampai kapan ini bertahan?
 Prediksi analis, paling cepat akhir tahun 2026 baru ada pemangkasan suku bunga.
 
 Siap-siap ikat pinggang kencang.
-
-Lagi lagi, Retail REKT
 
 ---
 
@@ -247,8 +244,6 @@ Bagi pembeli saham biasa, ini koreksi kecil.
 Tapi bagi pembeli ETF leverage 2x?
 
 Portofolio langsung minus 20% dalam hitungan hari.
-
-Lagi lagi, Retail REKT
 
 Kamu sempat beli di pucuk?😀
 
@@ -297,8 +292,6 @@ Saat harga Bitcoin koreksi keras.
 Saham ini pasti ikut hancur.
 
 Portofolio konservatif tiba tiba minus puluhan persen.
-
-Lagi lagi, Retail REKT
 
 Coba cek isi reksadana kamu hari ini😀
 

@@ -15,7 +15,7 @@ When the user prompts **"Activate Lulua"**, **"Activate Lulua mode"**, or asks t
    - [`lulua-pipeline/02-Memory/memory_log.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/lulua-pipeline/02-Memory/memory_log.md)
    - [`Configuration/x_style_guide.md`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/x_style_guide.md)
 3. **Execution Standards**:
-   - **Post Wireframing**: Extract strictly into the **Standardized 4-Part Schema** (`[Format]_[HookFramework]_[ConversionDriver]_[vN]`) with parameterized bracketed slots (`[Hook]`, `[Setup]`, `[Body]`, `[Closing]`).
+   - **Post Wireframing**: Extract strictly into the **Standardized 3-Part Schema** (Part 1: Post-by-Post 5-Point Dissection Matrix Table, Part 2: Applied Output, Part 3: Elastic Universal Wireframe Blueprint with Dynamic Content Scaling Directives).
    - **Account Audits**: Follow the **5-Dimension Dissection Framework** using literal profile bio quotes and direct evidence links.
    - **Ratio Math**: Enforce Virality Filters ($\text{Bookmarks} \ge 0.5\%$, $\text{Replies} \ge 0.3\%$, $\text{Retweets} \ge 0.2\%$, $\text{View Yield} \ge 2.5\times$).
 4. **Hybrid Intelligence**: Draw from both internal LLM training data (historic viral hooks, timeless frameworks) and Beidou snapshot JSON files ([`beidou-pipeline/00-Snapshots/`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/beidou-pipeline/00-Snapshots/)).

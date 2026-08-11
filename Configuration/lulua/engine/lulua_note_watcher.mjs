@@ -1,36 +1,38 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { runAccountAudit } from './lulua_account_auditor.mjs';
 import { runPostDissection } from './lulua_post_dissecter.mjs';
+import { runAccountAudit } from './lulua_account_auditor.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const BASE_DIR = path.resolve(__dirname, '../../../');
 const INBOX_DIR = path.join(BASE_DIR, 'lulua-pipeline/00-Inbox');
-const AUDIT_NOTE = path.join(INBOX_DIR, '_NEW_ACCOUNT_AUDIT.md');
+const MEMORY_DIR = path.join(BASE_DIR, 'lulua-pipeline/02-Memory');
 const DISSECT_NOTE = path.join(INBOX_DIR, '_NEW_POST_DISSECTION.md');
+const AUDIT_NOTE = path.join(INBOX_DIR, '_ACCOUNT_AUDIT_BRIEFING.md');
 
-// Helper to parse YAML frontmatter
 function parseFrontmatter(content) {
-  const meta = {};
-  if (content.startsWith('---')) {
-    const endIdx = content.indexOf('---', 3);
-    if (endIdx !== -1) {
-      const block = content.substring(3, endIdx);
-      block.split('\n').forEach(line => {
-        const parts = line.split(':');
-        if (parts.length >= 2) {
-          const key = parts[0].trim();
-          const val = parts.slice(1).join(':').trim().replace(/^["']|["']$/g, '');
-          meta[key] = val;
-        }
-      });
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+
+  const lines = match[1].split('\n');
+  const metadata = {};
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith('#') && trimmed.includes(':')) {
+      const [key, ...valParts] = trimmed.split(':');
+      const val = valParts.join(':').trim().replace(/^["']|["']$/g, '');
+      metadata[key.trim()] = val;
     }
   }
-  return meta;
+
+  return metadata;
 }
+
+let isDissecting = false;
 
 async function checkInboxNotes() {
   // Check Account Audit note
@@ -38,15 +40,8 @@ async function checkInboxNotes() {
     const content = fs.readFileSync(AUDIT_NOTE, 'utf8');
     const meta = parseFrontmatter(content);
 
-    if (meta.status === 'fetch' && meta.handle) {
-      console.log(`📥 [Note Watcher] Detected status: fetch for handle ${meta.handle}`);
-      await runAccountAudit(meta.handle, meta.platform || 'x');
-
-      // Update frontmatter to draft
-      const updated = content.replace(/^status:\s*fetch/m, 'status: draft');
-      fs.writeFileSync(AUDIT_NOTE, updated);
-    } else if (meta.status === 'ready' && meta.handle) {
-      console.log(`📥 [Note Watcher] Detected status: ready for audit of ${meta.handle}`);
+    if (meta.status === 'ready' && meta.handle && meta.handle.trim()) {
+      console.log(`📥 [Note Watcher] Detected status: ready for account audit (@${meta.handle})`);
       
       // Extract human notes section
       const notesIdx = content.indexOf('## 💰 Monetization & Funnel Notes');
@@ -74,19 +69,54 @@ platform: "x"
     }
   }
 
-  // Check Post Dissection note
-  if (fs.existsSync(DISSECT_NOTE)) {
+  // Check Post Dissection note (Exact Event Post Pattern: 00-Inbox -> 02-Memory -> Recreate Inbox ONLY after completion)
+  if (!isDissecting && fs.existsSync(DISSECT_NOTE)) {
     const content = fs.readFileSync(DISSECT_NOTE, 'utf8');
     const meta = parseFrontmatter(content);
 
     if (meta.status === 'ready' && (meta.url || content.includes('http'))) {
-      console.log(`📥 [Note Watcher] Detected status: ready for post dissection`);
-      const urlMatch = content.match(/https?:\/\/[^\s\)\>]+/i);
-      const target = (meta.url && meta.url.trim()) ? meta.url.trim() : (urlMatch ? urlMatch[0] : content);
-      await runPostDissection(target, meta.platform || 'x');
+      isDissecting = true;
+      console.log(`📥 [Note Watcher] Detected status: ready for post dissection. Moving to 02-Memory...`);
+      
+      if (!fs.existsSync(MEMORY_DIR)) {
+        fs.mkdirSync(MEMORY_DIR, { recursive: true });
+      }
 
-      // Reset template
-      const template = `---
+      const timestamp = Date.now();
+      const processingPath = path.join(MEMORY_DIR, `processing-dissect-${timestamp}.md`);
+
+      // 1. Move note out of 00-Inbox to 02-Memory (Locks file from re-triggering)
+      fs.renameSync(DISSECT_NOTE, processingPath);
+
+      // 2. Process the moved file inside 02-Memory
+      const processingContent = fs.readFileSync(processingPath, 'utf8');
+      const processingMeta = parseFrontmatter(processingContent);
+      const urlMatch = processingContent.match(/https?:\/\/[^\s\)\>]+/i);
+      const frontmatterUrl = (processingMeta.url && processingMeta.url.trim()) ? processingMeta.url.trim() : null;
+      const bodyContent = processingContent.replace(/^---\n[\s\S]*?\n---\n?/, '').trim();
+      const userText = bodyContent
+        .replace(/## 📌 Target Post Content \/ URL\n?/gi, '')
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/## 📐 Extracted Structural Wireframe[\s\S]*$/i, '')
+        .replace(/# Post Dissection Template\n?/gi, '')
+        .trim();
+      const hasManualText = userText.length > 50;
+      const target = hasManualText
+        ? (frontmatterUrl ? frontmatterUrl + '\n\n' + userText : userText)
+        : (frontmatterUrl || (urlMatch ? urlMatch[0] : processingContent));
+
+      try {
+        await runPostDissection(target, processingMeta.platform || 'x');
+
+        // 3. Remove temporary processing note from 02-Memory once saved to 01-Style-Bank
+        if (fs.existsSync(processingPath)) {
+          fs.unlinkSync(processingPath);
+        }
+      } catch (err) {
+        console.error(`❌ Dissection execution error:`, err.message);
+      } finally {
+        // 4. Re-create the fresh blank template in 00-Inbox ONLY AFTER completion!
+        const blankTemplate = `---
 status: draft
 url: ""
 platform: "x"
@@ -95,15 +125,21 @@ platform: "x"
 # Post Dissection Template
 
 ## 📌 Target Post Content / URL
+<!-- Paste URL or post text here -->
+
 
 ## 📐 Extracted Structural Wireframe (Lulua Output)
+<!-- Generated by Lulua when status is ready -->
 `;
-      fs.writeFileSync(DISSECT_NOTE, template);
+        fs.writeFileSync(DISSECT_NOTE, blankTemplate);
+        isDissecting = false;
+        console.log(`✨ [Note Watcher] Dissection complete! Re-created clean template in 00-Inbox.`);
+      }
     }
   }
 }
 
 // Start continuous polling / watching
-console.log('👀 [Lulua] Starting Obsidian Inbox Note Watcher Daemon...');
+console.log('👀 [Lulua] Starting Obsidian Inbox Note Watcher Daemon (00-Inbox -> 02-Memory -> 01-Style-Bank)...');
 setInterval(checkInboxNotes, 5000);
 checkInboxNotes();

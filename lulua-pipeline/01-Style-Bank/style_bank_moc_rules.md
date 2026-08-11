@@ -19,9 +19,10 @@
   %%
   ```
 
-## 2. 17 Master Categories (List Structure)
+## 2. 18 Master Categories (List Structure)
 - List headers MUST use H2 level formatting: `## XX - Category Name`
-- The board maintains 17 master categories:
+- The board maintains an inspection column `00 - New` plus 17 master categories:
+  - `00 - New` (Inspection Inbox — newly dissected styles dual-filed here for quick review)
   - `01 - Step-by-Step SOP`
   - `02 - Master Cheat Sheet`
   - `03 - Learn & Earn Walkthrough`

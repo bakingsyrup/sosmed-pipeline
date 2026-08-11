@@ -1,13 +1,40 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { callGemini } from '../../services/gemini_api.mjs';
+import { callDeepSeek } from '../../services/deepseek_api.mjs';
 import { fetchPostOrThreadText } from './lulua_url_fetcher.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const BASE_DIR = path.resolve(__dirname, '../../../');
 const STYLE_BANK_DIR = path.join(BASE_DIR, 'lulua-pipeline/01-Style-Bank');
+const DISSECTIONS_LOG = path.join(STYLE_BANK_DIR, 'new_dissections.md');
+const DEBUG_LOG = path.join(STYLE_BANK_DIR, 'dissection_debug.log');
+
+function debugLog(msg) {
+  const ts = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  const line = `[${ts}] ${msg}\n`;
+  try {
+    const existing = fs.existsSync(DEBUG_LOG) ? fs.readFileSync(DEBUG_LOG, 'utf8') : '';
+    fs.writeFileSync(DEBUG_LOG, line + existing);
+  } catch (e) {}
+}
+
+function logNewDissection(styleName) {
+  debugLog(`logNewDissection called: styleName=${styleName}`);
+  const ts = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  const line = `- [succeed] [[style-${styleName}]] — ${ts}\n`;
+  try {
+    const exists = fs.existsSync(DISSECTIONS_LOG);
+    debugLog(`  DISSECTIONS_LOG=${DISSECTIONS_LOG}, exists=${exists}`);
+    const existing = exists ? fs.readFileSync(DISSECTIONS_LOG, 'utf8') : '';
+    fs.writeFileSync(DISSECTIONS_LOG, line + existing);
+    debugLog(`  writeFileSync OK, size=${(line.length + existing.length)}`);
+  } catch (e) {
+    debugLog(`  FAILED: ${e.message}`);
+    console.warn(`⚠️ Failed to log dissection to new_dissections.md:`, e.message);
+  }
+}
 
 function loadEnv() {
   const envPaths = [
@@ -31,111 +58,133 @@ function loadEnv() {
 }
 loadEnv();
 
-async function dissectSinglePayload(payloadText, formatType, postUrl, platform, extraFrontmatterObj = {}) {
-  // Pre-clean payload text: strip scraper-prepended metadata headers and standalone stat lines
-  const cleanPayload = payloadText
-    .replace(/^Author:\s*@[A-Za-z0-9_]+\s*\n+/i, '')
-    .replace(/^(?:\d+K?|\d+M?|\d+)\s*\n+/i, '')
-    .trim();
+export async function dissectSinglePayload(payloadText, formatType, postUrl = null, platform = 'x', options = {}) {
+  const cleanPayload = payloadText.trim();
+  if (!cleanPayload) throw new Error('Cannot dissect empty payload text.');
 
   const systemInstruction = `You are Lulua, an expert Social Media Structural Analyst and Style R&D Engine for Iroi media business.
-Your task is to dissect viral social media content (${formatType}) into Lulua's Standardized 4-Part Style Bank Wireframe Schema:
+Your task is to dissect viral social media content (${formatType}) into Lulua's Standardized 3-Part Style Bank Wireframe Schema:
 
-Part 1: Metadata & Ratio Trigger
-- Identify the target metric trigger based on content mechanics: Bookmarks (High Utility/Save Value), Replies (High Debate/Polarization), Retweets (Identity Signal), or Views (Algorithmic Reach Yield).
+Part 1: Post-by-Post Dissection Matrix (Source Analysis Table)
+- Construct a Markdown table mapping every post in the source content across 5 dimensions:
+  1. Structural Arc Role (e.g. High-Stakes Hook, Problem Setup, Term Explainer Block, Red Flag Checklist, Conversion CTA).
+  2. Core Message Payload (Literal narrative event or data point).
+  3. Closing Bridge Line (Exact cliffhanger / transition line driving the next scroll).
+  4. Psychological Trigger (Target emotion: Shock, Curiosity, Relief, Caution, etc.).
+  5. Topic-Agnostic Wireframe Variable Slot (Parameter slot, e.g. [Slot: Thesis Statement & Teaser]).
 
-Part 2: Psychological Lever
-- Primary emotional driver: High Utility & Authority, Contrarian Piercing, FOMO, Debate, Social Proof, or Direct Benefit.
+Part 2a: Reference Source Content (Original Text)
+- DO NOT WRITE THIS SECTION. It will be injected automatically by the system with the exact source text.
 
-Part 3: Micro-Rhythm & Pacing Rules
-- Analyze exact structural mechanics: hook line length caps, line-break density, whitespace pacing, bullet/list patterns, and section progression rules.
+Part 2b: Cross-Domain Applied Demonstration Output
+- Randomly select a COMPLETELY UNRELATED industry domain from the target topic (e.g. Specialty Coffee, Skincare, SaaS, Real Estate, Fitness, Productivity).
+- Apply the Part 3 Wireframe Blueprint you generated.
+- Write 100% in Indonesian, using natural sentence-case copywriting per strict x_style_guide.md rules.
+- CRITICAL: You MUST translate and write ALL headlines, list headers, bullet titles, and body text in Indonesian together. NEVER leave English headers with Indonesian body text.
+- CRITICAL: You MUST write the full post starting from the top hook/intro line down to the final CTA. Never skip the opening intro sentence.
+- Include the mandatory anti-bias banner at the top of Part 2b:
+  > ⚠️ **ANTI-BIAS DIRECTIVE FOR AI AGENTS**: The sample implementation in Part 2b is provided purely for multi-domain illustration. You MUST NOT copy or default to the specific topic, industry vocabulary, or niche terms used in this example when generating content for other niches! Dynamically adapt all placeholders to the user's target topic.
 
-Part 4: Plug-and-Play Wireframe Blueprint
-- Create a parameterized structural formula using bracketed variable slots representing the content's exact structure (e.g. [Hook: Pattern], [Setup / Evidence: Pattern], [Core Mechanism: Step-by-Step], [CTA: Action]). Do NOT use static or generic placeholder text.
+Part 3: Master Universal Wireframe Blueprint (Elastic Narrative Phases)
+- Create a 100% topic-agnostic, phase-based wireframe blueprint for drafting agents (Shinku).
+- Organize content into Elastic Narrative Phases adapted to the content's structural archetype.
+- Include explicit DYNAMIC CONTENT SCALING DIRECTIVES for adaptive phases, instructing the drafting agent to analyze input data depth first and scale post count dynamically (1/N ... N/N). Never hardcode fixed post counts.
 
 CRITICAL FRONTMATTER RULES:
-Generate a descriptive, meaningful style_name in frontmatter following the 4-part Option 2 schema: [CategoryName]_[Format]_[HookArchetype]_[ConversionDriver] using PascalCase for each part, separated by single underscores.
+Generate YAML frontmatter at the top with these exact 8 fields:
+---
+category: "01 - Step-by-Step SOP"
+style_name: "[CategoryName]_[Format]_[HookArchetype]_[ConversionDriver]"
+authority_persona: "[Persona Name]"
+funnel_stage: "TOFU" | "MOFU" | "BOFU"
+target_metric: "[Metric Name]"
+elasticity: "dynamic (3 to 15 posts)"
+supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "linkedin"]
+narrative_flow_summary: "[Concise Human Hook (2-4 words)] → [Concise Human Body (2-4 words)] → [Concise Human CTA (2-4 words)]"
+---
 
-1. CategoryName MUST be strictly chosen from:
-- ClientAds (Client Sponsorships & Paid Promo)
-- ViralReach (Viral Reach, Impressions & Discovery)
-- HighUtility (Educational Deep-Dives, Glossaries & Save Value)
-- OwnedLeadGen (Owned Email Opt-ins, Sales & Product Lead-Gen)
-- DebateEngagement (Polarization, Reply Farming & Comments)
-- BrandIdentity (Culture, Build in Public & Personal Brand)
+CRITICAL FOR category: Pick exactly ONE from this list matching the content's structural archetype:
+"01 - Step-by-Step SOP", "02 - Master Cheat Sheet", "03 - Learn & Earn Walkthrough", "04 - Historical Precedent", "05 - Mega Number Alert", "06 - Binary Choice Debate", "07 - Friction Remover", "08 - Contrarian Manifesto", "09 - Master Framework", "10 - Lead Magnet Giveaway", "11 - Founder Retrospective", "12 - Company PR & Milestones", "13 - Memes & Industry Satire", "14 - Live Recaps & AMAs", "15 - Social Proof & UGC", "16 - Daily Posts", "17 - Story Narrative"
 
-2. Format MUST be strictly chosen from: Short, Thread, Article, Video.
-
-3. HookArchetype MUST be strictly chosen using this 8-Step Decision Tree (FORBIDDEN to invent new terms):
-   - Step 1: Offers a free downloadable tool, template, PDF, or lead magnet? ➔ ResourceGiveaway
-   - Step 2: Exposes a specific flaw/risk/pain point AND presents a step-by-step fix? ➔ ProblemSolution
-   - Step 3: Calls out a common mistake/misconception ("99% do this wrong") AND provides correct method? ➔ MistakeCorrection
-   - Step 4: Teaches a structured system, framework, or operational methodology from scratch? ➔ HowToPlaybook
-   - Step 5: Analyzes a specific historical benchmark, past event, or quantitative case study? ➔ HistoricalCaseStudy
-   - Step 6: Challenges popular consensus or presents a counter-intuitive market reality? ➔ ContrarianInsight
-   - Step 7: Asks a spicy binary question, poll, or polarized topic to drive comments? ➔ BinaryDebate
-   - Step 8: Default fallback (Shares a personal journey, build-in-public update, or brand culture check-in) ➔ StoryNarrative
-
-4. ConversionDriver MUST be strictly chosen from: AppDownload, SponsorSignup, BookmarkSave, NewsletterOptin, ReplyFarming, RetweetIdentity, ProfileVisit.
-
-Example valid style_names:
-- "ClientAds_Thread_ProblemSolution_AppDownload"
-- "HighUtility_Short_MistakeCorrection_BookmarkSave"
-- "ViralReach_Article_HistoricalCaseStudy_RetweetIdentity"
-- "OwnedLeadGen_Short_ResourceGiveaway_NewsletterOptin"
-- "DebateEngagement_Short_BinaryDebate_ReplyFarming"
-- "BrandIdentity_Short_StoryNarrative_ProfileVisit"
-
-PART 4 BLUEPRINT REQUIREMENTS:
-Part 4 MUST follow the Dynamic & Adaptive Blueprint format. Tag every structural slot explicitly as [Mandatory], [Adaptive], or [Optional] with clear evaluation guidance so the wireframe remains versatile and avoids AI slop.
-
-STRICT UNBIASED PART 4 BLUEPRINT RULE:
-- Part 4 MUST be 100% topic-agnostic and generalized.
-- Parenthetical examples (e.g. ...) inside Part 4 MUST use generic structural slots (e.g., [Primary System/Asset], [Key Operational Task], [Resource A], [Keyword]), NEVER specific niche terms from the source post (do NOT use terms like "Claude", "AI agents", "Crypto", or specific job titles inside Part 4).
-- Niche-specific source post details belong ONLY in Parts 1–3 and the Example Implementation section!
-
-STRICTLY FORBIDDEN: Do NOT use generic terms like "GenericWireframe" or "ReachYield". Output frontmatter at the top as: style_name: "...".`;
+Note for narrative_flow_summary: Use clean, natural, Title-Case human copywriting phrases (2–4 words per segment, separated by ' → '). Example: "Skill reward promise → Interactive feature walkthrough → Incentive referral link".`;
 
   const userPrompt = `Target Social Media Content to Dissect (${formatType}):
 ${cleanPayload}
 
 Platform: ${platform.toUpperCase()}
 
-Please dissect this content thoroughly and generate the complete 4-Part Wireframe Schema for saving into the Post Style Bank.`;
+Please dissect this content thoroughly and generate the complete Wireframe Schema including all parts (Part 1 Matrix, Part 2b Indonesian Applied Output, Part 3 Blueprint).`;
 
   let styleMarkdown = '';
   try {
-    const rawRes = await callGemini(userPrompt, systemInstruction, false);
-    styleMarkdown = rawRes.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    console.log(`🧠 [Lulua] DeepSeek V4 Pro dissecting full wireframe schema...`);
+    const rawRes = await callDeepSeek(userPrompt, systemInstruction, 'deepseek-v4-pro');
+    try {
+      const parsed = typeof rawRes === 'string' ? JSON.parse(rawRes) : rawRes;
+      styleMarkdown = parsed.choices?.[0]?.message?.content || parsed.text || rawRes || '';
+    } catch (e) {
+      styleMarkdown = typeof rawRes === 'string' ? rawRes : '';
+    }
   } catch (err) {
-    console.warn(`⚠️ Gemini call error during ${formatType} dissection:`, err.message);
+    console.warn(`⚠️ DeepSeek call error during ${formatType} dissection:`, err.message);
     const lines = cleanPayload.split('\n').filter(l => l.trim().length > 0);
     const firstLine = lines[0] || cleanPayload;
 
     const fallbackPrefix = formatType === 'long_form_article' ? 'Article' : 'Short';
     styleMarkdown = `---
+category: "01 - Step-by-Step SOP"
 style_name: "HighUtility_${fallbackPrefix}_ContentStructure_BookmarkSave"
-platform: "${platform}"
----
+authority_persona: "Tool Mechanic"
+funnel_stage: "TOFU"
+target_metric: "Bookmarks_and_Saves"
+elasticity: "dynamic (3 to 15 posts)"
+supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "linkedin"]
+narrative_flow_summary: "Time-saved promise → 3 to 5 setup steps → Tool link CTA"
+${postUrl ? `source_url: "${postUrl}"\n` : ''}---
 
-# 📐 Post Style Wireframe: ${formatType}
+# 🔬 Dissected Style Wireframe: ${formatType}
 
-## Part 1: Metadata & Ratio Trigger
-- **Target Metric:** High Utility & Retention
+## 🔬 Part 1: Post-by-Post Dissection Matrix (Source Analysis)
 
-## Part 2: Psychological Lever
-- **Emotional Driver:** High Utility & Authority
+| Post # | Structural Arc Role | Core Message Payload | Closing Bridge Line | Psychological Trigger | Topic-Agnostic Wireframe Variable |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Post 1** | **Hook Arc** | "${firstLine.slice(0, 80)}" | *Bridge line* | Curiosity | [Slot: Hook] |
 
-## Part 3: Micro-Rhythm & Pacing Rules
-- **Pacing:** Structured multi-paragraph cadence with whitespace pauses.
+## 📜 Part 2a: Reference Source Content (Original Text)
 
-## Part 4: Plug-and-Play Wireframe Blueprint
-\`\`\`markdown
-[Hook: Opening Hook Pattern]: "${firstLine.slice(0, 100)}"
-[Body: Structural Framework]: [Insert 2-3 supporting evidence points]
-[CTA: Direct Response Action]: [Insert clear call to action]
-\`\`\`
+${cleanPayload}
+
+## 📜 Part 2b: Cross-Domain Applied Output
+
+## 🤖 Part 3: Master Universal Wireframe Blueprint (Elastic Narrative Phases)
+
+Phase 1: Hook Arc
+Phase 2: Core Execution
+Phase 3: Conversion CTA
 `;
+  }
+
+  // Inject Part 2a directly with the exact source text (no AI involved)
+  let part2aBlock = `## 📜 Part 2a: Reference Source Content\n\n`;
+  if (postUrl) {
+    part2aBlock += `> 🔗 **Source Reference**: [${postUrl}](${postUrl})\n\n`;
+  }
+  part2aBlock += cleanPayload;
+
+  if (styleMarkdown.includes('## 📜 Part 2b:')) {
+    styleMarkdown = styleMarkdown.replace('## 📜 Part 2b:', part2aBlock + '\n\n## 📜 Part 2b:');
+  } else if (styleMarkdown.includes('## Part 2b:')) {
+    styleMarkdown = styleMarkdown.replace('## Part 2b:', part2aBlock + '\n\n## Part 2b:');
+  } else if (styleMarkdown.includes('## 🤖 Part 3:') || styleMarkdown.includes('## Part 3:')) {
+    styleMarkdown = styleMarkdown.replace(/(## 🤖 Part 3:|## Part 3:)/i, part2aBlock + '\n\n## 📜 Part 2b: Cross-Domain Applied Output\n\n$1');
+  }
+
+  // Inject source_url into frontmatter (dedup relies on it, no AI hallucination risk)
+  if (postUrl && !styleMarkdown.includes('source_url:')) {
+    styleMarkdown = styleMarkdown.replace(
+      /(^---\n[\s\S]*?)(\n---)/,
+      `$1\nsource_url: "${postUrl}"$2`
+    );
   }
 
   const match = styleMarkdown.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
@@ -157,27 +206,29 @@ platform: "${platform}"
     counter++;
   }
 
-  // Strip existing frontmatter from styleMarkdown to rebuild pristine frontmatter at line 1
-  let bodyMarkdown = styleMarkdown.replace(/^---[\s\S]*?---\n*/, '').trim();
+  styleMarkdown = styleMarkdown.replace(/style_name:\s*["']?[a-zA-Z0-9_-]+["']?/, `style_name: "${styleName}"`);
 
-  let frontmatterBlock = `---\nstyle_name: "${styleName}"\n`;
-  if (extraFrontmatterObj.format) frontmatterBlock += `format: "${extraFrontmatterObj.format}"\n`;
-  if (extraFrontmatterObj.attached_article) frontmatterBlock += `attached_article: "${extraFrontmatterObj.attached_article}"\n`;
-  if (extraFrontmatterObj.promo_post) frontmatterBlock += `promo_post: "${extraFrontmatterObj.promo_post}"\n`;
-  frontmatterBlock += `---\n\n`;
+  // Build final structured document block
+  let frontmatterBlock = '';
+  let bodyMarkdown = styleMarkdown;
 
-  let sourceReferenceBlock = `## 📌 Source Reference & Original Content\n`;
-  if (postUrl) {
-    sourceReferenceBlock += `- 🔗 **Direct Link:** [Inspect Content on X](${postUrl})\n\n`;
+  const fmMatch = styleMarkdown.match(/^---\n([\s\S]*?)\n---/);
+  if (fmMatch) {
+    frontmatterBlock = `---\n${fmMatch[1].trim()}\n---\n\n`;
+    bodyMarkdown = styleMarkdown.slice(fmMatch[0].length).trim();
+  } else {
+    frontmatterBlock = `---\ncategory: "01 - Step-by-Step SOP"\nstyle_name: "${styleName}"\nauthority_persona: "Tool Mechanic"\nfunnel_stage: "TOFU"\ntarget_metric: "Bookmarks_and_Saves"\nelasticity: "dynamic (3 to 15 posts)"\nsupported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "linkedin"]\nnarrative_flow_summary: "Time-saved promise → 3 to 5 setup steps → Tool link CTA"${postUrl ? `\nsource_url: "${postUrl}"` : ''}\n---\n\n`;
   }
-  sourceReferenceBlock += `### 📜 Complete Original Text:\n> ${payloadText.replace(/\n/g, '\n> ')}\n\n---\n\n`;
 
-  const finalMarkdown = frontmatterBlock + sourceReferenceBlock + bodyMarkdown;
+  const finalMarkdown = frontmatterBlock + bodyMarkdown;
   return { styleName, finalMarkdown };
 }
 
 export async function runPostDissection(inputUrlOrText, platform = 'x') {
-  console.log(`📐 [Lulua] Dissecting Post Wireframe for Style Bank...`);
+  debugLog('=== DISSECTION START ===');
+  debugLog(`Input: ${inputUrlOrText.slice(0, 200)}`);
+
+  console.log(`📐 [Lulua] Dissecting Post Wireframe for Style Bank (Hybrid Gemini + DeepSeek)...`);
 
   if (!fs.existsSync(STYLE_BANK_DIR)) {
     fs.mkdirSync(STYLE_BANK_DIR, { recursive: true });
@@ -186,15 +237,16 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
   const postUrl = inputUrlOrText.match(/https?:\/\/[^\s]+/)?.[0] || null;
   const statusMatch = inputUrlOrText.match(/status\/(\d+)/i);
   const targetStatusId = statusMatch ? statusMatch[1] : null;
+  debugLog(`postUrl: ${postUrl || 'none'}, statusId: ${targetStatusId || 'none'}`);
 
   // DUPLICATE PRE-CHECK GATE: Scan Source Reference header of existing Style Bank files
   if (fs.existsSync(STYLE_BANK_DIR) && (postUrl || targetStatusId)) {
     const existingFiles = fs.readdirSync(STYLE_BANK_DIR).filter(f => f.endsWith('.md') && f !== '00-Style-Bank-MOC.md');
+    debugLog(`Duplicate check: scanning ${existingFiles.length} existing files...`);
     for (const file of existingFiles) {
       const filePath = path.join(STYLE_BANK_DIR, file);
       const fileContent = fs.readFileSync(filePath, 'utf8');
       
-      // Extract the ## 📌 Source Reference & Original Content section (header before Part 1 / Metadata)
       const sourceHeaderSection = fileContent.split(/###?\s*Part\s*1/i)[0] || fileContent.slice(0, 800);
       
       const isUrlMatch = postUrl && sourceHeaderSection.includes(postUrl);
@@ -203,6 +255,8 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
       if (isUrlMatch || isStatusMatch) {
         const styleNameMatch = fileContent.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
         const styleName = styleNameMatch ? styleNameMatch[1] : file.replace(/^style-|\.md$/g, '');
+        debugLog(`DUPLICATE FOUND: ${file}`);
+        debugLog('=== DISSECTION END (duplicate, discarded) ===');
         console.log(`⚡ [Lulua Dissector] Post URL already dissected in Style Bank: ${file}`);
         return {
           ok: true,
@@ -213,76 +267,63 @@ export async function runPostDissection(inputUrlOrText, platform = 'x') {
         };
       }
     }
+    debugLog('Duplicate check: no match found');
+  } else {
+    debugLog('Duplicate check: skipped (no URL/statusId or dir missing)');
   }
 
   // 1. Resolve URL into literal post, thread, and X Article text
-  const fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
+  const textWithoutUrls = inputUrlOrText.replace(/https?:\/\/[^\s]+/g, '').trim();
+  const isPastedContent = textWithoutUrls.length > 200;
 
-  // STRICT VALIDATION GATE: Halt immediately if fetch failed, text is empty, or text is a raw URL string
-  const payloadToDissect = (fetchRes && fetchRes.text) ? fetchRes.text.trim() : '';
-  const isRawUrlOnly = /^(?:https?:\/\/|\/)?(?:www\.)?(?:x|twitter|instagram|tiktok|youtube|youtu\.be)\.com\/[^\s]+$/i.test(payloadToDissect) || (payloadToDissect.length < 100 && payloadToDissect.includes('status/'));
-
-  if (!fetchRes.ok || !payloadToDissect || payloadToDissect.length < 40 || isRawUrlOnly) {
-    const errorDetail = fetchRes.error || (isRawUrlOnly ? 'Scraped text is only a URL' : 'Extracted content is too short or empty');
-    console.error(`❌ [Lulua Dissector] Aborting dissection: ${errorDetail}`);
-    return {
-      ok: false,
-      error: `Scraping failed: ${errorDetail}. Dissection aborted to prevent hallucination.`
-    };
+  let fetchRes;
+  if (isPastedContent) {
+    debugLog('Pasted content detected, skipping CDP fetch');
+    fetchRes = { ok: true, isUrl: false, text: textWithoutUrls, articleUrl: null, isDual: false, hasArticle: false };
+  } else {
+    debugLog('Fetching post content...');
+    fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform);
   }
+  debugLog(`Fetch result: isDual=${fetchRes.isDual}, hasArticle=${fetchRes.hasArticle}, textLen=${fetchRes.text?.length || 0}`);
 
-  // 2. Dual Generation if an attached X Article is detected
-  if (fetchRes.hasArticle && fetchRes.articleText) {
-    console.log(`✨ [Lulua] Dual Content Detected (Launch Post + Attached X Article). Generating paired wireframes...`);
-
-    // First generate article wireframe to derive style name
-    const articleRes = await dissectSinglePayload(fetchRes.articleText, 'long_form_article', postUrl, platform);
-
-    // Then generate post wireframe with attached_article cross-link
-    const postRes = await dissectSinglePayload(fetchRes.postText || fetchRes.text, 'short_form_launch', postUrl, platform, {
-      format: 'short_form_launch',
-      attached_article: `[[style-${articleRes.styleName}]]`
-    });
-
-    // Re-build article wireframe with promo_post cross-link
-    const articleResFinal = await dissectSinglePayload(fetchRes.articleText, 'long_form_article', postUrl, platform, {
-      format: 'long_form_article',
-      promo_post: `[[style-${postRes.styleName}]]`
-    });
-
-    const postFile = path.join(STYLE_BANK_DIR, `style-${postRes.styleName}.md`);
-    const articleFile = path.join(STYLE_BANK_DIR, `style-${articleRes.styleName}.md`);
-
-    fs.writeFileSync(postFile, postRes.finalMarkdown);
-    fs.writeFileSync(articleFile, articleResFinal.finalMarkdown);
-
-    try {
-      const { updateStyleBankMOC } = await import('./lulua_moc_manager.mjs');
-      updateStyleBankMOC();
-    } catch (e) {}
-
-    console.log(`✅ [Lulua] Dual dissection complete! Saved paired wireframes:\n  - Post: style-${postRes.styleName}.md\n  - Article: style-${articleRes.styleName}.md`);
-    return { ok: true, isDual: true, postFile, articleFile, postStyle: postRes.styleName, articleStyle: articleRes.styleName };
-  }
-
-  // 3. Single Content Dissection
+  // 2. Dissect the post thread (X Articles are dissected separately via their own URL)
+  debugLog('SINGLE dissection route triggered');
   const singleRes = await dissectSinglePayload(fetchRes.text || inputUrlOrText, 'social_post', postUrl, platform, { format: 'social_post' });
+  debugLog(`Single dissection done: styleName=${singleRes.styleName}`);
+
+  // Inject article_url into frontmatter if the fetcher found an embedded article link
+  if (fetchRes.articleUrl) {
+    singleRes.finalMarkdown = singleRes.finalMarkdown.replace(
+      /(^---\n[\s\S]*?)(\n---)/,
+      `$1\narticle_url: "${fetchRes.articleUrl}"$2`
+    );
+  }
+
   const outputFile = path.join(STYLE_BANK_DIR, `style-${singleRes.styleName}.md`);
   fs.writeFileSync(outputFile, singleRes.finalMarkdown);
+  debugLog(`Saved: ${outputFile}`);
+
+  debugLog('Calling logNewDissection...');
+  logNewDissection(singleRes.styleName);
 
   try {
     const { updateStyleBankMOC } = await import('./lulua_moc_manager.mjs');
+    debugLog('Calling updateStyleBankMOC...');
     updateStyleBankMOC();
-  } catch (e) {}
+    debugLog('updateStyleBankMOC completed');
+  } catch (e) { debugLog(`updateStyleBankMOC ERROR: ${e.message}`); }
 
-  console.log(`✅ [Lulua] Post dissection complete. Saved to Style Bank: style-${singleRes.styleName}.md`);
+  debugLog('=== DISSECTION END (single, success) ===');
+  console.log(`✅ [Lulua Hybrid] Post dissection complete. Saved to Style Bank: style-${singleRes.styleName}.md`);
   return { ok: true, isDual: false, styleName: singleRes.styleName, file: outputFile, filename: `style-${singleRes.styleName}.md` };
 }
 
 // CLI execution check
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const inputArg = process.argv[2] || 'https://x.com/milesdeutscher/status/2082646132157780412?s=20';
+  debugLog(`CLI execution: inputArg = ${inputArg}`);
   runPostDissection(inputArg).catch(err => {
+    debugLog(`FATAL ERROR: ${err.message}`);
     console.error('❌ Dissection execution failed:', err);
     process.exit(1);
   });
