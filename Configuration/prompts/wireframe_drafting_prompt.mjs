@@ -97,18 +97,15 @@ CRITICAL EXECUTION DIRECTIVES:${directives}
 
 export function getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, researchBrief, lang, format = '', singleDraft = false, editorFeedback = '') {
   const bpArray = Array.isArray(wireframeBlueprints) ? wireframeBlueprints : (wireframeBlueprints ? [wireframeBlueprints] : []);
-  const blueprintsStr = bpArray.map((bp, index) => `
+  const blueprintsStr = bpArray.map((bp, index) => {
+    const tpl = bp.template_name || ('Template ' + (index + 1));
+    return `
 =========================================
-BLUEPRINT FOR DRAFT ${index + 1}: ${bp.template_name || \`Template \${index + 1}\`}
+BLUEPRINT FOR DRAFT ${index + 1}: ${tpl}
 Part 3 Blueprint Schema:
 ${bp.blueprint_text || bp}
-`).join('\n');
-  const blueprintsStr = bpArray.map((bp, index) => `
-=========================================
-BLUEPRINT FOR DRAFT ${index + 1}: ${bp.template_name || `Template ${index + 1}`}
-Part 3 Blueprint Schema:
-${bp.blueprint_text || bp}
-`).join('\n');
+`;
+  }).join('\n');
 
   const isArticle = format === 'article';
   const isSinglePost = format === 'single_post';
@@ -240,25 +237,37 @@ Your job is to research a topic and present a clear, scannable proposal for how 
 
 VOICE: Smart, analytical, direct. Write like a peer briefing their boss — professional but conversational. Use "Boss" as your opening salutation.
 
+LANGUAGE RULE:
+- Write ALL meta-commentary in ENGLISH: the opening line, style recommendation reasoning, design intent labels ("hook:", "body:", "close:"), section labels, and the top 10 facts explanation.
+- Write ALL actual post content in the TARGET LANGUAGE: hook example, body example, close example, and the quick-recap quotes. These are the actual words that will be published, so they must match the post's language.
+
 FORMAT RULES:
 - Use bullet points ( - ) for ALL lists. Put exactly ONE empty line between every bullet point, paragraph, and section.
 - Every sentence MUST be its own bullet point. No multi-sentence bullets.
 - Keep each bullet to 1 short sentence or 1 short phrase. Think "fast scan on mobile."
 - No nested bullets. Flat list only.
 
-PROPOSAL STRUCTURE:
-1. Opening: "Boss, I've researched [topic]." One line.
-2. Style recommendation: Style name, then a section "Why I propose this style:" followed by bullets explaining reasoning. Include alternatives considered and why rejected.
-3. Proposed post flow: Numbered posts (Post 1:, Post 2:, etc.). For EACH post, provide:
-   - hook: [design intent — what this post's hook achieves]
-   - hook example: "[concrete example of the hook text]"
-   - body: [design intent — what the body covers]
-   - body example: "[concrete example of body text]"
-   - close: [design intent — how this post bridges to the next]
-   - close example: "[concrete example of the bridge/close text]"
+PROPOSAL STRUCTURE (in this exact order):
+1. Opening: "Boss, I've researched [topic]." One line, in English.
+2. Style recommendation: Style name, then a section "Why I propose this style:" followed by bullets explaining reasoning in English.
+3. Thread composition: Segment the proposed post flow into logical segments (e.g. "Segment A — Hook (1 post)", "Segment B — Core value (5 posts)"). For each segment, state:
+   - The segment name and how many posts it covers
+   - Role: [what this segment achieves]
+   - Emphasis: [what weight/attention it receives and why]
+   Then close with a "Why this split:" line justifying the weighting in one short bullet.
+4. Quick recap: A compact summary of the ENTIRE proposed post flow. Each post gets 2 lines:
+   Line 1: "Post N: [same title used in the detailed flow below]" (in English)
+   Line 2: hook "[actual hook text]" → body "[actual body text]" → close "[actual close text]" (in the TARGET LANGUAGE)
+   Put one empty line between each post. This section is a fast-scan executive summary.
+5. Top 10 interesting facts: Numbered list of verified facts from research. Each fact on its own bullet line, written in English.
+6. Proposed post flow (detailed): Numbered posts (Post 1:, Post 2:, etc.). For EACH post, provide:
+   - hook: [design intent — what this post's hook achieves] (English)
+   - hook example: "[concrete example of the hook text]" (TARGET LANGUAGE)
+   - body: [design intent — what the body covers] (English)
+   - body example: "[concrete example of body text]" (TARGET LANGUAGE)
+   - close: [design intent — how this post bridges to the next] (English)
+   - close example: "[concrete example of the bridge/close text]" (TARGET LANGUAGE)
    Put one empty line between every element (hook, hook example, body, body example, close, close example). Put one empty line between posts.
-4. Quick recap: Compact table of posts (Post 1: hook→body→close, Post 2: hook→body→close, etc.). One line per post.
-5. Top 10 interesting facts: Numbered list of verified facts from research with their source data. Each fact on its own bullet line.
 
 CRITICAL: Every element described above MUST be on its own line with an empty line after it. The editor scans on mobile. No dense paragraphs.
 `;
@@ -279,7 +288,9 @@ ${researchBrief}
 
 TARGET LANGUAGE: ${lang === 'en' ? 'ENGLISH' : 'INDONESIAN'}
 
-TASK: Write a complete Writer's Proposal for your Editor-in-Chief. Propose the best style with reasoning. Propose the detailed post-by-post flow with design intent AND concrete examples for every component. List the top 10 most interesting facts from the research. Format everything with bullet points and empty line separators.
+IMPORTANT: Write your meta-commentary (opening, style reasoning, design intents, section labels) in ENGLISH. Write only the actual post content examples (hook example, body example, close example, quick-recap quotes) in the TARGET LANGUAGE above.
+
+TASK: Write a complete Writer's Proposal for your Editor-in-Chief. Propose the best style with reasoning. Propose the thread composition (segments with roles and emphasis). Propose the detailed post-by-post flow with design intent AND concrete examples for every component. List the top 10 most interesting facts from the research. Format everything with bullet points and empty line separators.
 `;
 }
 

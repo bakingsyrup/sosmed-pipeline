@@ -1,0 +1,74 @@
+[
+  {
+    "handle": "cipherr_exe",
+    "tweet_id": "2087132167889383651",
+    "url": "https://x.com/cipherr_exe/status/2087132167889383651",
+    "text": "THIS GUY MANAGED TO SCORE OVER 16 MILLION JUST FROM AI VIDEOS ALONE BRO\n\nYesterday when I made that article about AI Video Generation, maybe a lot of y'all were still skeptical, like, is it really legit that you can pull in two-digit figures in a month just from generating AI",
+    "media": {
+      "type": "text_only",
+      "label": "📝 Post Text",
+      "has_media": false
+    },
+    "timestamp": "2026-08-11T11:01:00.000Z",
+    "metrics": {
+      "views": 2967,
+      "likes": 93,
+      "bookmarks": 0,
+      "replies": 9,
+      "retweets": 13,
+      "followers": 9984,
+      "minViewsFloor": 1997
+    },
+    "ratios": {
+      "likeRatio": 0.0313,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.003,
+      "retweetRatio": 0.0044,
+      "viewYield": 0.3,
+      "yieldVsMedian": 3.37
+    },
+    "triggers": {
+      "highYield": true,
+      "highUtility": false,
+      "highDebate": false,
+      "highBroadcast": false,
+      "highAppreciation": true
+    }
+  },
+  {
+    "handle": "Coinvo",
+    "tweet_id": "2087246416263446904",
+    "url": "https://x.com/Coinvo/status/2087246416263446904",
+    "text": "BREAKING: A \n@MetaWin\n player just won $287,000 and withdrew the full amount instantly.\n\nEveryone who deposits on \nhttp://\nmetawin.com qualifies for their $1M August drop!\n\nComment your username, we’ve got another $250 for one of you as well",
+    "media": {
+      "type": "article_link",
+      "label": "📰 External Link / X Card Attached",
+      "has_media": true
+    },
+    "timestamp": "2026-08-11T18:34:59.000Z",
+    "metrics": {
+      "views": 51272,
+      "likes": 867,
+      "bookmarks": 0,
+      "replies": 716,
+      "retweets": 406,
+      "followers": 350500,
+      "minViewsFloor": 35050
+    },
+    "ratios": {
+      "likeRatio": 0.0169,
+      "bookmarkRatio": 0,
+      "replyRatio": 0.014,
+      "retweetRatio": 0.0079,
+      "viewYield": 0.15,
+      "yieldVsMedian": 1.75
+    },
+    "triggers": {
+      "highYield": false,
+      "highUtility": false,
+      "highDebate": true,
+      "highBroadcast": true,
+      "highAppreciation": false
+    }
+  }
+]

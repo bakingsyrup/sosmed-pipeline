@@ -687,7 +687,10 @@ async function processStrategicPost(filename, styleGuideContent) {
     const { frontmatter, body } = parseMarkdown(rawContent);
     const lang = (frontmatter.lang || 'id').toLowerCase();
     const coreTopic = frontmatter.core_topic || '';
-    const contextSnippet = frontmatter.context_snippet || body.trim().slice(0, 500);
+    const contextSnippet = frontmatter.context_snippet || (() => {
+      const ctxMatch = body.match(/## 📌 Context & Key Points\n([\s\S]*?)(?=\n## |$)/);
+      return ctxMatch ? ctxMatch[1].trim().replace(/<!--[\s\S]*?-->/g, '').trim() : body.trim();
+    })();
     const sourceUrl = frontmatter.source_url || '';
     const funnelStage = frontmatter.funnel_stage || 'TOFU';
     const persona = frontmatter.persona || '';
@@ -1009,16 +1012,23 @@ If any item's premise is fundamentally wrong (FALSE_PREMISE), explain the correc
     // === Generate Writer's Proposal (for ready/revise) ===
     console.log(`[Step 5/5] Generating Writer's Proposal...`);
     const proposalSystem = getWriterProposalSystemInstruction();
-    const proposalPrompt = getWriterProposalPromptStr(inputPayload, selectedStyles, plannerSkeleton, finalResearchBrief, lang);
+    const proposalPrompt = getWriterProposalPromptStr(inputPayload, selectedStyles, plannerSkeleton, compressedResearchBrief, lang);
     const proposalResult = await callDraftingModel(proposalPrompt, proposalSystem, draftModel);
     const proposalText = proposalResult || '';
+
+    if (!proposalText || proposalText.trim().length < 50) {
+      console.error('[Strategic Post] Proposal generation returned empty content. Restoring file for retry.');
+      fs.renameSync(researchingPath, inboxPath);
+      writeStatus('ERROR', 'Proposal generation returned empty content.');
+      return;
+    }
 
     // Cooldown between consecutive DeepSeek calls
     if (draftModel.toLowerCase().includes('deepseek')) {
       await new Promise(r => setTimeout(r, 10000));
     }
 
-    // Write proposal back into template with awaiting_feedback status
+    // Write proposal: fresh input → named file + regenerate blank template; revise → same file
     const selectedStylesComma = selectedStyles.slice(0, 4).join(', ');
     const updatedContent = `---
 type: Strategic Post
@@ -1057,14 +1067,62 @@ ${proposalText}
 <!-- Write your feedback here. Then flip status to "approved" to generate drafts, or "revise" to request a new proposal. -->
 `;
 
-    fs.writeFileSync(researchingPath, updatedContent, 'utf8');
+    const isFreshInput = path.basename(filename) === '_NEW_STRATEGIC_INPUT.md';
+    const strategicInputsDir = path.join(paths.inbox, '00-Strategic-Inputs');
 
-    // Move from researching back to inbox so user can review
-    const inboxTemplatePath = path.join(paths.inbox, '00-Strategic-Inputs', '_NEW_STRATEGIC_INPUT.md');
-    if (fs.existsSync(researchingPath) && !fs.existsSync(inboxTemplatePath)) {
-      fs.renameSync(researchingPath, inboxTemplatePath);
+    if (isFreshInput) {
+      // Save proposal as a new file named by core_topic
+      const topicSlug = coreTopic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
+      const namedFilePath = path.join(strategicInputsDir, `${topicSlug}.md`);
+      fs.writeFileSync(namedFilePath, updatedContent, 'utf8');
+
+      // Regenerate blank template
+      const blankTemplate = `---
+type: Strategic Post
+status: draft
+core_topic: ""
+context_snippet: ""
+source_url: ""
+target_metric: ""
+primary_lever: ""
+funnel_stage: ""
+format: ""
+post_count: ""
+lang: "id"
+persona: ""
+custom_styles: ""
+---
+
+# Strategic Post Briefing
+
+## 🎯 Core Topic & Angle
+<!-- What is the post about? What narrative angle? -->
+
+## 📌 Context & Key Points
+- Audience: [who is reading this, their knowledge level]
+- Objective: [what they should be able to do or feel after reading]
+- Emphasis: [what deserves the most weight — the core value]
+- De-emphasis: [what to keep brief, and roughly how brief]
+- Risk handling: brief, near the end, duty-of-care not fear
+- No shilling: present options honestly with pros AND cons
+
+## 🎨 Style Preferences (Optional)
+<!-- Leave empty for auto-selection. Or specify up to 4 style filenames from style-index.md -->
+`;
+      fs.writeFileSync(researchingPath, blankTemplate, 'utf8');
+      if (fs.existsSync(researchingPath) && !fs.existsSync(inboxPath)) {
+        fs.renameSync(researchingPath, inboxPath);
+      }
+      console.log(`[Strategic Post] Proposal saved as: ${topicSlug}.md — blank template regenerated.`);
+    } else {
+      // Revise: overwrite the same named file
+      fs.writeFileSync(researchingPath, updatedContent, 'utf8');
+      if (fs.existsSync(researchingPath) && !fs.existsSync(inboxPath)) {
+        fs.renameSync(researchingPath, inboxPath);
+      }
+      console.log(`[Strategic Post] Revised proposal saved back to: ${filename}. Status: awaiting_feedback.`);
     }
-    console.log(`[Strategic Post] Writer's Proposal ready in 01-Inbox/00-Strategic-Inputs/. Status: awaiting_feedback.`);
+
     writeStatus('OK');
     return; // Stop here — drafter runs after user approves
 
@@ -1150,9 +1208,9 @@ async function processStrategicPostDraft(filename, styleGuideContent) {
       fs.mkdirSync(strategicDraftsDir, { recursive: true });
     }
 
-    console.log(`[Step 1/2] Loading ${selectedStyles.length} wireframe blueprints...`);
+    console.log(`[Step 1/2] Loading 1 wireframe blueprint...`);
     const wireframeBlueprints = [];
-    for (const styleFile of selectedStyles.slice(0, 4)) {
+    for (const styleFile of selectedStyles.slice(0, 1)) {
       const filePath = path.join(STYLE_BANK_DIR, `${styleFile}.md`);
       if (!fs.existsSync(filePath)) {
         console.warn(`  Style file not found: ${styleFile}.md — skipping.`);
@@ -1234,40 +1292,11 @@ ${drafts}
     fs.writeFileSync(outputPath, outputFrontmatter, 'utf8');
     console.log(`[Strategic Post Draft] Saved: ${outputPath}`);
 
-    // Cleanup & regenerate template
+    // Cleanup — named file is done, just remove it. Blank template already exists separately.
     if (fs.existsSync(researchingPath)) {
       fs.unlinkSync(researchingPath);
     }
-
-    const blankTemplate = `---
-type: Strategic Post
-status: draft
-core_topic: ""
-context_snippet: ""
-source_url: ""
-target_metric: ""
-primary_lever: ""
-funnel_stage: ""
-format: ""
-post_count: ""
-lang: "id"
-persona: ""
-custom_styles: ""
----
-
-# Strategic Post Briefing
-
-## 🎯 Core Topic & Angle
-<!-- What is the post about? What narrative angle? -->
-
-## 📌 Context & Key Points
-<!-- Supporting context, data points, product links, source references -->
-
-## 🎨 Style Preferences (Optional)
-<!-- Leave empty for auto-selection. Or specify up to 4 style filenames from style-index.md -->
-`;
-    fs.writeFileSync(inboxPath, blankTemplate);
-    console.log(`[Strategic Post Draft] Re-created clean template in 01-Inbox/00-Strategic-Inputs/.`);
+    console.log(`[Strategic Post Draft] Removed processed file: ${filename}.`);
     writeStatus('OK');
 
   } catch (err) {
@@ -1828,26 +1857,49 @@ async function processInbox() {
   const styleGuideContent = fs.readFileSync(paths.styleGuide, 'utf8');
 
   // Check for Strategic Post input (Priority 1 overrides all)
-  const strategicInputPath = path.join(paths.inbox, '00-Strategic-Inputs', '_NEW_STRATEGIC_INPUT.md');
-  if (fs.existsSync(strategicInputPath)) {
-    const stratContent = fs.readFileSync(strategicInputPath, 'utf8');
-    const { frontmatter } = parseMarkdown(stratContent);
-    if (frontmatter.status === 'ready' && frontmatter.type === 'Strategic Post') {
+  const strategicInputsDir = path.join(paths.inbox, '00-Strategic-Inputs');
+  if (fs.existsSync(strategicInputsDir)) {
+    const inputFiles = fs.readdirSync(strategicInputsDir).filter(f => f.endsWith('.md'));
+
+    // 1. Fresh input (blank template) with status: ready → proposal phase
+    const freshFile = inputFiles.find(f => f === '_NEW_STRATEGIC_INPUT.md');
+    if (freshFile) {
+      const freshPath = path.join(strategicInputsDir, freshFile);
+      const freshContent = fs.readFileSync(freshPath, 'utf8');
+      const { frontmatter } = parseMarkdown(freshContent);
+      if (frontmatter.status === 'ready' && frontmatter.type === 'Strategic Post') {
+        console.log(`\n----------------------------------------`);
+        console.log(`[Strategic Post] Detected status: ready.`);
+        await processStrategicPost('00-Strategic-Inputs/_NEW_STRATEGIC_INPUT.md', styleGuideContent);
+        return;
+      }
+    }
+
+    // 2. Named files with status: approved → draft phase
+    const approvedFile = inputFiles.find(f => {
+      if (f === '_NEW_STRATEGIC_INPUT.md') return false;
+      const p = path.join(strategicInputsDir, f);
+      const { frontmatter } = parseMarkdown(fs.readFileSync(p, 'utf8'));
+      return frontmatter.status === 'approved' && frontmatter.type === 'Strategic Post';
+    });
+    if (approvedFile) {
       console.log(`\n----------------------------------------`);
-      console.log(`[Strategic Post] Detected status: ready.`);
-      await processStrategicPost('00-Strategic-Inputs/_NEW_STRATEGIC_INPUT.md', styleGuideContent);
+      console.log(`[Strategic Post] Detected status: approved (${approvedFile}).`);
+      await processStrategicPostDraft(`00-Strategic-Inputs/${approvedFile}`, styleGuideContent);
       return;
     }
-    if (frontmatter.status === 'approved' && frontmatter.type === 'Strategic Post') {
+
+    // 3. Named files with status: revise → re-proposal phase
+    const reviseFile = inputFiles.find(f => {
+      if (f === '_NEW_STRATEGIC_INPUT.md') return false;
+      const p = path.join(strategicInputsDir, f);
+      const { frontmatter } = parseMarkdown(fs.readFileSync(p, 'utf8'));
+      return frontmatter.status === 'revise' && frontmatter.type === 'Strategic Post';
+    });
+    if (reviseFile) {
       console.log(`\n----------------------------------------`);
-      console.log(`[Strategic Post] Detected status: approved.`);
-      await processStrategicPostDraft('00-Strategic-Inputs/_NEW_STRATEGIC_INPUT.md', styleGuideContent);
-      return;
-    }
-    if (frontmatter.status === 'revise' && frontmatter.type === 'Strategic Post') {
-      console.log(`\n----------------------------------------`);
-      console.log(`[Strategic Post] Detected status: revise.`);
-      await processStrategicPost('00-Strategic-Inputs/_NEW_STRATEGIC_INPUT.md', styleGuideContent);
+      console.log(`[Strategic Post] Detected status: revise (${reviseFile}).`);
+      await processStrategicPost(`00-Strategic-Inputs/${reviseFile}`, styleGuideContent);
       return;
     }
   }
