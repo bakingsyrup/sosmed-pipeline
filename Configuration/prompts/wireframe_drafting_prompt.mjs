@@ -43,7 +43,7 @@ export function getPlannerPromptStr(inputPayload, wireframeBlueprint, falsePremi
 
   promptStr += `\nSELECTED STYLE BANK WIREFRAME BLUEPRINT (PART 3 ELASTIC PHASES):\n`;
   promptStr += `${wireframeBlueprint.blueprint_text || wireframeBlueprint}\n\n`;
-  promptStr += `TASK: Generate the Thread Skeleton Plan and Targeted Research Shopping List JSON.`;
+  promptStr += `TASK: Generate the Thread Skeleton Plan and Targeted Research Shopping List JSON. When context snippet instructions (hook angle, closing tone, CTA, post count) conflict with the wireframe blueprint's default phases, the context snippet ALWAYS wins.`;
 
   return promptStr;
 }
