@@ -217,7 +217,7 @@ When an input topic is selected, it is converted into a standardized **Input Pay
 
 ## 🚀 7. Actionable Build Roadmap for Input Pipeline
 
-1. **Phase 5.1 (Wireframe Drafting Engine)**: ✅ Complete. `draft_agent.mjs` + `wireframe_drafting_prompt.mjs` with 5-step Planner→Researcher→Drafter ping-pong pipeline. Monitors `_NEW_STRATEGIC_INPUT.md`, auto-selects 4 wireframes from `style-index.md`.
+1. **Phase 5.1 (Wireframe Drafting Engine)**: ✅ Complete. `draft_agent.mjs` + `wireframe_drafting_prompt.mjs` with 5-step Planner→Researcher→Drafter ping-pong pipeline. Monitors `_NEW_STRATEGIC_INPUT.md` in `x-pipeline/01-Inbox/00-Strategic-Inputs/`, auto-selects 4 wireframes from `style-index.md`. **Only the X (Twitter) pipeline is wired.** Templates at `ig-pipeline/`, `tiktok-pipeline/`, `linkedin-pipeline/`, and `yt-pipeline/` exist but are not watched — future work.
 2. **Priority 1 Handler**: Implement `01-Inbox/` note watcher frontmatter parser (`style_wireframe` selector).
 3. **Priority 3 Handler**: Connect `iroi_command_center.md` Module 3 revenue rotation schedule into automated prompt generator.
 4. **Priority 2 Handler**: Build Lulua outlier topic extraction parser on top of Beidou daily snapshots.

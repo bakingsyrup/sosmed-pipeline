@@ -6,11 +6,14 @@ kanban-plugin: board
 
 ## 01 - Step-by-Step SOP
 
-- [ ] [[style-Format1_HighUtility_StepByStep_v1|Time-saved promise → 3 to 5 setup steps → Tool link CTA. X.Thread]]
+- [ ] [[style-HighUtility_Article_CheatCodeHook_LeadMagnetCTA|Cheat Code Promise → Step-by-Step AI Setup → Free Guide Lead Magnet. X.Thread]]
 - [ ] [[style-HighUtility_Short_ContentStructure_BookmarkSave|Time-saved promise → 3 to 5 setup steps → Tool link CTA. X.Thread]]
+- [ ] [[style-HighUtility_Thread_StepByStep_v1|Time-saved promise → 3 to 5 setup steps → Tool link CTA. X.Thread]]
+- [ ] [[style-SOP_Article_CredibilityHook_LeadMagnet|Personal Profit Credibility → 4-Step SOP Tutorial → Incentivized Lead Magnet. X.Thread]]
 - [ ] [[style-StepByStepSOP_Thread_MedicalMystery_DiagnosticBreakdown_PreventionCTA|Shocking Medical Anomaly → Differential Diagnosis Breakdown → Clinical Takeaway CTA. X.Thread]]
+- [ ] [[style-StepbyStepSOP_Article_AIAutomationBlueprint_ClonedMyselfHook_NewsletterCTA|Clone yourself claim → Five-step system walkthrough → Newsletter subscription. X.Thread]]
 - [ ] [[style-Utility_Thread_AuthorityHook_EducationalConversion|High Stakes Promise → Step-by-Step Execution → Actionable Resource Bridge. X.Thread]]
-- [ ] [[style-Value_Dump_PromptList_Curiosity_ImmediateValue|AI Trading Superpower Promise → 10-Prompt Stack Walkthrough → Bonus & Bookmark CTA. X.Thread]]
+- [ ] [[style-Value_Dump_Thread_PromptList_Curiosity_ImmediateValue|AI Trading Superpower Promise → 10-Prompt Stack Walkthrough → Bonus & Bookmark CTA. X.Thread]]
 - [ ] [[style-Workflow_Thread_AuthorityHook_EducationalConversion|High Stakes Promise → Step-by-Step Execution → Low-Friction CTA. X.Thread]]
 
 ## 02 - Master Cheat Sheet
@@ -70,7 +73,7 @@ kanban-plugin: board
 
 ## 16 - Daily Posts
 
-- [ ] [[style-DailyPosts_MicroTrendObservation_TrendTeaser_CuriosityDriver|Trend snapshot → Paradigm shift → Implication tease. X.Thread]]
+- [ ] [[style-DailyPosts_Short_MicroTrendObservation_TrendTeaser_CuriosityDriver|Trend snapshot → Paradigm shift → Implication tease. X.Thread]]
 
 ## 17 - Story Narrative
 

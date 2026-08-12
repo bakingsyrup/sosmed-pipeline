@@ -8,7 +8,7 @@ lang: id
 selected_styles:
   - [[style-ViralReach_Thread_HistoricalCaseStudy_RetweetIdentity]]
   - [[style-DebateEngagement_Thread_BinaryChoice_v1]]
-  - [[style-DailyPosts_MicroTrendObservation_TrendTeaser_CuriosityDriver]]
+  - [[style-DailyPosts_Short_MicroTrendObservation_TrendTeaser_CuriosityDriver]]
   - [[style-BrandIdentity_Thread_ContrarianManifesto_v1]]
 generated_at: 2026-08-11T18:03:03.888Z
 ---
@@ -131,7 +131,7 @@ Tulis strategi dan alasan kamu di kolom komentar di bawah👇 (4/4)
 
 ---
 
-### Draft 3 (DailyPosts_MicroTrendObservation_TrendTeaser_CuriosityDriver)
+### Draft 3 (DailyPosts_Short_MicroTrendObservation_TrendTeaser_CuriosityDriver)
 
 Volume DEX Solana makin rapet kejar Ethereum.
 

@@ -1,4 +1,7 @@
-- [succeed] [[style-DailyPosts_MicroTrendObservation_TrendTeaser_CuriosityDriver]] — 2026-08-11 17:02:06 UTC
+- [succeed] [[style-SOP_Article_CredibilityHook_LeadMagnet]] — 2026-08-12 05:30:02 UTC
+- [succeed] [[style-HighUtility_Article_CheatCodeHook_LeadMagnetCTA]] — 2026-08-12 05:19:58 UTC
+- [succeed] [[style-StepbyStepSOP_Article_AIAutomationBlueprint_ClonedMyselfHook_NewsletterCTA]] — 2026-08-12 05:07:55 UTC
+- [succeed] [[style-DailyPosts_Short_MicroTrendObservation_TrendTeaser_CuriosityDriver]] — 2026-08-11 17:02:06 UTC
 - [succeed] [[style-CompanyPR_NewsFlash_CredibilityBooster]] — 2026-08-11 16:53:12 UTC
 - [succeed] [[style-NewsBulletin_BreakingNews_PartnerValidation]] — 2026-08-11 16:47:09 UTC
 - [succeed] [[style-MilestoneNews_ShortForm_BreakingAnnouncement_AuthoritySignal]] — 2026-08-11 16:41:13 UTC
@@ -18,7 +21,7 @@
 - [succeed] [[style-HealthAlert_Thread_CaseShocker_ChecklistCTA]] — 2026-08-11 13:59:27 UTC
 - [duplicate] [[style-HighUtility_Short_ContentStructure_BookmarkSave]] — 2026-08-11 13:54:37 UTC
 - [succeed] [[style-HighUtility_Short_ContentStructure_BookmarkSave]] — 2026-08-11 13:34:35 UTC
-- [succeed] [[style-Value_Dump_PromptList_Curiosity_ImmediateValue]] — 2026-08-11 13:02:41 UTC
+- [succeed] [[style-Value_Dump_Thread_PromptList_Curiosity_ImmediateValue]] — 2026-08-11 13:02:41 UTC
 - [succeed] [[style-Trading_Prompts_PersonalAuthority_LeadMagnet]] — 2026-08-11 12:50:47 UTC
 - [succeed] [[style-Utility_Thread_BenefitPromise_DirectAccess]] — 2026-08-11 12:36:46 UTC
 - [succeed] [[style-Tech_Thread_UtilityHook_LeadMagnet]] — 2026-08-11 12:28:53 UTC

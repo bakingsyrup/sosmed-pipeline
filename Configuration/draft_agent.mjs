@@ -684,6 +684,8 @@ async function processStrategicPost(filename, styleGuideContent) {
     const funnelStage = frontmatter.funnel_stage || 'TOFU';
     const persona = frontmatter.persona || '';
     const customStyles = frontmatter.custom_styles || '';
+    const postFormat = frontmatter.format || '';
+    const targetPostCount = parseInt(frontmatter.post_count, 10) || null;
 
     if (!coreTopic) {
       console.error('[Strategic Post] Missing core_topic in frontmatter. Aborting.');
@@ -712,6 +714,22 @@ async function processStrategicPost(filename, styleGuideContent) {
         ? fs.readFileSync(STYLE_INDEX_PATH, 'utf8')
         : 'No style index available.';
 
+      // Filter style index by format if specified
+      let filteredIndexContent = styleIndexContent;
+      if (postFormat && styleIndexContent) {
+        const lines = styleIndexContent.split('\n');
+        filteredIndexContent = lines.filter(line => {
+          const m = line.match(/\[\[(style-[^\]]+)\]\]/);
+          if (!m) return true;
+          const fn = m[1];
+          if (postFormat === 'thread') return fn.includes('_Thread_');
+          if (postFormat === 'single_post') return fn.includes('_Short_') || fn.startsWith('style-DailyPosts');
+          if (postFormat === 'article') return fn.includes('_Article_');
+          return true;
+        }).join('\n');
+        console.log(`  Format filter (${postFormat}): ${lines.length} index lines → ${filteredIndexContent.split('\n').filter(l => l.includes('[[')).length} matching styles`);
+      }
+
       const lockedStyles = customList.length > 0 ? customList : null;
 
       // Read published history log for per-platform style cooldown (X platform only)
@@ -732,7 +750,7 @@ async function processStrategicPost(filename, styleGuideContent) {
       }
 
       const selSystem = getStyleSelectionSystemInstruction(lockedStyles, excludedStyles);
-      const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, styleIndexContent, lockedStyles, excludedStyles);
+      const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, filteredIndexContent, lockedStyles, excludedStyles);
       const selResult = await callDraftingModel(selPrompt, selSystem, draftModel);
 
       try {
@@ -744,7 +762,7 @@ async function processStrategicPost(filename, styleGuideContent) {
         }
       } catch (e) {
         console.warn('  Style selection JSON parse failed, using first 4 from index.');
-        const lines = styleIndexContent.split('\n').filter(l => l.includes('[[style-'));
+        const lines = filteredIndexContent.split('\n').filter(l => l.includes('[[style-'));
         selectedStyles = lines.slice(0, 4).map(l => {
           const m = l.match(/\[\[(style-[^\]]+)\]\]/);
           return m ? m[1] : '';
@@ -803,7 +821,9 @@ async function processStrategicPost(filename, styleGuideContent) {
       context_snippet: contextSnippet,
       source_url: sourceUrl,
       funnel_stage: funnelStage,
-      persona: persona
+      persona: persona,
+      target_post_count: targetPostCount,
+      format: postFormat
     };
 
     let plannerResult;
@@ -929,6 +949,8 @@ source_url: ""
 target_metric: ""
 primary_lever: ""
 funnel_stage: ""
+format: ""
+post_count: ""
 lang: "id"
 persona: ""
 custom_styles: ""

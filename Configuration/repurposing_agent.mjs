@@ -90,7 +90,7 @@ const platformOutputDirs = {
 
 // Master Wireframe Mapping Table (1 to 11)
 const WIREFRAME_FILES = {
-  1: 'style-Format1_HighUtility_StepByStep_v1.md',
+  1: 'style-HighUtility_Thread_StepByStep_v1.md',
   2: 'style-HighUtility_Thread_MasterCheatSheet_v1.md',
   3: 'style-ClientAds_Thread_LearnAndEarn_v1.md',
   4: 'style-HighUtility_Thread_HistoricalCaseStudy_BookmarkSave.md',

@@ -1,6 +1,6 @@
 ---
 category: "01 - Step-by-Step SOP"
-style_name: "Value_Dump_PromptList_Curiosity_ImmediateValue"
+style_name: "Value_Dump_Thread_PromptList_Curiosity_ImmediateValue"
 authority_persona: "Insider Expert with Exclusive Tactics"
 funnel_stage: "TOFU"
 target_metric: "Bookmarks & Amplification (Saves/Retweets)"
@@ -181,7 +181,7 @@ indikator momentum perbaikan, identifikasi breakout tren, dan lainnya:
 
 ## Part 3: Master Universal Wireframe Blueprint (Elastic Narrative Phases)
 
-**Blueprint Name:** `Value_Dump_PromptList_Curiosity_ImmediateValue`  
+**Blueprint Name:** `Value_Dump_Thread_PromptList_Curiosity_ImmediateValue`  
 **Archetype:** Numbered expert resource drop (list-based prompt/cheatsheet thread)
 
 ### Elastic Narrative Phases

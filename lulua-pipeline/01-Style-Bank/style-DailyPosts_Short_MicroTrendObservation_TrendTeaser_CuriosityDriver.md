@@ -1,6 +1,6 @@
 ---
 category: "16 - Daily Posts"
-style_name: "DailyPosts_MicroTrendObservation_TrendTeaser_CuriosityDriver"
+style_name: "DailyPosts_Short_MicroTrendObservation_TrendTeaser_CuriosityDriver"
 authority_persona: "Industry Insider"
 funnel_stage: "TOFU"
 target_metric: "Engagement & Profile Clicks"

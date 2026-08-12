@@ -13,6 +13,7 @@ CRITICAL INSTRUCTIONS:
    - For every request, state BOTH:
      a) **Data Wanted**: The specific metric, timestamp, dollar figure, or event proof requested.
      b) **Intent / Purpose**: WHY you need this data (e.g. "To prove liquidity was thinned before the whale dump"). This enables the Research Agent to find alternative evidence if exact data is unavailable or if a false premise is caught.
+4. **Post Count Constraint**: If a target post count is specified in the input, plan EXACTLY that many posts in the skeleton. Do not exceed it. If no post count is given, scale naturally based on topic depth.
 
 Output format MUST be clean, structured JSON containing:
 {
@@ -34,6 +35,8 @@ export function getPlannerPromptStr(inputPayload, wireframeBlueprint, falsePremi
   promptStr += `- Core Topic: "${inputPayload.core_topic || 'Strategic Post Topic'}"\n`;
   if (inputPayload.context_snippet) promptStr += `- Context Snippet: "${inputPayload.context_snippet}"\n`;
   if (inputPayload.source_url) promptStr += `- Source URL: "${inputPayload.source_url}"\n`;
+  if (inputPayload.target_post_count) promptStr += `- Target Post Count: ${inputPayload.target_post_count} (plan EXACTLY this many posts)\n`;
+  if (inputPayload.format) promptStr += `- Output Format: ${inputPayload.format}\n`;
 
   if (falsePremiseFeedback) {
     promptStr += `\n⚠️ FALSE PREMISE RE-PLANNING FEEDBACK FROM RESEARCH AGENT:\n`;
@@ -92,6 +95,20 @@ ${blueprintsStr}
 
 TASK INSTRUCTIONS:
 Using the verified research brief and style guide, generate FOUR (4) distinct draft variations for an X (Twitter) post by populating the selected Style Bank Wireframe Blueprints.
+
+OUTPUT FORMAT: For each draft, separate individual posts with a --- delimiter and label them as Post 1/N, Post 2/N, etc.
+Example:
+  Post 1/4
+  [content]
+  ---
+  Post 2/4
+  [content]
+  ---
+  Post 3/4
+  [content]
+  ---
+  Post 4/4
+  [content]
 
 Separate all 4 drafts clearly with standard markdown headers:
 

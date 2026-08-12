@@ -96,7 +96,7 @@ CRITICAL FRONTMATTER RULES:
 Generate YAML frontmatter at the top with these exact 8 fields:
 ---
 category: "01 - Step-by-Step SOP"
-style_name: "[CategoryName]_[Format]_[HookArchetype]_[ConversionDriver]"
+style_name: "[CategoryName]_${formatType === 'long_form_article' ? 'Article' : formatType === 'thread' ? 'Thread' : formatType === 'short_post' ? 'Short' : 'Thread'}_[HookArchetype]_[ConversionDriver]"
 authority_persona: "[Persona Name]"
 funnel_stage: "TOFU" | "MOFU" | "BOFU"
 target_metric: "[Metric Name]"
@@ -132,7 +132,8 @@ Please dissect this content thoroughly and generate the complete Wireframe Schem
     const lines = cleanPayload.split('\n').filter(l => l.trim().length > 0);
     const firstLine = lines[0] || cleanPayload;
 
-    const fallbackPrefix = formatType === 'long_form_article' ? 'Article' : 'Short';
+    const fallbackMap = { long_form_article: 'Article', thread: 'Thread', short_post: 'Short' };
+    const fallbackPrefix = fallbackMap[formatType] || 'Short';
     styleMarkdown = `---
 category: "01 - Step-by-Step SOP"
 style_name: "HighUtility_${fallbackPrefix}_ContentStructure_BookmarkSave"
@@ -197,12 +198,20 @@ Phase 3: Conversion CTA
     );
   }
 
-  const match = styleMarkdown.match(/style_name:\s*["']?([a-zA-Z0-9_-]+)["']?/);
-  let styleName = match ? match[1] : `${formatType}_${Date.now()}`;
+  const match = styleMarkdown.match(/style_name:\s*["']?([^"'\n]+)["']?/);
+  let styleName = match ? match[1].trim().replace(/[^a-zA-Z0-9_-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '') : `${formatType}_${Date.now()}`;
+
+  // Enforce format token in style name (inject if LLM omitted it)
+  const FORMAT_TOKENS = { long_form_article: 'Article', thread: 'Thread', short_post: 'Short' };
+  const expectedToken = FORMAT_TOKENS[formatType];
+  if (expectedToken && !styleName.includes(expectedToken)) {
+    styleName = styleName.replace(/_([A-Z])/, `_${expectedToken}_$1`);
+    console.log(`  [Format Enforcer] Injected "${expectedToken}" token into style name: ${styleName}`);
+  }
 
   // Sanitize styleName to guarantee no generic fallbacks
   if (styleName.includes('GenericWireframe') || styleName.includes('ReachYield')) {
-    const prefix = formatType === 'long_form_article' ? 'Article' : 'Short';
+    const prefix = { long_form_article: 'Article', thread: 'Thread', short_post: 'Short' }[formatType] || 'Short';
     styleName = `HighUtility_${prefix}_StructuralBlueprint_BookmarkSave`;
   }
 
@@ -234,7 +243,7 @@ Phase 3: Conversion CTA
   return { styleName, finalMarkdown };
 }
 
-export async function runPostDissection(inputUrlOrText, platform = 'x', postCount = 0) {
+export async function runPostDissection(inputUrlOrText, platform = 'x', postCount = 0, formatType = '') {
   debugLog('=== DISSECTION START ===');
   debugLog(`Input: ${inputUrlOrText.slice(0, 200)}`);
 
@@ -248,6 +257,10 @@ export async function runPostDissection(inputUrlOrText, platform = 'x', postCoun
   const statusMatch = inputUrlOrText.match(/status\/(\d+)/i);
   const targetStatusId = statusMatch ? statusMatch[1] : null;
   debugLog(`postUrl: ${postUrl || 'none'}, statusId: ${targetStatusId || 'none'}`);
+
+  // Resolve user-provided format to internal formatType
+  const formatMap = { thread: 'thread', single_post: 'short_post', article: 'long_form_article' };
+  const resolvedFormat = formatMap[formatType] || 'social_post';
 
   // DUPLICATE PRE-CHECK GATE: Scan Source Reference header of existing Style Bank files
   if (fs.existsSync(STYLE_BANK_DIR) && (postUrl || targetStatusId)) {
@@ -299,7 +312,7 @@ export async function runPostDissection(inputUrlOrText, platform = 'x', postCoun
 
   // 2. Dissect the post thread (X Articles are dissected separately via their own URL)
   debugLog('SINGLE dissection route triggered');
-  const singleRes = await dissectSinglePayload(fetchRes.text || inputUrlOrText, 'social_post', postUrl, platform, { format: 'social_post' });
+  const singleRes = await dissectSinglePayload(fetchRes.text || inputUrlOrText, resolvedFormat, postUrl, platform, { format: resolvedFormat });
   debugLog(`Single dissection done: styleName=${singleRes.styleName}`);
 
   // Inject article_url into frontmatter if the fetcher found an embedded article link

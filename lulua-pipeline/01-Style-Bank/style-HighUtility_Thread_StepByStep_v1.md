@@ -1,6 +1,6 @@
 ---
 category: "01 - Step-by-Step SOP"
-style_name: "Format1_HighUtility_StepByStep_v1"
+style_name: "HighUtility_Thread_StepByStep_v1"
 authority_persona: "Tool Mechanic"
 funnel_stage: "MOFU"
 target_metric: "Outbound_CTR_and_Tool_Adoption"
@@ -10,7 +10,7 @@ supported_output_formats: ["thread", "article", "ig_carousel", "yt_shorts", "lin
 
 # 🔬 Dissected Style Wireframe: High-Utility Step-by-Step SOP Thread
 
-> **Style Name**: `Format1_HighUtility_StepByStep_v1`  
+> **Style Name**: `HighUtility_Thread_StepByStep_v1`  
 > **Architecture**: Part 1 (Dissection Matrix) ➔ Part 2a (Reference Text) ➔ Part 2b (Cross-Domain Demo) ➔ Part 3 (Elastic Universal Blueprint)
 
 ---

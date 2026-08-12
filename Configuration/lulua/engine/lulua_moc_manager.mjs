@@ -31,7 +31,7 @@ const CATEGORIES = [
 
 // Exact file-by-file unique human titles restored directly from git commit 8a94ae5
 const COMMIT_FILE_LOOKUP = {
-  "style-Format1_HighUtility_StepByStep_v1": "Time-saved promise → 3 to 5 setup steps → Tool link CTA",
+  "style-HighUtility_Thread_StepByStep_v1": "Time-saved promise → 3 to 5 setup steps → Tool link CTA",
   "style-HighUtility_Thread_MasterCheatSheet_v1": "Effort compression claim → Curated list of tools/formulas → Bookmark prompt",
   "style-HighUtility_Short_HowToPlaybook_BookmarkSave": "Bite-sized rule offer → 4 core playbook takeaways → Save for later CTA",
   "style-ClientAds_Thread_LearnAndEarn_v1": "Skill reward promise → Interactive feature walkthrough → Incentive referral link",
