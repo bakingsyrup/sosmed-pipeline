@@ -1,74 +1,62 @@
 [
   {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "youtube": "angle_1786151800484",
-      "instagram": "angle_1786151800484",
-      "tiktok": "angle_1786151800484",
-      "linkedin": "angle_1786151800484"
-    }
+    "id": "log_20260808_001",
+    "published_at": "2026-08-08",
+    "content_type": "youtube_short",
+    "topic_id": "source-content-input-post-1-jika-bi",
+    "style": null,
+    "style_archetype": null,
+    "platform": "youtube",
+    "post_url": null,
+    "post_count": 0,
+    "posts": []
   },
   {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "youtube": "angle_1786179345079",
-      "instagram": "angle_1786179345079",
-      "tiktok": "angle_1786179345079",
-      "linkedin": "angle_1786179345079"
-    }
+    "id": "log_20260808_002",
+    "published_at": "2026-08-08",
+    "content_type": "instagram_carousel",
+    "topic_id": "source-content-input-post-1-jika-bi",
+    "style": null,
+    "style_archetype": null,
+    "platform": "instagram",
+    "post_url": null,
+    "post_count": 0,
+    "posts": []
   },
   {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "youtube": "angle_1786184176036",
-      "instagram": "angle_1786184176036",
-      "tiktok": "angle_1786184176036",
-      "linkedin": "angle_1786184176036"
-    }
+    "id": "log_20260808_003",
+    "published_at": "2026-08-08",
+    "content_type": "tiktok",
+    "topic_id": "source-content-input-post-1-jika-bi",
+    "style": null,
+    "style_archetype": null,
+    "platform": "tiktok",
+    "post_url": null,
+    "post_count": 0,
+    "posts": []
   },
   {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "instagram": "angle_1786190527122"
-    }
+    "id": "log_20260808_004",
+    "published_at": "2026-08-08",
+    "content_type": "linkedin",
+    "topic_id": "source-content-input-post-1-jika-bi",
+    "style": null,
+    "style_archetype": null,
+    "platform": "linkedin",
+    "post_url": null,
+    "post_count": 0,
+    "posts": []
   },
   {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "instagram": "angle_1786191861325"
-    }
-  },
-  {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "instagram": "angle_1786193085984"
-    }
-  },
-  {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "instagram": "angle_1786207012024"
-    }
-  },
-  {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-jika-bi",
-    "platforms": {
-      "instagram": "angle_1786213018713"
-    }
-  },
-  {
-    "date": "2026-08-08",
-    "topic": "source-content-input-post-1-flash-c",
-    "platforms": {
-      "instagram": "angle_1786213631845"
-    }
+    "id": "log_20260808_005",
+    "published_at": "2026-08-08",
+    "content_type": "instagram_carousel",
+    "topic_id": "source-content-input-post-1-flash-c",
+    "style": null,
+    "style_archetype": null,
+    "platform": "instagram",
+    "post_url": null,
+    "post_count": 0,
+    "posts": []
   }
 ]

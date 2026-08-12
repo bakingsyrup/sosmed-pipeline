@@ -109,11 +109,19 @@ Separate all 4 drafts clearly with standard markdown headers:
 `;
 }
 
-export function getStyleSelectionSystemInstruction() {
+export function getStyleSelectionSystemInstruction(lockedStyles = null, excludedStyles = null) {
+  const lockInstruction = lockedStyles
+    ? `\n\nCRITICAL LOCKED STYLES: The following styles are pre-selected and MUST be included in your output at the positions shown:\n${lockedStyles.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}\n\nPick complementary styles for the remaining slots to fill 4 total. Do NOT suggest alternatives to the locked styles — treat them as non-negotiable.\n`
+    : '';
+
+  const excludeInstruction = excludedStyles && excludedStyles.length > 0
+    ? `\n\nCOOLDOWN EXCLUSION: The following style FILENAMES were published in the last 10 posts. You MUST NOT select ANY of these exact filenames:\n${excludedStyles.map(s => `  - ${s}`).join('\n')}\n`
+    : '';
+
   return `
 You are a Senior Content Strategist and Style Bank Curator.
 Your task is to analyze a topic brief and select the 4 best-matching wireframe styles from a Style Bank Index.
-
+${lockInstruction}${excludeInstruction}
 SELECTION CRITERIA:
 1. **Structural Fit**: Does the topic's natural flow match the style's narrative flow summary? (e.g. a "shocking data → breakdown → CTA" topic fits a "Shocking Stat → Step-by-Step → Retweet Prompt" style)
 2. **Diversity**: Pick 4 DISTINCTLY DIFFERENT approaches — don't pick 4 variations of the same archetype. Cover different angles (educational, emotional, debate, story-driven).
@@ -128,18 +136,26 @@ OUTPUT: Clean JSON only, no markdown wrapper:
 `;
 }
 
-export function getStyleSelectionPromptStr(topic, contextSnippet, funnelStage, persona, styleIndexContent) {
+export function getStyleSelectionPromptStr(topic, contextSnippet, funnelStage, persona, styleIndexContent, lockedStyles = null, excludedStyles = null) {
+  const lockBlock = lockedStyles
+    ? `\nLOCKED STYLES (already chosen — include these exactly as-is, pick the remaining slots):\n${lockedStyles.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}\n`
+    : '';
+
+  const excludeBlock = excludedStyles && excludedStyles.length > 0
+    ? `\nEXCLUDED STYLE FILENAMES (recently published — DO NOT select any of these):\n${excludedStyles.map(s => `  - ${s}`).join('\n')}\n`
+    : '';
+
   return `
 TOPIC BRIEF:
 - Core Topic: "${topic}"
 - Context: "${contextSnippet || 'No additional context provided.'}"
 - Funnel Stage: ${funnelStage || 'TOFU'}
 - Target Persona: ${persona || 'Auto-select'}
-
+${lockBlock}${excludeBlock}
 STYLE BANK INDEX (all available wireframes):
 ${styleIndexContent}
 
-TASK: Select the 4 best-matching styles for this topic. Return ONLY the JSON object.
+TASK: Select the 4 best-matching styles for this topic.${lockedStyles ? ' The locked styles above are non-negotiable — output them in the same positions, then fill the remaining slots with complementary picks.' : ''}${excludedStyles ? ' The excluded styles above must NOT appear in your output.' : ''} Return ONLY the JSON object.
 `;
-}  
+}
 

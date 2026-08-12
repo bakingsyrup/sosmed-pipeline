@@ -125,6 +125,8 @@ To turn the master taxonomy Markdown files into a continuous, zero-friction post
 
 ## 📊 5. Closed-Loop Topic Execution & Yield Tracker (`topic_history_log.json`)
 
+> **Live Implementation:** The logging system, schema, and dedup pipeline are now active. See [published_content_log_spec.md](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/published_content_log_spec.md) for the current schema and operational workflow. The cooldown is 10 posts per platform (not 30 days).
+
 To prevent audience reader fatigue, enforce a **30-day topic cooldown**, and track metric yields per taxonomy node, the system logs every published post into a centralized closed-loop database at [`Configuration/topic_history_log.json`](file:///mnt/data/Obsidian%20Docs/Image%20Prompt%20Db/Sosmed-Pipeline/Configuration/topic_history_log.json):
 
 ```

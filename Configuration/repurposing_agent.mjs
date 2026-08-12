@@ -451,7 +451,7 @@ Perform fact-checking and gather core metrics, historical dates, and verified so
 
     // STEP 2: Angle Mutation Selection & 2nd-Degree Deep-Dive Items Request (DeepSeek)
     console.log(`[Step 2/4] DeepSeek: Selecting native angles & identifying 2nd-degree deep-dive items...`);
-    const recentAnglesStr = JSON.stringify(historyLog.slice(-5));
+    const recentAnglesStr = JSON.stringify(historyLog.filter(e => e.style_archetype).map(e => ({ topic_id: e.topic_id, platform: e.platform, style_archetype: e.style_archetype })).slice(-5));
     const step2System = `You are the Editor-in-Chief of the primary publication channel. Match topics to platform angles and identify missing deep-dive facts.`;
     const step2Prompt = `
 11 MASTER WIREFRAME FORMAT OPTIONS:
@@ -467,7 +467,7 @@ Perform fact-checking and gather core metrics, historical dates, and verified so
 10. Format 10 (LeadMagnetGiveaway): Free calculator/Notion template opt-ins (Framework Curator).
 11. Format 11 (FounderRetrospective): Executive lessons & long-term wisdom (Framework Curator).
 
-Recent Used Angles Log (COOLDOWN CHECK - Do NOT reuse these exact angles):
+Recent Published Content Log (COOLDOWN CHECK - Do NOT reuse these style_archetype on the same platform):
 ${recentAnglesStr}
 
 1st-Degree Fact Brief:
@@ -505,6 +505,14 @@ Tasks:
       : '';
 
     console.log(`[Targeted Wireframe Loader] Selected Format ${selectedFormatNum} ➔ Loading ${selectedFileName}`);
+
+    // Extract style archetype for history logging
+    let repurposeStyleArchetype = null;
+    try {
+      const nameCore = selectedFileName.replace(/^style-/, '');
+      const parts = nameCore.split('_');
+      repurposeStyleArchetype = parts.length >= 3 ? parts[2] : null;
+    } catch {}
 
     const platformWireframe = extractWireframeSection(selectedFormatContent, targetPlatform);
 
@@ -640,7 +648,18 @@ Draft the complete content kit for ${targetPlatform.toUpperCase()} now.
     const dateStr = new Date().toISOString().split('T')[0];
     const timestampStr = Date.now();
 
-    const usedAnglesLog = { date: dateStr, topic: topicSlug, platforms: { [targetPlatform]: `angle_${timestampStr}` } };
+    const usedAnglesLog = {
+      id: `log_${dateStr.replace(/-/g, '')}_${timestampStr}`,
+      published_at: dateStr,
+      content_type: targetPlatform === 'x' ? 'x_thread' : targetPlatform === 'instagram' ? 'instagram_carousel' : targetPlatform === 'youtube' ? 'youtube_short' : targetPlatform === 'tiktok' ? 'tiktok' : targetPlatform === 'linkedin' ? 'linkedin_article' : targetPlatform,
+      topic_id: topicSlug,
+      style: selectedFileName,
+      style_archetype: repurposeStyleArchetype,
+      platform: targetPlatform === 'x' ? 'X' : targetPlatform === 'instagram' ? 'Instagram' : targetPlatform === 'youtube' ? 'YouTube' : targetPlatform === 'tiktok' ? 'TikTok' : targetPlatform === 'linkedin' ? 'LinkedIn' : targetPlatform,
+      post_url: null,
+      post_count: 0,
+      posts: []
+    };
 
     const platformObj = platformOutputDirs[targetPlatform] || platformOutputDirs['instagram'];
     const outFilename = `${dateStr}-REPURPOSED-${targetPlatform.toUpperCase()}-${topicSlug}.md`;

@@ -703,16 +703,36 @@ async function processStrategicPost(filename, styleGuideContent) {
     console.log(`[Step 1/5] Selecting top 4 wireframe styles...`);
     let selectedStyles = [];
 
-    if (customStyles) {
-      selectedStyles = customStyles.split(',').map(s => s.trim()).filter(Boolean);
+    const customList = customStyles ? customStyles.split(',').map(s => s.trim()).filter(Boolean) : [];
+    if (customList.length >= 4) {
+      selectedStyles = customList.slice(0, 4);
       console.log(`  Using custom styles: ${selectedStyles.join(', ')}`);
     } else {
       const styleIndexContent = fs.existsSync(STYLE_INDEX_PATH)
         ? fs.readFileSync(STYLE_INDEX_PATH, 'utf8')
         : 'No style index available.';
 
-      const selSystem = getStyleSelectionSystemInstruction();
-      const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, styleIndexContent);
+      const lockedStyles = customList.length > 0 ? customList : null;
+
+      // Read published history log for per-platform style cooldown (X platform only)
+      const HISTORY_LOG_PATH = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/topic_history_log.json';
+      let excludedStyles = null;
+      if (fs.existsSync(HISTORY_LOG_PATH)) {
+        try {
+          const history = JSON.parse(fs.readFileSync(HISTORY_LOG_PATH, 'utf8'));
+          const xPosts = history.filter(e => e.platform === 'X' && e.style).slice(-10);
+          const excludeFilenames = xPosts.map(e => e.style).filter(Boolean);
+          if (excludeFilenames.length > 0) {
+            excludedStyles = excludeFilenames;
+            console.log(`  Cooldown: excluding ${excludedStyles.length} recently published X styles.`);
+          }
+        } catch (e) {
+          console.warn('  Could not read history log for style cooldown:', e.message);
+        }
+      }
+
+      const selSystem = getStyleSelectionSystemInstruction(lockedStyles, excludedStyles);
+      const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, styleIndexContent, lockedStyles, excludedStyles);
       const selResult = await callDraftingModel(selPrompt, selSystem, draftModel);
 
       try {
@@ -729,6 +749,16 @@ async function processStrategicPost(filename, styleGuideContent) {
           const m = l.match(/\[\[(style-[^\]]+)\]\]/);
           return m ? m[1] : '';
         }).filter(Boolean);
+      }
+
+      // Inject locked styles and deduplicate
+      if (lockedStyles) {
+        const deduped = [];
+        for (const s of [...lockedStyles, ...selectedStyles]) {
+          if (!deduped.includes(s)) deduped.push(s);
+        }
+        selectedStyles = deduped.slice(0, 4);
+        console.log(`  Final (locked + auto): ${selectedStyles.join(', ')}`);
       }
     }
 
@@ -916,7 +946,7 @@ custom_styles: ""
 <!-- Leave empty for auto-selection. Or specify up to 4 style filenames from style-index.md -->
 `;
     fs.writeFileSync(inboxPath, blankTemplate);
-    console.log(`[Strategic Post] Re-created clean template in 01-Inbox.`);
+    console.log(`[Strategic Post] Re-created clean template in 01-Inbox/00-Strategic-Inputs/.`);
     writeStatus('OK');
 
   } catch (err) {
@@ -1477,14 +1507,14 @@ async function processInbox() {
   const styleGuideContent = fs.readFileSync(paths.styleGuide, 'utf8');
 
   // Check for Strategic Post input (Priority 1 overrides all)
-  const strategicInputPath = path.join(paths.inbox, '_NEW_STRATEGIC_INPUT.md');
+  const strategicInputPath = path.join(paths.inbox, '00-Strategic-Inputs', '_NEW_STRATEGIC_INPUT.md');
   if (fs.existsSync(strategicInputPath)) {
     const stratContent = fs.readFileSync(strategicInputPath, 'utf8');
     const { frontmatter } = parseMarkdown(stratContent);
     if (frontmatter.status === 'ready' && frontmatter.type === 'Strategic Post') {
       console.log(`\n----------------------------------------`);
       console.log(`[Strategic Post] Detected status: ready.`);
-      await processStrategicPost('_NEW_STRATEGIC_INPUT.md', styleGuideContent);
+      await processStrategicPost('00-Strategic-Inputs/_NEW_STRATEGIC_INPUT.md', styleGuideContent);
       return;
     }
   }
