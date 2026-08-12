@@ -95,8 +95,14 @@ CRITICAL EXECUTION DIRECTIVES:${directives}
 `;
 }
 
-export function getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, researchBrief, lang, format = '', singleDraft = false) {
+export function getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, researchBrief, lang, format = '', singleDraft = false, editorFeedback = '') {
   const bpArray = Array.isArray(wireframeBlueprints) ? wireframeBlueprints : (wireframeBlueprints ? [wireframeBlueprints] : []);
+  const blueprintsStr = bpArray.map((bp, index) => `
+=========================================
+BLUEPRINT FOR DRAFT ${index + 1}: ${bp.template_name || \`Template \${index + 1}\`}
+Part 3 Blueprint Schema:
+${bp.blueprint_text || bp}
+`).join('\n');
   const blueprintsStr = bpArray.map((bp, index) => `
 =========================================
 BLUEPRINT FOR DRAFT ${index + 1}: ${bp.template_name || `Template ${index + 1}`}
@@ -151,8 +157,12 @@ Example:
 ### Draft 4 (${bpArray[3]?.template_name || 'Style Variation 4'})
 [Content for Draft 4 following Blueprint 4]`;
 
+  const fbBlock = editorFeedback
+    ? `\nCRITICAL EDITOR FEEDBACK — You MUST incorporate ALL of these instructions into the final draft:\n${editorFeedback}\n\n---\n\n`
+    : '';
+
   return `
-INPUT TOPIC PAYLOAD:
+${fbBlock}INPUT TOPIC PAYLOAD:
 - Topic ID: "${inputPayload.topic_id || 'N/A'}"
 - Core Topic: "${inputPayload.core_topic || 'Strategic Post Topic'}"
 - Sophistication Level: "${inputPayload.sophistication_level || 'Level 1'}"
@@ -220,6 +230,56 @@ STYLE BANK INDEX (all available wireframes):
 ${styleIndexContent}
 
 TASK: Select the 4 best-matching styles for this topic.${lockedStyles ? ' The locked styles above are non-negotiable — output them in the same positions, then fill the remaining slots with complementary picks.' : ''}${excludedStyles ? ' The excluded styles above must NOT appear in your output.' : ''} Return ONLY the JSON object.
+`;
+}
+
+export function getWriterProposalSystemInstruction() {
+  return `
+You are a junior content writer at Iroi Media, reporting to your Editor-in-Chief (Silvester / @KenalKripto).
+Your job is to research a topic and present a clear, scannable proposal for how to write about it.
+
+VOICE: Smart, analytical, direct. Write like a peer briefing their boss — professional but conversational. Use "Boss" as your opening salutation.
+
+FORMAT RULES:
+- Use bullet points ( - ) for ALL lists. Put exactly ONE empty line between every bullet point, paragraph, and section.
+- Every sentence MUST be its own bullet point. No multi-sentence bullets.
+- Keep each bullet to 1 short sentence or 1 short phrase. Think "fast scan on mobile."
+- No nested bullets. Flat list only.
+
+PROPOSAL STRUCTURE:
+1. Opening: "Boss, I've researched [topic]." One line.
+2. Style recommendation: Style name, then a section "Why I propose this style:" followed by bullets explaining reasoning. Include alternatives considered and why rejected.
+3. Proposed post flow: Numbered posts (Post 1:, Post 2:, etc.). For EACH post, provide:
+   - hook: [design intent — what this post's hook achieves]
+   - hook example: "[concrete example of the hook text]"
+   - body: [design intent — what the body covers]
+   - body example: "[concrete example of body text]"
+   - close: [design intent — how this post bridges to the next]
+   - close example: "[concrete example of the bridge/close text]"
+   Put one empty line between every element (hook, hook example, body, body example, close, close example). Put one empty line between posts.
+4. Quick recap: Compact table of posts (Post 1: hook→body→close, Post 2: hook→body→close, etc.). One line per post.
+5. Top 10 interesting facts: Numbered list of verified facts from research with their source data. Each fact on its own bullet line.
+
+CRITICAL: Every element described above MUST be on its own line with an empty line after it. The editor scans on mobile. No dense paragraphs.
+`;
+}
+
+export function getWriterProposalPromptStr(inputPayload, selectedStyles, plannerSkeleton, researchBrief, lang) {
+  return `
+TOPIC: "${inputPayload.core_topic || 'Strategic Post'}"
+
+SELECTED STYLES:
+${selectedStyles.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}
+
+PLANNER SKELETON:
+${JSON.stringify(plannerSkeleton, null, 2)}
+
+RESEARCH BRIEF:
+${researchBrief}
+
+TARGET LANGUAGE: ${lang === 'en' ? 'ENGLISH' : 'INDONESIAN'}
+
+TASK: Write a complete Writer's Proposal for your Editor-in-Chief. Propose the best style with reasoning. Propose the detailed post-by-post flow with design intent AND concrete examples for every component. List the top 10 most interesting facts from the research. Format everything with bullet points and empty line separators.
 `;
 }
 
