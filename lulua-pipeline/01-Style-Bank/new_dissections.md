@@ -1,3 +1,4 @@
+- [succeed] [[style-CompanyPR_ShockAnnouncement_MandatoryChange]] — 2026-08-12 09:45:12 UTC
 - [succeed] [[style-SOP_Article_CredibilityHook_LeadMagnet]] — 2026-08-12 05:30:02 UTC
 - [succeed] [[style-HighUtility_Article_CheatCodeHook_LeadMagnetCTA]] — 2026-08-12 05:19:58 UTC
 - [succeed] [[style-StepbyStepSOP_Article_AIAutomationBlueprint_ClonedMyselfHook_NewsletterCTA]] — 2026-08-12 05:07:55 UTC

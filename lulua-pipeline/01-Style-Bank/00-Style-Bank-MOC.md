@@ -60,6 +60,7 @@ kanban-plugin: board
 
 - [ ] [[style-ClientAds_Thread_ProofOfConcept_v1|Traction milestone claim → Proof of concept metrics → Product link CTA. X.Thread]]
 - [ ] [[style-ClientAds_Thread_TimelyAlpha_v1|Breaking feature news → Real-time market alpha → Early access link CTA. X.Thread]]
+- [ ] [[style-CompanyPR_ShockAnnouncement_MandatoryChange|Shocking Platform Change → Global Implementation Details → Zero Opt-Out Close. X.Thread]]
 
 ## 13 - Memes & Industry Satire
 

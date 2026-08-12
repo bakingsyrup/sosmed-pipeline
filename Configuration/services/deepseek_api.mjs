@@ -35,6 +35,7 @@ export async function callDeepSeek(prompt, systemInstruction, modelName = 'deeps
     port: 443,
     path: '/chat/completions',
     method: 'POST',
+    agent: false,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`,

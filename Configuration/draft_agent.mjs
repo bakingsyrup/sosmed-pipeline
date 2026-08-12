@@ -92,6 +92,7 @@ loadEnv();
 
 const PIPELINE_BASE = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/x-pipeline';
 const STYLE_GUIDE_PATH = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/x_style_guide.md';
+const STRATEGIC_STYLE_GUIDE_PATH = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/strategy_post_style_guide.md';
 const STATUS_FILE_PATH = path.join(PIPELINE_BASE, '00-Status.md');
 
 const paths = {
@@ -118,12 +119,12 @@ let currentErrorState = '';
 
 // Helper to route drafting calls to either Gemini or DeepSeek
 async function callDraftingModel(prompt, systemInstruction, modelName) {
-  const DRAFTING_HARD_TIMEOUT_MS = 600000; // 10 minutes
+  const DRAFTING_HARD_TIMEOUT_MS = 900000; // 15 minutes
 
   const draftingPromise = (async () => {
     if (modelName.toLowerCase().includes('deepseek')) {
       console.log(`Calling DeepSeek API with model: ${modelName}`);
-      const result = await callDeepSeek(prompt, systemInstruction, modelName);
+      const result = await callDeepSeek(prompt, systemInstruction, modelName, 5, 5000);
       return result.choices?.[0]?.message?.content || '';
     } else {
       console.log(`Calling Gemini API with model: ${modelName}`);
@@ -668,6 +669,11 @@ async function processStrategicPost(filename, styleGuideContent) {
   console.log(`[Strategic Post] Processing: ${filename}`);
 
   try {
+    // Ensure parent directory exists for lock (handles subdirectories like 00-Strategic-Inputs)
+    const lockParentDir = path.dirname(researchingPath);
+    if (!fs.existsSync(lockParentDir)) {
+      fs.mkdirSync(lockParentDir, { recursive: true });
+    }
     fs.renameSync(inboxPath, researchingPath);
   } catch (err) {
     console.error(`Failed to lock ${filename}:`, err.message);
@@ -709,6 +715,51 @@ async function processStrategicPost(filename, styleGuideContent) {
     if (customList.length >= 4) {
       selectedStyles = customList.slice(0, 4);
       console.log(`  Using custom styles: ${selectedStyles.join(', ')}`);
+    } else if (customList.length > 0) {
+      // User provided 1-3 styles: pad from filtered index directly, skip LLM
+      const styleIndexContent = fs.existsSync(STYLE_INDEX_PATH)
+        ? fs.readFileSync(STYLE_INDEX_PATH, 'utf8')
+        : 'No style index available.';
+
+      let filteredIndexContent = styleIndexContent;
+      if (postFormat && styleIndexContent) {
+        const lines = styleIndexContent.split('\n');
+        filteredIndexContent = lines.filter(line => {
+          const m = line.match(/\[\[(style-[^\]]+)\]\]/);
+          if (!m) return true;
+          const fn = m[1];
+          if (postFormat === 'thread') return fn.includes('_Thread_');
+          if (postFormat === 'single_post') return fn.includes('_Short_') || fn.startsWith('style-DailyPosts');
+          if (postFormat === 'article') return fn.includes('_Article_');
+          return true;
+        }).join('\n');
+        console.log(`  Format filter (${postFormat}): ${lines.length} index lines → ${filteredIndexContent.split('\n').filter(l => l.includes('[[')).length} matching styles`);
+      }
+
+      const availableStyles = filteredIndexContent.split('\n')
+        .filter(l => l.includes('[['))
+        .map(l => { const m = l.match(/\[\[(style-[^\]]+)\]\]/); return m ? m[1] : null; })
+        .filter(Boolean);
+
+      // Read cooldown exclusions
+      const HISTORY_LOG_PATH = '/mnt/data/Obsidian Docs/Image Prompt Db/Sosmed-Pipeline/Configuration/topic_history_log.json';
+      let cooldownStyles = [];
+      if (fs.existsSync(HISTORY_LOG_PATH)) {
+        try {
+          const history = JSON.parse(fs.readFileSync(HISTORY_LOG_PATH, 'utf8'));
+          cooldownStyles = history.filter(e => e.platform === 'X' && e.style).slice(-10).map(e => e.style).filter(Boolean);
+          if (cooldownStyles.length > 0) console.log(`  Cooldown: excluding ${cooldownStyles.length} recently published X styles.`);
+        } catch (e) {}
+      }
+
+      const lockedStyles = customList;
+      const padded = [...lockedStyles];
+      for (const s of availableStyles) {
+        if (padded.length >= 4) break;
+        if (!padded.includes(s) && !cooldownStyles.includes(s)) padded.push(s);
+      }
+      selectedStyles = padded;
+      console.log(`  Padded from index (skipped LLM): ${selectedStyles.join(', ')}`);
     } else {
       const styleIndexContent = fs.existsSync(STYLE_INDEX_PATH)
         ? fs.readFileSync(STYLE_INDEX_PATH, 'utf8')
@@ -753,6 +804,11 @@ async function processStrategicPost(filename, styleGuideContent) {
       const selPrompt = getStyleSelectionPromptStr(coreTopic, contextSnippet, funnelStage, persona, filteredIndexContent, lockedStyles, excludedStyles);
       const selResult = await callDraftingModel(selPrompt, selSystem, draftModel);
 
+      // Cooldown between consecutive DeepSeek calls to avoid rate limiting
+      if (draftModel.toLowerCase().includes('deepseek')) {
+        await new Promise(r => setTimeout(r, 10000));
+      }
+
       try {
         const selJson = JSON.parse((selResult || '').replace(/```json|```/g, '').trim());
         selectedStyles = selJson.selected_styles || [];
@@ -778,6 +834,23 @@ async function processStrategicPost(filename, styleGuideContent) {
         selectedStyles = deduped.slice(0, 4);
         console.log(`  Final (locked + auto): ${selectedStyles.join(', ')}`);
       }
+
+      // Validate all selected styles exist in the Style Bank (strip LLM hallucinations)
+      const validStyles = [];
+      for (const s of selectedStyles) {
+        const testPath = path.join(STYLE_BANK_DIR, `${s}.md`);
+        if (fs.existsSync(testPath)) {
+          validStyles.push(s);
+        } else {
+          console.warn(`  Style file not found: ${s}.md — discarding from selection.`);
+        }
+      }
+      selectedStyles = validStyles;
+      if (selectedStyles.length === 0) {
+        console.error('[Strategic Post] No valid style files found after validation. Aborting.');
+        fs.renameSync(researchingPath, inboxPath);
+        return;
+      }
     }
 
     if (selectedStyles.length === 0) {
@@ -796,8 +869,21 @@ async function processStrategicPost(filename, styleGuideContent) {
         continue;
       }
       const styleContent = fs.readFileSync(filePath, 'utf8');
-      const bpMatch = styleContent.match(/## Part 3:[\s\S]+/);
-      const blueprintText = bpMatch ? bpMatch[0].trim() : styleContent;
+      const bpMatch = styleContent.match(/(?:^|\n)#{1,2}\s*(?:🤖\s*)?Part 3:[\s\S]+/);
+      let blueprintText = bpMatch ? bpMatch[0].trim() : styleContent;
+
+      // Compress blueprint: strip verbose instructional prose, keep phase structure + slot names
+      blueprintText = blueprintText
+        .replace(/\*\*Purpose\*\*:[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Dynamic Content Scaling\*\*:[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Elasticity via[^*]+\*\*\n[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Core Components\*\*:\n[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Bridge\*\*:[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Key Slots\*\*:\n[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/\*\*Scaffold\*\*:[\s\S]*?(\n\n|\n(?=##|$))/g, '')
+        .replace(/-\s+\*\*.*?\*\*: .*\n/g, '')
+        .replace(/\n{3,}/g, '\n\n');
+
       const nameMatch = styleContent.match(/style_name:\s*["']?([^"'\n]+)["']?/);
       wireframeBlueprints.push({
         template_name: nameMatch ? nameMatch[1] : styleFile,
@@ -898,11 +984,36 @@ If any item's premise is fundamentally wrong (FALSE_PREMISE), explain the correc
       ? falsePremiseFeedback
       : (falsePremiseFeedback?.research_findings || 'No research data required.');
 
+    // Compress research brief for drafter: strip verbose prose, keep facts + source URLs
+    const compressedResearchBrief = finalResearchBrief
+      .replace(/Source:?\s*\[([^\]]+)\]\([^)]+\)\n/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/^[\s\S]{0,200}?\|/, '|')
+      .slice(0, 3000);
+
     // === STEP 5: Drafter — generate 4 drafts ===
     console.log(`[Step 5/5] Drafter generating ${wireframeBlueprints.length} draft variations...`);
-    const drafterSystem = getWireframeSystemInstruction(styleGuideContent, lang);
-    const drafterPrompt = getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, finalResearchBrief, lang);
-    const drafts = await callDraftingModel(drafterPrompt, drafterSystem, draftModel);
+    const strategicStyleGuide = fs.existsSync(STRATEGIC_STYLE_GUIDE_PATH)
+      ? fs.readFileSync(STRATEGIC_STYLE_GUIDE_PATH, 'utf8')
+      : styleGuideContent;
+    const drafterSystem = getWireframeSystemInstruction(strategicStyleGuide, lang, postFormat);
+    // Generate drafts one at a time to keep DeepSeek payloads small
+    let drafts = '';
+    for (let di = 0; di < wireframeBlueprints.length; di++) {
+      const singleBp = [wireframeBlueprints[di]];
+      const singlePrompt = getWireframeDraftPromptStr(inputPayload, singleBp, compressedResearchBrief, lang, postFormat, true);
+      console.log(`[Step 5/5] Drafting variation ${di + 1}/${wireframeBlueprints.length} (${singleBp[0].template_name})...`);
+
+      const rawResult = await callDeepSeek(singlePrompt, drafterSystem, draftModel);
+      const singleDraft = rawResult.choices?.[0]?.message?.content || '';
+      if (drafts) drafts += '\n\n';
+      drafts += `### Draft ${di + 1} (${singleBp[0].template_name || `Style Variation ${di + 1}`})\n${singleDraft}`;
+
+      // Cooldown between consecutive DeepSeek drafter calls
+      if (di < wireframeBlueprints.length - 1 && draftModel.toLowerCase().includes('deepseek')) {
+        await new Promise(r => setTimeout(r, 15000));
+      }
+    }
 
     // Save output
     const topicSlug = coreTopic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60);
@@ -1696,19 +1807,29 @@ function writeStatus(status, errorMsg = null) {
 function recoverOrphanedLocks() {
   try {
     if (fs.existsSync(paths.researching)) {
-      const lockedFiles = fs.readdirSync(paths.researching).filter(f => f.endsWith('.md'));
+      const lockedFiles = getFilesRecursive(paths.researching).filter(f => f.endsWith('.md'));
       if (lockedFiles.length > 0) {
         console.log(`[Self-Healing] Found ${lockedFiles.length} orphaned locks in 02-Researching. Restoring...`);
-        for (const file of lockedFiles) {
-          const lockedPath = path.join(paths.researching, file);
-          if (file.includes('-video-')) {
+        for (const lockedPath of lockedFiles) {
+          const relative = path.relative(paths.researching, lockedPath);
+          if (lockedPath.includes('-video-')) {
             fs.unlinkSync(lockedPath);
-            console.log(`[Self-Healing] Cleaned up temporary video lock: ${file}`);
+            console.log(`[Self-Healing] Cleaned up temporary video lock: ${relative}`);
           } else {
-            const inboxPath = path.join(paths.inbox, file);
+            const inboxPath = path.join(paths.inbox, relative);
+            const inboxDir = path.dirname(inboxPath);
+            if (!fs.existsSync(inboxDir)) fs.mkdirSync(inboxDir, { recursive: true });
             fs.renameSync(lockedPath, inboxPath);
-            console.log(`[Self-Healing] Recovered: ${file}`);
+            console.log(`[Self-Healing] Recovered: ${relative}`);
           }
+        }
+      }
+      // Clean up empty subdirectories
+      const subdirs = fs.readdirSync(paths.researching, { withFileTypes: true }).filter(d => d.isDirectory());
+      for (const subdir of subdirs) {
+        const subdirPath = path.join(paths.researching, subdir.name);
+        if (fs.readdirSync(subdirPath).length === 0) {
+          fs.rmdirSync(subdirPath);
         }
       }
     }
@@ -1720,18 +1841,20 @@ function recoverOrphanedLocks() {
 function checkStaleLocks(timeoutMs = 15 * 60 * 1000) {
   try {
     if (fs.existsSync(paths.researching)) {
-      const lockedFiles = fs.readdirSync(paths.researching).filter(f => f.endsWith('.md'));
+      const lockedFiles = getFilesRecursive(paths.researching).filter(f => f.endsWith('.md'));
       const now = Date.now();
-      for (const file of lockedFiles) {
-        const lockedPath = path.join(paths.researching, file);
+      for (const lockedPath of lockedFiles) {
+        const relative = path.relative(paths.researching, lockedPath);
         const age = now - fs.statSync(lockedPath).mtimeMs;
         if (age > timeoutMs) {
-          if (file.includes('-video-')) {
+          if (lockedPath.includes('-video-')) {
             fs.unlinkSync(lockedPath);
-            console.warn(`[Self-Healing] Stale video lock detected for ${file}. Cleaned up.`);
+            console.warn(`[Self-Healing] Stale video lock detected for ${relative}. Cleaned up.`);
           } else {
-            const inboxPath = path.join(paths.inbox, file);
-            console.warn(`[Self-Healing] Stale lock detected for ${file} (Locked for ${Math.round(age / 60000)}m). Releasing to 01-Inbox...`);
+            const inboxPath = path.join(paths.inbox, relative);
+            const inboxDir = path.dirname(inboxPath);
+            if (!fs.existsSync(inboxDir)) fs.mkdirSync(inboxDir, { recursive: true });
+            console.warn(`[Self-Healing] Stale lock detected for ${relative} (Locked for ${Math.round(age / 60000)}m). Releasing to 01-Inbox...`);
             fs.renameSync(lockedPath, inboxPath);
           }
         }

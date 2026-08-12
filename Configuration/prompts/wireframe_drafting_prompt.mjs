@@ -51,7 +51,38 @@ export function getPlannerPromptStr(inputPayload, wireframeBlueprint, falsePremi
   return promptStr;
 }
 
-export function getWireframeSystemInstruction(styleGuideContent, lang) {
+export function getWireframeSystemInstruction(styleGuideContent, lang, format = '') {
+  const isArticle = format === 'article';
+  const isSinglePost = format === 'single_post';
+  const isThread = !isArticle && !isSinglePost;
+
+  const threadDirectives = `
+1. Follow all writing style, formatting, and tone rules specified in the STYLE GUIDE above.
+2. Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English)' : 'INDONESIAN (blended naturally with English tech/trading terms)'}.
+3. Headline Formatting: Write opening headlines in standard SENTENCE CASE (e.g. "Why 90% of system prompts fail", NOT Title Case).
+4. Line-Break Density: Use double line breaks between every sentence block. Exactly 1 sentence per text block.
+5. Anti-Hype Rule: Avoid generic buzzwords ("game-changer", "unleash", "masif", "raksasa"). Use raw, active verbs (*kata dasar*) and concrete quantitative figures.
+6. Elastic Phase Scaling: Follow the slot progression specified in Part 3 of the blueprint. Dynamically scale the post count (1/N ... N/N) to fit the research brief's full information depth.`;
+
+  const articleDirectives = `
+1. Follow all writing style, formatting, and tone rules specified in the STYLE GUIDE above.
+2. Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English)' : 'INDONESIAN (blended naturally with English tech/trading terms)'}.
+3. Structure: Use ## Section Name headings for major topic breaks (e.g. "## Finding Strategies Worth Testing"). This is an X Article, not a thread — sections flow naturally down the page.
+4. Paragraph Density: Write natural multi-sentence paragraphs. Do NOT use single-sentence blocks or double line breaks between every sentence. Flowing prose.
+5. Anti-Hype Rule: Avoid generic buzzwords ("game-changer", "unleash", "masif", "raksasa"). Use raw, active verbs (*kata dasar*) and concrete quantitative figures.
+6. Rich Content: Where the wireframe calls for demonstration blocks or step breakdowns, use bullet lists, numbered steps, code blocks, tables, and blockquotes as appropriate.
+7. Closing: End with a formal closing section ("## Wrapping Up" or similar) and a sign-off paragraph. No bridge hooks or cliffhangers.`;
+
+  const singlePostDirectives = `
+1. Follow all writing style, formatting, and tone rules specified in the STYLE GUIDE above.
+2. Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English)' : 'INDONESIAN (blended naturally with English tech/trading terms)'}.
+3. Headline Formatting: Write the opening line in SENTENCE CASE.
+4. Line-Break Density: Use double line breaks between every sentence block. Exactly 1 sentence per text block.
+5. Anti-Hype Rule: Avoid generic buzzwords ("game-changer", "unleash", "masif", "raksasa"). Use raw, active verbs (*kata dasar*) and concrete quantitative figures.
+6. Single Post: This is a standalone post — no numbering, no separators, no bridge hooks. One complete thought.`;
+
+  const directives = isArticle ? articleDirectives : isSinglePost ? singlePostDirectives : threadDirectives;
+
   return `
 You are a professional social media ghostwriter who writes high-insight, viral posts on X (Twitter).
 Your task is to write social media draft variations based on selected Style Bank Wireframe Blueprints (Part 3 Elastic Narrative Phases) and verified research data.
@@ -60,17 +91,11 @@ Your task is to write social media draft variations based on selected Style Bank
 STYLE GUIDE SOURCE:
 ${styleGuideContent}
 
-CRITICAL EXECUTION DIRECTIVES:
-1. Follow all writing style, formatting, and tone rules specified in the STYLE GUIDE above.
-2. Output Language: ${lang === 'en' ? 'ENGLISH (write drafts 100% in English)' : 'INDONESIAN (blended naturally with English tech/trading terms)'}.
-3. Headline Formatting: Write opening headlines in standard SENTENCE CASE (e.g. "Why 90% of system prompts fail", NOT Title Case).
-4. Line-Break Density: Use double line breaks (\\n\\n) between every sentence block. Exactly 1 sentence per text block.
-5. Anti-Hype Rule: Avoid generic buzzwords ("game-changer", "unleash", "masif", "raksasa"). Use raw, active verbs (*kata dasar*) and concrete quantitative figures.
-6. Elastic Phase Scaling: Follow the slot progression specified in Part 3 of the blueprint. Dynamically scale the post count (1/N ... N/N) to fit the research brief's full information depth.
+CRITICAL EXECUTION DIRECTIVES:${directives}
 `;
 }
 
-export function getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, researchBrief, lang) {
+export function getWireframeDraftPromptStr(inputPayload, wireframeBlueprints, researchBrief, lang, format = '', singleDraft = false) {
   const bpArray = Array.isArray(wireframeBlueprints) ? wireframeBlueprints : (wireframeBlueprints ? [wireframeBlueprints] : []);
   const blueprintsStr = bpArray.map((bp, index) => `
 =========================================
@@ -78,6 +103,53 @@ BLUEPRINT FOR DRAFT ${index + 1}: ${bp.template_name || `Template ${index + 1}`}
 Part 3 Blueprint Schema:
 ${bp.blueprint_text || bp}
 `).join('\n');
+
+  const isArticle = format === 'article';
+  const isSinglePost = format === 'single_post';
+
+  const articleOutput = `
+OUTPUT FORMAT (X Article): Output as a complete X Article. Use ## Section headings for each major section.
+Write multi-sentence paragraphs — flowing prose, not telegraphic blocks.
+Include bullet lists, numbered steps, code blocks, tables, and blockquotes where the wireframe calls for demonstration or explanation.
+No Post 1/N labels. No --- separators.
+End with a formal "## Wrapping Up" closing section and sign-off paragraph.`;
+
+  const singlePostOutput = `
+OUTPUT FORMAT (Standalone Post): Output a single standalone post. No post numbering. No --- separators. One complete, self-contained message.`;
+
+  const threadOutput = `
+OUTPUT FORMAT (Thread): For each draft, separate individual posts with a --- delimiter and label them as Post 1/N, Post 2/N, etc.
+Example:
+  Post 1/4
+  [content]
+  ---
+  Post 2/4
+  [content]
+  ---
+  Post 3/4
+  [content]
+  ---
+  Post 4/4
+  [content]`;
+
+  const outputFormat = isArticle ? articleOutput : isSinglePost ? singlePostOutput : threadOutput;
+
+  const draftCount = singleDraft ? 'ONE (1)' : 'FOUR (4)';
+  const draftTarget = singleDraft
+    ? 'Output ONLY the raw draft content — no markdown headers, no draft labels, no numbering. The system will label and format it.'
+    : `Separate all 4 drafts clearly with standard markdown headers:
+
+### Draft 1 (${bpArray[0]?.template_name || 'Style Variation 1'})
+[Content for Draft 1 following Blueprint 1]
+
+### Draft 2 (${bpArray[1]?.template_name || 'Style Variation 2'})
+[Content for Draft 2 following Blueprint 2]
+
+### Draft 3 (${bpArray[2]?.template_name || 'Style Variation 3'})
+[Content for Draft 3 following Blueprint 3]
+
+### Draft 4 (${bpArray[3]?.template_name || 'Style Variation 4'})
+[Content for Draft 4 following Blueprint 4]`;
 
   return `
 INPUT TOPIC PAYLOAD:
@@ -94,35 +166,10 @@ SELECTED STYLE BANK WIREFRAME BLUEPRINTS:
 ${blueprintsStr}
 
 TASK INSTRUCTIONS:
-Using the verified research brief and style guide, generate FOUR (4) distinct draft variations for an X (Twitter) post by populating the selected Style Bank Wireframe Blueprints.
+Using the verified research brief and style guide, generate ${draftCount} distinct draft variation${singleDraft ? '' : 's'} for an X (Twitter) post by populating the selected Style Bank Wireframe Blueprints.
+${outputFormat}
 
-OUTPUT FORMAT: For each draft, separate individual posts with a --- delimiter and label them as Post 1/N, Post 2/N, etc.
-Example:
-  Post 1/4
-  [content]
-  ---
-  Post 2/4
-  [content]
-  ---
-  Post 3/4
-  [content]
-  ---
-  Post 4/4
-  [content]
-
-Separate all 4 drafts clearly with standard markdown headers:
-
-### Draft 1 (${bpArray[0]?.template_name || 'Style Variation 1'})
-[Content for Draft 1 following Blueprint 1]
-
-### Draft 2 (${bpArray[1]?.template_name || 'Style Variation 2'})
-[Content for Draft 2 following Blueprint 2]
-
-### Draft 3 (${bpArray[2]?.template_name || 'Style Variation 3'})
-[Content for Draft 3 following Blueprint 3]
-
-### Draft 4 (${bpArray[3]?.template_name || 'Style Variation 4'})
-[Content for Draft 4 following Blueprint 4]
+${draftTarget}
 `;
 }
 
