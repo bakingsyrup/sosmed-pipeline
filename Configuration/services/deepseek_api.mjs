@@ -2,9 +2,11 @@ import process from 'process';
 import console from 'console';
 import https from 'https';
 
+const httpsAgent = new https.Agent({ keepAlive: true, timeout: 300000 });
+
 /**
- * DeepSeek API caller using Node's native 'https' module with retry logic.
- * Bypasses undici/fetch's default 30-second headersTimeout to accommodate DeepSeek's thinking times.
+ * DeepSeek API caller using Node's native 'https' module with streaming & retry logic.
+ * Streams response internally to prevent socket idle timeouts (ECONNRESET) on long outputs.
  */
 export async function callDeepSeek(prompt, systemInstruction, modelName = 'deepseek-v4-pro', retries = 3, delay = 2000) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
@@ -27,7 +29,8 @@ export async function callDeepSeek(prompt, systemInstruction, modelName = 'deeps
   const payload = JSON.stringify({
     model: modelName,
     messages: messages,
-    temperature: 0.7
+    temperature: 0.7,
+    stream: true
   });
 
   const options = {
@@ -35,30 +38,63 @@ export async function callDeepSeek(prompt, systemInstruction, modelName = 'deeps
     port: 443,
     path: '/chat/completions',
     method: 'POST',
-    agent: false,
+    agent: httpsAgent,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`,
       'Content-Length': Buffer.byteLength(payload)
-    },
-    timeout: 300000 // 5 minutes timeout to support deep-thinking models
+    }
   };
 
   for (let i = 0; i < retries; i++) {
     try {
       const responseText = await new Promise((resolve, reject) => {
         const req = https.request(options, (res) => {
-          let data = '';
+          if (res.statusCode < 200 || res.statusCode >= 300) {
+            let errBody = '';
+            res.on('data', (chunk) => { errBody += chunk; });
+            res.on('end', () => {
+              reject(new Error(`DeepSeek API error (${res.statusCode}): ${errBody}`));
+            });
+            return;
+          }
+
+          let fullContent = '';
+          let buffer = '';
+
           res.on('data', (chunk) => {
-            data += chunk;
-          });
-          res.on('end', () => {
-            if (res.statusCode >= 200 && res.statusCode < 300) {
-              resolve(data);
-            } else {
-              reject(new Error(`DeepSeek API error (${res.statusCode}): ${data}`));
+            buffer += chunk.toString('utf8');
+            const lines = buffer.split('\n');
+            buffer = lines.pop(); // Keep potential incomplete line segment
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (trimmed.startsWith('data: ')) {
+                const dataStr = trimmed.slice(6);
+                if (dataStr === '[DONE]') continue;
+                try {
+                  const parsed = JSON.parse(dataStr);
+                  const delta = parsed.choices?.[0]?.delta?.content || '';
+                  fullContent += delta;
+                } catch (e) {}
+              }
             }
           });
+
+          res.on('end', () => {
+            if (buffer.trim().startsWith('data: ')) {
+              const dataStr = buffer.trim().slice(6);
+              if (dataStr !== '[DONE]') {
+                try {
+                  const parsed = JSON.parse(dataStr);
+                  const delta = parsed.choices?.[0]?.delta?.content || '';
+                  fullContent += delta;
+                } catch (e) {}
+              }
+            }
+            resolve(fullContent);
+          });
+
           res.on('error', (err) => {
             req.destroy();
             reject(err);
@@ -80,7 +116,7 @@ export async function callDeepSeek(prompt, systemInstruction, modelName = 'deeps
         req.end();
       });
 
-      return JSON.parse(responseText);
+      return { choices: [{ message: { content: responseText } }] };
     } catch (err) {
       console.warn(`Attempt ${i + 1} to call DeepSeek model ${modelName} failed: ${err.message}`);
       if (i === retries - 1) {

@@ -1,3 +1,7 @@
+- [succeed] [[style-StockTrading_Thread_ProblemSetup_DiscountCTA]] — 2026-08-14 07:33:30 UTC
+- [succeed] [[style-HighUtility_Short_ContentStructure_BookmarkSave_v2]] — 2026-08-14 07:10:14 UTC
+- [duplicate] [[style-social_post_1786689218238]] — 2026-08-14 06:40:50 UTC
+- [succeed] [[style-social_post_1786689218238]] — 2026-08-14 06:33:38 UTC
 - [succeed] [[style-CompanyPR_ShockAnnouncement_MandatoryChange]] — 2026-08-12 09:45:12 UTC
 - [succeed] [[style-SOP_Article_CredibilityHook_LeadMagnet]] — 2026-08-12 05:30:02 UTC
 - [succeed] [[style-HighUtility_Article_CheatCodeHook_LeadMagnetCTA]] — 2026-08-12 05:19:58 UTC

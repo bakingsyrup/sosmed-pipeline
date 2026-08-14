@@ -12,6 +12,7 @@ kanban-plugin: board
 - [ ] [[style-SOP_Article_CredibilityHook_LeadMagnet|Personal Profit Credibility → 4-Step SOP Tutorial → Incentivized Lead Magnet. X.Thread]]
 - [ ] [[style-StepByStepSOP_Thread_MedicalMystery_DiagnosticBreakdown_PreventionCTA|Shocking Medical Anomaly → Differential Diagnosis Breakdown → Clinical Takeaway CTA. X.Thread]]
 - [ ] [[style-StepbyStepSOP_Article_AIAutomationBlueprint_ClonedMyselfHook_NewsletterCTA|Clone yourself claim → Five-step system walkthrough → Newsletter subscription. X.Thread]]
+- [ ] [[style-StockTrading_Thread_ProblemSetup_DiscountCTA|Late Analysis Confession → Feature Walkthrough → Discount Referral CTA. X.Thread]]
 - [ ] [[style-Utility_Thread_AuthorityHook_EducationalConversion|High Stakes Promise → Step-by-Step Execution → Actionable Resource Bridge. X.Thread]]
 - [ ] [[style-Value_Dump_Thread_PromptList_Curiosity_ImmediateValue|AI Trading Superpower Promise → 10-Prompt Stack Walkthrough → Bonus & Bookmark CTA. X.Thread]]
 - [ ] [[style-Workflow_Thread_AuthorityHook_EducationalConversion|High Stakes Promise → Step-by-Step Execution → Low-Friction CTA. X.Thread]]

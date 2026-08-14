@@ -172,10 +172,13 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x', post
           return RESERVED_X_ROUTES.has(handle) ? '' : handle;
         };
 
-        const articles = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+        let articles = Array.from(document.querySelectorAll('article[data-testid="tweet"]'));
+        if (articles.length === 0) {
+          articles = Array.from(document.querySelectorAll('article'));
+        }
         let foundHandle = expectedHandle || '';
         if (!foundHandle && articles[0]) {
-          const handleLinks = articles[0].querySelectorAll('a[role="link"]');
+          const handleLinks = articles[0].querySelectorAll('a');
           for (const a of handleLinks) {
             const h = extractHandle(a.getAttribute('href') || '');
             if (h) { foundHandle = h; break; }
@@ -185,7 +188,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x', post
         const tweets = [];
 
         for (const article of articles) {
-          const handleLinks = article.querySelectorAll('a[role="link"]');
+          const handleLinks = article.querySelectorAll('a');
           let articleAuthor = '';
           for (const a of handleLinks) {
             const h = extractHandle(a.getAttribute('href') || '');
@@ -368,7 +371,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x', post
           // Fallback: extract from <article> elements for non-article pages or if body text parsing failed
           const articles = Array.from(document.querySelectorAll('article'));
           const opArticles = articles.filter(art => {
-            const handleLinks = Array.from(art.querySelectorAll('a[role="link"]'));
+            const handleLinks = Array.from(art.querySelectorAll('a'));
             const author = handleLinks.map(a => a.getAttribute('href') || '').find(h => /^\/[A-Za-z0-9_]{1,15}$/.test(h))?.slice(1)?.toLowerCase();
             return !author || (targetHandle && author === targetHandle.toLowerCase());
           });
@@ -380,7 +383,7 @@ export async function fetchPostOrThreadText(inputUrlOrText, platform = 'x', post
             return art.innerText ? art.innerText.trim() : '';
           }).filter(t => t.length > 30);
           if (opTexts.length > 0) return opTexts.join('\n\n---\n\n');
-          const topArticle = document.querySelector('article[data-testid="tweet"]') || document.querySelector('[data-testid="article"]');
+          const topArticle = document.querySelector('article[data-testid="tweet"]') || document.querySelector('[data-testid="article"]') || document.querySelector('article');
           return topArticle ? topArticle.innerText.trim() : '';
         }, { targetHandle: opHandle });
 

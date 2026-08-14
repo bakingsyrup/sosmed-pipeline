@@ -308,11 +308,16 @@ export async function runPostDissection(inputUrlOrText, platform = 'x', postCoun
     debugLog('Fetching post content...');
     fetchRes = await fetchPostOrThreadText(inputUrlOrText, platform, postCount);
   }
-  debugLog(`Fetch result: isDual=${fetchRes.isDual}, hasArticle=${fetchRes.hasArticle}, textLen=${fetchRes.text?.length || 0}`);
+  if (!fetchRes.ok || !fetchRes.text || fetchRes.text.trim().length === 0) {
+    const errorMsg = fetchRes.error || 'Failed to fetch post content text from page.';
+    debugLog(`FETCH FAILED: ${errorMsg}`);
+    console.error(`❌ [Lulua Dissector] ${errorMsg}`);
+    return { ok: false, error: errorMsg };
+  }
 
   // 2. Dissect the post thread (X Articles are dissected separately via their own URL)
   debugLog('SINGLE dissection route triggered');
-  const singleRes = await dissectSinglePayload(fetchRes.text || inputUrlOrText, resolvedFormat, postUrl, platform, { format: resolvedFormat });
+  const singleRes = await dissectSinglePayload(fetchRes.text, resolvedFormat, postUrl, platform, { format: resolvedFormat });
   debugLog(`Single dissection done: styleName=${singleRes.styleName}`);
 
   // Inject article_url into frontmatter if the fetcher found an embedded article link
